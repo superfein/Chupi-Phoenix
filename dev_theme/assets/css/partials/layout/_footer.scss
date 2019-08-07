@@ -1,0 +1,248 @@
+
+// _footer.scss
+
+footer {
+  position: relative;
+  display: block;
+  padding: 20px $mobile_side-padding;
+  .content {
+    .sign-up {
+      max-width: 600px;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 60px;
+      > p {
+        font-size: 14px;
+      }
+      form {
+        display: inline-block;
+        width: 400px;
+        max-width: 100%;
+      }
+    } // end .sign-up
+    > .grid {
+      grid-template-columns: 100%;
+      grid-gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+      .grid-item {
+        grid-column: span 1;
+        &.footer-menu {
+          h3 {
+            position: relative;
+            display: block;
+            font-size: 28px;
+            margin-bottom: 0;
+            padding: 5px 0;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+            &:before,
+            &:after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              right: 0;
+              width: 11px;
+              height: 11px;
+              background-color: transparent;
+              background-image: url($icon_minus_dark);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+              @include transform(translateY(-50%) rotate(0deg));
+              @include transition(all 0.2s $ease_in);
+            }
+            &:after {
+              @include transform(translateY(-50%) rotate(90deg));
+            }
+          }
+          ul {
+            display: none;
+            list-style-type: none;
+            padding: 10px 0;
+            li {
+              opacity: 0;
+              @include transform(translateY(-15px));
+              @include transition(all 0.2s $ease_out 0s);
+              a {
+                position: relative;
+                display: block;
+                font-size: 14px;
+                font-weight: $font_weight_lighter;
+                text-decoration: none;
+                padding: 8px 0;
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+              }
+            }
+          }
+          &.active { // active footer menu
+            h3 {
+              &:before {
+                @include transform(translateY(-50%) rotate(90deg));
+                opacity: 0;
+              }
+              &:after {
+                @include transform(translateY(-50%) rotate(180deg));
+              }
+            }
+            ul {
+              li {
+                opacity: 1;
+                @include transform(translateY(0px));
+                @include transition(all 0.2s $ease 0.11s);
+              }
+            }
+          }
+        } // end .footer-menu
+        &.footer-contact {
+          text-align: center;
+          margin-top: 20px;
+          h3 {
+            position: relative;
+            display: block;
+            font-size: 28px;
+            margin-bottom: 10px;
+          }
+          p {
+            font-size: 14px;
+          }
+          h4 {
+            font-size: 20px;
+          }
+          > a {
+            display: block;
+            font-size: 14px;
+            font-weight: $font-weight-lighter;
+            text-decoration: none;
+            padding: 3px 0;
+            margin-bottom: 10px;
+          }
+          .social-icons {
+            padding: 15px 0;
+            margin-bottom: 15px;
+          }
+        } // end .footer-contact
+      }
+    } // end .grid
+    .footer-lower {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      .logo {
+        width: 90px;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      > p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        a {
+          text-decoration: none;
+        }
+      }
+      .footer-payment {
+
+      }
+    }
+  } // end .content
+} // end footer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+
+
+@include mquery(ml) {
+
+  footer {
+    padding: 20px $mobile_side-padding;
+    .content {
+      .sign-up {
+        max-width: 700px;
+      } // end .sign-up
+      > .grid {
+        grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+        grid-gap: 50px;
+        max-width: none;
+        .grid-item {
+          &.footer-menu {
+            h3 {
+              &:before,
+              &:after {
+                display: none;
+              }
+            }
+            ul {
+              display: block;
+              padding: 10px 0;
+              li {
+                opacity: 1;
+                @include transform(translateY(0px));
+                @include transition(none);
+                a {
+                  padding: 6px 0;
+                }
+              }
+            }
+          } // end .footer-menu
+          &.footer-contact {
+            margin-top: 0px;
+            grid-column: span 2;
+            > a {
+              padding: 3px 0;
+              margin-bottom: 5px;
+            }
+          } // end .footer-contact
+        }
+      } // end .grid
+    } // end .content
+  } // end footer
+
+} // end media-query medium-large
+
+
+
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

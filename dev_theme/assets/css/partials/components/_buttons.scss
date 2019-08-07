@@ -1,0 +1,111 @@
+
+// _buttons.scss
+
+.btn {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: $font-weight-light;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $grey_dark;
+  border: 1px solid $grey_dark;
+  background-color: transparent;
+  padding: 16px 20px;
+  min-width: 160px;
+  @include transition(all 0.2s $ease);
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+  }
+  &.btn-light {
+    color: $white;
+    border: 1px solid $white;
+  }
+  &.btn-dark {
+    color: $grey_dark;
+    border: 1px solid $grey_dark;
+  }
+} // end .btn
+
+
+
+
+
+
+
+
+// Social icons
+ul.social-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 40px);
+  grid-gap: 8px;
+  justify-content: center;
+  list-style-type: none;
+  li {
+    display: inline-block;
+    a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $grey;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 50%;
+      // &.social-facebook { background-image: url($icon_social_facebook_light); }
+      // &.social-twitter { background-image: url($icon_social_twitter_light); }
+      // &.social-instagram { background-image: url($icon_social_instagram_light); }
+      // &.social-youtube { background-image: url($icon_social_youtube_light); }
+    }
+  }
+} // end .social-icons
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

@@ -1,0 +1,158 @@
+
+// _global.scss
+
+html {
+box-sizing: border-box;
+}
+*, *:before, *:after {
+box-sizing: inherit;
+}
+body {
+font-family: $font_family_secondary;
+@include font-size($p_text_size);
+color: $grey_dark;
+background: $white;
+}
+body.no-scroll {
+overflow: hidden;
+}
+body.no-scroll-y {
+overflow-y: hidden;
+}
+body.no-scroll-x {
+overflow-x: hidden;
+}
+
+main {
+  //display: none;
+}
+
+section {
+  position: relative;
+  display: block;
+  padding: 20px $mobile_side-padding;
+}
+.section-top {
+  padding-top: $mobile_header_height;
+}
+.content {
+  position: relative;
+  display: block;
+  z-index: 1; // bring up when under-gradient exists
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $content_max_width;
+}
+.grid {
+  display: grid;
+}
+.image-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.object-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+font-family: $font_family_primary;
+}
+h1 {
+@include font-size($h1_size);
+font-weight: $font-weight-light;
+line-height: 1;
+margin-bottom: 10px;
+}
+h2 {
+@include font-size($h2_size);
+font-weight: $font-weight-light;
+line-height: 1.2;
+margin-bottom: 20px;
+}
+h3 {
+@include font-size($h3_size);
+font-weight: $font-weight-light;
+line-height: 1.2;
+margin-bottom: 20px;
+}
+h4 {
+@include font-size($h4_size);
+font-weight: $font-weight-light;
+line-height: 1.2;
+margin-bottom: 10px;
+}
+h5 {
+@include font-size($h5_size);
+}
+h6 {
+@include font-size($h6_size);
+}
+p {
+  @include font-size($p_text_size);
+  font-weight: $font-weight-lighter;
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+a {
+  cursor: pointer;
+  color: $grey_dark;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

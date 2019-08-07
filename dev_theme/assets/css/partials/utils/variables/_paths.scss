@@ -1,0 +1,21 @@
+
+// _paths.scss
+
+
+// Icon path
+$icon_path: '../img/icon/';
+
+// Icons
+$icon_account_light: $icon_path + 'lock-light.svg';
+$icon_account_dark: $icon_path + 'lock-dark.svg';
+$icon_search_light: $icon_path + 'search-light.svg';
+$icon_search_dark: $icon_path + 'search-dark.svg';
+$icon_wishlist_light: $icon_path + 'heart-light.svg';
+$icon_wishlist_light_full: $icon_path + 'heart-light-full.svg';
+$icon_wishlist_dark: $icon_path + 'heart-dark.svg';
+$icon_cart_light: $icon_path + 'bag-light.svg';
+$icon_cart_light_full: $icon_path + 'bag-light-full.svg';
+$icon_cart_dark: $icon_path + 'bag-dark.svg';
+$icon_chevron_light: $icon_path + 'chevron-light.svg';
+$icon_chevron_dark: $icon_path + 'chevron-dark.svg';
+$icon_minus_dark: $icon_path + 'minus-dark.svg';

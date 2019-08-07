@@ -1,0 +1,25 @@
+
+// _aniamtions.scss
+
+
+// Flash
+@include keyframes(flash) {
+  0% { opacity: 0; }
+  10% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+// Icon pop (optimum duration 0.5s)
+@include keyframes(iconPop) {
+  0% { transform: scale(1); }
+  //25% { transform: scale(1.15); }
+  50% { transform: scale(1.2); }
+  //75% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Menu list in
+@include keyframes(menuListIn) {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0px); }
+}

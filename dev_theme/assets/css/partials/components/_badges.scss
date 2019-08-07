@@ -1,0 +1,79 @@
+
+// _badges.scss
+
+
+.badge-count:before,
+.badge-count:after  {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  right: 0px;
+  top: 2px;
+}
+.badge-count:before {
+  background: $pink;
+  border-radius: 50%;
+}
+.badge-count:after {
+  font-size: 12px;
+  color: $grey-dark;
+  line-height: 18px;
+  text-align: center;
+}
+.badge-count.count-1:after { content: "1"; }
+.badge-count.count-2:after { content: "2"; }
+.badge-count.count-3:after { content: "3"; }
+.badge-count.count-4:after { content: "4"; }
+.badge-count.count-5:after { content: "5"; }
+.badge-count.count-6:after { content: "6"; }
+.badge-count.count-7:after { content: "7"; }
+.badge-count.count-8:after { content: "8"; }
+.badge-count.count-9:after { content: "9"; }
+.badge-count.count-9-plus:after { content: "9+"; }
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

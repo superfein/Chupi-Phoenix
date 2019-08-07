@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.131" height="18.49" viewBox="0 0 17.131 18.49">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="17.131" height="18.49" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="ico-Full-Cart" clip-path="url(#clip-path)">
+    <g id="Component_1" data-name="Component 1" clip-path="url(#clip-path)">
+      <g id="Group_1" data-name="Group 1" transform="translate(0.566 3.924)">
+        <line id="Line_5" data-name="Line 5" y1="14" x2="2" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+        <line id="Line_7" data-name="Line 7" x2="16" transform="translate(0 14)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+        <line id="Line_8" data-name="Line 8" x1="2" y1="14" transform="translate(14)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+        <line id="Line_9" data-name="Line 9" x2="12" transform="translate(2)" fill="none" stroke="#fff" stroke-width="1"/>
+      </g>
+      <g id="Path_1" data-name="Path 1" transform="translate(4.066)" fill="none">
+        <path d="M4.424,0A4.424,4.424,0,0,1,8.848,4.424H0A4.424,4.424,0,0,1,4.424,0Z" stroke="none"/>
+        <path d="M 4.423843383789062 1.000001668930054 C 2.883694171905518 1.000001668930054 1.577780723571777 2.02225136756897 1.148935794830322 3.423841714859009 L 7.698750972747803 3.423841714859009 C 7.269906044006348 2.02225136756897 5.963992595672607 1.000001668930054 4.423843383789062 1.000001668930054 M 4.423843383789062 1.9073486328125e-06 C 6.867063522338867 1.9073486328125e-06 8.847682952880859 1.980621576309204 8.847682952880859 4.42384147644043 C 3.784533500671387 4.42384147644043 3.906433582305908 4.42384147644043 3.814697265625e-06 4.42384147644043 C 3.814697265625e-06 1.980621576309204 1.980623245239258 1.9073486328125e-06 4.423843383789062 1.9073486328125e-06 Z" stroke="none" fill="#fff"/>
+      </g>
+      <path id="Path_8" data-name="Path 8" d="M0,0H13l2.013,14H-1.956Z" transform="translate(2.066 4)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

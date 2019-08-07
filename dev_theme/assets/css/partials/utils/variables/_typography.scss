@@ -1,0 +1,85 @@
+
+// _typography.scss
+
+
+// Font family
+$font_family_primary: 'freight', sans-serif;
+$font_family_secondary: 'gotham', sans-serif;
+
+
+
+// Font size - h1-h6 media-query maps (max-width:font-size)
+$h1_size: (             null  : 60px, // mobile
+                        768px : 70px,
+                        992px : 80px,
+                        1200px : 110px,
+                        1400px : 110px
+);
+$h2_size: (             null  : 38px, // mobile
+                        768px : 38px,
+                        992px : 38px,
+                        1200px : 38px,
+                        1400px : 38px
+);
+$h3_size: (             null  : 32px, // mobile
+                        768px : 32px,
+                        992px : 32px,
+                        1200px : 32px,
+                        1400px : 32px
+);
+$h4_size: (             null  : 24px, // mobile
+                        768px : 24px,
+                        992px : 24px,
+                        1200px : 24px,
+                        1400px : 24px
+);
+$h5_size: (             null  : 20px, // mobile
+                        768px : 20px,
+                        992px : 20px,
+                        1200px : 20px,
+                        1400px : 20px
+);
+$h6_size: (             null  : 20px, // mobile
+                        768px : 20px,
+                        992px : 20px,
+                        1200px : 20px,
+                        1400px : 20px
+);
+
+
+
+
+// Font size (other) media-query maps (max-width:font-size)
+$p_text_size: (             null  : 18px,
+                            991px : 18px,
+                            767px : 18px,
+                            450px : 18px
+);
+$p_standout_text_size: (    null  : 28px,
+                            991px : 24px,
+                            767px : 22px,
+                            450px : 22px
+);
+$button_text_size: (        null  : 20px,
+                            991px : 18px,
+                            767px : 18px,
+                            450px : 18px
+);
+$button_lg_text_size: (     null  : 36px,
+                            1400px : 32px,
+                            991px : 28px,
+                            767px : 24px,
+                            450px : 20px
+);
+
+
+
+
+
+
+// Font weight
+$font_weight_lighter:       200;
+$font_weight_light:         300;
+$font_weight_regular:       400;
+$font_weight_semibold:      600;
+$font_weight_bold:          700;

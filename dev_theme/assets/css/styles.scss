@@ -1,0 +1,25 @@
+
+// Utilities
+@import "partials/utils/variables";
+@import "partials/utils/mixins";
+
+// Base styles
+@import "partials/base/reset";
+@import "partials/base/global";
+
+// Component styles
+@import "partials/components/badges";
+@import "partials/components/buttons";
+@import "partials/components/cards";
+@import "partials/components/currencies";
+@import "partials/components/forms";
+
+// Layout styles
+@import "partials/layout/header";
+@import "partials/layout/footer";
+
+// Page styles
+@import "partials/pages/home";
+
+// Animations
+@import "partials/animations/animations";

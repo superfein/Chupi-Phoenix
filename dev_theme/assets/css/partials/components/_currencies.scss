@@ -1,0 +1,83 @@
+
+// _currencies.scss
+
+// Set image paths for currency flags
+$currency_aud: $icon_path + 'currency-aud.png';
+$currency_cad: $icon_path + 'currency-cad.png';
+$currency_eur: $icon_path + 'currency-eur.png';
+
+
+// Note: Currency flags prepended as :before pseudo elements
+.currency-item,
+.currency-btn {
+  &:before {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &.currency-aud {
+    &:before {
+      background-image: url($currency_aud);
+    }
+  }
+  &.currency-cad {
+    &:before {
+      background-image: url($currency_cad);
+    }
+  }
+  &.currency-eur {
+    &:before {
+      background-image: url($currency_eur);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

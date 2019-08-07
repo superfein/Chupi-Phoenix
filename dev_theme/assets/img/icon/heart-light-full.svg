@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.026" height="17.557" viewBox="0 0 21.026 17.557">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="21.026" height="17.557" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="heart-icon" clip-path="url(#clip-path)">
+    <path id="heart-icon-2" data-name="heart-icon" d="M191.116,208.025l.174-.155a51.849,51.849,0,0,1,4.274-3.1,16.355,16.355,0,0,0,4.14-3.807,7,7,0,0,0,1.334-5.332,5.392,5.392,0,0,0-4.771-4.194,5.167,5.167,0,0,0-5.117,3.5,5.167,5.167,0,0,0-5.117-3.5,5.392,5.392,0,0,0-4.772,4.194,7.005,7.005,0,0,0,1.334,5.332,16.353,16.353,0,0,0,4.14,3.807,51.857,51.857,0,0,1,4.274,3.1l.259.251" transform="translate(-180.636 -190.923)" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

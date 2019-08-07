@@ -1,0 +1,147 @@
+
+// _mixins.scss
+
+
+// Mixin for general media queries
+// See: https://www.sitepoint.com/introduction-mobile-first-media-queries/
+@mixin mquery($size) {
+  @if $size == xs { // Default
+    @media (min-width: 0px) { // 0px - 450px width
+      @content;
+    }
+  }
+  @if $size == xs_landscape {
+    @media (min-width: 450px) and (max-height: 450px) and (orientation: landscape) { // 0px - 450px height, landscape
+      @content;
+    }
+  }
+  @if $size == s {
+    @media (min-width: 450px) { // 450px - 767px width
+      @content;
+    }
+  }
+  @else if $size == m {
+    @media (min-width: 768px) { // 768px - 991px width
+      @content;
+    }
+  }
+  @else if $size == ml {
+    @media (min-width: 992px) { // 992px - 1199px width
+      @content;
+    }
+  }
+  @else if $size == l {
+    @media (min-width: 1200px) { // 1200px - 1399px width
+      @content;
+    }
+  }
+  @else if $size == xl {
+    @media (min-width: 1400px) { // 1400px - 1920px width
+      @content;
+    }
+  }
+  @else if $size == xxl {
+    @media (min-width: 1921px) { // 1921px+ width
+      @content;
+    }
+  }
+}
+
+
+
+// Mixin for font media query maps
+// See: https://www.smashingmagazine.com/2015/06/responsive-typography-with-sass-maps/
+@mixin font-size($fs_map) {
+  @each $fs_breakpoint, $fs-font-size in $fs_map {
+    @if $fs_breakpoint == null {
+      font-size: $fs_font_size;
+    }
+    @else {
+      @media screen and (min-width: $fs_breakpoint) {
+        font-size: $fs_font_size;
+      }
+    }
+  }
+}
+
+
+// Cross-browser transitions full
+@mixin transition($transition...) { // '...' allows for multiple comma-separated parameters
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+// Cross-browser transition-durations
+@mixin transition($duration...) { // '...' allows for multiple comma-separated parameters
+  -webkit-transition: $duration;
+     -moz-transition: $duration;
+       -o-transition: $duration;
+          transition: $duration;
+}
+
+// Cross-browser transition-delays
+@mixin transition-delay($delay...) { // '...' allows for multiple comma-separated parameters
+  -webkit-transition-delay: $delay;
+     -moz-transition-delay: $delay;
+       -o-transition-delay: $delay;
+          transition-delay: $delay;
+}
+
+
+
+// Cross-browser transforms
+@mixin transform($transformation) {
+  -webkit-transform: $transformation;
+     -moz-transform: $transformation;
+      -ms-transform: $transformation;
+       -o-transform: $transformation;
+          transform: $transformation;
+}
+
+// Cross-browser transform origin
+@mixin transform-origin($transformOriginVal) {
+  -webkit-transform-origin: $transformOriginVal;
+     -moz-transform-origin: $transformOriginVal;
+      -ms-transform-origin: $transformOriginVal;
+       -o-transform-origin: $transformOriginVal;
+          transform-origin: $transformOriginVal;
+}
+
+
+// Cross-browser animations
+// See: http://joshbroton.com/quick-fix-sass-mixins-for-css-keyframe-animations/
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    animation:         $animations;
+}
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+// Cross-browser aniamtion-delays
+@mixin animation-delay($delay) { // '...' allows for multiple comma-separated parameters
+  -webkit-animation-delay: $delay;
+     -moz-animation-delay: $delay;
+       -o-animation-delay: $delay;
+          animation-delay: $delay;
+}

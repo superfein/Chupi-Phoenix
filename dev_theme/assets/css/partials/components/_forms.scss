@@ -1,0 +1,155 @@
+
+// _forms.scss
+
+form {
+  .form-field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    @include transition(all 0.2s $ease);
+    input:not([type=submit]), select, textarea {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      font-weight: $font-weight-lighter;
+      color: $grey;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px solid $grey;
+      &:focus, &:focus, &:focus {
+        outline: none;
+      }
+    }
+    select {
+      padding-right: 40px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+    select::-ms-expand {
+      display: none; // Hide default IE select arrow
+    }
+    textarea {
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 120px;
+      height: 120px;
+      max-height: 500px;
+      //resize: none;
+      -ms-overflow-style: none;
+      @include transition(all 0.2s $ease);
+    }
+    textarea.active {
+      height: 300px;
+      min-height: 300px;
+    }
+    label {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      font-size: 14px;
+      font-weight: $font-weight-lighter;
+      line-height: 1.5;
+      color: $grey;
+      text-align: left;
+      pointer-events: none;
+      @include transition(all 0.4s $ease_in_out_quart);
+    }
+  } // end .form-field
+  .form-field.open { // Open field (focused or complete - class added via JS)
+    //margin-top: 35px;
+    label {
+      top: -18px;
+      font-size: 12px;
+      color: $grey;
+    }
+  }
+  &.single-field { // single-field form (e.g. signup)
+    position: relative;
+    .form-field {
+      input:not([type=submit]), select, textarea {
+        padding-right: 70px;
+      }
+    }
+    > button[type="submit"] {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: auto;
+      font-size: 14px;
+      font-weight: $font-weight-lighter;
+      color: $grey;
+      text-transform: uppercase;
+      padding: 10px;
+      padding-right: 20px;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      -webkit-appearance: none;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 11px;
+        height: 11px;
+        background-color: transparent;
+        background-image: url($icon_chevron_dark);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        @include transform(translateY(-50%) rotate(-90deg));
+        @include transition(all 0.2s $ease_in);
+      }
+    }
+  }
+} // end form
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large
