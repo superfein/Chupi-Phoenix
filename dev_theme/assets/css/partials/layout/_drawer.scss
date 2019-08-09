@@ -1,0 +1,133 @@
+
+// _drawer.scss
+
+.drawer {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: minmax(min-content, max-content) auto minmax(min-content, max-content); // auto = main section
+  grid-gap: 0px;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  height: 100vh;
+  padding: $mobile_side-padding;
+  background-color: $grey_lightest;
+  z-index: 12;
+  .drawer-back {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 2000px;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+  }
+  .drawer-header {
+    position: relative;
+    border-bottom: 1px solid $grey_light;
+    grid-row: 1 / span 1;
+    align-self: start;
+    h2 {
+      font-size: 26px;
+      display: block;
+      padding-right: 50px;
+      margin-bottom: 5px;
+    }
+    > p {
+      font-size: 14px;
+      &:last-of-type {
+        margin-bottom: 15px;
+      }
+    }
+    .close-btn {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      width: 40px;
+      height: 40px;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 0.05em;
+        top: 50%;
+        left: 50%;
+        background-color: $grey;
+        @include transition(all 0s $ease);
+      }
+      &:before {
+        @include transform(translate(-50%, -50%) rotateZ(135deg));
+      }
+      &:after {
+        @include transform(translate(-50%, -50%) rotateZ(45deg));
+      }
+    }
+  } // end .drawer-header
+  .drawer-main {
+    grid-row: 2 / span 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px 0;
+  } // end .drawer-main
+  .drawer-footer {
+    grid-row: 3 / span 1;
+    align-self: end;
+  } // end .drawer-footer
+} // end .drawer
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+
+
+@include mquery(ml) {
+
+
+} // end media-query medium-large
+
+
+
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

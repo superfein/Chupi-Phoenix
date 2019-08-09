@@ -14,22 +14,115 @@
   background-color: transparent;
   padding: 16px 20px;
   min-width: 160px;
+  overflow: hidden;
   @include transition(all 0.2s $ease);
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+  }
+  &:before { // background
+    width: 130%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $grey_dark;
+    opacity: 0.15;
+    //border-radius: 100px;
+    @include transform(skewX(-15deg) translateX(-110%));
+    @include transition(all 0.3s $ease_out_expo);
+  }
+  &:after { // underline
+    display: none;
+    width: 0px;
+    height: 1px;
+    bottom: 10px;
+    left: 15%;
+    background: $white;
+    background: linear-gradient(
+      to right,
+      rgba($white, 0),
+      rgba($white, 0.7),
+      rgba($white, 0)
+    );
+    opacity: 0.5;
+    //@include transform(translateX(-50%));
+    @include transition(all 0.3s $ease_out_expo);
+  }
+  // Hover on button
+  &:hover,
+  &:active {
+    color: $white;
+    &:before {
+      opacity: 1;
+      @include transform(skewX(-15deg) translateX(-10%));
+      @include transition(all 0.5s $ease_out_expo);
+    }
+    &:after {
+      width: 70%;
+      @include transition(all 0.5s $ease_out_expo 0.1s);
+    }
+  }
+  // Remove any text decoration
   &:hover,
   &:active,
   &:focus,
   &:visited {
     text-decoration: none;
   }
+  // Light button
   &.btn-light {
     color: $white;
     border: 1px solid $white;
+    &:before {
+      background: $white;
+    }
+    &:after {
+      background: $grey_dark;
+      background: linear-gradient(
+        to right,
+        rgba($grey_dark, 0),
+        rgba($grey_dark, 0.5),
+        rgba($grey_dark, 0)
+      );
+    }
+    &:hover,
+    &:active {
+      color: $grey_dark;
+      &:before {
+      }
+    }
   }
+  // Dark button
   &.btn-dark {
     color: $grey_dark;
     border: 1px solid $grey_dark;
+    &:before {
+      background: $grey_dark;
+    }
+    &:after {
+      background: $white;
+      background: linear-gradient(
+        to right,
+        rgba($white, 0),
+        rgba($white, 0.7),
+        rgba($white, 0)
+      );
+    }
+    &:hover,
+    &:active {
+      color: $white;
+      &:before {
+        opacity: 1;
+      }
+    }
   }
+
 } // end .btn
+
+
 
 
 

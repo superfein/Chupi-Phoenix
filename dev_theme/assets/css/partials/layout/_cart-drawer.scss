@@ -1,0 +1,82 @@
+
+// _cart-drawer.scss
+
+#cart-drawer {
+  .drawer-header {
+
+  } // end .drawer-header
+  .drawer-main {
+
+  } // end .drawer-main
+  .drawer-footer {
+    margin-top: 15px;
+    h3 {
+
+    }
+    .totals-item {
+      .title {
+
+      }
+      .value {
+
+      }
+    }
+    #checkout-btn {
+
+    }
+  } // end .drawer-footer
+} // end #cart-drawer
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+
+
+@include mquery(ml) {
+
+
+} // end media-query medium-large
+
+
+
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

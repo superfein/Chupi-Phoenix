@@ -1,21 +1,25 @@
 $( document ).ready(function() {
 
-  const desktopBreakPoint = 991;
+  const desktopBreakPoint = 991; // Screen width in px
 
 
 
 
-  // Position mega menus
-  function megaMenuWidth() {
-    if( window.innerWidth > desktopBreakPoint ) { // Desktop only
-      $('.mega-menu').removeClass('active').css('width', $(window).width());
+  // Reset mega menus on resize
+  function megaMenuReset() {
+    if( window.innerWidth > desktopBreakPoint ) { // Desktop
+      $('.mega-menu').removeClass('active').css('width', $(window).width()).css('display', 'grid');
+      $('.mega-menu .inner-list > ul').css('display', 'block');
     }
-    else {
-      $('.mega-menu').css('width', 'auto');
+    else { // Mobile
+      $('.mega-menu').css('width', 'auto').css('display', 'none');
+      $('.mega-menu').siblings('a.active').siblings('.mega-menu').addClass('active').css('display', 'block');
+      $('.mega-menu .inner-list > ul').css('display', 'none');
+      $('.mega-menu .inner-list > ul.active').css('display', 'block');
     }
 	}
-	megaMenuWidth();
-	$(window).resize ( function() {	megaMenuWidth(); });
+	megaMenuReset();
+	$(window).resize ( function() {	megaMenuReset(); });
 
 
 
@@ -23,7 +27,9 @@ $( document ).ready(function() {
 
 
 
-  // Menu open/close
+  var mobileMenuSlideTime = 200;
+
+  // Menu open/close (mobile only)
   $('#menu-btn').off().click( function(e) {
     e.preventDefault();
     $(this).toggleClass('active');
@@ -41,34 +47,37 @@ $( document ).ready(function() {
     }
   });
 
-  var mobileMenuSlideTime = 200;
-  // Top level menu items open/close
+  // Top level menu items open/close (mobile only)
   $('#main-nav > ul > li > a').off().click(function(e) {
     e.preventDefault();
-    // Close sibling menus and inner menus
-    $('#main-nav > ul > li > a').not(this).removeClass('active');
-    $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').slideUp(mobileMenuSlideTime).removeClass('active');
-    $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').children('.inner-list').children('h3').removeClass('active');
-    $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').children('.inner-list').children('ul').slideUp(mobileMenuSlideTime).removeClass('active');
-    // Open clicked menu
-    $(this).toggleClass('active').siblings('.mega-menu').slideToggle(mobileMenuSlideTime).toggleClass('active');
+    if( window.innerWidth <= desktopBreakPoint ) { // Mobile only
+      // Close sibling menus and inner menus
+      $('#main-nav > ul > li > a').not(this).removeClass('active');
+      $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').slideUp(mobileMenuSlideTime).removeClass('active');
+      $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').children('.inner-list').children('h3').removeClass('active');
+      $('#main-nav > ul > li > a').not(this).siblings('.mega-menu').children('.inner-list').children('ul').slideUp(mobileMenuSlideTime).removeClass('active');
+      // Open clicked menu
+      $(this).toggleClass('active').siblings('.mega-menu').slideToggle(mobileMenuSlideTime).toggleClass('active');
+    }
 	});
-  // Inner menu items open/close
+  // Inner menu items open/close (mobile only)
   $('#main-nav .mega-menu .inner-list > h3').off().click(function(e) {
     e.preventDefault();
-    // Close sibling inner menus
-    $('#main-nav .mega-menu .inner-list > h3').not(this).removeClass('active');
-    $('#main-nav .mega-menu .inner-list > h3').not(this).siblings('ul').slideUp(mobileMenuSlideTime).removeClass('active');
-    // Open clicked menu
-    $(this).toggleClass('active').siblings('ul').slideToggle(mobileMenuSlideTime).toggleClass('active');
+    if( window.innerWidth <= desktopBreakPoint ) { // Mobile only
+      // Close sibling inner menus
+      $('#main-nav .mega-menu .inner-list > h3').not(this).removeClass('active');
+      $('#main-nav .mega-menu .inner-list > h3').not(this).siblings('ul').slideUp(mobileMenuSlideTime).removeClass('active');
+      // Open clicked menu
+      $(this).toggleClass('active').siblings('ul').slideToggle(mobileMenuSlideTime).toggleClass('active');
+    }
 	});
 
-  // Currency open
-  $('.currency-btn').off().click( function() {
+  // Mobile currency open
+  $('#main-nav .currency-btn').off().click( function() {
     $('#main-nav > ul').toggleClass('slide-out');
   });
-  // Currency close
-  $('.currency-close-btn').off().click( function() {
+  // Mobile currency close
+  $('#main-nav .currency-close-btn').off().click( function() {
     $('#main-nav > ul').toggleClass('slide-out');
   });
 
@@ -86,6 +95,10 @@ $( document ).ready(function() {
 		} else if( scrolled <= scrollTrigger && !$('#main-nav').hasClass('active') ) { // If at top and menu closed
 			$('header').removeClass('solid scrolled');
 		}
+
+    if( window.innerWidth > desktopBreakPoint && scrolled <= scrollTrigger ) { // If is desktop and at top
+      $('header').removeClass('solid scrolled');
+    }
 	}
 	headerScroll();
 	$(window).scroll ( function() {	headerScroll(); });
@@ -93,7 +106,7 @@ $( document ).ready(function() {
 
 
 
-  // Hover on top level menu items
+  // Hover on top level menu items (desktop only)
   $('#main-nav > ul > li > a').hover(function(e) {
     if( window.innerWidth > desktopBreakPoint ) { // Desktop only
       var thisTopLevelItem = $(this);
@@ -152,6 +165,21 @@ $( document ).ready(function() {
       $('#mega-menu-bg').removeClass('active');
     }
 	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
