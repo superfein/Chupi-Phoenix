@@ -14,8 +14,13 @@
   height: 100%;
   height: 100vh;
   padding: $mobile_side-padding;
-  background-color: $grey_lightest;
+  background-color: $white;
+  //background-color: $grey_lightest;
   z-index: 12;
+  opacity: 1;
+  pointer-events: none;
+  @include transform(translateX(100%));
+  @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
   .drawer-back {
     position: absolute;
     top: 0;
@@ -24,6 +29,7 @@
     width: 100vw;
     height: 100%;
     background-color: rgba(0,0,0,0.3);
+    opacity: 0;
   }
   .drawer-header {
     position: relative;
@@ -70,12 +76,18 @@
     grid-row: 2 / span 1;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 20px 0;
+    padding: 10px 0;
   } // end .drawer-main
   .drawer-footer {
     grid-row: 3 / span 1;
     align-self: end;
   } // end .drawer-footer
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    @include transform(translateX(0%));
+    @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+  }
 } // end .drawer
 
 
@@ -93,6 +105,17 @@
 
 
 @include mquery(s) {
+
+  .drawer {
+    opacity: 0;
+    @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+    &.active {
+      @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+      .drawer-back {
+        opacity: 1;
+      }
+    }
+  } // end .drawer
 
 } // end media-query small
 

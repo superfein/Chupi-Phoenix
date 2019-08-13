@@ -202,6 +202,23 @@ $( document ).ready(function() {
 
 
 
+
+  // Drawer close
+  $('.drawer-header .close-btn, .drawer-back').off().click(function(e) {
+    $(this).closest('.drawer').removeClass('active');
+  });
+
+
+
+
+  // Cart drawer open/close
+  $('#cart-btn').off().click(function(e) {
+    $('#cart-drawer').addClass('active');
+  });
+
+
+
+
   // Footer menus open/close
   function footerMobileMenus() {
 

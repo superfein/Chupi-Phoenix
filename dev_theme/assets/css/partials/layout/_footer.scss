@@ -139,6 +139,9 @@ footer {
         margin-bottom: 10px;
         a {
           text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
       .footer-payment {
