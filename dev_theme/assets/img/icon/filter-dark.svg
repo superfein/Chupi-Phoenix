@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="17.915" viewBox="0 0 14 17.915">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="14" height="17.915" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Component_2" data-name="Component 2" transform="translate(0)" clip-path="url(#clip-path)">
+    <path id="Path_1228" data-name="Path 1228" d="M12082.967,505.4v-14" transform="translate(505.399 -12079.672) rotate(90)" fill="none" stroke="#5e5d5b" stroke-width="1"/>
+    <path id="Path_1230" data-name="Path 1230" d="M12082.967,505.4v-14" transform="translate(-491.399 12092.301) rotate(-90)" fill="none" stroke="#5e5d5b" stroke-width="1"/>
+    <path id="Path_1231" data-name="Path 1231" d="M12082.967,505.4v-14" transform="translate(-491.399 12098.301) rotate(-90)" fill="none" stroke="#5e5d5b" stroke-width="1"/>
+    <g id="Ellipse_18" data-name="Ellipse 18" transform="translate(1.014 12.915)" fill="#fff" stroke="#5e5d5b" stroke-width="1">
+      <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+      <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+    </g>
+    <g id="Ellipse_19" data-name="Ellipse 19" transform="translate(4.429 6.83) rotate(-150)" fill="#fff" stroke="#5e5d5b" stroke-width="1">
+      <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+      <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+    </g>
+    <g id="Ellipse_20" data-name="Ellipse 20" transform="translate(8.014 6.915)" fill="#fff" stroke="#5e5d5b" stroke-width="1">
+      <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+      <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+    </g>
+  </g>
+</svg>

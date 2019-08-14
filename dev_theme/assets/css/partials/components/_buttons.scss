@@ -16,6 +16,7 @@
   min-width: 160px;
   text-align: center;
   overflow: hidden;
+  z-index: 0;
   @include transition(all 0.2s $ease);
   &:before,
   &:after {
@@ -26,7 +27,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: -1; // fall below button text
     background-color: $grey_dark;
     opacity: 0.15;
     @include transform(skewX(-15deg) translateX(-110%));
@@ -111,6 +112,50 @@
 } // end .btn
 
 
+
+
+// Filter buttons (Collection page)
+.btn-sort,
+.btn-filter {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: $font-weight-light;
+  text-decoration: none;
+  color: $grey_dark;
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 1px solid $grey_light;
+  text-align: center;
+  @include transition(all 0.2s $ease);
+  &:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-left: 7px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+.btn-sort {
+  &:after {
+    background-image: url($icon_sort_dark);
+  }
+}
+.btn-filter {
+  &:after {
+    background-image: url($icon_filter_dark);
+  }
+}
 
 
 

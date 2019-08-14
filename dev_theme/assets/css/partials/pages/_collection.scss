@@ -1,0 +1,383 @@
+
+// _collection.scss
+
+#collection-top {
+  padding-top: 80px;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 30px;
+      .grid-item:nth-of-type(1) { // Collection description
+        grid-column: 1 / span 1;
+        text-align: center;
+        justify-self: center;
+        h1 {
+          font-size: 48px;
+        }
+        .compressed-text {
+          display: block;
+          width: 100%;
+          max-width: 600px;
+          p {
+            font-size: 14px;
+          }
+        } // end .compressed-text
+      }
+      .grid-item:nth-of-type(2) { // Collection links
+        position: relative;
+        display: block;
+        > .inner {
+          position: relative;
+          grid-column: 1 / span 1;
+          overflow-x: scroll;
+          -webkit-overflow-scrolling: touch;
+          overflow-y: hidden;
+          -ms-overflow-style: none; /* IE 11 */
+          scrollbar-width: none; /* Firefox 64 */
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          ul {
+            display: inline-block;
+            float: left;
+            list-style-type: none;
+            width: 100%;
+            width: max-content;
+            white-space: nowrap;
+            li {
+              display: inline-block;
+              float: left;
+              a {
+                position: relative;
+                font-size: 14px;
+                font-weight: $font-weight-lighter;
+                text-decoration: none;
+                padding: 10px;
+                &:after {
+                  content: "-";
+                  position: absolute;
+                  top: 50%;
+                  right: 0;
+                  @include transform(translate(50%, -50%));
+                }
+                &:hover {
+                  text-decoration: none;
+                  &:after {
+                    text-decoration: none;
+                  }
+                }
+              }
+              &:first-of-type {
+                a {
+                  padding-left: 0;
+                }
+              }
+              &:last-of-type {
+                a {
+                  margin-right: 30px;
+                  &:after {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        } // end .inner
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          width: 100px;
+          background: linear-gradient(
+            to left,
+            rgba($white, 1),
+            rgba($white, 0)
+          );
+          pointer-events: none;
+        }
+      }
+      .grid-item:nth-of-type(3) { // #filter-buttons
+        grid-column: 1 / span 1;
+        margin-left: -$mobile_side-padding;
+        margin-right: -$mobile_side-padding;
+        height: 40px;
+        #filter-buttons {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          height: 40px;
+          background-color: $white;
+          border-top: 1px solid $grey_light;
+          border-bottom: 1px solid $grey_light;
+          a {
+            display: inline-block;
+            float: left;
+            width: 50%;
+            max-height: 38px;
+            border: none;
+            &:nth-of-type(2) {
+              border-left: 1px solid $grey_light; // centerline
+            }
+          }
+          &.sticky {
+            position: fixed;
+            z-index: 10; // same as header
+            top: $mobile_header_height;
+            left: 0;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+} // end #collection-top
+
+
+#collection-listing {
+  padding-top: 0;
+  padding-bottom: 0;
+  .content {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 15px;
+      grid-row-gap: 20px;
+      //padding: 15px 0;
+      margin-left: -$mobile_side-padding;
+      margin-right: -$mobile_side-padding;
+      .grid-item {
+        grid-column: span 1;
+        justify-self: center;
+        //background-color: darken($white, 2%); // complete grey colour of grid items
+        .collection-card {
+          width: 100%;
+          min-width: 130px;
+          height: 100%;
+        }
+      }
+    } // end .grid
+    .collection-pagination {
+      display: block;
+      padding: 50px 0;
+      text-align: center;
+      .progress-available {
+        #pagination-progress-bar {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          height: 8px;
+          border-radius: 4px;
+          max-width: 480px;
+          margin-bottom: 20px;
+          background-color: $grey_lighter;
+          #pagination-progress { // dynamic width
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 4px;
+            background-color: $grey_light;
+            @include transition(width 0.5s $ease_in_out_quint);
+          }
+        }
+        > p {
+          display: block;
+          font-size: 14px;
+          color: $grey;
+          margin-bottom: 20px;
+          span {
+
+          }
+        }
+      }
+      .progress-unavailable {
+        display: none;
+        > a {
+
+        }
+      }
+      > .btn {
+
+      }
+    } // end .collection-pagination
+  }
+} // end #collection-listing
+
+
+#collection-help {
+  background-color: $pink_lighter;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      .grid-item {
+        text-align: center;
+      }
+    }
+  }
+} // end #collection-help
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  #collection-listing {
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  } // end #collection-listing
+
+} // end media-query medium
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  #collection-top {
+    padding-top: 100px;
+    .content {
+      .grid {
+        grid-template-columns: auto minmax(200px,auto);
+        .grid-item:nth-of-type(1) { // Collection description
+          grid-column: 1 / span 2;
+          text-align: center;
+          justify-self: center;
+          h1 {
+            font-size: 48px;
+          }
+          .compressed-text {
+            display: block;
+            max-width: 600px;
+            p {
+              font-size: 14px;
+            }
+          } // end .compressed-text
+        }
+        .grid-item:nth-of-type(2) { // Collection links
+          grid-column: 1 / span 1;
+          ul {
+            display: block;
+            list-style-type: none;
+            li {
+              display: inline-block;
+              float: left;
+              a {
+                position: relative;
+                font-size: 14px;
+                font-weight: $font-weight-lighter;
+                text-decoration: none;
+                padding: 10px;
+                &:after {
+                  content: "-";
+                  position: absolute;
+                  top: 50%;
+                  right: 0;
+                  @include transform(translate(50%, -50%));
+                }
+                &:hover {
+                  text-decoration: underline;
+                  &:after {
+                    text-decoration: none;
+                  }
+                }
+              }
+              &:last-of-type {
+                a {
+                  &:after {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .grid-item:nth-of-type(3) { // Filter buttons
+          grid-column: 2 / span 1;
+
+        }
+      }
+    }
+  } // end #collection-top
+
+
+  // #collection-listing {
+  //   .content {
+  //     .grid {
+  //       grid-template-columns: 1fr 1fr 1fr;
+  //       grid-gap: 15px;
+  //       .grid-item {
+  //         grid-column: span 1;
+  //         justify-self: center;
+  //         background-color: transparent;
+  //         .collection-card {
+  //           width: 100%;
+  //           min-width: 130px;
+  //           //height: 100%;
+  //         }
+  //       }
+  //     }
+  //   }
+  // } // end #collection-listing
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

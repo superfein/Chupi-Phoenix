@@ -5,6 +5,7 @@ footer {
   position: relative;
   display: block;
   padding: 20px $mobile_side-padding;
+  padding-top: 70px;
   .content {
     .sign-up {
       max-width: 600px;
@@ -184,7 +185,8 @@ footer {
 @include mquery(ml) {
 
   footer {
-    padding: 40px $mobile_side-padding;
+    //padding: 40px $mobile_side-padding;
+    padding-top: 100px;
     .content {
       .sign-up {
         max-width: 700px;

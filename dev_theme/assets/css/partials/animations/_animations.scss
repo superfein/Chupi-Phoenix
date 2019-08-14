@@ -23,3 +23,26 @@
   0% { opacity: 0; transform: translateX(-10px); }
   100% { opacity: 1; transform: translateX(0px); }
 }
+
+// Metal switcher shine
+@include keyframes(metalSwitcherShine) {
+  0% { opacity: 0; transform: rotate(0deg); }
+  25% { opacity: 1; transform: rotate(25deg); }
+  50% { opacity: 0.5; transform: rotate(50deg); }
+  100% { opacity: 0; transform: rotate(100deg); }
+}
+
+// Chevron hint down
+@include keyframes(chevronHintDown) {
+  0% { transform: translateY(0%); }
+  20% { transform: translateY(-10%); }
+  60% { transform: translateY(20%); }
+  100% { transform: translateY(0%); }
+}
+
+@include keyframes(chevronHintUp) {
+  0% { transform: translateY(0%) rotate(180deg); }
+  20% { transform: translateY(10%) rotate(180deg); }
+  60% { transform: translateY(-20%) rotate(180deg); }
+  100% { transform: translateY(0%) rotate(180deg); }
+}

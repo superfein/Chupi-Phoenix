@@ -100,9 +100,9 @@ $( document ).ready(function() {
       $('header').removeClass('solid scrolled');
     }
 	}
-	headerScroll();
-	$(window).scroll ( function() {	headerScroll(); });
-	$(window).resize ( function() {	headerScroll(); });
+	// headerScroll();
+	// $(window).scroll ( function() {	headerScroll(); });
+	// $(window).resize ( function() {	headerScroll(); });
 
 
 
@@ -215,6 +215,52 @@ $( document ).ready(function() {
   $('#cart-btn').off().click(function(e) {
     $('#cart-drawer').addClass('active');
   });
+
+
+
+
+
+  // Sticky filter
+  function stickyFilter() {
+    var filterButtonsPosTopDefault = $('#filter-buttons').parent().offset().top; // Position when not sticky
+    var headerHeight = $('header').outerHeight();
+	  var scrolled = $(window).scrollTop();
+		if( scrolled >= (filterButtonsPosTopDefault - headerHeight) ) { // If past top and menu open
+      $('#filter-buttons').addClass('sticky');
+		} else {
+      $('#filter-buttons').removeClass('sticky');
+    }
+	}
+	stickyFilter();
+	$(window).scroll ( function() {	stickyFilter(); });
+	$(window).resize ( function() {	stickyFilter(); });
+
+
+
+
+
+  // Compressed text
+  $('.compressed-text').each( function() {
+    var thisCompText = $(this);
+    // var content = thisCompText.children('.content');
+    // var contentHeight = content.outerHeight();
+    var expandToggle = thisCompText.children('.expand-toggle');
+    expandToggle.off().click(function(e) {
+      thisCompText.toggleClass('active');
+    });
+  });
+
+
+
+
+
+  // Metal switcher
+  $('.metal-switcher a').off().click(function(e) {
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
+  });
+
+
 
 
 
