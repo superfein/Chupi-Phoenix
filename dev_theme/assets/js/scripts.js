@@ -223,17 +223,31 @@ $( document ).ready(function() {
   // Sticky filter
   function stickyFilter() {
     var filterButtonsPosTopDefault = $('#filter-buttons').parent().offset().top; // Position when not sticky
+    var filterBarPosTopDefault = $('#filter-bar').parent().offset().top; // Position when not sticky
     var headerHeight = $('header').outerHeight();
 	  var scrolled = $(window).scrollTop();
-		if( scrolled >= (filterButtonsPosTopDefault - headerHeight) ) { // If past top and menu open
-      $('#filter-buttons').addClass('sticky');
-		} else {
-      $('#filter-buttons').removeClass('sticky');
+
+    if( window.innerWidth <= desktopBreakPoint ) { // Mobile only
+      $('#filter-bar').removeClass('sticky'); // Remove desktop sticky
+  		if( scrolled >= (filterButtonsPosTopDefault - headerHeight) ) { // If past top and menu open
+        $('#filter-buttons').addClass('sticky');
+  		} else {
+        $('#filter-buttons').removeClass('sticky');
+      }
+    }
+    else { // Desktop only
+      $('#filter-buttons').removeClass('sticky'); // Remove mobile sticky
+      if( scrolled >= (filterBarPosTopDefault - headerHeight) ) { // If past top and menu open
+        $('#filter-bar').addClass('sticky');
+  		} else {
+        $('#filter-bar').removeClass('sticky');
+      }
     }
 	}
 	stickyFilter();
 	$(window).scroll ( function() {	stickyFilter(); });
 	$(window).resize ( function() {	stickyFilter(); });
+
 
 
 

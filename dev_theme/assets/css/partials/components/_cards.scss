@@ -83,17 +83,14 @@
     position: relative;
     text-align: center;
     height: 100%;
-    //background-color: $grey;
+    background-color: $white;
     .upper {
       position: relative;
       overflow: hidden;
-      // display: block;
       img {
         display: block;
         width: 100%;
         filter: brightness(0.97); // darken to light grey
-        //background-color: $white;
-        //opacity: 0.96;
       }
       .variant-switcher {
         display: inline-block;
@@ -129,7 +126,6 @@
       margin-bottom: 0;
       padding: 10px;
       padding-bottom: 80px;
-      //background-color: rgba($white, 0.96);
       span {
         display: inline-block;
         width: 100%;
@@ -245,30 +241,43 @@
 
   // Collection card
   .collection-card {
+    filter: brightness(0.97); // darken whole card to light grey
+    @include transition(all 0.3s $ease);
+    overflow: hidden;
     > .object-cover {
       display: block;
       opacity: 0;
+      @include transition(opacity 0.3s $ease, transform 0.3s $ease);
     }
     .inner {
-      a {
-        h2 {
-          font-size: 28px;
-          padding: 0 15px;
-          padding-bottom: 70px;
-          span {
-            font-size: 18px;
-            padding-top: 5px;
+      @include transition(background-color 0.3s $ease);
+      .upper {
+        @include transition(opacity 0.3s $ease);
+        img {
+          display: block;
+          width: 100%;
+          filter: brightness(1); // return to default brightness
+        }
+        .variant-switcher {
+          &:hover {
+            text-decoration: underline;
           }
         }
       }
-      .variant-switcher {
-        display: block;
+      h2 {
+        font-size: 28px;
+        span {
+          font-size: 18px;
+        }
       }
     }
     .wishlist-add {
       top: 5px;
       right: 5px;
       background-size: auto 50%;
+      &:hover {
+        background-image: url($icon_wishlist_dark_full);
+      }
     }
     .metal-switcher {
       position: absolute;
@@ -281,12 +290,61 @@
     }
     .price {
       position: absolute;
-      font-size: 14px;
+      font-size: 16px;
       bottom: 15px;
       left: 10px;
       text-align: center;
       @include transform(translateX(0%));
     }
+    &:hover { // hover over product WITHOUT variant switcher
+      filter: brightness(1); // darken whole card to light grey
+      > .object-cover {
+        opacity: 1;
+        @include transform(scale(1.05));
+        @include transition(opacity 0.4s $ease, transform 4s $ease_out);
+      }
+      .inner {
+        background-color: transparent;
+        @include transition(background-color 0.3s $ease);
+        .upper {
+          opacity: 0;
+          @include transition(opacity 0.3s $ease);
+          img {
+            display: block;
+            width: 100%;
+            filter: brightness(1); // return to default brightness
+          }
+        }
+        h2 {
+          font-size: 28px;
+          color: $grey;
+          span {
+            font-size: 18px;
+          }
+        }
+      }
+    } // end collection-card:hover
+    &.has-variant-switcher {
+      overflow: visible;
+      > .object-cover {
+        display: none;
+      }
+      &:hover { // hover over product WITH variant switcher
+        filter: brightness(0.97); // darken whole card to light grey
+        .inner {
+          background-color: $white;
+          @include transition(none);
+          .upper {
+            opacity: 1;
+            @include transition(none);
+          }
+          h2 {
+            color: $grey_dark;
+          }
+        }
+      } // end collection-card:hover
+    } // end .has-variant-switcher
+
   } // .collection-card
 
 } // end media-query medium-large

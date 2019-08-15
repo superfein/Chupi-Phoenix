@@ -128,7 +128,7 @@
   padding: 10px 20px;
   border: 1px solid $grey_light;
   text-align: center;
-  @include transition(all 0.2s $ease);
+  @include transition(background-color 0.2s $ease);
   &:after {
     content: "";
     position: relative;
@@ -208,15 +208,32 @@ ul.social-icons {
 
 
 
+
+
+
 @include mquery(m) {
 
 } // end media-query medium
 
 
 
+
+
+
 @include mquery(ml) {
 
+  // Filter buttons (Collection page)
+  .btn-sort,
+  .btn-filter {
+    &:hover {
+      background-color: $grey_lightest;
+    }
+  }
+
 } // end media-query medium-large
+
+
+
 
 
 

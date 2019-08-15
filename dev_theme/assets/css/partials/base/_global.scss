@@ -170,7 +170,7 @@ a {
 
 // Compressed text
 .compressed-text {
-  .content {
+  .inner {
     p {
       display: block;
       opacity: 0;
@@ -210,7 +210,7 @@ a {
     }
   }
   &.active {
-    .content {
+    .inner {
       p {
         //display: block;
         opacity: 1;
