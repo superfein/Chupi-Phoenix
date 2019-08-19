@@ -96,13 +96,13 @@
         display: inline-block;
         max-width: 100%;
         position: absolute;
-        font-size: 12px;
+        font-size: 10px;
         text-decoration: none;
-        padding: 8px 0;
-        bottom: 0px;
+        bottom: 8px;
         left: 50%;
         white-space: nowrap;
         @include transform(translateX(-50%));
+        pointer-events: none; // Allow interaction with underlying link
         &:after {
           content: "";
           position: relative;
@@ -111,10 +111,19 @@
           height: 16px;
           margin-left: 5px;
           vertical-align: middle;
-          background-image: url($icon_filter_dark);
           background-position: center;
           background-repeat: no-repeat;
           background-size: contain;
+        }
+        &.variant-birthstones {
+          &:after {
+            background-image: url($icon_birthstones_dark);
+          }
+        }
+        &.variant-starsigns {
+          &:after {
+            background-image: url($icon_starsigns_dark);
+          }
         }
       }
     }
@@ -258,11 +267,6 @@
           width: 100%;
           filter: brightness(1); // return to default brightness
         }
-        .variant-switcher {
-          &:hover {
-            text-decoration: underline;
-          }
-        }
       }
       h2 {
         font-size: 28px;
@@ -324,26 +328,27 @@
         }
       }
     } // end collection-card:hover
-    &.has-variant-switcher {
-      overflow: visible;
-      > .object-cover {
-        display: none;
-      }
-      &:hover { // hover over product WITH variant switcher
-        filter: brightness(0.97); // darken whole card to light grey
-        .inner {
-          background-color: $white;
-          @include transition(none);
-          .upper {
-            opacity: 1;
-            @include transition(none);
-          }
-          h2 {
-            color: $grey_dark;
-          }
-        }
-      } // end collection-card:hover
-    } // end .has-variant-switcher
+
+    // &.has-variant-switcher {
+    //   overflow: visible;
+    //   > .object-cover {
+    //     display: none;
+    //   }
+    //   &:hover { // hover over product WITH variant switcher
+    //     filter: brightness(0.97); // darken whole card to light grey
+    //     .inner {
+    //       background-color: $white;
+    //       @include transition(none);
+    //       .upper {
+    //         opacity: 1;
+    //         @include transition(none);
+    //       }
+    //       h2 {
+    //         color: $grey_dark;
+    //       }
+    //     }
+    //   } // end collection-card:hover
+    // } // end .has-variant-switcher
 
   } // .collection-card
 
@@ -361,9 +366,16 @@
 
 
 
+
+
+
 @include mquery(xl) {
 
 } // end media-query extra-large
+
+
+
+
 
 
 

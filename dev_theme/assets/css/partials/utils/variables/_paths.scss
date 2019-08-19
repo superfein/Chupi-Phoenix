@@ -4,6 +4,7 @@
 
 // Icon path
 $icon_path: '../img/icon/';
+$filter_icons_path: '../img/icon/filter-icons/';
 
 // Icons
 $icon_account_light: $icon_path + 'lock-light.svg';
@@ -24,3 +25,24 @@ $icon_plus_dark: $icon_path + 'plus-dark.svg';
 $icon_gift_box: $icon_path + 'gift-box.svg';
 $icon_sort_dark: $icon_path + 'sort-dark.svg';
 $icon_filter_dark: $icon_path + 'filter-dark.svg';
+$icon_lock_light: $icon_path + 'lock-light.svg';
+$icon_lock_dark: $icon_path + 'lock-dark.svg';
+$icon_birthstones_dark: $icon_path + 'birthstones-dark.svg';
+$icon_starsigns_dark: $icon_path + 'starsigns-dark.svg';
+
+// Filter icons
+$icon_filter_solid_gold: $filter_icons_path + 'metal-solid-gold.svg';
+$icon_filter_solid_white_gold: $filter_icons_path + 'metal-solid-white-gold.svg';
+$icon_filter_solid_rose_gold: $filter_icons_path + 'metal-solid-rose-gold.svg';
+$icon_filter_plated_gold: $filter_icons_path + 'metal-plated-gold.svg';
+$icon_filter_classic_diamond: $filter_icons_path + 'stone-classic-diamond.svg';
+$icon_filter_grey_diamond: $filter_icons_path + 'stone-grey-diamond.svg';
+$icon_filter_moissanite: $filter_icons_path + 'stone-moissanite.svg';
+$icon_filter_morganite: $filter_icons_path + 'stone-morganite.svg';
+$icon_filter_sapphire: $filter_icons_path + 'stone-sapphire.svg';
+$icon_filter_emerald: $filter_icons_path + 'stone-emerald.svg';
+$icon_filter_halo: $filter_icons_path + 'shape-halo.svg';
+$icon_filter_round: $filter_icons_path + 'shape-round.svg';
+$icon_filter_solitaire: $filter_icons_path + 'shape-solitaire.svg';
+$icon_filter_three_stone: $filter_icons_path + 'shape-three-stone.svg';
+$icon_filter_oval: $filter_icons_path + 'shape-oval.svg';

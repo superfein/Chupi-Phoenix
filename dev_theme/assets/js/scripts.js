@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
   const desktopBreakPoint = 991; // Screen width in px
+  const mobileMenuSlideTime = 200; // ms
 
 
 
@@ -27,7 +28,6 @@ $( document ).ready(function() {
 
 
 
-  var mobileMenuSlideTime = 200;
 
   // Menu open/close (mobile only)
   $('#menu-btn').off().click( function(e) {
@@ -220,8 +220,8 @@ $( document ).ready(function() {
 
 
 
-  // Sticky filter
-  function stickyFilter() {
+  // Sticky filter bar
+  function stickyFilterBar() {
     var filterButtonsPosTopDefault = $('#filter-buttons').parent().offset().top; // Position when not sticky
     var filterBarPosTopDefault = $('#filter-bar').parent().offset().top; // Position when not sticky
     var headerHeight = $('header').outerHeight();
@@ -244,9 +244,37 @@ $( document ).ready(function() {
       }
     }
 	}
-	stickyFilter();
-	$(window).scroll ( function() {	stickyFilter(); });
-	$(window).resize ( function() {	stickyFilter(); });
+	stickyFilterBar();
+	$(window).scroll ( function() {	stickyFilterBar(); });
+	$(window).resize ( function() {	stickyFilterBar(); });
+
+
+
+
+
+
+
+  // Filter drawer
+  // Open filter drawer
+  $('#filter-filter-button').off().click( function() {
+    console.log('testxz');
+    $('#filter-drawer').addClass('active');
+  });
+  // Expand filter section
+  $('.filter-section > a').off().click( function() {
+    if ($(this).parent('.filter-section').hasClass('active')) { // if click on active, close
+      $(this).parent('.filter-section').removeClass('active');
+    } else { // else open clicked
+      $('.filter-section').removeClass('active');
+      $(this).parent('.filter-section').addClass('active');
+    }
+  });
+  // Select filter item (temp)
+  $('.filter-section ul li a').off().click( function() {
+    $(this).parent('li').toggleClass('active');
+  });
+
+
 
 
 

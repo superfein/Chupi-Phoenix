@@ -1,0 +1,307 @@
+
+// _filter-drawer.scss
+
+#filter-drawer {
+  .drawer-header {
+    min-height: 50px;
+    border-bottom: 0;
+  } // end .drawer-header
+  .drawer-main {
+    .filter-section {
+      opacity: 0;
+      @include transform(translateX(30px));
+      @include transition(all 0.4s $ease_out_quint);
+      > a { // Section title
+        display: block;
+        position: relative;
+        font-family: $font_family_primary;
+        font-size: 26px;
+        font-weight: $font-weight-lighter;
+        text-decoration: none;
+        color: $grey;
+        padding: 8px 0;
+        padding-left: 25px;
+        border-bottom: 1px solid $grey_light;
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          top: 45%;
+          left: 0;
+          display: block;
+          width: 11px;
+          height: 11px;
+          background-color: transparent;
+          background-image: url($icon_minus_dark);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          @include transform(translateY(-50%) rotate(0deg));
+          @include transition(all 0.2s $ease_in);
+        }
+        &:after {
+          @include transform(translateY(-50%) rotate(90deg));
+        }
+      }
+      ul {
+        display: grid;
+        grid-template-columns: 100%;
+        list-style-type: none;
+        padding: 10px 0;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        padding: 0;
+        @include transition(max-height 0.4s $ease_out_quint 0s, padding 0.2s $ease 0s, opacity 0.2s $ease 0s);
+        > li {
+          position: relative;
+          grid-column: span 1;
+          > a {
+            position: relative;
+            display: block;
+            font-size: 14px;
+            font-weight: $font_weight_lighter;
+            text-decoration: none;
+            color: $grey;
+            padding: 8px 0;
+            &.icon {
+              padding-left: 22px;
+              &:before {
+                content: "";
+                position: absolute;
+                top: 45%;
+                left: 0;
+                display: block;
+                width: 11px;
+                height: 11px;
+                background-color: transparent;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                @include transform(translateY(-50%));
+              }
+              // Metal
+              &.filter-solid-gold {
+                &:before { background-image: url($icon_filter_solid_gold); }
+              }
+              &.filter-solid-white-gold {
+                &:before { background-image: url($icon_filter_solid_white_gold); }
+              }
+              &.filter-solid-rose-gold {
+                &:before { background-image: url($icon_filter_solid_rose_gold); }
+              }
+              &.filter-plated-gold {
+                &:before { background-image: url($icon_filter_plated_gold); }
+              }
+              // Stone
+              &.filter-classic-diamond {
+                &:before { background-image: url($icon_filter_classic_diamond); }
+              }
+              &.filter-grey-diamond {
+                &:before { background-image: url($icon_filter_grey_diamond); }
+              }
+              &.filter-moissanite {
+                &:before { background-image: url($icon_filter_moissanite); }
+              }
+              &.filter-morganite {
+                &:before { background-image: url($icon_filter_morganite); }
+              }
+              &.filter-sapphire {
+                &:before { background-image: url($icon_filter_sapphire); }
+              }
+              &.filter-emerald {
+                &:before { background-image: url($icon_filter_emerald); }
+              }
+              // Shape
+              &.filter-halo {
+                &:before { background-image: url($icon_filter_halo); }
+              }
+              &.filter-round {
+                &:before { background-image: url($icon_filter_round); }
+              }
+              &.filter-solitaire {
+                &:before { background-image: url($icon_filter_solitaire); }
+              }
+              &.filter-three-stone {
+                &:before { background-image: url($icon_filter_three_stone); }
+              }
+              &.filter-oval {
+                &:before { background-image: url($icon_filter_oval); }
+              }
+            }
+          }
+          &:before, // Checkbox
+          &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 7px;
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+          }
+          &:before { // Checkbox box
+            background-color: $grey_lightest;
+            border: 1px solid lighten($grey, 30%);
+            border-radius: 3px;
+            @include transition(all 0.2s $ease);
+          }
+          &:after { // Checkbox tick
+            width: 6px;
+            height: 10px;
+            top: 10px;
+            right: 6px;
+            border-right: 3px solid $grey;
+            border-bottom: 3px solid $grey;
+            opacity: 0;
+            @include transform(rotate(45deg) scale(0.5));
+            @include transition(all 0.12s $ease_in_out_quart);
+          }
+          // &:hover {
+          //   &:before {
+          //     background-color: $grey_lighter;
+          //   }
+          // }
+          &.active { // li.active
+            &:after {
+              opacity: 1;
+              @include transform(rotate(45deg) scale(1));
+            }
+          }
+        }
+      }
+      &:last-of-type {
+        > a {
+          border-bottom: 0;
+        }
+      }
+      &.filter-section-shape { // larger icons
+        ul {
+          li {
+            a.icon {
+              &:before {
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
+        }
+      }
+      &.filter-section-style { // two-column
+        ul {
+          grid-template-columns: 1fr 1fr;
+          grid-column-gap: 30px;
+        }
+      }
+      &.active { // filter-section open
+        > a {
+          &:before,
+          &:after {
+            @include transform(translateY(-50%) rotate(180deg));
+          }
+          &:before {
+            @include transform(translateY(-50%) rotate(90deg));
+            opacity: 0;
+          }
+        }
+        ul {
+          opacity: 1;
+          visibility: visible;
+          max-height: 250px; // Probable max-height of section
+          padding: 10px 0;
+          @include transform(translateY(0));
+          @include transition(max-height 0.6s $ease_out_quint 0s, padding 0.5s $ease_out_quint 0.1s, opacity 0.2s $ease 0.1s);
+        }
+      }
+    } // end .filter-section
+  } // end .drawer-main
+  .drawer-footer {
+    #filter-update {
+      width: 100%;
+      margin-top: 20px;
+    }
+  } // end .drawer-footer
+  &.active { // drawer open
+    .drawer-main {
+      .filter-section {
+        opacity: 1;
+        @include transform(translateX(0));
+        @include transition(all 0.4s $ease_out_quint);
+        // Transition delay loop @ mquery(s)
+      }
+    }
+  }
+} // end #filter-drawer
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+
+@include mquery(s) {
+
+  #filter-drawer {
+    &.active { // drawer open
+      .drawer-main {
+        @for $i from 1 to 10 { // up to 10 filter sections
+          > .filter-section:nth-of-type(#{$i}) {
+            @include transition-delay(0.05 + ($i * 0.05s)); // initial delay, then subsequent delays per item
+          }
+        } // end for loop
+      }
+    }
+  }
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+
+
+@include mquery(ml) {
+
+
+} // end media-query medium-large
+
+
+
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

@@ -204,6 +204,23 @@
     #checkout-btn {
       width: 100%;
       margin-top: 20px;
+      background-color: $grey_dark;
+      &:before { // override default btn:before
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-image: url($icon_lock_light);
+        background-color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        @include transform(none);
+        z-index: 0;
+        vertical-align: text-bottom;
+        margin-right: 10px;
+      }
     }
   } // end .drawer-footer
   &.active { // drawer open
@@ -214,11 +231,7 @@
           @include transform(translateX(0));
           @include transition(all 0.4s $ease_out_quint);
         }
-        // @for $i from 1 to 10 { // up to 10 cart items
-        //   > li.cart-item:nth-of-type(#{$i}) {
-        //     @include transition-delay(0.05 + ($i * 0.05s)); // initial delay, then subsequent delays per item
-        //   }
-        // } // end for loop
+        // Transition delay loop @ mquery(s)
       }
     }
   }

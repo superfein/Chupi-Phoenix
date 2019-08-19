@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.372" height="18.078" viewBox="0 0 17.372 18.078">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="17.372" height="18.078" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Component" transform="translate(0 0)" clip-path="url(#clip-path)">
+    <g id="Ellipse_30" data-name="Ellipse 30" transform="translate(0.686 1.039)" fill="#fff" stroke="#707070" stroke-width="1">
+      <circle cx="8" cy="8" r="8" stroke="none"/>
+      <circle cx="8" cy="8" r="7.5" fill="none"/>
+    </g>
+    <g id="Ellipse_31" data-name="Ellipse 31" transform="matrix(0.839, -0.545, 0.545, 0.839, 11, 2.723)" fill="#fff" stroke="#707070" stroke-width="1">
+      <ellipse cx="2.5" cy="2" rx="2.5" ry="2" stroke="none"/>
+      <ellipse cx="2.5" cy="2" rx="2" ry="1.5" fill="none"/>
+    </g>
+    <g id="Ellipse_32" data-name="Ellipse 32" transform="matrix(-0.839, -0.545, 0.545, -0.839, 4.193, 6.078)" fill="#fff" stroke="#707070" stroke-width="1">
+      <ellipse cx="2.5" cy="2" rx="2.5" ry="2" stroke="none"/>
+      <ellipse cx="2.5" cy="2" rx="2" ry="1.5" fill="none"/>
+    </g>
+    <g id="Ellipse_33" data-name="Ellipse 33" transform="matrix(0.839, 0.545, -0.545, 0.839, 13.179, 12)" fill="#fff" stroke="#707070" stroke-width="1">
+      <ellipse cx="2.5" cy="2" rx="2.5" ry="2" stroke="none"/>
+      <ellipse cx="2.5" cy="2" rx="2" ry="1.5" fill="none"/>
+    </g>
+    <g id="Ellipse_34" data-name="Ellipse 34" transform="matrix(-0.839, 0.545, -0.545, -0.839, 6.372, 15.355)" fill="#fff" stroke="#707070" stroke-width="1">
+      <ellipse cx="2.5" cy="2" rx="2.5" ry="2" stroke="none"/>
+      <ellipse cx="2.5" cy="2" rx="2" ry="1.5" fill="none"/>
+    </g>
+  </g>
+</svg>
