@@ -164,6 +164,9 @@ a {
   font-family: $font_family_primary;
   font-size: 24px;
 }
+ul {
+  padding-left: $mobile_side-padding;
+}
 
 
 // Misc.
@@ -249,6 +252,7 @@ a {
     border-radius: 50%;
     background: $grey_light; // fallback
     margin: 0 2px;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
     @include transition(all 0.0.2s $ease);
     &:before,
     &:after {

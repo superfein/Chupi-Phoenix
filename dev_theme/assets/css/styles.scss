@@ -12,6 +12,7 @@
 @import "partials/components/buttons";
 @import "partials/components/cards";
 @import "partials/components/currencies";
+@import "partials/components/sliders";
 @import "partials/components/forms";
 
 // Layout styles
@@ -24,6 +25,8 @@
 // Page styles
 @import "partials/pages/home";
 @import "partials/pages/collection";
+@import "partials/pages/product";
+@import "partials/pages/product-customisation";
 
 // Animations
 @import "partials/animations/animations";

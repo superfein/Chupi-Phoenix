@@ -5,6 +5,7 @@
 // Icon path
 $icon_path: '../img/icon/';
 $filter_icons_path: '../img/icon/filter-icons/';
+$birthstones_path: '../img/product/birthstones/';
 
 // Icons
 $icon_account_light: $icon_path + 'lock-light.svg';
@@ -29,6 +30,9 @@ $icon_lock_light: $icon_path + 'lock-light.svg';
 $icon_lock_dark: $icon_path + 'lock-dark.svg';
 $icon_birthstones_dark: $icon_path + 'birthstones-dark.svg';
 $icon_starsigns_dark: $icon_path + 'starsigns-dark.svg';
+$icon_ruler_dark: $icon_path + 'ruler-dark.svg';
+$icon_stone_dark: $icon_path + 'stone-dark.svg';
+$icon_paper_plane_dark: $icon_path + 'paper-plane-dark.svg';
 
 // Filter icons
 $icon_filter_solid_gold: $filter_icons_path + 'metal-solid-gold.svg';
@@ -46,3 +50,6 @@ $icon_filter_round: $filter_icons_path + 'shape-round.svg';
 $icon_filter_solitaire: $filter_icons_path + 'shape-solitaire.svg';
 $icon_filter_three_stone: $filter_icons_path + 'shape-three-stone.svg';
 $icon_filter_oval: $filter_icons_path + 'shape-oval.svg';
+
+// Birthstones
+$birthstone_solid_gold_jan: $birthstones_path + 'birthstone-solid-gold-jan.png';
