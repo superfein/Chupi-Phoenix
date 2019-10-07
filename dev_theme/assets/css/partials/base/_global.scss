@@ -22,6 +22,13 @@ overflow-y: hidden;
 body.no-scroll-x {
 overflow-x: hidden;
 }
+.scrollbar-measure { // applied to temporary element to measure scrollbar width
+	width: 100px;
+	height: 100px;
+	overflow: scroll;
+	position: absolute;
+	top: -9999px;
+}
 
 
 // Sections
@@ -31,7 +38,7 @@ main {
 section {
   position: relative;
   display: block;
-  overflow-x: hidden;
+  //overflow-x: hidden;
   padding: 20px $mobile_side-padding;
 }
 .section-top {

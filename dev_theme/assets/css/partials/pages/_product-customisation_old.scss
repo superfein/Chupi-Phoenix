@@ -1,0 +1,1694 @@
+
+// _product-customisation.scss
+
+// Maintain specificity within product page...
+#product-top {
+  .content {
+    > .grid {
+      #product-info {
+        .product-customise {
+
+          .customise-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-column-gap: 20px;
+            margin-bottom: 10px;
+            .dropdown-btn {
+              position: relative;
+              display: inline-block;
+              grid-column: span 1;
+              font-size: 14px;
+              line-height: 1;
+              padding: 15px;
+              padding-right: 40px;
+              border: 1px solid $grey_light;
+              text-decoration: none;
+              width: 100%;
+              max-width: 400px;
+              cursor: pointer;
+              @include transition(border 0.2s $ease);
+              > img {
+                display: inline-block;
+                vertical-align: middle;
+                width: 24px;
+                height: 24px;
+                margin-left: -5px; // nudge to left
+                margin-right: 3px;
+                object-fit: contain;
+              }
+              &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                width: 10px;
+                height: 10px;
+                background-image: url($icon_chevron_dark);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                @include transform(translateY(-50%));
+              }
+            }
+            .guide-btn {
+              position: relative;
+              grid-column: span 1;
+              justify-self: end;
+              align-self: center;
+              font-size: 14px;
+              text-decoration: underline;
+              padding-left: 28px;
+              &:before {
+                content: "";
+                position: absolute;
+                top: 0px;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+            }
+            .dropdown-panel {
+              position: fixed;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: minmax(min-content, max-content) auto minmax(min-content, max-content); // auto = main section
+              grid-row-gap: 0px;
+              z-index: 8;
+              top: $mobile_header_height;
+              right: 0;
+              width: 100%;
+              height: 100%;
+              height: calc(100% - #{$mobile_header_height});
+              padding: 20px $mobile_side-padding;
+              background-color: $grey_lightest;
+              opacity: 1;
+              pointer-events: none;
+              @include transform(translateY(100%));
+              @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+              .dropdown-panel-header {
+                position: relative;
+                display: block;
+                //padding-right: 50px;
+                grid-column: 1 / span 2;
+                h3 {
+                  position: relative;
+                  display: inline-block;
+                  font-size: 20px;
+                  max-width: calc(100% - 40px);
+                  margin-bottom: 0;
+                  padding-right: 25px;
+                  &:after {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    right: 0;
+                    width: 15px;
+                    height: 15px;
+                    background-image: url($icon_filter_dark);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                  }
+                }
+                .close-btn {
+                  position: absolute;
+                  top: -9px;
+                  right: -12px;
+                  width: 40px;
+                  height: 40px;
+                  &:before, &:after {
+                    content: "";
+                    position: absolute;
+                    width: 18px;
+                    height: 0.05em;
+                    top: 50%;
+                    left: 50%;
+                    background-color: $grey;
+                    @include transition(all 0s $ease);
+                  }
+                  &:before {
+                    @include transform(translate(-50%, -50%) rotateZ(135deg));
+                  }
+                  &:after {
+                    @include transform(translate(-50%, -50%) rotateZ(45deg));
+                  }
+                }
+              }
+              .dropdown-panel-main {
+                grid-column: 1 / span 2;
+                grid-row: 2 / span 1;
+                overflow-x: hidden;
+                overflow-y: auto;
+              }
+              &.active { // customise panel open
+                opacity: 1;
+                pointer-events: auto;
+                @include transform(translateY(0%));
+                @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+              }
+            }
+            .product-guide-drawer { // general
+              background-color: $grey_lightest;
+              .drawer-main {
+                padding: 15px;
+                padding-top: 30px;
+                h3 {
+                  font-size: 22px;
+                }
+                p {
+                  font-size: 14px;
+                  font-weight: $font-weight-light;
+                }
+              }
+            }
+
+            // Ring size
+            &.customise-ring-size {
+              .guide-btn {
+                &:before {
+                  background-image: url($icon_ruler_dark);
+                }
+              }
+              .dropdown-panel {
+                ul.ring-size-options,
+                .ring-size-bespoke {
+                  max-width: 400px;
+                  margin: 0 auto;
+                }
+                ul.ring-size-options {
+                  display: grid;
+                  grid-column: 1 / span 2;
+                  grid-template-columns: 1fr 1fr;
+                  grid-gap: 0 15px;
+                  justify-items: center;
+                  list-style-type: none;
+                  padding: 30px 0;
+                  li {
+                    grid-column: span 1;
+                    display: block;
+                    a.ring-size-option {
+                      display: inline-block;
+                      font-size: 14px;
+                      padding: 15px 0;
+                      text-decoration: none;
+                    }
+                  }
+                }
+                .ring-size-bespoke {
+                  text-align: center;
+                  > a {
+                    display: block;
+                    font-size: 14px;
+                    padding: 10px 0;
+                    //margin-bottom: 10px;
+                  }
+                  .inner {
+                    display: block;
+                    max-height: 0;
+                    opacity: 0;
+                    @include transform(translateY(-20px));
+                    @include transition(all 0.4s $ease_out_quint);
+                    textarea {
+                      display: none;
+                      width: 100%;
+                      height: 160px;
+                      font-size: 14px;
+                      padding: 20px 15px;
+                      margin-top: 10px;
+                      border: 1px solid $grey_light;
+                      box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+                      margin-bottom: 25px;
+                    }
+                    .btn {
+                      display: none;
+                      padding: 12px 20px;
+                      width: 100%;
+                    }
+                    &.active {
+                      max-height: 200px;
+                      opacity: 1;
+                      @include transform(translateY(0px));
+                      @include transition(all 0.4s $ease_out_quint);
+                      textarea,
+                      .btn {
+                        display: block;
+                      }
+                    }
+                  }
+                }
+              }
+              .product-guide-drawer {
+                .drawer-main {
+                  text-align: center;
+                  img {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    max-height: 150px;
+                  }
+                }
+              }
+            } // end .customise-ring-size
+
+            // Birthstone
+            &.customise-birthstone {
+              .guide-btn {
+                &:before {
+                  background-image: url($icon_stone_dark);
+                  background-position: top;
+                  background-size: auto 80%;
+                }
+              }
+              .dropdown-panel {
+                ul.birthstone-options {
+                  max-width: 400px;
+                  margin: 0 auto;
+                  display: grid;
+                  grid-column: 1 / span 2;
+                  grid-template-columns: 1fr 1fr;
+                  grid-gap: 0 15px;
+                  justify-items: left;
+                  list-style-type: none;
+                  padding: 30px 0;
+                  li {
+                    grid-column: span 1;
+                    align-self: center;
+                    display: block;
+                    a.birthstone-option {
+                      position: relative;
+                      display: inline-block;
+                      font-size: 14px;
+                      padding: 20px 0;
+                      padding-left: 40px;
+                      text-decoration: none;
+                      img {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 35px;
+                        height: 35px;
+                        @include transform(translateY(-50%));
+                      }
+                    }
+                  }
+                }
+              }
+              .product-guide-drawer {
+                .drawer-main {
+                  ul {
+                    list-style-type: none;
+                    padding: 0;
+                    li {
+                      display: block;
+                      position: relative;
+                      padding-left: 100px;
+                      margin-bottom: 50px;
+                      img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        border: 1px solid $grey_light;
+                        border-radius: 50%;
+                        width: 80px;
+                      }
+                    }
+                  }
+                }
+              }
+            } // end .customise-birthstone
+
+            // Starsign
+            &.customise-starsign {
+              .guide-btn {
+                &:before {
+                  background-image: url($icon_starsigns_dark);
+                  background-position: top;
+                  background-size: auto 80%;
+                }
+              }
+              .dropdown-panel {
+                ul.starsign-options {
+                  max-width: 400px;
+                  margin: 0 auto;
+                  display: grid;
+                  grid-column: 1 / span 2;
+                  grid-template-columns: 1fr 1fr;
+                  grid-gap: 0 15px;
+                  justify-items: left;
+                  list-style-type: none;
+                  padding: 30px 0;
+                  li {
+                    grid-column: span 1;
+                    align-self: center;
+                    display: block;
+                    a.starsign-option {
+                      position: relative;
+                      display: inline-block;
+                      font-size: 14px;
+                      padding: 20px 0;
+                      padding-left: 40px;
+                      text-decoration: none;
+                      img {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 35px;
+                        height: 35px;
+                        @include transform(translateY(-50%));
+                      }
+                      span {
+                        display: block;
+                        font-size: 11px;
+                        color: $grey;
+                      }
+                    }
+                  }
+                }
+              }
+              .product-guide-drawer {
+                .drawer-main {
+                  ul {
+                    list-style-type: none;
+                    padding: 0;
+                    li {
+                      display: block;
+                      position: relative;
+                      padding-left: 100px;
+                      margin-bottom: 50px;
+                      img {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 80px;
+                        @include transform(translateY(-50%));
+                      }
+                      h3 {
+                        span {
+                          display: block;
+                          font-family: $font_family_secondary;
+                          font-size: 14px;
+                          margin-top: 3px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            } // end .customise-starsign
+
+            // Coordinates
+            &.customise-coordinates {
+              display: block;
+              width: 100%;
+              max-width: 300px;
+              margin-left: auto;
+              margin-right: auto;
+              > p {
+                font-size: 14px;
+                font-weight: $font-weight-light;
+                margin-bottom: 10px;
+              }
+              form {
+                display: block;
+                width: 100%;
+                .form-group {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr 1fr 1fr;
+                  grid-gap: 5px;
+                  margin-bottom: 12px;
+                  .form-field {
+                    grid-column: span 1;
+                    margin: 0;
+                    input {
+                      display: inline-block;
+                      width: 48px;
+                      height: 48px;
+                      font-size: 14px;
+                      font-weight: $font-weight-light;
+                      text-align: center;
+                      border: 1px solid $grey_light;
+                      @include transition(border 0.2s $ease);
+                      &:active,
+                      &:focus {
+                        outline: none;
+                        border: 1px solid $grey;
+                      }
+                    }
+                    input::-webkit-input-placeholder {
+                      color: $grey_light;
+                    }
+                    input::-moz-placeholder {
+                      color: $grey_light;
+                    }
+                    input:-ms-input-placeholder {
+                      color: $grey_light;
+                    }
+                    input:-moz-placeholder {
+                      color: $grey_light;
+                    }
+                    label {
+                      display: inline-block;
+                      vertical-align: top;
+                      margin-left: 3px;
+                      font-size: 20px;
+                    }
+                  } // end .form-field
+                  .switch {
+                    grid-column: span 1;
+                    align-self: center;
+                    position: relative;
+                    width: 76px;
+                    height: 38px;
+                    display: inline-block;
+                    border-radius: 50px;
+                    background: $grey;
+                    cursor: pointer;
+                    @include transition(all 0.2s $ease);
+                    &:before {
+                      content: "";
+                      position: absolute;
+                      top: 0px;
+                      left: -1px;
+                      background: $pink;
+                      height: 38px;
+                      width: 38px;
+                      border-radius: 50%;
+                      border: 1px solid $grey;
+                      @include transition(all 0.25s $ease_in_out_quart);
+                    }
+                    span {
+                      position: absolute;
+                      height: 38px;
+                      font-size: 22px;
+                      font-weight: $font-weight-light;
+                      line-height: 38px;
+                      text-align: center;
+                      width: 38px;
+                      top: 1px;
+                      color: white;
+                      pointer-events: none;
+                      -webkit-tap-highlight-color: transparent;
+                      @include transition(all 0.1s $ease);
+                      &:nth-of-type(1) {
+                        left: -1px;
+                        right: auto;
+                        @include transform(scale(1));
+                      }
+                      &:nth-of-type(2) {
+                        left: auto;
+                        right: -1px;
+                        @include transform(scale(0.8));
+                      }
+                    }
+                    &.switched {
+                      &:before {
+                        @include transform(translateX(40px)); // switch button width (inc. borders)
+                      }
+                      span {
+                        &:nth-of-type(1) {
+                          @include transform(scale(0.8));
+                        }
+                        &:nth-of-type(2) {
+                          @include transform(scale(1));
+                        }
+                      }
+                    }
+                    &:hover {
+                      background: lighten($grey, 10%);
+                    }
+                  } // .switch
+                } // end .form-group
+              }
+              .guide-btn {
+                display: block;
+                padding-left: 0;
+                font-size: 14px;
+                text-align: right;
+              }
+              .product-guide-drawer {
+                .drawer-main {
+                  img {
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 30px;
+                    max-height: 150px;
+                  }
+                }
+              }
+            } // end .customise-coordinates
+
+            // Initials
+            &.customise-initials {
+              grid-template-columns: 100%;
+              grid-gap: 10px;
+              .grid-item {
+                position: relative;
+                display: flex;
+                justify-self: center;
+                align-self: center;
+                // align-items: center;
+                // align-content: center;
+                > span {
+                  display: inline-block;
+                  font-size: 12px;
+                  margin-right: 10px;
+                  align-self: center;
+                  max-width: 50px;
+                }
+                .initials-selection {
+                  display: inline-block;
+                  span {
+                    display: inline-block;
+                    float: left;
+                    width: 40px;
+                    height: 48px;
+                    margin-right: 7px;
+                    margin-bottom: 3px;
+                    padding: 0;
+                    border: 1px solid $grey_light;
+                    background-repeat: no-repeat;
+                    background-size: 75%;
+                    background-position: center;
+                    cursor: pointer;
+                    @include transition(all 0.2s $ease);
+                    &:after {
+                      display: none;
+                    }
+                    // &:hover {
+                    //   border: 1px solid $grey;
+                    // }
+                  }
+                }
+              }
+              .change-disc {
+                justify-self: center;
+                .dropdown-btn {
+                  display: inline-block;
+                  // width: auto;
+                  // margin
+                  padding: 10px 0;
+                  border: 0;
+                  text-align: center;
+                  &:after {
+                    position: relative;
+                    display: inline-block;
+                    top: 2px;
+                    right: auto;
+                    vertical-align: bottom;
+                    margin-left: 7px;
+                  }
+                }
+                .dropdown-panel { // change disc panel
+                  grid-template-columns: 100%;
+                  .dropdown-panel-header {
+
+                  }
+                  .dropdown-panel-main {
+                    padding-top: 30px;
+                    ul {
+                      list-style-type: none;
+                      padding: 0;
+                      li {
+                        display: block;
+                        position: relative;
+                        a {
+                          display: block;
+                          font-size: 14px;
+                          text-align: center;
+                          padding: 15px;
+                          text-decoration: none;
+                          &.disabled {
+                            opacity: 0.3;
+                            pointer-events: none;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              > .dropdown-panel { // initial panel
+                grid-template-columns: 100%;
+                .dropdown-panel-header {
+                  //grid-template-columns: 100%;
+                  .initials-selection {
+                    display: block;
+                    text-align: center;
+                    padding: 15px 0;
+                    span {
+                      display: inline-block;
+                      width: 44px;
+                      height: 53px;
+                      padding: 0;
+                      background-color: $white;
+                      border: 1px solid $grey_light;
+                      background-repeat: no-repeat;
+                      background-size: 75%;
+                      background-position: center;
+                      cursor: pointer;
+                      @include transition(all 0.2s $ease);
+                      &.active {
+                        border: 1px solid $grey;
+                      }
+                      &:after {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+                .dropdown-panel-main {
+                  padding-bottom: 30px;
+                  ul {
+                    list-style-type: none;
+                    padding: 0;
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    //grid-template-rows: repeat(auto-fit, 60px);
+                    grid-column-gap: 10px;
+                    grid-row-gap: 5px;
+                    max-width: 500px;
+                    margin: 0 auto;
+                    li {
+                      position: relative;
+                      grid-column: span 1;
+                      a {
+                        display: inline-block;
+                        width: 100%;
+                        height: 70px;
+                        margin: 0px;
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        // background-images defines below
+                      }
+                    }
+                  }
+                }
+                .dropdown-panel-footer {
+                  padding-top: 15px;
+                  text-align: center;
+                  .btn {
+                    width: 100%;
+                    max-width: 350px;
+                    padding: 12px 20px;
+                  }
+                }
+              }
+              // Initials images (common within parent customise-initials)
+              .initial-a { background-image: url($initial_a); }
+              .initial-b { background-image: url($initial_b); }
+              .initial-c { background-image: url($initial_c); }
+              .initial-d { background-image: url($initial_d); }
+              .initial-e { background-image: url($initial_e); }
+              .initial-f { background-image: url($initial_f); }
+              .initial-g { background-image: url($initial_g); }
+              .initial-h { background-image: url($initial_h); }
+              .initial-i { background-image: url($initial_i); }
+              .initial-j { background-image: url($initial_j); }
+              .initial-k { background-image: url($initial_k); }
+              .initial-l { background-image: url($initial_l); }
+              .initial-m { background-image: url($initial_m); }
+              .initial-n { background-image: url($initial_n); }
+              .initial-o { background-image: url($initial_o); }
+              .initial-p { background-image: url($initial_p); }
+              .initial-q { background-image: url($initial_q); }
+              .initial-r { background-image: url($initial_r); }
+              .initial-s { background-image: url($initial_s); }
+              .initial-t { background-image: url($initial_t); }
+              .initial-u { background-image: url($initial_u); }
+              .initial-v { background-image: url($initial_v); }
+              .initial-w { background-image: url($initial_w); }
+              .initial-x { background-image: url($initial_x); }
+              .initial-y { background-image: url($initial_y); }
+              .initial-z { background-image: url($initial_z); }
+              .initial-a-fada { background-image: url($initial_a_fada); }
+              .initial-e-fada { background-image: url($initial_e_fada); }
+              .initial-i-fada { background-image: url($initial_i_fada); }
+              .initial-o-fada { background-image: url($initial_o_fada); }
+              .initial-u-fada { background-image: url($initial_u_fada); }
+              .initial-ampersand { background-image: url($initial_ampersand); }
+              .initial-heart { background-image: url($initial_heart); }
+              .initial-star { background-image: url($initial_star); }
+              .initial-blank { background-image: url($initial_blank); }
+              .initial-blank-faded { background-image: url($initial_blank_faded); }
+            } // end .customise-initials
+
+          } // end .customise-section
+
+        } // end .product-customise
+      } // end #product-info
+    } // end .grid
+  }
+} // end #product-top
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+            .customise-section {
+
+              // Initials
+              &.customise-initials {
+                > .dropdown-panel { // initial panel
+                  .dropdown-panel-main {
+                    ul {
+                      grid-template-columns: repeat(7, 1fr);
+                    }
+                  }
+                }
+              } // end .customise-initials
+
+            } // end .customise-section
+
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
+
+} // end media-query small
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+            .customise-section {
+              grid-template-columns: 2fr 1fr;
+              .dropdown-btn {
+                justify-self: end;
+              }
+              .guide-btn {
+                justify-self: start;
+              }
+            }
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+
+            .customise-section {
+              position: relative;
+              // display: grid;
+              // grid-template-columns: 2fr 1fr;
+              // grid-column-gap: 20px;
+              // margin-bottom: 10px;
+              .dropdown-btn {
+                // position: relative;
+                // display: inline-block;
+                // grid-column: span 1;
+                // font-size: 14px;
+                // line-height: 1;
+                // padding: 15px;
+                // padding-right: 40px;
+                // border: 1px solid $grey_light;
+                // text-decoration: none;
+                // width: 100%;
+                // max-width: 400px;
+                // cursor: pointer;
+                // justify-self: end;
+                // > img {
+                //   display: inline-block;
+                //   vertical-align: middle;
+                //   width: 24px;
+                //   height: 24px;
+                //   margin-left: -5px; // nudge to left
+                //   margin-right: 3px;
+                //   object-fit: contain;
+                // }
+                // &:after {
+                //   content: "";
+                //   position: absolute;
+                //   top: 50%;
+                //   right: 15px;
+                //   width: 10px;
+                //   height: 10px;
+                //   background-image: url($icon_chevron_dark);
+                //   background-position: center;
+                //   background-repeat: no-repeat;
+                //   background-size: contain;
+                //   @include transform(translateY(-50%));
+                // }
+                &:hover {
+                  border: 1px solid darken($grey_light, 20%);
+                }
+              }
+              // .guide-btn {
+              //   position: relative;
+              //   grid-column: span 1;
+              //   justify-self: start;
+              //   align-self: center;
+              //   font-size: 14px;
+              //   text-decoration: underline;
+              //   padding-left: 28px;
+              //   &:before {
+              //     content: "";
+              //     position: absolute;
+              //     top: 0px;
+              //     left: 0;
+              //     width: 20px;
+              //     height: 20px;
+              //     background-position: center;
+              //     background-repeat: no-repeat;
+              //     background-size: contain;
+              //   }
+              // }
+              .dropdown-panel {
+                position: absolute;
+                // display: grid;
+                grid-template-columns: 100%;
+                // grid-template-rows: minmax(min-content, max-content) auto minmax(min-content, max-content); // auto = main section
+                // grid-row-gap: 0px;
+                z-index: 1;
+                top: 100%;
+                left: 0;
+                right: auto;
+                width: 100%;
+                height: auto;
+                //height: calc(100% - #{$mobile_header_height});
+                padding: 10px $mobile_side-padding;
+                background-color: $white;
+                box-shadow: 0px 5px 10px rgba(0,0,0,0.12);
+                opacity: 0;
+                //pointer-events: none;
+                @include transform(translateY(-10px));
+                //@include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+                .dropdown-panel-header {
+                  //position: relative;
+                  display: none;
+                  //padding-right: 50px;
+                  //grid-column: 1 / span 2;
+                  // h3 {
+                  //   position: relative;
+                  //   display: inline-block;
+                  //   font-size: 20px;
+                  //   max-width: calc(100% - 40px);
+                  //   margin-bottom: 0;
+                  //   padding-right: 25px;
+                  //   &:after {
+                  //     content: "";
+                  //     position: absolute;
+                  //     top: 2px;
+                  //     right: 0;
+                  //     width: 15px;
+                  //     height: 15px;
+                  //     background-image: url($icon_filter_dark);
+                  //     background-position: center;
+                  //     background-repeat: no-repeat;
+                  //     background-size: contain;
+                  //   }
+                  // }
+                  // .close-btn {
+                  //   position: absolute;
+                  //   top: -9px;
+                  //   right: -12px;
+                  //   width: 40px;
+                  //   height: 40px;
+                  //   &:before, &:after {
+                  //     content: "";
+                  //     position: absolute;
+                  //     width: 18px;
+                  //     height: 0.05em;
+                  //     top: 50%;
+                  //     left: 50%;
+                  //     background-color: $grey;
+                  //     @include transition(all 0s $ease);
+                  //   }
+                  //   &:before {
+                  //     @include transform(translate(-50%, -50%) rotateZ(135deg));
+                  //   }
+                  //   &:after {
+                  //     @include transform(translate(-50%, -50%) rotateZ(45deg));
+                  //   }
+                  // }
+                }
+                .dropdown-panel-main {
+                  grid-column: 1 / span 1;
+                  grid-row: 1 / span 1;
+                  // overflow-x: hidden;
+                  // overflow-y: auto;
+                }
+                // &.active { // customise panel open
+                //   opacity: 1;
+                //   pointer-events: auto;
+                //   @include transform(translateY(0%));
+                //   @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+                // }
+              }
+              .product-guide-drawer { // general
+                //background-color: $grey_lightest;
+                .drawer-main {
+                  //padding: 15px;
+                  padding-top: 50px;
+                  // h3 {
+                  //   font-size: 22px;
+                  // }
+                  // p {
+                  //   font-size: 14px;
+                  //   font-weight: $font-weight-light;
+                  // }
+                }
+              }
+
+              // Ring size
+              &.customise-ring-size {
+                // .guide-btn {
+                //   &:before {
+                //     background-image: url($icon_ruler_dark);
+                //   }
+                // }
+                .dropdown-panel {
+                  ul.ring-size-options,
+                  .ring-size-bespoke {
+                    max-width: 400px;
+                    margin: 0 auto;
+                  }
+                  ul.ring-size-options {
+                    //display: grid;
+                    //grid-column: 1 / span 2;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-gap: 0 15px;
+                    justify-items: left;
+                    // list-style-type: none;
+                    padding: 0;
+                    max-width: none;
+                    li {
+                      // grid-column: span 1;
+                      // display: block;
+                      a.ring-size-option {
+                        // display: inline-block;
+                        // font-size: 14px;
+                        padding: 12px 0;
+                        //text-decoration: none;
+                        &:hover {
+                          text-decoration: underline;
+                        }
+                      }
+                    }
+                  }
+                  .ring-size-bespoke {
+                    //text-align: center;
+                    // > a {
+                    //   display: block;
+                    //   font-size: 14px;
+                    //   padding: 10px 0;
+                    //   margin-bottom: 10px;
+                    // }
+                    .inner {
+                      display: inline-block;
+                      width: 100%;
+                      max-height: 0;
+                      // opacity: 0;
+                      // @include transform(translateY(-20px));
+                      // @include transition(all 0.4s $ease_out_quint);
+                      // textarea {
+                      //   display: none;
+                      //   width: 100%;
+                      //   height: 160px;
+                      //   font-size: 14px;
+                      //   padding: 20px 15px;
+                      //   border: 1px solid $grey_light;
+                      //   box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+                      //   margin-bottom: 25px;
+                      // }
+                      // .btn {
+                      //   display: none;
+                      //   padding: 12px 20px;
+                      //   width: 100%;
+                      // }
+                      // &.active {
+                      //   max-height: 200px;
+                      //   opacity: 1;
+                      //   @include transform(translateY(0px));
+                      //   @include transition(all 0.4s $ease_out_quint);
+                      //   textarea,
+                      //   .btn {
+                      //     display: block;
+                      //   }
+                      // }
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    //text-align: center;
+                    img {
+                      // margin-top: 20px;
+                      // margin-bottom: 20px;
+                      max-height: 180px;
+                    }
+                  }
+                }
+              } // end .customise-ring-size
+
+              // Birthstone
+              &.customise-birthstone {
+                // .guide-btn {
+                //   &:before {
+                //     background-image: url($icon_stone_dark);
+                //     background-position: top;
+                //     background-size: auto 80%;
+                //   }
+                // }
+                .dropdown-panel {
+                  ul.birthstone-options {
+                    max-width: none;
+                    // margin: 0 auto;
+                    // display: grid;
+                    // grid-column: 1 / span 2;
+                    // grid-template-columns: 1fr 1fr;
+                    // grid-gap: 0 15px;
+                    // justify-items: left;
+                    // list-style-type: none;
+                    padding: 0;
+                    li {
+                      // grid-column: span 1;
+                      // align-self: center;
+                      // display: block;
+                      a.birthstone-option {
+                        // position: relative;
+                        // display: inline-block;
+                        // font-size: 14px;
+                        padding: 15px 0;
+                        padding-left: 40px;
+                        overflow: hidden; // prevent shine from overflowing
+                        // text-decoration: none;
+                        // img {
+                        //   position: absolute;
+                        //   top: 50%;
+                        //   left: 0;
+                        //   width: 35px;
+                        //   height: 35px;
+                        //   @include transform(translateY(-50%));
+                        // }
+                        &:after { // shine
+                          content: "";
+                          position: absolute;
+                          top: 7px;
+                          left: 0;
+                          width: 35px;
+                          height: 35px;
+                          border-radius: 50%;
+                          background: linear-gradient(
+                            to bottom,
+                            rgba(255, 255, 255, 0),
+                            rgba(255, 255, 255, 0.5),
+                            rgba(255, 255, 255, 0)
+                          );
+                          opacity: 0;
+                        }
+                        &:hover {
+                          &:after {
+                            @include animation('metalSwitcherShine 0.7s linear both');
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    ul {
+                      // list-style-type: none;
+                      // padding: 0;
+                      li {
+                        // display: block;
+                        // position: relative;
+                        padding-left: 120px;
+                        //margin-bottom: 50px;
+                        img {
+                          // position: absolute;
+                          // top: 0;
+                          // left: 0;
+                          // border: 1px solid $grey_light;
+                          // border-radius: 50%;
+                          width: 100px;
+                        }
+                      }
+                    }
+                  }
+                }
+              } // end .customise-birthstone
+
+              // Starsign
+              &.customise-starsign {
+                // .guide-btn {
+                //   &:before {
+                //     background-image: url($icon_starsigns_dark);
+                //     background-position: top;
+                //     background-size: auto 80%;
+                //   }
+                // }
+                .dropdown-panel {
+                  ul.starsign-options {
+                    max-width: none;
+                    // margin: 0 auto;
+                    // display: grid;
+                    // grid-column: 1 / span 2;
+                    // grid-template-columns: 1fr 1fr;
+                    // grid-gap: 0 15px;
+                    // justify-items: left;
+                    // list-style-type: none;
+                    padding: 0;
+                    li {
+                      // grid-column: span 1;
+                      // align-self: center;
+                      // display: block;
+                      a.starsign-option {
+                        // position: relative;
+                        // display: inline-block;
+                        // font-size: 14px;
+                        padding: 12px 0;
+                        padding-left: 40px;
+                        overflow: hidden; // prevent shine from overflowing
+                        // text-decoration: none;
+                        // img {
+                        //   position: absolute;
+                        //   top: 50%;
+                        //   left: 0;
+                        //   width: 35px;
+                        //   height: 35px;
+                        //   @include transform(translateY(-50%));
+                        // }
+                        // span {
+                        //   display: block;
+                        //   font-size: 11px;
+                        //   color: $grey;
+                        // }
+                        &:after { // shine
+                          content: "";
+                          position: absolute;
+                          top: 7px;
+                          left: 0;
+                          width: 35px;
+                          height: 35px;
+                          border-radius: 50%;
+                          background: linear-gradient(
+                            to bottom,
+                            rgba(255, 255, 255, 0),
+                            rgba(255, 255, 255, 0.5),
+                            rgba(255, 255, 255, 0)
+                          );
+                          opacity: 0;
+                        }
+                        &:hover {
+                          &:after {
+                            @include animation('metalSwitcherShine 0.7s linear both');
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    ul {
+                      // list-style-type: none;
+                      // padding: 0;
+                      li {
+                        // display: block;
+                        // position: relative;
+                        padding-left: 120px;
+                        //margin-bottom: 50px;
+                        img {
+                          // position: absolute;
+                          // top: 50%;
+                          // left: 0;
+                          width: 100px;
+                          //@include transform(translateY(-50%));
+                        }
+                        // h3 {
+                        //   span {
+                        //     display: block;
+                        //     font-family: $font_family_secondary;
+                        //     font-size: 14px;
+                        //     margin-top: 3px;
+                        //   }
+                        // }
+                      }
+                    }
+                  }
+                }
+              } // end .customise-starsign
+
+              // Coordinates
+              &.customise-coordinates {
+                // display: block;
+                // width: 100%;
+                // max-width: 300px;
+                // margin-left: auto;
+                // margin-right: auto;
+                // > p {
+                //   font-size: 14px;
+                //   font-weight: $font-weight-light;
+                //   margin-bottom: 10px;
+                // }
+                // form {
+                //   display: block;
+                //   width: 100%;
+                //   .form-group {
+                //     display: grid;
+                //     grid-template-columns: 1fr 1fr 1fr 1fr;
+                //     grid-gap: 5px;
+                //     margin-bottom: 12px;
+                //     .form-field {
+                //       grid-column: span 1;
+                //       margin: 0;
+                //       input {
+                //         display: inline-block;
+                //         width: 48px;
+                //         height: 48px;
+                //         font-size: 14px;
+                //         font-weight: $font-weight-light;
+                //         text-align: center;
+                //         border: 1px solid $grey_light;
+                //         @include transition(border 0.2s $ease);
+                //         &:active,
+                //         &:focus {
+                //           outline: none;
+                //           border: 1px solid $grey;
+                //         }
+                //       }
+                //       input::-webkit-input-placeholder {
+                //         color: $grey_light;
+                //       }
+                //       input::-moz-placeholder {
+                //         color: $grey_light;
+                //       }
+                //       input:-ms-input-placeholder {
+                //         color: $grey_light;
+                //       }
+                //       input:-moz-placeholder {
+                //         color: $grey_light;
+                //       }
+                //       label {
+                //         display: inline-block;
+                //         vertical-align: top;
+                //         margin-left: 3px;
+                //         font-size: 20px;
+                //       }
+                //     } // end .form-field
+                //     .switch {
+                //       grid-column: span 1;
+                //       align-self: center;
+                //       position: relative;
+                //       width: 76px;
+                //       height: 38px;
+                //       display: inline-block;
+                //       border-radius: 50px;
+                //       background: $grey;
+                //       cursor: pointer;
+                //       @include transition(all 0.2s $ease);
+                //       &:before {
+                //         content: "";
+                //         position: absolute;
+                //         top: 0px;
+                //         left: -1px;
+                //         background: $pink;
+                //         height: 38px;
+                //         width: 38px;
+                //         border-radius: 50%;
+                //         border: 1px solid $grey;
+                //         @include transition(all 0.25s $ease_in_out_quart);
+                //       }
+                //       span {
+                //         position: absolute;
+                //         height: 38px;
+                //         font-size: 22px;
+                //         font-weight: $font-weight-light;
+                //         line-height: 38px;
+                //         text-align: center;
+                //         width: 38px;
+                //         top: 1px;
+                //         color: white;
+                //         pointer-events: none;
+                //         -webkit-tap-highlight-color: transparent;
+                //         @include transition(all 0.1s $ease);
+                //         &:nth-of-type(1) {
+                //           left: -1px;
+                //           right: auto;
+                //           @include transform(scale(1));
+                //         }
+                //         &:nth-of-type(2) {
+                //           left: auto;
+                //           right: -1px;
+                //           @include transform(scale(0.8));
+                //         }
+                //       }
+                //       &.switched {
+                //         &:before {
+                //           @include transform(translateX(40px)); // switch button width (inc. borders)
+                //         }
+                //         span {
+                //           &:nth-of-type(1) {
+                //             @include transform(scale(0.8));
+                //           }
+                //           &:nth-of-type(2) {
+                //             @include transform(scale(1));
+                //           }
+                //         }
+                //       }
+                //       &:hover {
+                //         background: lighten($grey, 10%);
+                //       }
+                //     } // .switch
+                //   } // end .form-group
+                // }
+                // .guide-btn {
+                //   display: block;
+                //   padding-left: 0;
+                //   font-size: 14px;
+                //   text-align: right;
+                // }
+                .product-guide-drawer {
+                  .drawer-main {
+                    img {
+                      // display: block;
+                      // margin: 0 auto;
+                      // margin-bottom: 30px;
+                      max-height: 180px;
+                    }
+                  }
+                }
+              } // end .customise-coordinates
+
+              // Initials
+              &.customise-initials {
+                grid-template-columns: auto auto;
+                //grid-gap: 10px;
+                .grid-item {
+                  // position: relative;
+                  // display: flex;
+                  // justify-self: center;
+                  // align-self: center;
+                  // align-items: center;
+                  // align-content: center;
+                  // > span {
+                  //   display: inline-block;
+                  //   font-size: 12px;
+                  //   margin-right: 10px;
+                  //   align-self: center;
+                  // }
+                  .initials-selection {
+                    //display: inline-block;
+                    span {
+                      // display: inline-block;
+                      // float: left;
+                      // width: 40px;
+                      // height: 48px;
+                      // margin-right: 5px;
+                      // margin-bottom: 3px;
+                      // padding: 0;
+                      // border: 1px solid $grey_light;
+                      // background-repeat: no-repeat;
+                      // background-size: 75%;
+                      // background-position: center;
+                      // cursor: pointer;
+                      // @include transition(all 0.2s $ease);
+                      // &:after {
+                      //   display: none;
+                      // }
+                      // &:hover {
+                      //   border: 1px solid $grey;
+                      // }
+                    }
+                  }
+                }
+                .change-disc {
+                  //justify-self: center;
+                  .dropdown-btn {
+                    //display: inline-block;
+                    font-size: 12px;
+                    line-height: 1.2;
+                    max-width: 70px;
+                    // width: auto;
+                    // margin
+                    // padding: 10px 0;
+                    // border: 0;
+                    text-align: left;
+                    // &:after {
+                    //   position: relative;
+                    //   display: inline-block;
+                    //   top: 2px;
+                    //   right: auto;
+                    //   vertical-align: bottom;
+                    //   margin-left: 7px;
+                    // }
+                  }
+                  .dropdown-panel { // change disc panel
+                    //grid-template-columns: 100%;
+                    //max-width: 250px;
+                    width: auto;
+                    left: auto;
+                    right: 0;
+                    .dropdown-panel-header {
+
+                    }
+                    .dropdown-panel-main {
+                      padding-top: 0px;
+                      ul {
+                        // list-style-type: none;
+                        // padding: 0;
+                        li {
+                          // display: block;
+                          // position: relative;
+                          a {
+                            // display: block;
+                            // font-size: 14px;
+                            // text-align: center;
+                            // padding: 15px 0;
+                            // text-decoration: none;
+                            // &.disabled {
+                            //   opacity: 0.3;
+                            //   pointer-events: none;
+                            // }
+                            &:hover {
+                              text-decoration: underline;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                > .dropdown-panel { // initial panel
+                  //grid-template-columns: 100%;
+                  // .dropdown-panel-header {
+                  //   //grid-template-columns: 100%;
+                  //   .initials-selection {
+                  //     // display: block;
+                  //     // text-align: center;
+                  //     // padding: 15px 0;
+                  //     span {
+                  //       display: inline-block;
+                  //       width: 44px;
+                  //       height: 53px;
+                  //       padding: 0;
+                  //       background-color: $white;
+                  //       border: 1px solid $grey_light;
+                  //       background-repeat: no-repeat;
+                  //       background-size: 75%;
+                  //       background-position: center;
+                  //       cursor: pointer;
+                  //       @include transition(all 0.2s $ease);
+                  //       &.active {
+                  //         border: 1px solid $grey;
+                  //       }
+                  //       &:after {
+                  //         display: none;
+                  //       }
+                  //     }
+                  //   }
+                  // }
+                  .dropdown-panel-main {
+                    padding-bottom: 0px;
+                    padding: 10px 0;
+                    ul {
+                      // list-style-type: none;
+                      // padding: 0;
+                      // display: grid;
+                      // grid-template-columns: repeat(7, 1fr);
+                      //grid-template-rows: repeat(auto-fit, 60px);
+                      // grid-column-gap: 10px;
+                      // grid-row-gap: 5px;
+                      // max-width: 500px;
+                      // margin: 0 auto;
+                      li {
+                        // position: relative;
+                        // grid-column: span 1;
+                        a {
+                          // display: inline-block;
+                          // width: 100%;
+                          height: 55px;
+                          // margin: 0px;
+                          // background-size: contain;
+                          // background-position: center;
+                          // background-repeat: no-repeat;
+                          // background-images defines below
+                          &:after { // shine
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            background: linear-gradient(
+                              to bottom,
+                              rgba(255, 255, 255, 0),
+                              rgba(255, 255, 255, 0.5),
+                              rgba(255, 255, 255, 0)
+                            );
+                            opacity: 0;
+                          }
+                          &:hover {
+                            &:after {
+                              @include animation('metalSwitcherShine 0.7s linear both');
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .dropdown-panel-footer {
+                    display: none;
+                    // padding-top: 15px;
+                    // text-align: center;
+                    // .btn {
+                    //   width: 100%;
+                    //   max-width: 350px;
+                    //   padding: 12px 20px;
+                    // }
+                  }
+                }
+                // Initials images (common within parent customise-initials)
+                // .initial-a { background-image: url($initial_a); }
+                // .initial-b { background-image: url($initial_b); }
+                // .initial-c { background-image: url($initial_c); }
+                // .initial-d { background-image: url($initial_d); }
+                // .initial-e { background-image: url($initial_e); }
+                // .initial-f { background-image: url($initial_f); }
+                // .initial-g { background-image: url($initial_g); }
+                // .initial-h { background-image: url($initial_h); }
+                // .initial-i { background-image: url($initial_i); }
+                // .initial-j { background-image: url($initial_j); }
+                // .initial-k { background-image: url($initial_k); }
+                // .initial-l { background-image: url($initial_l); }
+                // .initial-m { background-image: url($initial_m); }
+                // .initial-n { background-image: url($initial_n); }
+                // .initial-o { background-image: url($initial_o); }
+                // .initial-p { background-image: url($initial_p); }
+                // .initial-q { background-image: url($initial_q); }
+                // .initial-r { background-image: url($initial_r); }
+                // .initial-s { background-image: url($initial_s); }
+                // .initial-t { background-image: url($initial_t); }
+                // .initial-u { background-image: url($initial_u); }
+                // .initial-v { background-image: url($initial_v); }
+                // .initial-w { background-image: url($initial_w); }
+                // .initial-x { background-image: url($initial_x); }
+                // .initial-y { background-image: url($initial_y); }
+                // .initial-z { background-image: url($initial_z); }
+                // .initial-a-fada { background-image: url($initial_a_fada); }
+                // .initial-e-fada { background-image: url($initial_e_fada); }
+                // .initial-i-fada { background-image: url($initial_i_fada); }
+                // .initial-o-fada { background-image: url($initial_o_fada); }
+                // .initial-u-fada { background-image: url($initial_u_fada); }
+                // .initial-ampersand { background-image: url($initial_ampersand); }
+                // .initial-heart { background-image: url($initial_heart); }
+                // .initial-star { background-image: url($initial_star); }
+                // .initial-blank { background-image: url($initial_blank); }
+                // .initial-blank-faded { background-image: url($initial_blank_faded); }
+              } // end .customise-initials
+
+            } // end .customise-section
+
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

@@ -9,13 +9,27 @@
   100% { opacity: 0; }
 }
 
-// Icon pop (optimum duration 0.5s)
+// Icon pop (optimum duration 0.3s)
 @include keyframes(iconPop) {
   0% { transform: scale(1); }
   //25% { transform: scale(1.15); }
   50% { transform: scale(1.2); }
   //75% { transform: scale(1.05); }
   100% { transform: scale(1); }
+}
+// Icon pop reverse (optimum duration 0.3s)
+@include keyframes(iconPopReverse) {
+  0% { transform: scale(1); }
+  //25% { transform: scale(1.15); }
+  50% { transform: scale(0.8); }
+  //75% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Wishlist heart explode
+@include keyframes(wishlistHeartExplode) {
+  0% { transform: scale(1); opacity: 0.1; }
+  100% { transform: scale(7); opacity: 0; }
 }
 
 // Menu list in

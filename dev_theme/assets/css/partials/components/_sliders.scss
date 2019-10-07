@@ -122,7 +122,6 @@
 
 
 
-
 // Slick Theme CSS
 // http://kenwheeler.github.io/slick/
 
@@ -336,6 +335,8 @@
 
 
 
+
+
 // Custom overriding CSS
 .slider {
   margin-bottom: 30px;
@@ -357,9 +358,10 @@
     background-repeat: no-repeat;
     background-size: 40%;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
-    opacity: 0.7;
+    opacity: 0.8;
     z-index: 1;
     border: none;
+    @include transition(all 0.2s ease);
     &:before {
       display: none;
     }
@@ -442,17 +444,33 @@
 
 
 
+
 @include mquery(m) {
 
 } // end media-query medium
 
 
 
+
+
+
+
+
 @include mquery(ml) {
 
-
+  // Custom overriding CSS
+  .slider {
+    .slick-prev:hover,
+    .slick-next:hover {
+      opacity: 1;
+    }
+  } // end .slider
 
 } // end media-query medium-large
+
+
+
+
 
 
 
@@ -463,9 +481,18 @@
 
 
 
+
+
+
+
+
 @include mquery(xl) {
 
 } // end media-query extra-large
+
+
+
+
 
 
 

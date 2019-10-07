@@ -1,6 +1,8 @@
 
 // _forms.scss
 
+/*
+
 form {
   .form-field {
     position: relative;
@@ -106,7 +108,176 @@ form {
   }
 } // end form
 
+*/
 
+
+
+form {
+  fieldset {
+    border: 0;
+  }
+  .form-field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    input:not([type=submit]), select, textarea {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      font-weight: $font-weight-lighter;
+      color: $grey;
+      padding: 15px;
+      border: 1px solid lighten($grey, 40%);
+      @include transition(border 0.2s $ease);
+      &:focus, &:active, &:visited {
+        outline: none;
+      }
+      &:focus {
+        border: 1px solid $grey;
+      }
+    }
+    input[type=checkbox] {
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+      pointer-events: none;
+      + label {
+        display: block;
+        font-size: 14px;
+        width: 100%;
+        padding: 10px 0;
+        padding-left: 25px;
+        cursor: pointer;
+        &:before, // Checkbox
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 8px;
+          width: 18px;
+          height: 18px;
+          pointer-events: none;
+        }
+        &:before { // Checkbox box
+          background-color: $grey_lightest;
+          border: 1px solid lighten($grey, 30%);
+          border-radius: 3px;
+          @include transition(all 0.2s $ease);
+        }
+        &:after { // Checkbox tick
+          width: 6px;
+          height: 10px;
+          top: 11px;
+          left: 6px;
+          border-right: 3px solid $grey;
+          border-bottom: 3px solid $grey;
+          opacity: 0;
+          @include transform(rotate(45deg) scale(0.5));
+          @include transition(all 0.12s $ease_in_out_quart);
+        }
+      }
+      &:checked {
+        + label {
+          &:after {
+            opacity: 1;
+            @include transform(rotate(45deg) scale(1));
+          }
+        }
+      }
+    } // end input[type=checkbox]
+    select {
+      padding-right: 40px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+    select::-ms-expand {
+      display: none; // Hide default IE select arrow
+    }
+    textarea {
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 120px;
+      height: 120px;
+      max-height: 500px;
+      //resize: none;
+      -ms-overflow-style: none;
+      @include transition(all 0.2s $ease);
+    }
+    textarea.active {
+      height: 300px;
+      min-height: 300px;
+    }
+  } // end .form-field
+
+  &.single-field { // single-field form (e.g. signup)
+    position: relative;
+    margin-top: 20px;
+    @include transition(all 0.2s $ease);
+    .form-field {
+      margin-bottom: 0;
+      label {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        font-size: 14px;
+        font-weight: $font-weight-lighter;
+        line-height: 1.5;
+        color: $grey;
+        text-align: left;
+        pointer-events: none;
+        @include transition(all 0.4s $ease_in_out_quart);
+      }
+      input:not([type=submit]), select, textarea {
+        padding: 10px 0;
+        border: 0;
+        border-bottom: 1px solid $grey;
+        padding-right: 70px;
+      }
+      &.open { // Open field (focused or complete - class added via JS)
+        label {
+          top: -18px;
+          font-size: 12px;
+          color: $grey;
+        }
+      }
+    }
+    > button[type="submit"] {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: auto;
+      font-size: 14px;
+      font-weight: $font-weight-lighter;
+      color: $grey;
+      text-transform: uppercase;
+      padding: 10px;
+      padding-right: 20px;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      -webkit-appearance: none;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 11px;
+        height: 11px;
+        background-color: transparent;
+        background-image: url($icon_chevron_dark);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        @include transform(translateY(-50%) rotate(-90deg));
+        @include transition(all 0.2s $ease_in);
+      }
+    }
+  } // end .single-field
+
+} // end form
 
 
 

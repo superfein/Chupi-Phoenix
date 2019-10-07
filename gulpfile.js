@@ -132,11 +132,12 @@ function scripts(cb) {
   return (
     gulp
     .src(paths.devJS)
-    .pipe(sourcemaps.init())
-    .pipe(babel({
-      presets: ['@babel/env']
-    }))
-    .pipe(uglify())
+    // Disabled to allow devTools debugger to work
+    // .pipe(sourcemaps.init())
+    // .pipe(babel({
+    //   presets: ['@babel/env']
+    // }))
+    // .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.devHTMLJS)) // pipe to current dev location for local testing
     .pipe(gulp.dest(paths.compiledAssets)) // pipe to compiled assets

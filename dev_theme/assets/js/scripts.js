@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+//$( document ).ready(function() {
 
   const desktopBreakPoint = 991; // Screen width in px
   const mobileMenuSlideTime = 200; // ms
@@ -201,10 +201,32 @@ $( document ).ready(function() {
 
 
 
+  // Lock/Unlock page scroll
+  // Get scrollbar width (Ref: https://davidwalsh.name/detect-scrollbar-width)
+  var scrollDiv = document.createElement("div"); // Create temporary div
+  scrollDiv.className = "scrollbar-measure";
+  document.body.appendChild(scrollDiv);
+  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth; // Get the scrollbar width
+  document.body.removeChild(scrollDiv); // Delete the div
+  // console.log('scrollbarWidth: ' + scrollbarWidth);
+  function lockPageScroll() { // Lock scroll
+    $('body').css('overflow', 'hidden');
+    if (scrollbarWidth > 0) {
+      $('body').css('padding-right', scrollbarWidth + 'px'); // add side padding to replace scrollbar width
+      $('header .inner').css('padding-right', scrollbarWidth + 'px'); // add side padding to replace scrollbar width
+    }
+  }
+  function unlockPageScroll() { // Unlock scroll
+    $('body').css({ 'overflow' : '', 'padding-right' : '' });
+    $('header .inner').css('padding-right', '');
+  }
+
+
 
 
   // Drawer close
   $('.drawer-header .close-btn, .drawer-back').off().click(function(e) {
+    unlockPageScroll(); // Unlock page scroll
     $(this).closest('.drawer').removeClass('active');
   });
 
@@ -213,6 +235,7 @@ $( document ).ready(function() {
 
   // Cart drawer open/close
   $('#cart-btn').off().click(function(e) {
+    lockPageScroll(); // Lock page scroll
     $('#cart-drawer').addClass('active');
   });
 
@@ -259,7 +282,6 @@ $( document ).ready(function() {
   // Filter drawer
   // Open filter drawer
   $('#filter-filter-button').off().click( function() {
-    console.log('testxz');
     $('#filter-drawer').addClass('active');
   });
   // Expand filter section
@@ -308,136 +330,64 @@ $( document ).ready(function() {
 
 
 
+  // Add to wishlist
+  $('.wishlist-add').off().click( function() {
+    $('.wishlist-add').toggleClass('active');
+  });
 
-  //------ Product gallery (uses Slick slider)
+
+
+
+
+  // Set parameters
+	// Ref: http://kenwheeler.github.io/slick/
+  var slickSliderSettings = {
+    adaptiveHeight: true,
+    mobileFirst: true,
+		//autoplay: true,
+		autoplaySpeed: 10000,
+		cssEase: 'cubic-bezier(0.230, 1.000, 0.320, 1.000)', // $ease_out_quint
+		dots: true,
+		arrows: true,
+    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"></button>', // remove text from button
+    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"></button>', // remove text from button
+		draggable: true,
+		swipe: true,
+		infinite: true,
+		pauseOnFocus: true,
+		pauseOnDotsHover: true,
+		slidesToShow: 1,
+		speed: 400,
+		waitForAnimate: true,
+		responsive: [ // More swipe-friendly on mobile
+	    // {
+	    //   breakpoint: 1199,
+	    //   settings: {
+	    //     cssEase: 'ease',
+			// 		speed: 300
+	    //   }
+	    // },
+			{
+	      breakpoint: 992, // mobile
+	      settings: {
+	        dots: false,
+          //settings: "unslick",
+					//arrows: true,
+					//draggable: true,
+					//swipe: true,
+					speed: 400
+	      }
+	    }
+		]
+  };
+
+  //
 	if( $('.slider').length ) {
-		// Set parameters
-		// Ref: http://kenwheeler.github.io/slick/
-	  $('.slider').slick({
-			adaptiveHeight: true,
-			//autoplay: true,
-			autoplaySpeed: 10000,
-			cssEase: 'cubic-bezier(0.230, 1.000, 0.320, 1.000)', // $ease_out_quint
-			dots: true,
-			arrows: true,
-      nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"></button>', // remove text from button
-      prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"></button>', // remove text from button
-			draggable: true,
-			swipe: true,
-			infinite: true,
-			pauseOnFocus: true,
-			pauseOnDotsHover: true,
-			slidesToShow: 1,
-			speed: 300,
-			waitForAnimate: true,
-			responsive: [ // More swipe-friendly on mobile
-		    // {
-		    //   breakpoint: 1199,
-		    //   settings: {
-		    //     cssEase: 'ease',
-				// 		speed: 300
-		    //   }
-		    // },
-				{
-		      breakpoint: 768,
-		      settings: {
-		        dots: true,
-						arrows: true,
-						draggable: true,
-						swipe: true,
-						speed: 400,
-		      }
-		    }
-			]
-	  });
+	  $('.slider').slick(slickSliderSettings);
 	} // end if
 
 
 
-
-
-
-  // Product customisation (Product page)
-
-  // Open product customise panel
-  $('.customise-section .dropdown-btn').off().click( function() {
-    $(this).siblings('.dropdown-panel').toggleClass('active');
-  });
-
-  // Close product customise panel
-  $('.customise-section .dropdown-panel .close-btn').off().click( function() {
-    $(this).closest('.dropdown-panel').removeClass('active');
-  });
-
-  // Customisation - Ring size
-  $('.customise-ring-size .ring-size-option').off().click( function() {
-    $(this).closest('.dropdown-panel').toggleClass('active');
-  });
-  $('.customise-ring-size .ring-size-bespoke > a').off().click( function() {
-    $(this).siblings('.inner').addClass('active');
-  });
-
-  // Customisation - Birthstone
-  $('.customise-birthstone .birthstone-option').off().click( function() {
-    $(this).closest('.dropdown-panel').toggleClass('active');
-    // Prevent scrolling main content
-    if( (window.innerWidth <= desktopBreakPoint) ) { // Mobile only
-      $('body').css('overflow', 'hidden');
-    }
-  });
-
-  // Customisation - Starsign
-  $('.customise-starsign .starsign-option').off().click( function() {
-    $(this).closest('.dropdown-panel').toggleClass('active');
-  });
-
-  // Customisation - Coordinates
-  $('.customise-coordinates .switch').off().click( function() {
-    $(this).toggleClass('switched');
-  });
-
-  // Customisation - Initials
-  $('.customise-initials .initials-selection .dropdown-btn').off().click( function() {
-    $(this).closest('.customise-section').children('.dropdown-panel').addClass('active');
-  });
-  $('.customise-initials').children('.dropdown-panel .initials-options .initial').off().click( function() {
-
-  });
-
-
-
-  // Customisation - general selection (ring-size. birthstone, starsign)
-  $('.customise-section .dropdown-panel .dropdown-option').off().click( function() {
-
-    var thisCustomiseSection = $(this).closest('.customise-section');
-    var thisDropdownButton = thisCustomiseSection.find('.dropdown-btn');
-    var thisDropdownPanel = thisCustomiseSection.find('.dropdown-panel');
-
-    var selectedStoneTitle = $(this).clone().children().remove().end().text(); // Direct text content only, not additional child content
-    // var selectedStoneImage = '<img src="' + $(this).children('img').attr('src') + '" />';
-    var selectedStoneImage = '';
-    if($(this).children('img').length) {
-      selectedStoneImage = '<img src="' + $(this).children('img').attr('src') + '" />';
-    }
-
-    thisDropdownPanel.removeClass('active'); // Close overlay
-    $('body').css('overflow', ''); // Allow scrolling main content
-    //$('#product-upper .product-info .customise-field').removeClass('error').children('.error-message').remove(); // Remove any existing required-field errors
-    //$('.customise-birthstone > .dropdown-btn').attr('data-stone', selectedStoneTitle);
-    thisDropdownButton.text(selectedStoneTitle).parent('.customise-section').addClass('complete'); // Apply chosen stone to stone 'input' and mark as complete
-    //if (!$(this).hasClass('stone-none')) { // Apply stone image to stone 'input' (unless no birhstone)
-      $(selectedStoneImage).prependTo(thisDropdownButton);
-    //}
-    // Append variant ID
-    //$(".select-stone").data('id', $('#selected-variant-id').val());
-  });
-
-
-
-  // Open guide
-  $('.customise-section .guide-btn').off().click( function() {
-    $(this).closest('.customise-section').find('.product-guide-drawer').addClass('active');
-  });
 
 
 
@@ -508,4 +458,4 @@ $( document ).ready(function() {
 
 
 
-}); // end document.ready
+//}); // end document.ready

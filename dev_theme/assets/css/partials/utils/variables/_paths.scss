@@ -6,6 +6,10 @@
 $icon_path: '../img/icon/';
 $filter_icons_path: '../img/icon/filter-icons/';
 $birthstones_path: '../img/product/birthstones/';
+// Drawing path
+$drawing_path: '../img/drawing/';
+// Initials
+$initial_path: '../img/product/initials/';
 
 // Icons
 $icon_account_light: $icon_path + 'lock-light.svg';
@@ -31,8 +35,14 @@ $icon_lock_dark: $icon_path + 'lock-dark.svg';
 $icon_birthstones_dark: $icon_path + 'birthstones-dark.svg';
 $icon_starsigns_dark: $icon_path + 'starsigns-dark.svg';
 $icon_ruler_dark: $icon_path + 'ruler-dark.svg';
+$icon_tools_dark: $icon_path + 'tools-dark.svg';
+$icon_delivery_truck_dark: $icon_path + 'delivery-truck-dark.svg';
 $icon_stone_dark: $icon_path + 'stone-dark.svg';
 $icon_paper_plane_dark: $icon_path + 'paper-plane-dark.svg';
+$icon_quotation_marks_dark: $icon_path + 'quotation-marks-dark.svg';
+
+// Drawings
+$drawing_paper_plane_dark: $drawing_path + 'paper-plane-dark.svg';
 
 // Filter icons
 $icon_filter_solid_gold: $filter_icons_path + 'metal-solid-gold.svg';
@@ -53,3 +63,43 @@ $icon_filter_oval: $filter_icons_path + 'shape-oval.svg';
 
 // Birthstones
 $birthstone_solid_gold_jan: $birthstones_path + 'birthstone-solid-gold-jan.png';
+
+// Initials (A-Z)
+$initial_a: $initial_path + 'initial-a.jpg';
+$initial_b: $initial_path + 'initial-b.jpg';
+$initial_c: $initial_path + 'initial-c.jpg';
+$initial_d: $initial_path + 'initial-d.jpg';
+$initial_e: $initial_path + 'initial-e.jpg';
+$initial_f: $initial_path + 'initial-f.jpg';
+$initial_g: $initial_path + 'initial-g.jpg';
+$initial_h: $initial_path + 'initial-h.jpg';
+$initial_i: $initial_path + 'initial-i.jpg';
+$initial_j: $initial_path + 'initial-j.jpg';
+$initial_k: $initial_path + 'initial-k.jpg';
+$initial_l: $initial_path + 'initial-l.jpg';
+$initial_m: $initial_path + 'initial-m.jpg';
+$initial_n: $initial_path + 'initial-n.jpg';
+$initial_o: $initial_path + 'initial-o.jpg';
+$initial_p: $initial_path + 'initial-p.jpg';
+$initial_q: $initial_path + 'initial-q.jpg';
+$initial_r: $initial_path + 'initial-r.jpg';
+$initial_s: $initial_path + 'initial-s.jpg';
+$initial_t: $initial_path + 'initial-t.jpg';
+$initial_u: $initial_path + 'initial-u.jpg';
+$initial_v: $initial_path + 'initial-v.jpg';
+$initial_w: $initial_path + 'initial-w.jpg';
+$initial_x: $initial_path + 'initial-x.jpg';
+$initial_y: $initial_path + 'initial-y.jpg';
+$initial_z: $initial_path + 'initial-z.jpg';
+// Initials (accents)
+$initial_a_fada: $initial_path + 'initial-a-fada.jpg';
+$initial_e_fada: $initial_path + 'initial-e-fada.jpg';
+$initial_i_fada: $initial_path + 'initial-i-fada.jpg';
+$initial_o_fada: $initial_path + 'initial-o-fada.jpg';
+$initial_u_fada: $initial_path + 'initial-u-fada.jpg';
+// Initials (symbols)
+$initial_ampersand: $initial_path + 'initial-ampersand.jpg';
+$initial_heart: $initial_path + 'initial-heart.jpg';
+$initial_star: $initial_path + 'initial-star.jpg';
+$initial_blank: $initial_path + 'initial-blank.jpg';
+$initial_blank_faded: $initial_path + 'initial-blank-faded.jpg';

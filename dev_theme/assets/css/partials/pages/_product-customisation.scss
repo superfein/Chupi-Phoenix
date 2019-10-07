@@ -8,7 +8,6 @@
       #product-info {
         .product-customise {
 
-
           .customise-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -26,14 +25,27 @@
               text-decoration: none;
               width: 100%;
               max-width: 400px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
               cursor: pointer;
+              @include transition(border 0.2s $ease);
+              // > img {
+              //   display: inline-block;
+              //   vertical-align: middle;
+              //   width: 24px;
+              //   height: 24px;
+              //   margin-left: -5px; // nudge to left
+              //   margin-right: 3px;
+              //   object-fit: contain;
+              // }
               > img {
-                display: inline-block;
-                vertical-align: middle;
+                position: absolute;
+                top: 50%;
+                @include transform(translateY(-50%));
+                left: 10px;
                 width: 24px;
                 height: 24px;
-                margin-left: -5px; // nudge to left
-                margin-right: 3px;
                 object-fit: contain;
               }
               &:after {
@@ -49,6 +61,9 @@
                 background-size: contain;
                 @include transform(translateY(-50%));
               }
+              &.prepend-image {
+                padding-left: 38px; // Space for prepended image
+              }
             }
             .guide-btn {
               position: relative;
@@ -61,13 +76,14 @@
               &:before {
                 content: "";
                 position: absolute;
-                top: 0px;
+                top: 50%;
                 left: 0;
                 width: 20px;
                 height: 20px;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;
+                @include transform(translateY(-50%));
               }
             }
             .dropdown-panel {
@@ -154,7 +170,7 @@
               background-color: $grey_lightest;
               .drawer-main {
                 padding: 15px;
-                padding-top: 50px;
+                padding-top: 30px;
                 h3 {
                   font-size: 22px;
                 }
@@ -202,11 +218,11 @@
                   > a {
                     display: block;
                     font-size: 14px;
-                    padding: 10px 0;
-                    margin-bottom: 10px;
+                    padding: 15px 0;
+                    //margin-bottom: 10px;
                   }
                   .inner {
-                    display: block;
+                    display: inline-block;
                     max-height: 0;
                     opacity: 0;
                     @include transform(translateY(-20px));
@@ -214,12 +230,16 @@
                     textarea {
                       display: none;
                       width: 100%;
-                      height: 160px;
+                      height: 120px;
+                      min-height: 80px;
+                      max-height: 300px;
                       font-size: 14px;
                       padding: 20px 15px;
+                      margin-top: 10px;
                       border: 1px solid $grey_light;
                       box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
                       margin-bottom: 25px;
+                      resize: vertical;
                     }
                     .btn {
                       display: none;
@@ -230,7 +250,7 @@
                       max-height: 200px;
                       opacity: 1;
                       @include transform(translateY(0px));
-                      @include transition(all 0.4s $ease_out_quint);
+                      @include transition(all 0.5s $ease_out_quint);
                       textarea,
                       .btn {
                         display: block;
@@ -245,7 +265,7 @@
                   img {
                     margin-top: 20px;
                     margin-bottom: 20px;
-                    max-height: 180px;
+                    max-height: 150px;
                   }
                 }
               }
@@ -291,6 +311,16 @@
                         @include transform(translateY(-50%));
                       }
                     }
+                    &.no-birthstone {
+                      grid-column: span 2;
+                      width: 100%;
+                      text-align: center;
+                      a.birthstone-option {
+                        display: block;
+                        padding: 20px;
+                        text-decoration: underline;
+                      }
+                    }
                   }
                 }
               }
@@ -298,10 +328,11 @@
                 .drawer-main {
                   ul {
                     list-style-type: none;
+                    padding: 0;
                     li {
                       display: block;
                       position: relative;
-                      padding-left: 120px;
+                      padding-left: 100px;
                       margin-bottom: 50px;
                       img {
                         position: absolute;
@@ -309,7 +340,7 @@
                         left: 0;
                         border: 1px solid $grey_light;
                         border-radius: 50%;
-                        width: 100px;
+                        width: 80px;
                       }
                     }
                   }
@@ -369,16 +400,17 @@
                 .drawer-main {
                   ul {
                     list-style-type: none;
+                    padding: 0;
                     li {
                       display: block;
                       position: relative;
-                      padding-left: 120px;
+                      padding-left: 100px;
                       margin-bottom: 50px;
                       img {
                         position: absolute;
                         top: 50%;
                         left: 0;
-                        width: 100px;
+                        width: 80px;
                         @include transform(translateY(-50%));
                       }
                       h3 {
@@ -415,11 +447,14 @@
                   grid-template-columns: 1fr 1fr 1fr 1fr;
                   grid-gap: 5px;
                   margin-bottom: 12px;
-                  .input-label-group {
+                  .form-field {
                     grid-column: span 1;
+                    margin: 0;
                     input {
+                      display: inline-block;
                       width: 48px;
                       height: 48px;
+                      padding: 15px 5px;
                       font-size: 14px;
                       font-weight: $font-weight-light;
                       text-align: center;
@@ -449,7 +484,45 @@
                       margin-left: 3px;
                       font-size: 20px;
                     }
-                  }
+                    .error {
+                      position: absolute;
+                      display: inline-block;
+                      font-size: 14px;
+                      line-height: 1.3;
+                      background: $grey_dark;
+                      color: $white;
+                      padding: 10px;
+                      bottom: calc(100% + 20px);
+                      left: 0px;
+                      margin-left: 0;
+                      width: 150px;
+                      border-radius: 5px;
+                      z-index: 1;
+                      opacity: 0;
+                      @include transform(translateY(5px));
+                      @include transition(all 0.2s $ease_out_quint 0s);
+                      &:before {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        bottom: 0px;
+                        left: calc(48px / 2);
+                        height: 20px;
+                        width: 20px;
+                        border-bottom: 10px solid transparent;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-top:10px solid $grey_dark;
+                        top: 100%;
+                        @include transform(translateX(-50%));
+                      }
+                      &.active {
+                        opacity: 1;
+                        @include transform(translateY(0));
+                        @include transition(all 0.4s $ease_out_quint 0s);
+                      }
+                    }
+                  } // end .form-field
                   .switch {
                     grid-column: span 1;
                     align-self: center;
@@ -513,8 +586,8 @@
                     &:hover {
                       background: lighten($grey, 10%);
                     }
-                  }
-                }
+                  } // .switch
+                } // end .form-group
               }
               .guide-btn {
                 display: block;
@@ -528,6 +601,7 @@
                     display: block;
                     margin: 0 auto;
                     margin-bottom: 30px;
+                    max-height: 150px;
                   }
                 }
               }
@@ -549,29 +623,37 @@
                   font-size: 12px;
                   margin-right: 10px;
                   align-self: center;
+                  max-width: 50px;
                 }
-                .initials-selection {
+                .initials-selection { // outside panel
+                  position: relative;
                   display: inline-block;
-                  .initial {
+                  span {
+                    display: inline-block;
+                    float: left;
                     width: 40px;
                     height: 48px;
+                    margin-right: 7px;
+                    margin-bottom: 3px;
                     padding: 0;
+                    border: 1px solid $grey_light;
                     background-repeat: no-repeat;
                     background-size: 75%;
                     background-position: center;
                     cursor: pointer;
                     @include transition(all 0.2s $ease);
-                    &:after {
-                      display: none;
-                    }
-                    // &:hover {
-                    //   border: 1px solid $grey;
+                    // &:after {
+                    //   display: none;
                     // }
+                  }
+                  .pointer {
+                    display: none;
                   }
                 }
               }
               .change-disc {
                 justify-self: center;
+                align-self: center;
                 .dropdown-btn {
                   display: inline-block;
                   // width: auto;
@@ -582,7 +664,7 @@
                   &:after {
                     position: relative;
                     display: inline-block;
-                    top: auto;
+                    top: 2px;
                     right: auto;
                     vertical-align: bottom;
                     margin-left: 7px;
@@ -591,9 +673,7 @@
                 .dropdown-panel { // change disc panel
                   grid-template-columns: 100%;
                   .dropdown-panel-header {
-                    // h3 {
-                    //   grid-column: 1 / span 2;
-                    // }
+
                   }
                   .dropdown-panel-main {
                     padding-top: 30px;
@@ -603,7 +683,6 @@
                       li {
                         display: block;
                         position: relative;
-                        //margin-bottom: 50px;
                         a {
                           display: block;
                           font-size: 14px;
@@ -624,22 +703,25 @@
                 grid-template-columns: 100%;
                 .dropdown-panel-header {
                   //grid-template-columns: 100%;
-                  .initials-selection {
+                  .initials-selection { // inside panel
                     display: block;
                     text-align: center;
                     padding: 15px 0;
-                    .initial {
+                    span {
                       display: inline-block;
                       width: 44px;
                       height: 53px;
                       padding: 0;
-                      background: $white;
+                      background-color: $white;
                       border: 1px solid $grey_light;
                       background-repeat: no-repeat;
                       background-size: 75%;
                       background-position: center;
                       cursor: pointer;
                       @include transition(all 0.2s $ease);
+                      &.active {
+                        border: 1px solid $grey;
+                      }
                       &:after {
                         display: none;
                       }
@@ -654,21 +736,23 @@
                     display: grid;
                     grid-template-columns: repeat(5, 1fr);
                     //grid-template-rows: repeat(auto-fit, 60px);
-                    grid-gap: 10px;
+                    grid-column-gap: 10px;
+                    grid-row-gap: 5px;
+                    max-width: 500px;
+                    margin: 0 auto;
                     li {
                       position: relative;
                       grid-column: span 1;
-                      height: 70px;
                       a {
-                        img {
-                          position: absolute;
-                          top: 0;
-                          left: 0;
-                          width: 100%;
-                          height: 100%;
-                          object-fit: contain;
-                          filter: brightness(0.97); // darken to light grey
-                        }
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                        height: 70px;
+                        margin: 0px;
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        // background-images defines below
                       }
                     }
                   }
@@ -683,9 +767,44 @@
                   }
                 }
               }
-
+              // Initials images (common within parent customise-initials)
+              .initial-a { background-image: url($initial_a); }
+              .initial-b { background-image: url($initial_b); }
+              .initial-c { background-image: url($initial_c); }
+              .initial-d { background-image: url($initial_d); }
+              .initial-e { background-image: url($initial_e); }
+              .initial-f { background-image: url($initial_f); }
+              .initial-g { background-image: url($initial_g); }
+              .initial-h { background-image: url($initial_h); }
+              .initial-i { background-image: url($initial_i); }
+              .initial-j { background-image: url($initial_j); }
+              .initial-k { background-image: url($initial_k); }
+              .initial-l { background-image: url($initial_l); }
+              .initial-m { background-image: url($initial_m); }
+              .initial-n { background-image: url($initial_n); }
+              .initial-o { background-image: url($initial_o); }
+              .initial-p { background-image: url($initial_p); }
+              .initial-q { background-image: url($initial_q); }
+              .initial-r { background-image: url($initial_r); }
+              .initial-s { background-image: url($initial_s); }
+              .initial-t { background-image: url($initial_t); }
+              .initial-u { background-image: url($initial_u); }
+              .initial-v { background-image: url($initial_v); }
+              .initial-w { background-image: url($initial_w); }
+              .initial-x { background-image: url($initial_x); }
+              .initial-y { background-image: url($initial_y); }
+              .initial-z { background-image: url($initial_z); }
+              .initial-a-fada { background-image: url($initial_a_fada); }
+              .initial-e-fada { background-image: url($initial_e_fada); }
+              .initial-i-fada { background-image: url($initial_i_fada); }
+              .initial-o-fada { background-image: url($initial_o_fada); }
+              .initial-u-fada { background-image: url($initial_u_fada); }
+              .initial-ampersand { background-image: url($initial_ampersand); }
+              .initial-heart { background-image: url($initial_heart); }
+              .initial-star { background-image: url($initial_star); }
+              .initial-blank { background-image: url($initial_blank); }
+              .initial-blank-faded { background-image: url($initial_blank_faded); }
             } // end .customise-initials
-
 
           } // end .customise-section
 
@@ -709,6 +828,48 @@
 
 @include mquery(s) {
 
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+            .customise-section {
+
+              // Coordinates
+              &.customise-coordinates {
+                form {
+                  .form-group {
+                    .form-field {
+                      .error {
+                        margin-left: calc(-1 * (150px - 48px) / 2);
+                        &:before {
+                          left: 50%;
+                        }
+                      }
+                    } // end .form-field
+                  } // end .form-group
+                }
+              } // end .customise-coordinates
+
+              // Initials
+              &.customise-initials {
+                > .dropdown-panel { // initial panel
+                  .dropdown-panel-main {
+                    ul {
+                      grid-template-columns: repeat(7, 1fr);
+                    }
+                  }
+                }
+              } // end .customise-initials
+
+            } // end .customise-section
+
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
+
 } // end media-query small
 
 
@@ -720,6 +881,25 @@
 
 @include mquery(m) {
 
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+            .customise-section {
+              grid-template-columns: 2fr 1fr;
+              .dropdown-btn {
+                justify-self: end;
+              }
+              .guide-btn {
+                justify-self: start;
+              }
+            }
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
 
 } // end media-query medium
 
@@ -729,8 +909,328 @@
 
 
 
+
+
+
 @include mquery(ml) {
 
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+
+            .customise-section {
+              position: relative;
+              .dropdown-btn {
+                &:hover {
+                  border: 1px solid darken($grey_light, 20%);
+                }
+              }
+              .dropdown-panel {
+                position: absolute;
+                grid-template-columns: 100%;
+                z-index: 1;
+                top: 100%;
+                left: 0;
+                right: auto;
+                width: 100%;
+                height: auto;
+                padding: 10px $mobile_side-padding;
+                background-color: $white;
+                box-shadow: 0px 5px 10px rgba(0,0,0,0.12);
+                opacity: 0;
+                @include transform(translateY(-10px));
+                .dropdown-panel-header {
+                  display: none;
+                }
+                .dropdown-panel-main {
+                  grid-column: 1 / span 1;
+                  grid-row: 1 / span 1;
+                }
+              }
+              .product-guide-drawer { // general
+                .drawer-main {
+                  padding-top: 50px;
+                }
+              }
+
+              // Ring size
+              &.customise-ring-size {
+                .dropdown-panel {
+                  ul.ring-size-options,
+                  .ring-size-bespoke {
+                    max-width: 400px;
+                    margin: 0 auto;
+                  }
+                  ul.ring-size-options {
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-gap: 0 15px;
+                    justify-items: left;
+                    padding: 0;
+                    max-width: none;
+                    li {
+                      a.ring-size-option {
+                        padding: 12px 0;
+                        &:hover {
+                          text-decoration: underline;
+                        }
+                      }
+                    }
+                  }
+                  .ring-size-bespoke {
+                    .inner {
+                      display: inline-block;
+                      width: 100%;
+                      max-height: 0;
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    img {
+                      max-height: 180px;
+                    }
+                  }
+                }
+              } // end .customise-ring-size
+
+              // Birthstone
+              &.customise-birthstone {
+                .dropdown-panel {
+                  ul.birthstone-options {
+                    max-width: none;
+                    padding: 0;
+                    li {
+                      a.birthstone-option {
+                        padding: 15px 0;
+                        padding-left: 40px;
+                        overflow: hidden; // prevent shine from overflowing
+                        &:after { // shine
+                          content: "";
+                          position: absolute;
+                          top: 7px;
+                          left: 0;
+                          width: 35px;
+                          height: 35px;
+                          border-radius: 50%;
+                          background: linear-gradient(
+                            to bottom,
+                            rgba(255, 255, 255, 0),
+                            rgba(255, 255, 255, 0.5),
+                            rgba(255, 255, 255, 0)
+                          );
+                          opacity: 0;
+                        }
+                        &:hover {
+                          &:after {
+                            @include animation('metalSwitcherShine 0.7s linear both');
+                          }
+                        }
+                      }
+                      &.no-birthstone {
+                        a.birthstone-option {
+                          padding: 15px;
+                        }
+                      }
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    ul {
+                      li {
+                        padding-left: 120px;
+                        img {
+                          width: 100px;
+                        }
+                      }
+                    }
+                  }
+                }
+              } // end .customise-birthstone
+
+              // Starsign
+              &.customise-starsign {
+                .dropdown-panel {
+                  ul.starsign-options {
+                    max-width: none;
+                    padding: 0;
+                    li {
+                      a.starsign-option {
+                        padding: 12px 0;
+                        padding-left: 40px;
+                        overflow: hidden; // prevent shine from overflowing
+                        &:after { // shine
+                          content: "";
+                          position: absolute;
+                          top: 7px;
+                          left: 0;
+                          width: 35px;
+                          height: 35px;
+                          border-radius: 50%;
+                          background: linear-gradient(
+                            to bottom,
+                            rgba(255, 255, 255, 0),
+                            rgba(255, 255, 255, 0.5),
+                            rgba(255, 255, 255, 0)
+                          );
+                          opacity: 0;
+                        }
+                        &:hover {
+                          &:after {
+                            @include animation('metalSwitcherShine 0.7s linear both');
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .product-guide-drawer {
+                  .drawer-main {
+                    ul {
+                      li {
+                        padding-left: 120px;
+                        img {
+                          width: 100px;
+                        }
+                      }
+                    }
+                  }
+                }
+              } // end .customise-starsign
+
+              // Coordinates
+              &.customise-coordinates {
+                .product-guide-drawer {
+                  .drawer-main {
+                    img {
+                      max-height: 180px;
+                    }
+                  }
+                }
+              } // end .customise-coordinates
+
+              // Initials
+              &.customise-initials {
+                grid-template-columns: minmax(300px, auto) auto;
+                .grid-item {
+                  justify-self: start;
+                  align-self: center;
+                  > span {
+                    max-width: none;
+                  }
+                  .initials-selection {
+                    span {
+                      &:hover {
+                        border: 1px solid $grey;
+                      }
+                      &.active {
+                        border: 1px solid $grey;
+                      }
+                    }
+                    .pointer {
+                      display: block;
+                      position: absolute;
+                      top: 100%;
+                      left: 0;
+                      width: 15px;
+                      height: 15px;
+                      background-repeat: no-repeat;
+                      background-size: contain;
+                      background-position: bottom center;
+                      background-image: url($icon_chevron_dark);
+                      @include transform(translateX(14px) translateY(5px) rotate(180deg));
+                      opacity: 0;
+                      pointer-events: none;
+                      @include transition(all 0.2s $ease, left 0s $ease_in_out_quart);
+                      &.active {
+                        opacity: 0.3;
+                        @include transition(all 0.2s $ease, left 0.3s $ease_in_out_quint);
+                        @include transform(translateX(14px) translateY(0) rotate(180deg));
+                      }
+                    }
+                  }
+                }
+                .change-disc {
+                  .dropdown-btn {
+                    font-size: 12px;
+                    line-height: 1.2;
+                    max-width: 70px;
+                    white-space: normal;
+                    overflow: inherit;
+                    text-align: left;
+                  }
+                  .dropdown-panel { // change disc panel
+                    width: auto;
+                    left: auto;
+                    right: 0;
+                    .dropdown-panel-main {
+                      padding-top: 0px;
+                      ul {
+                        li {
+                          a {
+                            &:hover {
+                              text-decoration: underline;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                > .dropdown-panel { // initial panel
+                  top: calc(100% + 14px);
+                  .dropdown-panel-main {
+                    padding-bottom: 0px;
+                    padding: 10px 0;
+                    ul {
+                      li {
+                        @include transform(scale(1));
+                        @include transition(all 0.2s $ease);
+                        a {
+                          height: 55px;
+                          &:after { // shine
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            background: linear-gradient(
+                              to bottom,
+                              rgba(255, 255, 255, 0),
+                              rgba(255, 255, 255, 0.5),
+                              rgba(255, 255, 255, 0)
+                            );
+                            opacity: 0;
+                          }
+                          &:hover {
+                            &:after {
+                              @include animation('metalSwitcherShine 0.7s linear both');
+                            }
+                          }
+                        }
+                        &:active {
+                          @include transform(scale(0.85)); // pressed-in state
+                        }
+                      }
+                    }
+                  }
+                  .dropdown-panel-footer {
+                    display: none;
+                  }
+                }
+              } // end .customise-initials
+
+            } // end .customise-section
+
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
 
 } // end media-query medium-large
 
@@ -740,10 +1240,38 @@
 
 
 
+
+
+
+
 @include mquery(l) {
 
+  #product-top {
+    .content {
+      > .grid {
+        #product-info {
+          .product-customise {
+            .customise-section {
+              // Initials
+              &.customise-initials {
+                .change-disc {
+                  .dropdown-btn {
+                    max-width: none;
+                  }
+                }
+              } // end .customise-initials
+
+            } // end .customise-section
+
+          } // end .product-customise
+        } // end #product-info
+      } // end .grid
+    }
+  } // end #product-top
 
 } // end media-query large
+
+
 
 
 
@@ -754,6 +1282,11 @@
 @include mquery(xl) {
 
 } // end media-query extra-large
+
+
+
+
+
 
 
 
