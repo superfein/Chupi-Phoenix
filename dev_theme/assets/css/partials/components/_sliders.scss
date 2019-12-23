@@ -84,10 +84,10 @@
     height: 100%;
     min-height: 1px;
 }
-[dir='rtl'] .slick-slide
-{
-    float: right;
-}
+// [dir='rtl'] .slick-slide
+// {
+//     float: right;
+// }
 .slick-slide img
 {
     display: block;
@@ -125,22 +125,6 @@
 // Slick Theme CSS
 // http://kenwheeler.github.io/slick/
 
-/* Slider */
-.slick-loading .slick-list
-{
-    //background: #fff url(../img/icon/slick-ajax-loader.gif) center center no-repeat;
-}
-
-/* Icons */
-@font-face
-{
-    // font-family: 'slick';
-    // font-weight: normal;
-    // font-style: normal;
-    //
-    // src: url('./fonts/slick.eot');
-    // src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
-}
 /* Arrows */
 .slick-prev,
 .slick-next
@@ -192,7 +176,6 @@
 .slick-prev:before,
 .slick-next:before
 {
-    font-family: 'slick';
     font-size: 20px;
     line-height: 1;
 
@@ -201,42 +184,6 @@
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-.slick-prev
-{
-    left: -25px;
-}
-[dir='rtl'] .slick-prev
-{
-    right: -25px;
-    left: auto;
-}
-.slick-prev:before
-{
-    content: '←';
-}
-[dir='rtl'] .slick-prev:before
-{
-    content: '→';
-}
-
-.slick-next
-{
-    right: -25px;
-}
-[dir='rtl'] .slick-next
-{
-    right: auto;
-    left: -25px;
-}
-.slick-next:before
-{
-    content: '→';
-}
-[dir='rtl'] .slick-next:before
-{
-    content: '←';
 }
 
 /* Dots */
@@ -303,7 +250,6 @@
 }
 .slick-dots li button:before
 {
-    font-family: 'slick';
     font-size: 6px;
     line-height: 20px;
 
@@ -314,7 +260,6 @@
     width: 20px;
     height: 20px;
 
-    content: '•';
     text-align: center;
 
     opacity: .25;
@@ -342,21 +287,32 @@
   margin-bottom: 30px;
   .slick-slide {
     position: relative;
+    //overflow: hidden;
+    @include transition(transform 0.2s $ease); // transition back to default position after gesture
+    img.gesture-scalable {
+      @include transition(transform 0.2s $ease); // transition back to default position after gesture
+    }
     &:focus {
       outline: none;
+    }
+    &.gesture-active {
+      @include transition(transform 0s $ease); // no transition during gesture
+      img.gesture-scalable {
+        @include transition(transform 0s $ease); // no transition during gesture
+      }
     }
   }
   .slick-prev, .slick-next {
     content: "";
     position: absolute;
     top: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-image: url($icon_chevron_dark);
     background-color: rgba(255,255,255,0.6);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 40%;
+    background-size: 35%;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
     opacity: 0.8;
     z-index: 1;
@@ -388,6 +344,7 @@
       width: 20px;
       height: 20px;
       margin: 0;
+      float: none;
       button {
         position: relative;
         width: 20px;
@@ -406,11 +363,27 @@
           background-color: $grey_light;
           @include transition(all 0.2s ease);
         }
+        &.video-dot {
+          &:before {
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid $grey_light;
+            background-color: transparent;
+            border-radius: 0;
+            margin-right: 1px;
+          }
+        }
       }
       &.slick-active {
         button {
           &:before {
             background-color: darken($grey_light, 20%);
+          }
+          &.video-dot {
+            &:before {
+              background-color: transparent;
+              border-left: 8px solid darken($grey_light, 20%);
+            }
           }
         }
       }

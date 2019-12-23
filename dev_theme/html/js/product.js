@@ -1,11 +1,6 @@
 $( document ).ready(function() {
 
 
-
-
-
-  // Product page
-
   // Sticky Gallery and CTA
   // function stickyGalleryAndCta() {
   //
@@ -53,6 +48,341 @@ $( document ).ready(function() {
 
 
 
+  //-------------- Gallery -------------- //
+
+  // Slick Slider - set parameters (Ref: http://kenwheeler.github.io/slick/)
+  var slickSliderSettings = {
+    adaptiveHeight: true,
+    mobileFirst: true,
+		//autoplay: true,
+		autoplaySpeed: 10000,
+		cssEase: 'cubic-bezier(0.230, 1.000, 0.320, 1.000)', // $ease_out_quint
+		dots: true,
+		arrows: true,
+    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"></button>', // remove text from button
+    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"></button>', // remove text from button
+		draggable: true,
+		swipe: true,
+    swipeToSlide: true,
+    touchThreshold: 200,
+    //verticalSwiping: true,
+    touchMove: true,
+		infinite: true,
+		pauseOnFocus: true,
+		pauseOnDotsHover: true,
+		slidesToShow: 1,
+		speed: 300,
+		waitForAnimate: true,
+		responsive: [ // More swipe-friendly on mobile
+	    // {
+	    //   breakpoint: 1199,
+	    //   settings: {
+	    //     cssEase: 'ease',
+			// 		speed: 300
+	    //   }
+	    // },
+			{
+	      breakpoint: 992, // desktop
+	      settings: {
+	        dots: false,
+          arrows: false,
+					speed: 400,
+          fade: true
+          //slickFilter: '.video-slide'
+	      }
+	    }
+		]
+  };
+	if( $('.slider').length ) {
+	  $('.slider').slick(slickSliderSettings);
+    $('.slider').removeClass('loading'); // Show slider after fully loaded
+    //$('.slick-slide').bind('touchstart', function(){ console.log('touchstart'); });
+	}
+
+
+  // Resize thumbnails
+  function resizeThumbnails() {
+    var thumbnailsContainerHeight = $('#product-gallery .gallery-thumbnails').outerHeight();
+    var thumbnailCount = $('#product-gallery .gallery-thumbnails .gallery-thumbnail').length;
+    var thumbnailMargin = parseInt($('#product-gallery .gallery-thumbnails .gallery-thumbnail').css('margin-bottom'));
+    var newThumbnailHeight = ((thumbnailsContainerHeight + thumbnailMargin) / thumbnailCount) - thumbnailMargin;
+    $('#product-gallery .gallery-thumbnails .gallery-thumbnail').css({
+      'height': newThumbnailHeight,
+      'width': newThumbnailHeight
+    });
+    // if thumbnail are smaller than 50px remove video label
+    if (newThumbnailHeight < 50) {
+      $('#product-gallery .gallery-thumbnails .video-thumbnail').addClass('small');
+    } else {
+      $('#product-gallery .gallery-thumbnails .video-thumbnail').removeClass('small');
+    }
+    $('#product-gallery .gallery-thumbnails').removeClass('loading');
+  }
+  resizeThumbnails();
+  $(window).resize(function() {
+    resizeThumbnails();
+  });
+
+
+  // Gallery slider video dots
+  $('#product-gallery .gallery-thumbnails .gallery-thumbnail').each( function(i) {
+    if ($(this).hasClass('video-thumbnail')) {
+      $('#product-gallery .display-box .slider').find('.slick-dots').children().eq(i).children('button').addClass('video-dot');
+    }
+  });
+
+
+  // Change gallery on thumbnail select
+  $('#product-gallery .gallery-thumbnail').off().click( function(e) {
+    $('#product-gallery .slider').slick('slickGoTo',$(this).index());
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
+  });
+
+
+  // Activate thumbnail on gallery slider change
+  $('#product-gallery .slider').on('afterChange', function() {
+    var currentSlide = $('.slick-current').attr('data-slick-index');
+    $('#product-gallery .gallery-thumbnail').removeClass('active');
+    $('#product-gallery .gallery-thumbnail').eq(currentSlide).addClass('active');
+  });
+
+
+  // Play videos after slider is changed
+  var currentSlide = '';
+  // After slider change
+  $('#product-gallery .slider').on('afterChange', function() {
+    currentSlide = $('#product-gallery .slider').find('.slick-active');
+    if (currentSlide.children('video').length > 0) {
+      var video = currentSlide.children('video');
+      video[0].play(); // Play video object
+    }
+  });
+
+
+  // Image pinch zoom - https://interactjs.io/
+  if( $('.slider').length ) {
+
+    // Init on current slide
+    makeInteractable('.slick-current');
+
+    // Set initial XY coordinates of interactable element
+    var activeItemX = 0;
+    var activeItemY = 0;
+
+    function dragMoveListener (event) {
+
+      event.target.classList.add('gesture-active');
+
+      var target = event.target,
+      // keep the dragged position in the data-x/data-y attributes
+      activeItemX = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+      activeItemY = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+      // translate the element
+      target.style.webkitTransform =
+      target.style.transform = 'translate(' + activeItemX + 'px, ' + activeItemY + 'px)';
+      // update the posiion attributes
+      target.setAttribute('data-x', activeItemX);
+      target.setAttribute('data-y', activeItemY);
+
+    } // end dragMoveListener()
+
+    function makeInteractable(event) {
+
+      var body = document.body;
+      var angleScale = 1;
+
+      interact('.slick-current').gesturable({
+
+        onstart: function (event) {
+          // Prevent (touch) scrolling while gesturing
+          body.addEventListener("touchmove", function(e){ e.preventDefault(); });
+        },
+
+        onmove: function (event) {
+
+          // Make active on move
+          event.target.classList.add('gesture-active');
+          // Define new scale
+          var currentScale = event.scale * angleScale;
+          // Restrict scale
+          if (currentScale > 4) { currentScale = 4; } // Not greater than 4x default size
+          else if (currentScale < 1) { currentScale = 1; } // Not smaller than default size
+          // Set inner scalable element
+          var scaleElement = null;
+          for (var i = 0; i < event.target.childNodes.length; i++) {
+            if (event.target.childNodes[i].classList.contains('gesture-scalable')) {
+              scaleElement = event.target.childNodes[i]; // inner image
+              break;
+            }
+          }
+          // Apply scale changes
+          scaleElement.style.webkitTransform = scaleElement.style.transform = 'scale(' + currentScale + ')';
+          // Call drag function
+          dragMoveListener(event);
+
+        },
+
+        onend: function (event) {
+
+          // Remove active class
+          event.target.classList.remove('gesture-active');
+          // Reset position of outer parent
+          var target = event.target;
+          target.style.webkitTransform = target.style.transform = 'translateX(0) translateY(0)';
+          target.setAttribute('data-x', '0');
+          target.setAttribute('data-y', '0');
+          // Reset position of inner scalable image
+          scaleElement = event.target.childNodes[i];
+          scaleElement.style.webkitTransform = scaleElement.style.transform = 'scale(1)';
+          // Allow normal touch events after gesturing
+          body.addEventListener("touchmove", function(e){ e.returnValue = true; });
+
+        }
+
+      }); // end gesturable()
+
+    } // end makeInteractable()
+
+  } // end if .slider
+
+
+
+
+
+
+
+
+
+
+
+  //-------------- Finance Options -------------- //
+
+  // Open finance options tooltip
+  $('.finance-options .finance-options-trigger').click(function(){
+    $(this).siblings('.finance-options-tooltip').toggleClass('active');
+  });
+  // Close Finance options tooltip on click away
+  $(document).on('click', function(e) {
+    var financeOptionsTrigger = $('.finance-options .finance-options-trigger');
+    var financeOptionsTooltip = $('.finance-options .finance-options-tooltip');
+    // If the target of the click isn't the container nor a descendant of the container
+    if (!financeOptionsTrigger.is(e.target) && financeOptionsTrigger.has(e.target).length === 0) {
+      financeOptionsTooltip.removeClass('active');
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+  //-------------- Adjust variant price dropdown width based on selection -------------- //
+
+  // See: https://stackoverflow.com/questions/20091481/auto-resizing-the-select-element-according-to-selected-options-width
+  function variantPriceWidth(currentSelect) {
+  	var tempSelect = $('#temp-product-price-select');
+  	var tempOption = tempSelect.children('option');
+  	tempOption.html('').html(currentSelect.children('option:selected').text());
+  	currentSelect.width(tempSelect.width());
+  }
+  if ( $('#product-price-select').length ) {
+  	var currentSelect = $('#product-price-select');
+    var defaultAddButtonText = $('#product-cta #add-to-bag').children('span').text();
+  	variantPriceWidth(currentSelect); // Call on load
+  	currentSelect.change(function(){ // Call on change
+      variantPriceWidth(currentSelect);
+      $('#product-info .customise-field').removeClass('error').children('.error-message').remove(); // Remove any existing required-field errors
+      $('#product-info .customise-field').addClass('complete'); // Mark as complete
+  	});
+  }
+
+
+
+
+
+
+
+
+
+  //-------------- Wishlist -------------- //
+
+function wishlistState() {
+  // Toggle active state
+  // $('.wishlist-add').toggleClass('active');
+  // // Change 'Add' text
+  // $('#product-cta').find('.wishlist-add').children('span').each( function() {
+  //   var ctaWishlistButton = $(this);
+  //   var ctaWishlistText = ctaWishlistButton.text();
+  //   //wishlistAddedText = text.replace("Add", "Added");
+  //   if ($(this).closest('.wishlist-add').hasClass('active')) {
+  //     ctaWishlistButton.text(ctaWishlistText.replace('Add', 'Added'));
+  //   } else {
+  //     ctaWishlistButton.text(ctaWishlistText.replace('Added', 'Add'));
+  //   }
+  // });
+}
+
+// Toggle Wishlist buttons
+$('.wishlist-add').on().click( function() {
+  //wishlistState(); // Change frontend Wishlist state
+  //$(this).toggleClass('active');
+  $('#product-cta').find('.wishlist-add').children('span').each( function() {
+    var ctaWishlistButton = $(this);
+    var ctaWishlistText = ctaWishlistButton.text();
+    //wishlistAddedText = text.replace("Add", "Added");
+    if ($(this).closest('.wishlist-add').hasClass('active')) {
+      ctaWishlistButton.text(ctaWishlistText.replace('Add', 'Added'));
+    } else {
+      ctaWishlistButton.text(ctaWishlistText.replace('Added', 'Add'));
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+//-------------- Share -------------- //
+
+// Open Share list
+$('.share').off().click( function() {
+  $(this).find('ul').toggleClass('active');
+});
+
+// Close Share list on click away
+$(document).on('click', function(e) {
+  var socialButton = $('.share');
+  var socialList = $('.share ul.share-list');
+  // If the target of the click isn't the container nor a descendant of the container
+  if (!socialButton.is(e.target) && socialButton.has(e.target).length === 0) {
+    socialList.removeClass('active');
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+  //-------------- Add to Bag -------------- //
+
   const addToBagButton = $('#add-to-bag');
   var addToBadButtonDefaultText = addToBagButton.text();
 
@@ -76,10 +406,6 @@ $( document ).ready(function() {
     }
   }
   requiredCustomisationCheck(); // Call on load
-
-
-
-
 
 
   // Click Add-to-bag
@@ -126,9 +452,15 @@ $( document ).ready(function() {
 
 
 
+
+
+
+  //-------------- Prodct Customisation -------------- //
+
   // Open product customise panel
   $('.customise-section .dropdown-btn').off().click( function() {
-    $('.customise-section').not($(this).closest('.customise-section')).find('.dropdown-panel').removeClass('active'); // Close any other open customisation panels
+    // $('.customise-section').not($(this).closest('.customise-section')).find('.dropdown-panel').removeClass('active'); // Close any other open customisation panels
+    $('.customise-section').find('.dropdown-panel').removeClass('active'); // Close any other open customisation panels
     $(this).siblings('.dropdown-panel').toggleClass('active'); // Open selected customisation panel
   });
 
@@ -450,15 +782,6 @@ $( document ).ready(function() {
 
 
 
-
-
-
-
-
-
-
-
-
   // Customisation - Initials
   // Click initial selection item
   $('.customise-initials .initials-selection span').off().click( function() {
@@ -551,7 +874,6 @@ $( document ).ready(function() {
 
 
 
-
   // Customisation - general selection (ring-size. birthstone, starsign)
   $('.customise-section .dropdown-panel .dropdown-option').off().click( function() {
 
@@ -585,17 +907,34 @@ $( document ).ready(function() {
 
 
 
+
+
+
+
+
+
   // Open guide
   $('.customise-section .guide-btn').off().click( function() {
-    lockPageScroll(); // Lock page scroll
+    if( window.innerWidth > 450 ) { // Desktop only
+      lockPageScroll(); // Lock page scroll
+    }
     $(this).closest('.customise-section').find('.product-guide-drawer').addClass('active');
+  });
+
+
+
+  // Open Share list
+  $('.share').off().click( function() {
+    $(this).find('ul').toggleClass('active');
   });
 
 
 
   // Open Hint drawer
   $('.send-hint').off().click( function() {
-    lockPageScroll(); // Lock page scroll
+    if( window.innerWidth > 450 ) { // Desktop only
+      lockPageScroll(); // Lock page scroll
+    }
     $('#hint-drawer').addClass('active');
   });
 
@@ -603,17 +942,61 @@ $( document ).ready(function() {
 
 
 
-  // Product customer stories hover effect
-  $('.customer-photo').hover( function() {
+
+
+
+  // Customer stories section
+  $('.customer-photo').off().click( function() {
     var thisPhotoIndex = $('.customer-photo').index(this); // get index of current
-    // Make current photo active
-    $('.customer-photo').removeClass('active');
-    $(this).addClass('active');
+    // Give index attribute to parent (controls style of children)
+    $(this).parent('.customer-photos').attr('data-active-index', (thisPhotoIndex+1));
     // Make current quote active
     $(this).parent('.grid-item').siblings('.grid-item').children('.customer-quote').removeClass('active').eq(thisPhotoIndex).addClass('active');
-  }, function() {
-    // Hover off
   });
+
+
+
+
+  // Press section
+  function pressSectionAdjust() {
+    // Set min height of quotes container
+    var minHeight = -1;
+    $('#product-press').find('.press-quote').each(function() {
+     minHeight = minHeight > $(this).height() ? minHeight : $(this).height();
+    });
+    $('#product-press').find('.press-quotes').css('min-height', minHeight);
+
+    // Position underline
+    var currentPressLogo = $('#product-press').find('.press-logo.current');
+    $('#product-press').find('.underline').css({
+      'width' : parseInt(currentPressLogo.innerWidth()),
+      'left' : parseInt(currentPressLogo.position().left)
+    });
+  }
+  pressSectionAdjust();
+  $(window).resize(function() { pressSectionAdjust(); }); // on resize
+
+  // Change quote when a logo is selected
+  $('#product-press').find('.press-logo').click( function() {
+    currentPressLogo = $(this);
+    // Assign current class
+    $('#product-press').find('.press-logo').removeClass('current');
+    $(this).addClass('current');
+    // Move underline
+    var thisLogoIndex = $('.press-logo').index(this);
+    $(this).siblings('.underline').css({
+      'width' : parseInt($('#product-press').find('.press-logo.current').innerWidth()),
+      'left' : parseInt($('#product-press').find('.press-logo.current').position().left)
+    });
+    // Show matching quote
+    $('#product-press').find('.press-quote').removeClass('active');
+    $('#product-press').find('.press-quote').eq(thisLogoIndex).addClass('active');
+  });
+
+
+
+
+
 
 
   // Product FAQs open/close
@@ -623,41 +1006,6 @@ $( document ).ready(function() {
     $('#product-faq .question').not(thisQuestion).removeClass('active').siblings('.answer').slideUp(mobileMenuSlideTime); // close all
     thisQuestion.toggleClass('active').siblings('.answer').slideToggle(mobileMenuSlideTime); // open this
   });
-
-
-
-
-
-
-  // Product Detail section - disable Slick on desktop
-  // function productDetailSlider() {
-  //   if( window.innerWidth > desktopBreakPoint ) { // Desktop only
-  //     if (!$('body').hasClass('desktop')) {
-  //       setTimeout(function(){
-  //         $('#product-detail .slider').slick(slickSliderSettings); // Enable Slick
-  //         $('#product-detail .slider').slick("unslick"); // Disable Slick
-  //       }, 200);
-  //     }
-  //     $('body').addClass('desktop');
-  //   }
-  //   else { // Mobile only
-  //     if ($('body').hasClass('desktop')) {
-  //       $('#product-detail .slider').slick(slickSliderSettings); // Enable Slick
-  //     }
-  //     $('body').removeClass('desktop');
-  //   }
-	// }
-  // if ($('#product-detail').length) { // only run on Product page
-  //   productDetailSlider();
-  // 	$(window).resize ( function() {	productDetailSlider(); });
-  // }
-
-
-
-
-
-
-
 
 
 

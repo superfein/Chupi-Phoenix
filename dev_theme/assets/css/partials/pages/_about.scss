@@ -1,0 +1,627 @@
+
+// _about.scss
+
+#about-top {
+  height: 100vh;
+  max-height: 550px;
+  .content {
+    height: 100%;
+    max-width: 900px;
+    .grid {
+      height: 100%;
+      grid-template-columns: 100%;
+      align-items: end;
+      padding-bottom: 15%;
+      .grid-item {
+        grid-column: 1 / span 1;
+        h1 {
+          display: block;
+          color: $white;
+          span {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+} // end #about-top
+
+
+#about-intro {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    text-align: center;
+    .grid {
+      grid-template-columns: 100%;
+      .grid-item {
+        grid-column: 1 / span 1;
+        justify-self: center;
+        &.quote {
+          max-width: 800px;
+          blockquote {
+            position: relative;
+            font-family: $font-family-primary;
+            font-size: 24px;
+            line-height: 1.3;
+            color: $grey;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            &:after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              @include transform(translate(-50%));
+              width: 100px;
+              height: 1px;
+              background-color: $grey;
+            }
+          }
+          p {
+            font-size: 18px;
+            font-weight: $font-weight-light;
+            margin-bottom: 40px;
+            span {
+              display: block;
+              font-size: 14px;
+              margin-top: 0px;
+            }
+          }
+        }
+        &.video {
+          position: relative;
+          video {
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+} // end #about-intro
+
+
+#about-story {
+  background-color: $grey_lightest;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    text-align: center;
+    h2 {
+      display: inline-block;
+      max-width: 400px;
+      margin-bottom: 50px;
+    }
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 50px;
+      .grid-item {
+        position: relative;
+        align-self: center;
+        h3 {
+          padding: 0 10%;
+        }
+        p {
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+        .btn {
+          margin-top: 30px;
+        }
+        .about-story-image {
+          position: relative;
+        }
+        &.one-image {
+          margin-left: -$mobile_side-padding;
+          margin-right: -$mobile_side-padding;
+          .about-story-image {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 0 auto;
+          }
+        } // end .one-image
+
+        &.two-image {
+          margin-left: -$mobile_side-padding;
+          margin-right: -$mobile_side-padding;
+          height: 400px;
+          .about-story-image {
+            position: absolute;
+            width: 55%;
+            max-width: 300px;
+            height: 70%;
+            &:nth-of-type(1) {
+              top: 30%;
+              left: 45%;
+            }
+            &:nth-of-type(2) {
+              top: 0;
+              right: 45%;
+            }
+          }
+          &.switch { // class to switch image positions for .two-image blocks
+            .about-story-image {
+              &:nth-of-type(1) {
+                top: 30%;
+                left: auto;
+                right: 45%;
+              }
+              &:nth-of-type(2) {
+                top: 0;
+                left: 45%;
+                right: auto;
+              }
+            }
+          }
+        } // end .two-image
+
+      }
+    } // end .grid
+  }
+} // end #about-story
+
+
+#about-chupi {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    text-align: center;
+    h2 {
+      font-size: 48px;
+      span {
+        display: block;
+        font-size: 28px;
+      }
+    }
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 40px;
+      .grid-item {
+        grid-column: 1 / span 1;
+        align-self: center;
+        &:nth-of-type(1) {
+          p {
+            &:last-of-type {
+              margin-bottom: 30px;
+            }
+          }
+        }
+        &:nth-of-type(2) {
+          margin-left: -$mobile_side-padding;
+          margin-right: -$mobile_side-padding;
+        }
+      }
+    }
+  }
+} // end #about-chupi
+
+
+#about-quote {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: $grey_lightest;
+  .content {
+    text-align: center;
+    .grid {
+      .grid-item {
+        justify-self: center;
+        max-width: 700px;
+        blockquote {
+          position: relative;
+          font-family: $font-family-primary;
+          font-size: 24px;
+          line-height: 1.3;
+          color: $grey;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            @include transform(translate(-50%));
+            width: 100px;
+            height: 1px;
+            background-color: $grey;
+          }
+        }
+        p {
+          font-size: 18px;
+          font-weight: $font-weight-light;
+          margin-bottom: 0px;
+          span {
+            display: block;
+            font-size: 14px;
+            margin-top: 0px;
+          }
+        }
+      }
+    }
+  }
+} // end #about-quote
+
+
+#about-promise {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  .content {
+    max-width: 400px;
+    h2 {
+      margin-bottom: 50px;
+    }
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 50px;
+      .grid-item {
+        grid-column: span 1;
+        img {
+          max-width: 70px;
+          max-height: 70px;
+          margin-bottom: 15px;
+        }
+        p {
+          font-size: 16px;
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+} // end #about-promise
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+  #about-story {
+    .content {
+      .grid {
+        .grid-item {
+          h3 {
+            padding: 0 15%;
+          }
+          p {
+            padding: 0 15%;
+          }
+          &.one-image {
+            margin-left: 0;
+            margin-right: 0;
+            .about-story-image {
+              height: 500px;
+            }
+          } // end .one-image
+
+          &.two-image {
+            margin-left: 0;
+            margin-right: 0;
+            height: 500px;
+            .about-story-image {
+              width: 55%;
+              height: 80%;
+              &:nth-of-type(1) {
+                top: 20%;
+              }
+              &:nth-of-type(2) {
+                top: 0;
+              }
+            }
+            &.switch { // class to switch image positions for .two-image blocks
+              .about-story-image {
+                &:nth-of-type(1) {
+                  top: 20%;
+                }
+                &:nth-of-type(2) {
+                  top: 0;
+                }
+              }
+            }
+          } // end .two-image
+
+        }
+      } // end .grid
+    }
+  } // end #about-story
+
+
+  #about-chupi {
+    .content {
+      .grid {
+        .grid-item {
+          &:nth-of-type(1) {
+            padding: 0 10%;
+          }
+          &:nth-of-type(2) {
+            margin-left: 0;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  } // end #about-chupi
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  #about-top {
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        padding-bottom: 0;
+        .grid-item {
+          grid-column: 1 / span 1;
+          h1 {
+            font-size: 60px;
+          }
+        }
+      }
+    }
+  } // end #about-top
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  #about-intro {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      .grid {
+        .grid-item {
+          &.quote {
+            blockquote {
+              font-size: 32px;
+              line-height: 1.3;
+              padding-bottom: 30px;
+              margin-bottom: 30px;
+              &:after {
+                width: 160px;
+              }
+            }
+            p {
+              margin-bottom: 60px;
+            }
+          }
+        }
+      }
+    }
+  } // end #about-intro
+
+
+  #about-story {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      h2 {
+        max-width: 500px;
+        margin-bottom: 80px;
+      }
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        .grid-item {
+          h3 {
+            padding: 0 15%;
+          }
+          p {
+            padding: 0 10%;
+          }
+          &.one-image {
+            margin-left: 0;
+            margin-right: 0;
+            .about-story-image {
+              height: 100%;
+              min-height: 500px;
+            }
+          } // end .one-image
+          &.two-image {
+            margin-left: 0;
+            margin-right: 0;
+            height: 100%;
+            min-height: 500px;
+            .about-story-image {
+              &:nth-of-type(1) {
+                top: 30%;
+              }
+              &:nth-of-type(2) {
+                top: 10%;
+              }
+            }
+            &.switch { // class to switch image positions for .two-image blocks
+              .about-story-image {
+                &:nth-of-type(1) {
+                  top: 30%;
+                }
+                &:nth-of-type(2) {
+                  top: 10%;
+                }
+              }
+            }
+          } // end .two-image
+          &:nth-of-type(3) {
+            grid-column: 2 / span 1;
+            grid-row: 2 / span 1;
+          }
+          &:nth-of-type(4) {
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+          }
+        }
+      } // end .grid
+    }
+    &:before { // white bottom (fake bottom of section)
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background-color: $white;
+      //display: none;
+    }
+  } // end #about-story
+
+
+  #about-chupi {
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        .grid-item {
+          padding: 0 10%;
+          &:nth-of-type(1) {
+            padding: 0 5%;
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 1;
+            p {
+              &:last-of-type {
+                margin-bottom: 70px;
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            grid-row: 1 / span 1;
+          }
+        }
+      }
+    }
+  } // end #about-chupi
+
+
+  #about-quote {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      .grid {
+        .grid-item {
+          max-width: 900px;
+          blockquote {
+            font-size: 32px;
+          }
+        }
+      }
+    }
+  } // end #about-quote
+
+
+  #about-promise {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    .content {
+      max-width: $content_max_width;
+      h2 {
+        font-size: 38px;
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-gap: 50px;
+        justify-content: center;
+        .grid-item {
+          grid-column: auto;
+          max-width: none;
+          img {
+            max-width: 90px;
+            max-height: 90px;
+          }
+        }
+      }
+    }
+  } // end #about-promise
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+  #about-intro {
+    .content {
+      .grid {
+        .grid-item {
+          &.quote {
+            blockquote {
+              font-size: 38px;
+            }
+          }
+          &.video {
+            video {
+              max-width: 100%;
+            }
+          }
+        }
+      }
+    }
+  } // end #about-intro
+
+  #about-quote {
+    .content {
+      .grid {
+        .grid-item {
+          blockquote {
+            font-size: 38px;
+          }
+        }
+      }
+    }
+  } // end #about-quote
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

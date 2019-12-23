@@ -1,13 +1,15 @@
 
 // _measures.scss
 
-// Header height
+// Header
 $mobile_header_height: 60px;
-$desktop_header_height: 90px;
+$desktop_header_height: 64px;
+$header_max_width: 1480px;
 
 // Content
 $content_max_width: 1164px;
 $content_max_width_lg: 1366px;
+$desktop_max_width: 1920px;
 
 // Side padding
 $mobile_side-padding: 15px;

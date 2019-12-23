@@ -1,0 +1,18 @@
+<svg id="Component_8_1" data-name="Component 8 – 1" xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20">
+  <path id="Path_1378" data-name="Path 1378" d="M12082.967,493.54v-5.6" transform="translate(5626.168 10716.791) rotate(-120)" fill="none" stroke="#2c2c2b" stroke-width="1"/>
+  <path id="Path_1379" data-name="Path 1379" d="M12082.967,493.54v-5.6" transform="translate(-6456.799 10232.052) rotate(-60)" fill="none" stroke="#2c2c2b" stroke-width="1"/>
+  <g id="Group_633" data-name="Group 633" transform="translate(-858 -715)">
+    <g id="Ellipse_73" data-name="Ellipse 73" transform="translate(869 715)" fill="#fff" stroke="#2c2c2b" stroke-width="1">
+      <circle cx="4" cy="4" r="4" stroke="none"/>
+      <circle cx="4" cy="4" r="3.5" fill="none"/>
+    </g>
+    <g id="Ellipse_74" data-name="Ellipse 74" transform="translate(858 721)" fill="#fff" stroke="#2c2c2b" stroke-width="1">
+      <circle cx="4" cy="4" r="4" stroke="none"/>
+      <circle cx="4" cy="4" r="3.5" fill="none"/>
+    </g>
+    <g id="Ellipse_75" data-name="Ellipse 75" transform="translate(869 727)" fill="#fff" stroke="#2c2c2b" stroke-width="1">
+      <circle cx="4" cy="4" r="4" stroke="none"/>
+      <circle cx="4" cy="4" r="3.5" fill="none"/>
+    </g>
+  </g>
+</svg>

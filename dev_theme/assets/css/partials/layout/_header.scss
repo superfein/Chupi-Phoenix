@@ -9,33 +9,37 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: $mobile_header_height;
+  //height: $mobile_header_height;
   display: block;
-  padding: 10px $mobile_side-padding;
-  padding-right: 5px;
   z-index: 10;
-  &:before {
+  background: $white;
+  @include transition(all 0.15s $ease_in 0s, padding-right 0s $ease); // padding-right 0s for opening/closing drawer components
+  &:before { // background gradient in header
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    //height: 110%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba($grey_dark, 0.9),
-      rgba($grey_dark, 0)
-    );
+    height: 120%;
+    background: $grey_light;
     pointer-events: none;
-    @include transition(background 0.15s $ease_in 0s);
+    background: -moz-linear-gradient(top,  rgba(44,44,43,0.6) 0%, rgba(44,44,43,0) 100%);
+    background: -webkit-linear-gradient(top,  rgba(44,44,43,0.6) 0%,rgba(44,44,43,0) 100%);
+    background: linear-gradient(to bottom,  rgba(44,44,43,0.6) 0%,rgba(44,44,43,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#802c2c2b', endColorstr='#002c2c2b',GradientType=0 );
+    opacity: 0;
+    @include transition(all 0.15s $ease);
   }
   > .inner {
     position: relative;
     display: grid;
-    grid-template-columns: 70px auto;
-    grid-gap: 5px;
+    grid-template-columns: 64px auto;
+    grid-gap: 10px;
     align-items: center;
+    padding: 10px $mobile_side-padding;
+    padding-right: 5px;
+    //z-index: 12;
+    @include transition(background 0.15s $ease_in 0s);
     #main-nav {
       display: block;
       position: fixed;
@@ -54,10 +58,80 @@ header {
       #mega-menu-bg {
         display: none;
       }
+      #mobile-search {
+        position: relative;
+        display: block;
+        padding: 0 15px;
+        opacity: 0;
+        @include transition(transform 0.3s $ease_in_out_quint 0s, opacity 0.1 $ease_out 0s);
+        input[type="search"] {
+          background-image: none;
+          width: 100%;
+          height: 38px;
+          padding: 5px 10px;
+          padding-right: 90px;
+          border: 1px solid $grey_light;
+          -webkit-appearance: none;
+          font-size: 14px;
+          font-weight: $font_weight_lighter;
+          @include transition(all 0.2s $ease);
+          &:focus {
+            outline: 0;
+            border: 1px solid $grey;
+          }
+        }
+        input[type="search"]::-webkit-search-decoration,
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-results-button,
+        input[type="search"]::-webkit-search-results-decoration {
+          display: none;
+        }
+        input[type="submit"] {
+          position: absolute;
+          top: 50%;
+          right: 15px;
+          width: 38px;
+          min-width: 0;
+          height: 38px;
+          padding: 0;
+          margin-top: 0;
+          border: 0;
+          @include transform(translateY(-50%));
+          background-color: transparent;
+          background-image: url($icon_search_dark);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 45%;
+          @include transition(all 0.2s $ease);
+          &:focus {
+            outline: 0;
+          }
+        }
+        .clear {
+          position: absolute;
+          top: 50%;
+          right: 55px;
+          font-size: 12px;
+          font-weight: $font_weight_light;
+          color: lighten($grey, 20%);
+          padding: 8px 10px;
+          @include transform(translateY(-50%));
+          opacity: 0;
+          pointer-events: none;
+          @include transition(all 0.2s $ease);
+          &.active {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          &:hover {
+            font-weight: $font_weight_light;
+          }
+        }
+      } // end #mobile-search
       > ul {
         position: relative;
         list-style-type: none;
-        min-height: 100%;
+        min-height: calc(100% - 40px); // minus mobile search height
         padding: 15px 15px;
         padding-bottom: 80px; // space for mobile currenct button
         opacity: 0;
@@ -95,7 +169,7 @@ header {
                 font-weight: $font_weight_lighter;
                 color: $grey;
                 text-transform: uppercase;
-                padding: 8px 0;
+                padding: 10px 0;
                 padding-right: 30px;
                 margin-bottom: 0;
                 cursor: pointer;
@@ -141,14 +215,26 @@ header {
                   > a {
                     position: relative;
                     display: block;
-                    font-size: 14px;
+                    font-size: 16px;
                     font-weight: $font_weight_lighter;
                     color: $grey;
                     text-transform: none;
                     text-decoration: none;
                     padding: 8px 0;
+                    background-color: transparent;
                     cursor: pointer;
                     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+                    @include transition(background-color 0.15s $ease);
+                    &:hover {
+                      //text-decoration: underline $pink;
+                      background-color: $grey_lightest;
+                    }
+                    &.menu-item-icon {
+                      padding-left: 35px;
+                      background-repeat: no-repeat;
+                      background-position: left center;
+                      background-size: auto 75%;
+                    }
                   }
                 }
                 &.active {
@@ -174,6 +260,9 @@ header {
             width: calc(100% - 15px - 15px);
             bottom: 15px;
             left: 15px;
+            form {
+              display: none;
+            }
             > a.currency-btn { // Mobile currency button
               font-size: 16px;
               padding-left: 35px;
@@ -203,10 +292,6 @@ header {
             ul.currency-list { // Mobile currency list
               position: fixed;
               display: block;
-              // grid-template-columns: 1fr;
-              // grid-template-rows: auto;
-              // //grid-auto-flow: row;
-              // align-content: end;
               width: 100%;
               max-height: calc(100vh - #{$mobile_header_height}); // Interpolate
               left: 0;
@@ -217,9 +302,7 @@ header {
               overflow-x: hidden;
               overflow-y: auto;
               scroll-snap-align: end;
-              //opacity: 0;
               @include transform(translateX(100%));
-              //@include transition(all 0.15s $ease_out);
               li {
                 position: relative;
                 display: block;
@@ -232,7 +315,7 @@ header {
                   color: $grey;
                   text-transform: none;
                   text-decoration: none;
-                  padding: 10px 0;
+                  padding: 12px 0;
                   padding-left: 50px;
                   cursor: pointer;
                   -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
@@ -311,6 +394,14 @@ header {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+        #mobile-search {
+          opacity: 1;
+          //@include transform(translateY(0));
+          @include transition(transform 0.3s $ease_in_out_quint 0s, opacity 0.25s $ease_out 0.25s);
+          &.slide-out {
+            @include transform(translateX(-100%));
+          }
+        }
         >  ul {
           opacity: 1;
           @include transform(translateY(0));
@@ -327,24 +418,26 @@ header {
       justify-self: left;
       align-self: start;
       img {
-        width: 64px;
-        max-width: 100%;
-        color: $white; // for alt text fallback
+        max-width: 64px;
+        max-height: 40px;
+        color: $grey_dark; // for alt text fallback
         &.light {
-          display: block;
+          display: none;
         }
         &.dark {
-          display: none;
+          display: block;
         }
       }
     }
     #header-icons {
       grid-column: 2 / span 1;
       justify-self: right;
+      display: grid;
+      grid-template-columns: repeat( 5, minmax(20px, auto) ); // 5 icons (mobile)
       > a {
         position: relative;
         display: inline-block;
-        float: right;
+        align-self: center;
         width: 40px;
         height: 40px;
         margin-left: 2px;
@@ -353,21 +446,31 @@ header {
         background-size: auto 50%;
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
         @include transition(all 0.2s $ease);
-        &:last-of-type {
-          margin-left: 0;
-        }
         &#account-btn {
-          background-image: url($icon_account_light);
-        }
-        &#search-btn {
-          background-image: url($icon_search_light);
+          grid-column: 2 / span 1;
+          grid-row: 1;
+          background-image: url($icon_account_dark);
+          &.active{
+            background-image: url($icon_account_active_dark);
+          }
         }
         &#wishlist-btn {
-          background-image: url($icon_wishlist_light);
+          background-image: url($icon_wishlist_dark);
+          background-size: auto 46%;
+          &.active {
+            background-image: url($icon_wishlist_dark_full);
+          }
+        }
+        &#mobile-search-btn {
+          grid-column: 4 / span 1;
+          grid-row: 1;
+          background-image: url($icon_search_dark);
         }
         &#cart-btn {
-          background-image: url($icon_cart_light);
-          &.active:after {
+          grid-column: 1 / span 1;
+          grid-row: 1;
+          background-image: url($icon_cart_dark);
+          &.active:after { // pink dot
             content: "";
             position: absolute;
             width: 8px;
@@ -380,14 +483,16 @@ header {
           }
         }
         &#menu-btn {
+          grid-column: 5 / span 1;
+          grid-row: 1;
           span {
             position: absolute;
             width: 14px;
             height: 1px;
-            height: 0.05em;
+            //height: 0.05em;
             top: 50%;
             left: 50%;
-            background-color: $white;
+            background-color: $grey_dark;
             @include transform(translate(-50%, -50%) rotateZ(0deg));
             @include transition(all 0s $ease);
             &:before, &:after {
@@ -426,56 +531,71 @@ header {
           }
         } // end #menu-btn
       }
-      .currency-select {
+      form#search {
+        display: none;
+      }
+      .currency-select { // Desktop currency selector
         display: none;
       }
     } // end #header-icons
   } // end .inner
+} // end header
 
 
-  &.solid { // header.solid (on scroll or menu open)
+
+// Transparent header (mobile)
+body.transparent-header {
+  header {
+    background: transparent;
     &:before {
-      height: 100%;
-      background: $white;
-      @include transition(background 0.2s $ease_in);
+      opacity: 1;
     }
     > .inner {
       #header-logo {
         img {
-          color: $grey_dark; // for alt text fallback
+          color: $white; // for alt text fallback
           &.light {
-            display: none;
+            display: block;
           }
           &.dark {
-            display: block;
+            display: none;
           }
         }
       }
       #header-icons {
         > a {
           &#account-btn {
-            background-image: url($icon_account_dark);
-          }
-          &#search-btn {
-            background-image: url($icon_search_dark);
+            background-image: url($icon_account_light);
+            &.active{
+              background-image: url($icon_account_active_light);
+            }
           }
           &#wishlist-btn {
-            background-image: url($icon_wishlist_dark);
+            background-image: url($icon_wishlist_light);
+            &.active {
+              background-image: url($icon_wishlist_light_full);
+            }
+          }
+          &#mobile-search-btn {
+            background-image: url($icon_search_light);
           }
           &#cart-btn {
-            background-image: url($icon_cart_dark);
+            background-image: url($icon_cart_light);
           }
           &#menu-btn {
             span {
-              background-color: $grey_dark;
+              background-color: $white;
             }
-          } // end #mobile-menu-button
+          } // end #menu-btn
         }
       } // end #header-icons
     } // end .inner
-  } // end .solid
+  } // end header
+} // end body.transparent-header
 
-} // end header
+
+
+
 
 
 
@@ -498,8 +618,8 @@ header {
   header {
     > .inner {
       #header-icons {
+        grid-gap: 10px;
         > a {
-          margin-left: 10px;
           background-size: auto 50%;
         }
       } // end #header-icons
@@ -507,6 +627,7 @@ header {
   } // end header
 
 } // end media-query small
+
 
 
 
@@ -526,22 +647,18 @@ header {
 
 
 
+
+
 @include mquery(ml) {
 
   header {
-    padding: 10px 10px;
-    padding-right: 15px;
-    &:before {
-      background: linear-gradient(
-        to bottom,
-        rgba($grey_dark, 0.9),
-        rgba($grey_dark, 0)
-      );
-      @include transition(all 0.15s $ease 0s);
-    }
+    padding: 0;
+    @include transition(all 0.2s $ease 0s, padding-right 0s $ease); // padding-right 0s for opening/closing drawer components
     > .inner {
-      grid-template-columns: 1fr 70px 1fr;
-      grid-gap: 10px;
+      grid-template-columns: auto 72px auto;
+      grid-gap: 15px;
+      padding: 10px 10px;
+      max-width: $header_max_width;
       #main-nav {
         position: relative;
         grid-column: 1 / span 1;
@@ -570,11 +687,15 @@ header {
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
-          @include transition(opacity 0.15s $ease, height 0.3s $ease_in_out_quint);
+          @include transition(opacity 0.2s $ease, height 0.3s $ease_in_out_quint, visibility 0.2s $ease 0.2s);
           &.active {
             opacity: 1;
             visibility: visible;
+            @include transition(opacity 0.2s $ease, height 0.3s $ease_in_out_quint, visibility 0.2s $ease 0s);
           }
+        }
+        #mobile-search {
+          display: none;
         }
         > ul {
           display: inline-block;
@@ -592,8 +713,9 @@ header {
               width: auto;
               font-size: 14px;
               font-weight: $font_weight_light;
-              color: $white;
+              color: $grey_dark;
               padding: 10px 6px;
+              @include transition(color 0s $ease);
               &:hover + .mega-menu {
                 opacity: 1;
                 visibility: visible;
@@ -602,13 +724,17 @@ header {
             }
             .mega-menu {
               display: grid;
-              grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
-              grid-gap: 50px;
+              grid-template-columns: repeat( auto-fit, minmax(120px, 250px) );
+              grid-auto-flow: column;
+              grid-gap: 30px;
               position: absolute;
-              top: calc(100% + 10px);
+              top: 100%;
               left: -10px; // header padding-left
               width: 100%;
               width: 100vw;
+              max-width: $content_max_width_lg;
+              max-height: calc(100vh - #{$desktop_header_height});
+              overflow-y: auto; // allow for mega-menu scrollign when it exceeds the window height
               padding: 40px 20px;
               opacity: 0;
               visibility: hidden;
@@ -628,11 +754,13 @@ header {
                 @include transform(translateX(-10px));
                 h3 {
                   font-family: $font_family_primary;
-                  font-size: 28px;
-                  text-transform: none;
+                  font-size: 18px;
+                  line-height: 1.2;
+                  text-transform: uppercase;
                   padding: 0;
                   padding-right: 0;
-                  margin-bottom: 25px;
+                  margin-bottom: 10px;
+                  min-height: 50px; // two lines of text
                   cursor: auto;
                   &:before,
                   &:after {
@@ -642,17 +770,19 @@ header {
                 > ul {
                   display: block;
                   padding: 0;
+                  margin-bottom: 20px;
                   opacity: 0;
                   @include transform(translateX(-10px));
                   > li {
                     display: block;
-                    height: 29px; // height of inner <a> to remove inline-block gap
                     opacity: 1;
                     @include transform(translateY(0));
                     > a {
                       display: inline-block;
                       font-weight: $font_weight_lighter;
-                      padding: 6px 0;
+                      font-size: 16px;
+                      line-height: 1.3;
+                      padding: 3px 0;
                       overflow-x: hidden;
                       @include transition(all 0.2s $ease);
                       &:after { // underline bar on hover
@@ -662,19 +792,43 @@ header {
                         height: 2px;
                         background: $pink;
                         bottom: 3px;
-                        left: 0;
-                        @include transform(translateX(-100%));
+                        left: -100%;
                       }
                       &:hover {
+                        text-decoration: none;
                         color: $black;
+                        background-color: transparent;
                         &:after {
                           height: 1px;
-                          @include transform(translateX(100%));
-                          @include transition(transform 0.4s $ease, height 0.1s $ease);
+                          left: 100%;
+                          @include transition(left 0.4s $ease, height 0.1s $ease);
+                        }
+                      }
+                      &.menu-item-icon {
+                        padding-left: 32px;
+                        background-size: auto 90%;
+                        &:after { // underline bar on hover
+                          width: 0;
+                          left: 32px;
+                          @include transform(translateX(0));
+                        }
+                        &:hover {
+                          color: $black;
+                          &:after {
+                            width: calc(100% - 32px);
+                            @include transform(translateX(100%));
+                            @include transition(transform 0.4s $ease, height 0.1s $ease, width 0.4s $ease);
+                          }
                         }
                       }
                     }
                   }
+                  &:last-of-type {
+                    margin-bottom: 0;
+                  }
+                }
+                &.no-title {
+                  margin-top: 56px; // Gap where title would have been
                 }
               }
               &.active,
@@ -695,9 +849,10 @@ header {
 
                 @for $i from 1 to 8 { // up to 8 inner lists
                   .inner-list:nth-of-type(#{$i}) {
-                    @include animation-delay($i * 0.07s);
+                    @include animation-delay($i * 0.06s);
                     > ul {
-                      @include animation-delay($i * 0.1s);
+                      // @include animation-delay($i * 0.1s);
+                      @include animation-delay(0.1s);
                     }
                   }
                 } // end for loop
@@ -718,10 +873,10 @@ header {
                   right: auto;
                   display: inline-block;
                   width: 8px;
-                  height: 8px;
-                  vertical-align: middle;
+                  height: 10px;
+                  margin-top: 0;
                   margin-left: 5px;
-                  background-image: url($icon_chevron_light);
+                  background-image: url($icon_chevron_dark);
                   @include transform(translateY(0%) rotate(0deg));
                   @include transition(all 0s $ease);
                 }
@@ -734,6 +889,12 @@ header {
                     @include transition(all 0s $ease);
                   }
                 }
+              }
+            }
+            &.mobile-only {
+              display: none;
+              > a {
+                display: none;
               }
             }
           }
@@ -765,14 +926,29 @@ header {
         grid-column: 2 / span 1;
         justify-self: center;
         align-self: center;
+        img {
+          max-width: 72px;
+          height: 40px;
+          max-height: 40px;
+        }
       }
       #header-icons {
         grid-column: 3 / span 1;
+        grid-gap: 5px;
         > a {
-          margin-left: 5px;
           background-size: auto 45%;
           @include transition(all 0.2s $ease);
+          &#account-btn {
+            grid-column: 2 / span 1;
+          }
+          &.wk-link {
+            grid-column: 3 / span 1;
+          }
+          &#mobile-search-btn {
+            display: none;
+          }
           &#cart-btn {
+            grid-column: 4 / span 1;
             &.active:after {
               width: 7px;
               height: 7px;
@@ -786,11 +962,86 @@ header {
             @include transform(scale(1.2));
           }
         }
-        .currency-select {
+        form#search {
+          position: relative;
+          display: block;
+          grid-column: 1 / span 1;
+          grid-row: 1;
+          align-self: center;
+          width: auto;
+          max-width: 150px;
+          margin-right: 10px;
+          input[type="search"] {
+            background-color: transparent;
+            background-image: none;
+            width: 100%;
+            height: 32px;
+            padding: 0;
+            padding-right: 30px;
+            border: 0;
+            border-bottom: 1px solid $grey_dark;
+            -webkit-appearance: none;
+            font-family: $font_family_secondary;
+            font-size: 14px;
+            font-weight: $font_weight_light;
+            color: $grey_dark;
+            @include transition(all 0.2s $ease);
+            &:focus {
+              outline: 0;
+              //border: 1px solid $grey;
+            }
+          }
+          input[type="search"]::-webkit-search-decoration,
+          input[type="search"]::-webkit-search-cancel-button,
+          input[type="search"]::-webkit-search-results-button,
+          input[type="search"]::-webkit-search-results-decoration {
+            display: none;
+          }
+          input[type="search"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: $grey_dark;
+          }
+          input[type="search"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: $grey_dark;
+          }
+          input[type="search"]::-ms-input-placeholder { /* Microsoft Edge */
+            color: $grey_dark;
+          }
+          input[type="submit"] {
+            position: absolute;
+            top: 50%;
+            right: -6px;
+            width: 32px;
+            min-width: 0;
+            height: 32px;
+            padding: 0;
+            margin-top: 0;
+            border: 0;
+            @include transform(translateY(-50%));
+            background-color: transparent;
+            background-image: url($icon_search_dark);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 56%;
+            @include transition(all 0.2s $ease);
+            &:hover {
+              //@include transform(translateY(-50%) scale(1.2));
+            }
+          }
+          &:hover {
+            input[type="search"] {
+              //border: 1px solid $grey;
+            }
+          }
+        }
+        .currency-select { // Desktop currency selector
           position: relative;
           display: inline-block;
-          float: right;
-          margin-left: 10px;
+          grid-column: 5 / span 1;
+          grid-row: 1;
+          margin-right: 5px;
+          form {
+            display: none;
+          }
           .currency-btn {
             display: inline-block;
             height: 40px;
@@ -799,15 +1050,18 @@ header {
             line-height: 40px;
             text-transform: uppercase;
             text-decoration: none;
-            color: $white;
+            color: $grey_dark;
             &:before {
               content: "";
               position: absolute;
               top: 50%;
               right: 0;
-              width: 28px;
-              height: 28px;
+              width: 26px;
+              height: 26px;
               @include transform(translateY(-50%));
+            }
+            &:hover {
+              font-weight: $font_weight_light;
             }
             &:hover + ul.currency-list {
               visibility: visible;
@@ -823,7 +1077,7 @@ header {
               }
               @for $i from 1 to 15 { // up to 15 items
                 > li:nth-of-type(#{$i}) {
-                  @include transition-delay($i * 0.04s);
+                  @include transition-delay($i * 0.02s);
                 }
               } // end for loop
             }
@@ -867,8 +1121,8 @@ header {
                   position: absolute;
                   top: 50%;
                   right: 0;
-                  width: 28px;
-                  height: 28px;
+                  width: 26px;
+                  height: 26px;
                   @include transform(translateY(-50%));
                   @include transition(all 0.2s $ease);
                 }
@@ -903,43 +1157,86 @@ header {
       } // end #header-icons
     } // end .inner
 
+  } // end header
 
-    // header.solid (on scroll or menu open)
-    &.solid {
-      &:before {
-      background: $white;
-      @include transition(all 0.15s $ease 0s);
-      }
+
+
+  // Transparent header (desktop)
+  body.transparent-header {
+    header {
       > .inner {
         #main-nav {
           > ul {
             > li { // Top-level item
               > a {
-                color: $grey_dark;
-                @include transition(color 0s $ease);
+                color: $white;
               }
               &.has-mega-menu {
                 > a {
                   &:after {
-                    background-image: url($icon_chevron_dark);
-                    @include transition(all 0s $ease);
+                    background-image: url($icon_chevron_light);
                   }
                 }
               }
             }
+            .underline {
+              background-color: $white;
+            }
           } // end top level ul
         } // end #main-nav
+
         #header-icons {
-          .currency-select {
-            .currency-btn {
-              color: $grey_dark;
+          form#search {
+            input[type="search"] {
+              border-bottom: 1px solid $white;
+              color: $white;
+            }
+            input[type="search"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+              color: $white;
+            }
+            input[type="search"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+              color: $white;
+            }
+            input[type="search"]::-ms-input-placeholder { /* Microsoft Edge */
+              color: $white;
+            }
+            input[type="submit"] {
+              background-image: url($icon_search_light);
+            }
+            &.active { // Input has content
+              input[type="search"] {
+                background-color: $white;
+                height: 36px;
+                color: $grey_dark;
+                padding: 0 10px;
+                padding-right: 40px;
+              }
+              input[type="submit"] {
+                right: 0;
+                background-image: url($icon_search_dark);
+              }
             }
           }
+          .currency-select { // Desktop currency selector
+            .currency-btn {
+              color: $white;
+            }
+            ul.currency-list {
+              &:before { // currency dropdown background
+                background-color: transparent;
+              }
+              > li {
+                > a {
+                  color: $white;
+                }
+              }
+            }
+          } // end .currency-select
         } // end #header-icons
       } // end .inner
-    } // end .solid
+    } // end header
+  } // end body.transparent-header
 
-  } // end header
 
 } // end media-query medium-large
 
@@ -957,15 +1254,17 @@ header {
 @include mquery(l) {
 
   header {
-    padding: 25px 10px;
-    padding-right: 15px;
-    height: $desktop_header_height;
-    @include transition(all 0.1s $ease 0s);
-    &:before {
-      @include transition(all 0.1s $ease_in_out_quint 0s);
-    }
-    @include transition(all 0.1s $ease_in_out_quint 0s);
+    padding: 0;
+    background-color: $white;
+    // &:before {
+    //   @include transition(all 0.1s $ease_in_out_quint 0s);
+    // }
     > .inner {
+      grid-template-columns: 1fr 72px 1fr;
+      grid-gap: 20px;
+      padding: 10px 10px;
+      //max-width: $header_max_width;
+      margin: 0 auto;
       #main-nav {
         #mega-menu-bg {
           top: $desktop_header_height;
@@ -985,14 +1284,36 @@ header {
                 }
               }
             }
+            .mega-menu {
+              .inner-list {
+                h3 {
+                  font-size: 20px;
+                }
+              }
+              .inner-list.col-2 {
+                grid-column: span 2;
+                position: relative;
+                column-count: 2;
+                column-gap: 30px;
+                padding-top: 60px;
+                h3 {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                }
+                > ul {
+                  opacity: 1;
+                  > li {
+                    > a {
+
+                    }
+                  }
+                }
+              }
+            } // end .mega-menu
           }
         } // end top level ul
       } // end #main-nav
-      #header-logo {
-        img {
-          width: 70px;
-        }
-      }
       #header-icons {
         > a {
           width: 44px;
@@ -1003,6 +1324,9 @@ header {
             @include transform(scale(1.15));
           }
         }
+        form#search {
+          max-width: 200px;
+        }
         .currency-select {
           .currency-btn {
             height: 44px;
@@ -1011,26 +1335,6 @@ header {
         } // end .currency-select
       } // end #header-icons
     } // end .inner
-
-    &.scrolled {
-      padding: 10px 10px;
-      padding-right: 15px;
-      height: calc( #{$desktop_header_height} - 15px - 15px );
-      @include transition(all 0.5s $ease_in_out_quint 0s);
-      > .inner {
-        #main-nav {
-          #mega-menu-bg {
-            top: calc( #{$desktop_header_height} - 15px - 15px );
-          }
-        }
-        #header-logo {
-          img {
-            @include transform(scale(0.914));
-            @include transition(all 0.5s $ease_in_out_quint 0s);
-          }
-        }
-      }
-    }
 
   } // end header
 
@@ -1045,7 +1349,26 @@ header {
 
 @include mquery(xl) {
 
+  header {
+    > .inner {
+      #main-nav {
+        > ul {
+          > li { // Top-level item
+            .mega-menu {
+              .inner-list {
+                h3 {
+                  font-size: 22px;
+                }
+              }
+            } // end .mega-menu
+          }
+        } // end top level ul
+      } // end #main-nav
+    } // end .inner
+  } // end header
+
 } // end media-query extra-large
+
 
 
 

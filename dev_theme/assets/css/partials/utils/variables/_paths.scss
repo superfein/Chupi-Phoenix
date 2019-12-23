@@ -12,8 +12,10 @@ $drawing_path: '../img/drawing/';
 $initial_path: '../img/product/initials/';
 
 // Icons
-$icon_account_light: $icon_path + 'lock-light.svg';
-$icon_account_dark: $icon_path + 'lock-dark.svg';
+$icon_account_light: $icon_path + 'profile-light.svg';
+$icon_account_dark: $icon_path + 'profile-dark.svg';
+$icon_account_active_light: $icon_path + 'profile-active-light.svg';
+$icon_account_active_dark: $icon_path + 'profile-active-dark.svg';
 $icon_search_light: $icon_path + 'search-light.svg';
 $icon_search_dark: $icon_path + 'search-dark.svg';
 $icon_wishlist_light: $icon_path + 'heart-light.svg';
@@ -28,6 +30,8 @@ $icon_chevron_dark: $icon_path + 'chevron-dark.svg';
 $icon_minus_dark: $icon_path + 'minus-dark.svg';
 $icon_plus_dark: $icon_path + 'plus-dark.svg';
 $icon_gift_box: $icon_path + 'gift-box.svg';
+$icon_gift_box_add: $icon_path + 'gift-box-add.svg';
+$icon_gift_box_added: $icon_path + 'gift-box-added.svg';
 $icon_sort_dark: $icon_path + 'sort-dark.svg';
 $icon_filter_dark: $icon_path + 'filter-dark.svg';
 $icon_lock_light: $icon_path + 'lock-light.svg';
@@ -39,10 +43,18 @@ $icon_tools_dark: $icon_path + 'tools-dark.svg';
 $icon_delivery_truck_dark: $icon_path + 'delivery-truck-dark.svg';
 $icon_stone_dark: $icon_path + 'stone-dark.svg';
 $icon_paper_plane_dark: $icon_path + 'paper-plane-dark.svg';
-$icon_quotation_marks_dark: $icon_path + 'quotation-marks-dark.svg';
+$icon_share_dark: $icon_path + 'share-dark.svg';
+$icon_quotation_marks_dark: $icon_path + 'quotation-marks-open-dark.svg';
+$icon_question_mark_grey: $icon_path + 'question-grey.svg';
+$icon_video_play_dark: $icon_path + 'video-play-dark.svg';
+$icon_video_play_light_full: $icon_path + 'video-play-light-full.svg';
+$icon_calendar_dark: $icon_path + 'calendar-dark.svg';
+$icon_shipping_box_dark: $icon_path + 'shipping-box.svg';
+$icon_arrow_pink: $icon_path + 'arrow-pink.svg';
 
 // Drawings
 $drawing_paper_plane_dark: $drawing_path + 'paper-plane-dark.svg';
+$drawing_globe_dark: $drawing_path + 'globe-dark.svg';
 
 // Filter icons
 $icon_filter_solid_gold: $filter_icons_path + 'metal-solid-gold.svg';
@@ -103,3 +115,14 @@ $initial_heart: $initial_path + 'initial-heart.jpg';
 $initial_star: $initial_path + 'initial-star.jpg';
 $initial_blank: $initial_path + 'initial-blank.jpg';
 $initial_blank_faded: $initial_path + 'initial-blank-faded.jpg';
+
+// Social
+$icon_social_facebook_light: $icon_path + 'social-facebook-light.svg';
+$icon_social_twitter_light: $icon_path + 'social-twitter-light.svg';
+$icon_social_instagram_light: $icon_path + 'social-instagram-light.svg';
+$icon_social_pinterest_light: $icon_path + 'social-pinterest-light.svg';
+$icon_social_youtube_light: $icon_path + 'social-youtube-light.png';
+$icon_social_custom_facebook_dark: $icon_path + 'social-custom-facebook-dark.svg';
+$icon_social_custom_twitter_dark: $icon_path + 'social-custom-twitter-dark.svg';
+$icon_social_custom_instagram_dark: $icon_path + 'social-custom-instagram-dark.svg';
+$icon_social_custom_pinterest_dark: $icon_path + 'social-custom-pinterest-dark.svg';

@@ -12,14 +12,75 @@ footer {
       text-align: center;
       margin: 0 auto;
       margin-bottom: 60px;
+      h2 {
+        // font-size: 28px;
+        // text-transform: uppercase;
+      }
       > p {
         font-size: 14px;
       }
       form {
-        display: inline-block;
-        width: 400px;
-        max-width: 100%;
-      }
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px 50px;
+        width: 100%;
+        //max-width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        margin-top: 20px;
+        @include transition(all 0.2s $ease);
+        .form-field {
+          position: relative;
+          grid-column: span 2;
+          margin-bottom: 0;
+          > button[type="submit"] {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: auto;
+            font-size: 14px;
+            font-weight: $font-weight-lighter;
+            color: $grey;
+            text-transform: uppercase;
+            padding: 10px;
+            padding-right: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            -webkit-appearance: none;
+            min-width: 0px;
+            &:after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              right: 0;
+              width: 11px;
+              height: 11px;
+              background-color: transparent;
+              background-image: url($icon_chevron_dark);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+              @include transform(translateY(-50%) rotate(-90deg));
+              @include transition(all 0.2s $ease_in);
+            }
+            &:hover {
+              &:after {
+                right: -5px;
+              }
+            }
+          }
+          &:last-of-type {
+            input:not([type=submit]), select, textarea {
+              padding-right: 90px;
+            }
+            // &:after {
+            //   right: 70px;
+            // }
+          }
+        }
+      } // end form
     } // end .sign-up
     > .grid {
       grid-template-columns: 100%;
@@ -33,6 +94,7 @@ footer {
             position: relative;
             display: block;
             font-size: 28px;
+            //text-transform: uppercase;
             margin-bottom: 0;
             padding: 5px 0;
             cursor: pointer;
@@ -70,10 +132,14 @@ footer {
                 display: inline-block;
                 font-size: 14px;
                 font-weight: $font_weight_lighter;
+                line-height: 1;
                 text-decoration: none;
-                padding: 8px 0;
+                padding: 12px 0;
                 cursor: pointer;
                 -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+                &:hover {
+                  text-decoration: underline $pink;
+                }
               }
             }
           }
@@ -103,31 +169,33 @@ footer {
             position: relative;
             display: block;
             font-size: 28px;
-            margin-bottom: 10px;
+            //text-transform: uppercase;
+            margin-bottom: 25px;
           }
           p {
             font-size: 14px;
+            margin-bottom: 20px;
+            > a {
+              display: inline-block;
+              font-size: 14px;
+              font-weight: $font-weight-lighter;
+              text-decoration: none;
+              padding: 0;
+              &:hover {
+                font-weight: $font-weight-lighter;
+                text-decoration: underline;
+              }
+            }
           }
-          h4 {
-            font-size: 20px;
-          }
-          > a {
-            display: block;
-            font-size: 14px;
-            font-weight: $font-weight-lighter;
-            text-decoration: none;
-            padding: 3px 0;
-            margin-bottom: 10px;
-          }
-          .social-icons {
+          ul.social-icons {
             padding: 15px 0;
             margin-bottom: 15px;
-          }
+          } // end .social-icons
         } // end .footer-contact
       }
     } // end .grid
     .footer-lower {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
       text-align: center;
       .logo {
@@ -146,7 +214,11 @@ footer {
         }
       }
       .footer-payment {
-
+        padding: 20px 0;
+        text-align: center;
+        img {
+          max-height: 30px;
+        }
       }
     }
   } // end .content
@@ -170,6 +242,22 @@ footer {
 
 @include mquery(s) {
 
+  footer {
+    .content {
+      .sign-up {
+        form {
+          grid-gap: 10px 50px;
+          .form-field {
+            grid-column: span 1;
+            &:last-of-type {
+              grid-column: span 2;
+            }
+          }
+        } // end form
+      } // end .sign-up
+    }
+  }
+
 } // end media-query small
 
 
@@ -189,7 +277,7 @@ footer {
     padding-top: 100px;
     .content {
       .sign-up {
-        max-width: 700px;
+        //max-width: 500px;
         margin-bottom: 100px;
       } // end .sign-up
       > .grid {
@@ -207,11 +295,12 @@ footer {
             ul {
               display: block;
               li {
-                height: 33px; // height of inner <a> to remove inline-block gap
+                //height: 33px; // height of inner <a> to remove inline-block gap
                 opacity: 1;
                 @include transform(translateY(0px));
                 @include transition(none);
                 a {
+                  padding: 6px 0;
                   overflow-x: hidden;
                   &:after { // underline bar on hover
                     content: "";
@@ -220,15 +309,15 @@ footer {
                     height: 2px;
                     background: $pink;
                     bottom: 3px;
-                    left: 0;
-                    @include transform(translateX(-100%));
+                    left: -100%;
                     @include transition(all 0s $ease); // no effect on hover off
                   }
                   &:hover {
+                    text-decoration: none;
                     &:after {
                       height: 1px;
-                      @include transform(translateX(100%));
-                      @include transition(all 0.4s $ease);
+                      left: 100%;
+                      @include transition(left 0.4s $ease, height 0.1s $ease);
                     }
                   }
                 }
@@ -238,9 +327,8 @@ footer {
           &.footer-contact {
             margin-top: 0px;
             grid-column: span 2;
-            > a {
-              padding: 3px 0;
-              margin-bottom: 5px;
+            p {
+              margin-bottom: 10px;
             }
           } // end .footer-contact
         }

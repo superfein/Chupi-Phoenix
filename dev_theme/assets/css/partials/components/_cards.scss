@@ -8,73 +8,9 @@
 
 // Product card
 .product-card {
-  .upper {
-    position: relative;
-    width: 100%;
-    height: 470px;
-    overflow: hidden;
-    .object-cover {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-    .wishlist-add,
-    .cart-add {
-      position: absolute;
-      right: 5px;
-      width: 40px;
-      height: 40px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: auto 50%;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
-      @include transition(all 0.2s $ease);
-    }
-    .wishlist-add {
-      top: 5px;
-      background-image: url($icon_wishlist_light);
-      &.active {
-        background-image: url($icon_wishlist_light_full);
-      }
-    }
-    .cart-add {
-      bottom: 5px;
-      background-image: url($icon_cart-light);
-      &.active {
-        background-image: url($icon_cart_light_full);
-      }
-    }
-  }
-  > a {
-    display: block;
-    text-decoration: none;
-    padding: 10px;
-    padding-left: $mobile_side-padding;
-    padding-right: $mobile_side-padding;
-    h3 {
-      font-weight: $font-weight-light;
-      line-height: 1;
-      margin-bottom: 0;
-      white-space: normal;
-      span {
-        display: block;
-        margin-top: 5px;
-        font-family: $font_family_secondary;
-        font-size: 18px;
-        font-weight: $font-weight-lighter;
-      }
-    }
-  }
-} // .product-card
-
-
-
-
-// Collection card
-.collection-card {
   position: relative;
+  overflow: hidden;
+  height: 100%;
   > .object-cover {
     display: none;
     opacity: 0;
@@ -139,27 +75,17 @@
       span {
         display: inline-block;
         width: 100%;
-        font-size: 14px;
+        font-family: $font-family-secondary;
+        font-size: 12px;
+        font-weight: $font-weight-light;
         color: $grey;
-        //padding-top: 3px;
       }
     }
   }
   .wishlist-add {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 40px;
-    height: 40px;
-    background-image: url($icon_wishlist_dark);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto 45%;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
-    @include transition(all 0.2s $ease);
-    &.active {
-      background-image: url($icon_wishlist_dark_full);
-    }
+    top: 5px;
+    right: 5px;
   }
   .metal-switcher {
     position: absolute;
@@ -176,6 +102,45 @@
     left: 50%;
     text-align: center;
     @include transform(translateX(-50%));
+  }
+} // .product-card
+
+
+
+
+// Collection card
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  .upper {
+    position: relative;
+    img {
+      display: block;
+      width: 100%;
+      filter: brightness(0.97); // darken to light grey
+      &.icon {
+        filter: brightness(1); // reset
+        padding: 10%;
+        border: 1px solid $grey_light;
+      }
+    }
+  }
+  h2,
+  h3 {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    color: $grey_dark;
+    margin-bottom: 0;
+    padding: 10px;
+    span {
+      display: inline-block;
+      width: 100%;
+      font-family: $font-family-secondary;
+      font-size: 12px;
+      font-weight: $font-weight-light;
+      color: $grey;
+    }
   }
 } // .collection-card
 
@@ -203,6 +168,16 @@
 
 @include mquery(m) {
 
+  // Collection card
+  .collection-card {
+    .upper {
+      img {
+        &.icon {
+          padding: 15%;
+        }
+      }
+    }
+  }
 
 } // end media-query medium
 
@@ -215,45 +190,8 @@
 
   // Product card
   .product-card {
-    @include transition(box-shadow 0.2s $ease);
-    .upper {
-      height: 470px;
-      .object-cover {
-        @include transition(transform 0.5s $ease);
-      }
-      .wishlist-add {
-        &:hover {
-          background-image: url($icon_wishlist_light_full);
-        }
-      }
-      .cart-add {
-        &:hover {
-          background-image: url($icon_cart_light_full);
-        }
-      }
-    }
-    > a {
-      padding: 15px;
-      padding-left: $mobile_side-padding;
-      padding-right: $mobile_side-padding;
-    }
-    &:hover {
-      box-shadow: 0px 2px 50px rgba(0,0,0,.12);
-      .upper {
-        .object-cover {
-          @include transform(scale(1.03));
-          //@include transition(transform 0.5s $ease);
-        }
-      }
-    }
-  } // .product-card
-
-
-  // Collection card
-  .collection-card {
     filter: brightness(0.97); // darken whole card to light grey
     @include transition(all 0.3s $ease);
-    overflow: hidden;
     > .object-cover {
       display: block;
       opacity: 0;
@@ -269,20 +207,17 @@
           filter: brightness(1); // return to default brightness
         }
       }
-      h2 {
+      h2,
+      h3 {
         font-size: 28px;
         span {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
     .wishlist-add {
-      top: 5px;
-      right: 5px;
-      background-size: auto 50%;
-      &:hover {
-        background-image: url($icon_wishlist_dark_full);
-      }
+      // top: 5px;
+      // right: 5px;
     }
     .metal-switcher {
       position: absolute;
@@ -328,32 +263,38 @@
           }
         }
       }
+      .wishlist-add {
+        background-color: rgba(255,255,255,0.6);
+      }
     } // end collection-card:hover
 
-    // &.has-variant-switcher {
-    //   overflow: visible;
-    //   > .object-cover {
-    //     display: none;
-    //   }
-    //   &:hover { // hover over product WITH variant switcher
-    //     filter: brightness(0.97); // darken whole card to light grey
-    //     .inner {
-    //       background-color: $white;
-    //       @include transition(none);
-    //       .upper {
-    //         opacity: 1;
-    //         @include transition(none);
-    //       }
-    //       h2 {
-    //         color: $grey_dark;
-    //       }
-    //     }
-    //   } // end collection-card:hover
-    // } // end .has-variant-switcher
+  } // .product-card
 
+
+  // Collection card
+  .collection-card {
+    .upper {
+      img {
+        &.icon {
+          filter: brightness(1); // reset
+          width: 90%;
+          margin: 5% 5% 0 5%;
+        }
+      }
+    }
+    h2,
+    h3 {
+      font-size: 28px;
+      padding: 15px 10px;
+      span {
+        font-size: 16px;
+      }
+    }
   } // .collection-card
 
 } // end media-query medium-large
+
+
 
 
 
@@ -370,9 +311,12 @@
 
 
 
+
+
 @include mquery(xl) {
 
 } // end media-query extra-large
+
 
 
 

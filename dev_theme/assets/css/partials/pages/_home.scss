@@ -5,7 +5,8 @@
   display: grid;
   align-items: end;
   height: 100vh;
-  max-height: 600px;
+  max-height: 700px;
+  padding-bottom: 10%;
   .content {
     .grid {
       .grid-item {
@@ -34,25 +35,13 @@
   padding-top: 40px;
   padding-bottom: 50px;
   .content {
+    max-width: $content_max_width_lg;
     text-align: center;
     > h2 {
       margin-bottom: 35px;
     }
-    .h-scroller {
-      display: block;
-      text-align: center;
-      margin-left: -$mobile_side-padding;
-      margin-right: -$mobile_side-padding;
-      margin-bottom: 30px;
-      .h-scroller-item {
-        display: block;
-        vertical-align: top;
-        width: 100%;
-        max-width: 450px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-      } // end .carousel-item
+    .carousel {
+      margin-bottom: 40px;
     } // end .carousel
   }
 } // end #home-new-arrivals
@@ -169,6 +158,10 @@
 
 @include mquery(ml) {
 
+  #home-top {
+    padding-bottom: 10%;
+  } // end #home-top
+
   #home-new-arrivals {
     padding-top: 40px;
     padding-bottom: 50px;
@@ -177,25 +170,9 @@
       > h2 {
         margin-bottom: 35px;
       }
-      .h-scroller {
-        text-align: left;
-        margin-left: 0;
-        margin-right: 0;
+      .carousel {
         margin-bottom: 0;
-        width: 200%; // twice width of container
-        overflow-x: visible;
-        //overflow-y: hidden;
-        white-space: nowrap;
-        .h-scroller-item {
-          display: inline-block;
-          text-align: center;
-          width: 350px;
-          max-width: none;
-          margin-left: auto;
-          margin-right: auto;
-          margin-right: 20px;
-        } // end .h-scroller-item
-      } // end .h-scroller
+      } // end .carousel
       > .btn {
         position: absolute;
         top: 0;
@@ -274,8 +251,9 @@
 @include mquery(l) {
 
   #home-top {
-    align-items: center;
-    padding-bottom: 40px;
+    align-items: end;
+    padding-bottom: 7%;
+    max-height: 1000px;
     .content {
       .grid {
         .grid-item {

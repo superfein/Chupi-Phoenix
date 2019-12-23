@@ -1,0 +1,460 @@
+
+// _press.scss
+
+#press-top {
+  .content {
+    .grid {
+      .grid-item {
+        text-align: center;
+        max-width: 560px;
+        justify-self: center;
+        h1 {
+          font-size: 38px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+} // end #press-top
+
+
+#press-quotes {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  text-align: center;
+  //background-color: $grey_lightest;
+  .content {
+    max-width: 600px;
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 20px;
+      &:nth-of-type(1) { // Quote block
+        margin-bottom: 20px;
+        .grid-item {
+          align-self: center;
+          &:nth-of-type(1) {
+            grid-column: span 1;
+            grid-row: 1 / span 1;
+            blockquote {
+              position: relative;
+              font-family: $font_family_primary;
+              font-size: 28px;
+              line-height: 1.2;
+              padding: 0 30px;
+              margin-bottom: 10px;
+              &:before, // Quotation marks
+              &:after {
+                content: '';
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                top: 0px;
+                left: 0;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-image: url($icon_quotation_marks_dark);
+                @include transition(all 0.2s $ease 0.2s);
+                opacity: 0.2;
+              }
+              &:after {
+                top: auto;
+                bottom: 10px;
+                left: auto;
+                right: 0;
+                @include transform(rotate(180deg));
+              }
+            }
+            > span {
+              font-size: 14px;
+            }
+          }
+          &:nth-of-type(2) {
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+            img {
+              max-width: 100%;
+              max-height: 500px;
+            }
+          }
+        }
+      }
+      &:nth-of-type(2) { // Logos
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        justify-content: center;
+        max-width: none;
+        margin: 0;
+        .press-logo {
+          position: relative;
+          grid-column: span 1;
+          justify-self: center;
+          align-self: center;
+          img {
+            max-width: 100%;
+            max-height: 50px;
+            margin-bottom: 10px;
+            //cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+} // end #press-quotes
+
+#press-articles {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    text-align: center;
+    max-width: $content_max_width_lg;
+    h2 {
+      margin-bottom: 15px;
+    }
+    > p {
+      font-size: 16px;
+    }
+    .carousel {
+      margin-top: 30px;
+      &:before { // centre-line
+        content: "";
+        position: absolute;
+        top: 100px;
+        top: calc(40px + 30px); // padding-top + half image height
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: grey;
+        background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+        background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,1) 10%,rgba(0,0,0,1) 50%,rgba(0,0,0,1) 90%,rgba(0,0,0,0) 100%);
+        background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,1) 10%,rgba(0,0,0,1) 50%,rgba(0,0,0,1) 90%,rgba(0,0,0,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
+
+      }
+      .carousel-track {
+        position: relative;
+        grid-template-columns: auto;
+        .carousel-item {
+          &.article {
+            position: relative;
+            text-align: center;
+            padding: 40px 0;
+            width: 150px;
+            > a {
+              display: block;
+              width: 100%;
+              .image {
+                position: relative;
+                display: block;
+                grid-column: span 1;
+                grid-row: 1 / span 1;
+                display: inline-block;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                @include transition(box-shadow 0.2s $ease_in_quart);
+              }
+              img {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                @include transform(translateX(-50%));
+                max-width: 100%;
+                max-height: 30px;
+              }
+              &:hover {
+                .image {
+                  box-shadow: 0px 5px 20px rgba(0,0,0,.3);
+                  @include transition(box-shadow 0.3s $ease_out_quart);
+                }
+              }
+            }
+            &:nth-of-type(2n) { // Every second article
+              img {
+                bottom: auto;
+                top: 0;
+              }
+            }
+          }
+        } // end .carousel-item
+        .date {
+          grid-column: span 1;
+          grid-row: 1 / span 1;
+          align-self: center;
+          background-color: $white;
+          padding: 10px;
+          min-width: 80px;
+          font-size: 14px;
+        }
+      }
+    } // end .carousel
+  }
+} // end #press-articles
+
+
+#press-more {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    text-align: center;
+    max-width: 900px;
+    h2 {
+      margin-bottom: 40px;
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+      .grid-item {
+        grid-column: span 1;
+        a {
+          display: block;
+          img {
+            max-height: 250px;
+          }
+        }
+      }
+    }
+  }
+} // end #press-more
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+  #press-more {
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  } // end #press-more
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  #press-articles {
+    .content {
+      .carousel {
+        margin-top: 50px;
+        &:before { // centre-line
+          top: calc(50px + 40px); // padding-top + half image height
+        }
+        .carousel-track {
+          .carousel-item {
+            &.article {
+              padding: 50px 0;
+              width: 200px;
+              > a {
+                .image {
+                  width: 80px;
+                  height: 80px;
+                }
+                img {
+                  max-height: 40px;
+                }
+              }
+            }
+          } // end .carousel-item
+          .date {
+            min-width: 100px;
+            font-size: 16px;
+          }
+        }
+      } // end .carousel
+    }
+  } // end #press-articles
+
+  #press-more {
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+    }
+  } // end #press-more
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  #press-quotes {
+    padding-top: 10px;
+    padding-bottom: 70px;
+    .content {
+      max-width: $content_max_width;
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        //grid-gap: 0px;
+        &:nth-of-type(1) { // Quote block
+          margin-bottom: 50px;
+          .grid-item {
+            &:nth-of-type(1) {
+              grid-column: 2 / span 1;
+              grid-row: 1 / span 1;
+              padding: 0 30px;
+              blockquote {
+                font-size: 32px;
+                padding: 0 30px;
+                &:before, // Quotation marks
+                &:after {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+            &:nth-of-type(2) {
+              grid-column: 1 / span 1;
+              grid-row: 1 / span 1;
+              img {
+                width: 100%;
+                max-height: none;
+                ;
+              }
+            }
+          }
+        }
+        &:nth-of-type(2) { // Logos
+          grid-template-columns: repeat(5, minmax(100px, auto));
+          grid-gap: 30px;
+          // .press-logo {
+          //   position: relative;
+          //   grid-column: span 1;
+          //   justify-self: center;
+          //   align-self: center;
+          //   img {
+          //     max-width: 100%;
+          //     max-height: 50px;
+          //     margin-bottom: 10px;
+          //     cursor: pointer;
+          //   }
+          // }
+        }
+      }
+    }
+  } // end #press-quotes
+
+  #press-articles {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      .carousel {
+        &:before { // centre-line
+          top: calc(50px + 45px); // padding-top + half image height
+        }
+        .carousel-track {
+          .carousel-item {
+            &.article {
+              width: 250px;
+              > a {
+                .image {
+                  width: 90px;
+                  height: 90px;
+                }
+              }
+            }
+          } // end .carousel-item
+        }
+      } // end .carousel
+    }
+  } // end #press-articles
+
+  #press-more {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      .grid {
+        .grid-item {
+          a {
+            img {
+              max-height: 350px;
+            }
+          }
+        }
+      }
+    }
+  } // end #press-more
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+  #press-quotes {
+    .content {
+      .grid {
+        .grid-item {
+          &:nth-of-type(1) {
+            padding: 0 50px;
+            blockquote {
+              font-size: 38px;
+              padding: 0 30px;
+            }
+          }
+        }
+      }
+    }
+  } // end #press-quotes
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

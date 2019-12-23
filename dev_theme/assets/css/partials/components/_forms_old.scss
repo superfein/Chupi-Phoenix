@@ -1,0 +1,203 @@
+
+// _forms.scss
+
+
+form {
+  fieldset {
+    border: 0;
+  }
+  .form-field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    input:not([type=submit]), select, textarea {
+      display: block;
+      width: 100%;
+      font-family: $font_family_secondary;
+      font-size: 14px;
+      font-weight: $font-weight-light;
+      color: $grey;
+      padding: 15px;
+      border: 1px solid lighten($grey, 40%);
+      background-color: transparent;
+      @include transition(border 0.2s $ease);
+      &:focus, &:active, &:visited {
+        outline: none;
+      }
+      &:focus {
+        outline: none;
+        border: 1px solid $grey;
+      }
+    }
+    input[type=checkbox] {
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+      pointer-events: none;
+      + label {
+        display: block;
+        font-size: 14px;
+        width: 100%;
+        padding: 10px 0;
+        padding-left: 25px;
+        cursor: pointer;
+        &:before, // Checkbox
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 8px;
+          width: 18px;
+          height: 18px;
+          pointer-events: none;
+        }
+        &:before { // Checkbox box
+          background-color: $grey_lightest;
+          border: 1px solid lighten($grey, 30%);
+          border-radius: 3px;
+          @include transition(all 0.2s $ease);
+        }
+        &:after { // Checkbox tick
+          width: 6px;
+          height: 10px;
+          top: 11px;
+          left: 6px;
+          border-right: 3px solid $grey;
+          border-bottom: 3px solid $grey;
+          opacity: 0;
+          @include transform(rotate(45deg) scale(0.5));
+          @include transition(all 0.12s $ease_in_out_quart);
+        }
+      }
+      &:checked {
+        + label {
+          &:after {
+            opacity: 1;
+            @include transform(rotate(45deg) scale(1));
+          }
+        }
+      }
+    } // end input[type=checkbox]
+    select {
+      padding-right: 40px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+    select::-ms-expand {
+      display: none; // Hide default IE select arrow
+    }
+    textarea {
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 120px;
+      height: 120px;
+      max-height: 500px;
+      //resize: none;
+      -ms-overflow-style: none;
+      @include transition(all 0.2s $ease);
+    }
+    textarea.active {
+      height: 300px;
+      min-height: 300px;
+    }
+
+    // Floating labels (requires JS)
+    &.floating-label {
+      margin-top: 20px;
+      label {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        font-size: 16px;
+        font-weight: $font-weight-light;
+        line-height: 1.5;
+        color: $grey;
+        margin-bottom: 0;
+        text-align: left;
+        pointer-events: none;
+        @include transition(all 0.3s $ease_in_out_quart);
+      }
+      input:not([type=submit]), select, textarea {
+        width: 100%;
+        padding: 8px 0;
+        border: 0;
+        border-bottom: 1px solid $grey;
+        border-radius: 0;
+      }
+      &.open { // Open field (focused or complete - class added via JS)
+        label {
+          top: -18px;
+          font-size: 14px;
+          color: lighten($grey, 30%);
+        }
+      }
+    } // end .floating-labels
+
+    // Floating labels (requires JS)
+    &.required {
+      input:not([type=submit]), select, textarea {
+        padding-right: 15px;
+      }
+      &:after {
+        content: '*';
+        position: absolute;
+        top: 10px;
+        right: 0;
+        font-size: 20px;
+        font-weight: $font-weight-lighter;
+        color: $grey_dark;
+      }
+    }
+
+  } // end .form-field
+
+} // end form
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+} // end media-query small
+
+
+
+@include mquery(m) {
+
+} // end media-query medium
+
+
+
+@include mquery(ml) {
+
+} // end media-query medium-large
+
+
+
+@include mquery(l) {
+
+} // end media-query large
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

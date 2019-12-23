@@ -1,6 +1,7 @@
 
 // _buttons.scss
 
+// Standard buttons
 .btn {
   position: relative;
   display: inline-block;
@@ -168,36 +169,181 @@
 
 
 
-
-
 // Social icons
 ul.social-icons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 40px);
-  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fit, 55px);
+  grid-gap: 5px;
   justify-content: center;
   list-style-type: none;
   li {
     display: inline-block;
+    float: none;
+    padding: 0;
+    width: auto;
     a {
       display: inline-block;
-      width: 40px;
-      height: 40px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      background-color: $grey;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 50%;
-      // &.social-facebook { background-image: url($icon_social_facebook_light); }
-      // &.social-twitter { background-image: url($icon_social_twitter_light); }
-      // &.social-instagram { background-image: url($icon_social_instagram_light); }
-      // &.social-youtube { background-image: url($icon_social_youtube_light); }
+      background-size: 100%;
+      @include transition(all 0.2s $ease);
+      &.social-facebook { background-image: url($icon_social_custom_facebook_dark); }
+      &.social-twitter { background-image: url($icon_social_custom_twitter_dark); }
+      &.social-instagram { background-image: url($icon_social_custom_instagram_dark); }
+      &.social-pinterest { background-image: url($icon_social_custom_pinterest_dark); }
+      //&.social-youtube { background-image: url($icon_social_youtube_light); }
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 } // end .social-icons
 
 
 
+
+// Wishlist button
+.wishlist-add {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  //background-color: rgba(255,255,255,0.6);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+  @include transition(all 0.2s $ease);
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:before { // white background
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: $white;
+    border-radius: 50%;
+    opacity: 0;
+    @include transition(all 0.2s $ease);
+  }
+  &:after { // heart icon
+    top: 22%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    background-image: url($icon_wishlist_dark);
+    @include animation('iconPopReverse 0.25s ease both');
+    @include transition(none);
+  }
+  &.active {
+    &:before {
+      @include animation('wishlistHeartExplode 0.3s ease-out 0.05s');
+    }
+    &:after {
+      background-image: url($icon_wishlist_dark_full);
+      @include animation('iconPop 0.25s ease both');
+    }
+  }
+}
+
+
+
+
+
+// Video cover button (sibling of <video> with controls hidden)
+.video-cover-btn {
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	@include transform(translate(-50%, -50%));
+  width: 60px;
+	height: 60px;
+	border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  @include transition(all 0.4s $ease_out_quint);
+  &:after { // play icon
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url($icon_video_play_light_full);
+		background-position: 58% 50%;
+		background-repeat: no-repeat;
+		background-size: 40%;
+  }
+  &:hover {
+    @include transform(translate(-50%, -50%) scale(1.1));
+  }
+  &.min {
+    opacity: 0;
+    pointer-events: none;
+    @include transform(translate(-50%, -50%) scale(0));
+    @include transition(all 0.2s $ease_out_quint);
+  }
+}
+
+
+
+
+
+
+// Shop story button
+.shop-story-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
+  @include transition(all 0.2s $ease);
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:before { // grey background
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: $grey_dark;
+    border-radius: 50%;
+    opacity: 0.5;
+    @include transition(all 0.2s $ease);
+  }
+  &:after { // bag icon
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    background-image: url($icon_cart_light_full);
+    @include transform(scale(1));
+    @include transition(all 0.2s $ease);
+  }
+  &:hover {
+    &:before { // grey background
+      opacity: 1;
+    }
+    &:after {
+      @include transform(scale(1.2));
+      @include transition(all 0.3s $ease);
+    }
+  }
+  &.active {
+    &:before { // grey background
+      background-color: $white;
+      opacity: 0.3;
+    }
+  }
+}
 
 
 
@@ -235,6 +381,17 @@ ul.social-icons {
       background-color: $grey_lightest;
     }
   }
+
+  // Social icons
+  ul.social-icons {
+    grid-template-columns: repeat(auto-fit, 60px);
+    li {
+      a {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  } // end .social-icons
 
 } // end media-query medium-large
 

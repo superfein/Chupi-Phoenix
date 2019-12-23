@@ -145,13 +145,12 @@
       grid-template-columns: 1fr 1fr;
       grid-column-gap: 15px;
       grid-row-gap: 20px;
-      //padding: 15px 0;
       margin-left: -$mobile_side-padding;
       margin-right: -$mobile_side-padding;
       .grid-item {
         grid-column: span 1;
         justify-self: center;
-        .collection-card {
+        .product-card {
           width: 100%;
           min-width: 130px;
           height: 100%;

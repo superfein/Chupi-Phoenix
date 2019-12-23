@@ -1,0 +1,356 @@
+
+// _upgrade-program.scss
+
+#upgrade-program-top {
+  height: 100vh;
+  max-height: 550px;
+  .content {
+    height: 100%;
+    max-width: 900px;
+    .grid {
+      height: 100%;
+      grid-template-columns: 100%;
+      align-items: end;
+      padding-bottom: 15%;
+      justify-items: center;
+      text-align: center;
+      color: $white;
+      .grid-item {
+        grid-column: 1 / span 1;
+        max-width: 550px;
+        h1 {
+          font-size: 60px;
+          color: $white;
+        }
+      }
+    }
+  }
+} // end #upgrade-program-top
+
+#upgrade-program-about {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 40px;
+      .grid-item {
+        grid-column: span 1;
+        text-align: center;
+        &:nth-of-type(1) {
+          max-width: 600px;
+          justify-self: center;
+          align-self: center;
+        }
+        &:nth-of-type(2) {
+          position: relative;
+          margin-left: -15px;
+          margin-right: -15px;
+          height: 400px;
+          .image {
+            position: absolute;
+            width: 55%;
+            max-width: 300px;
+            height: 70%;
+            &:nth-of-type(1) {
+              top: 0;
+              right: 45%;
+            }
+            &:nth-of-type(2) {
+              top: 30%;
+              left: 45%;
+            }
+          }
+        }
+      }
+    }
+  }
+} // end #upgrade-program-about
+
+#upgrade-program-instructions {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      .grid-item {
+        grid-column: span 1;
+        justify-self: center;
+        text-align: center;
+        max-width: 700px;
+        h2 {
+
+        }
+        > p {
+
+        }
+        .instruction-panels {
+          position: relative;
+          width: 100%;
+          max-width: 500px;
+          background-color: $white;
+          //min-height: 350px;
+          padding: 40px 15px;
+          margin: 40px 0;
+          .instruction-panel {
+            // position: absolute;
+            // top: 0;
+            // left: 0;
+            // width: 100%;
+            // padding: 40px 30px;
+            // opacity: 0;
+            // visibility: hidden;
+            // pointer-events: none;
+            // .top {
+            //   display: block;
+            //   margin-bottom: 10px;
+            //   .prev,
+            //   .next {
+            //     display: inline-block;
+            //     vertical-align: super;
+            //     width: 40px;
+            //     height: 40px;
+            //     background-image: url($icon_arrow_pink);
+            //     background-repeat: no-repeat;
+            //     background-position: center;
+            //     background-size: 50%;
+            //   }
+            //   .prev {
+            //     @include transform(rotate(180deg));
+            //   }
+            //   > span {
+            //     display: inline-block;
+            //     vertical-align: top;
+            //     color: $pink;
+            //     margin: 10px 10px 0 10px;
+            //   }
+            // }
+            > span {
+              display: block;
+              color: $pink;
+              margin-bottom: 20px;
+              //margin: 10px 10px 0 10px;
+            }
+            > p {
+              font-size: 16px;
+            }
+            // &.active {
+            //   opacity: 1;
+            //   visibility: visible;
+            //   pointer-events: auto;
+            // }
+          } // end .instruction-panel
+          &.slider {
+            position: relative;
+            display: block;
+            max-width: 100%;
+            height: 300px;/////
+            .slick-prev,
+            .slick-next {
+              width: 40px;
+              height: 40px;
+              top: 30px;
+              left: calc(50% + 40px);
+              @include transform(none);
+              opacity: 1;
+              background-image: url($icon_arrow_pink);
+              background-size: 50%;
+            }
+            .slick-prev {
+              left: auto;
+              right: calc(50% + 40px);
+              @include transform(rotate(180deg));
+            }
+            .slick-list {
+              // position: absolute;
+              // top: 0;
+              // left: 0;
+              width: 100%;
+              height: 100%!important;
+              .slick-track {
+                // position: absolute;
+                // top: 0;
+                // left: 0;
+                // width: 100%;
+                // height: 100%!important;
+                position: relative;
+                top: 0;
+                left: 0;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                .slick-slide {
+                  position: relative;
+                  height: 100%;
+                  padding: 0 15px;
+                }
+              }
+            }
+          }
+        } // end .instruction-panels
+      }
+    }
+  }
+} // end #upgrade-program-about
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+  #upgrade-program-about {
+    .content {
+      .grid {
+        .grid-item {
+          &:nth-of-type(2) {
+            position: relative;
+            margin-left: 0;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  #upgrade-program-top {
+    .content {
+      .grid {
+        padding-bottom: 10%;
+      }
+    }
+  } // end #upgrade-program-top
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  #upgrade-program-top {
+    .content {
+      .grid {
+        padding-bottom: 5%;
+        .grid-item {
+          p {
+            font-size: 24px;
+            margin-bottom: 40px;
+          }
+        }
+      }
+    }
+  } // end #upgrade-program-top
+
+  #upgrade-program-about {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 60px;
+        .grid-item {
+          grid-row: 1 / span 1;
+          text-align: left;
+          // grid-column: span 1;
+          // text-align: center;
+          &:nth-of-type(1) {
+            max-width: none;
+            grid-column: 2 / span 1;
+            //justify-self: center;
+            h2 {
+              max-width: 70%;
+            }
+            p {
+              &:last-of-type {
+                margin-bottom: 40px;
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            //grid-column: 1 / span 1;
+            height: 500px;
+            .image {
+              position: absolute;
+              width: 60%;
+              max-width: 350px;
+              height: 70%;
+              &:nth-of-type(1) {
+                top: 0;
+                right: 40%;
+              }
+              &:nth-of-type(2) {
+                top: 30%;
+                left: 40%;
+              }
+            }
+          }
+        }
+      }
+    }
+  } // end #upgrade-program-about
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

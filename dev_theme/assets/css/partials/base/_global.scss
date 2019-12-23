@@ -12,6 +12,7 @@ font-family: $font_family_secondary;
 @include font-size($p_text_size);
 color: $grey_dark;
 background: $white;
+padding-top: $mobile_header_height;
 }
 body.no-scroll {
 overflow: hidden;
@@ -21,6 +22,9 @@ overflow-y: hidden;
 }
 body.no-scroll-x {
 overflow-x: hidden;
+}
+body.transparent-header-no-spacing {
+padding-top: 0;
 }
 .scrollbar-measure { // applied to temporary element to measure scrollbar width
 	width: 100px;
@@ -42,7 +46,7 @@ section {
   padding: 20px $mobile_side-padding;
 }
 .section-top {
-  padding-top: $mobile_header_height;
+  //padding-top: $mobile_header_height;
 }
 .content {
   position: relative;
@@ -98,10 +102,22 @@ section {
       );
     }
   }
+	&.full {
+		height: 100%;
+		&.dark {
+			background-color: rgba($grey_dark, 0.1);
+		}
+		&.light {
+			background-color: rgba($white, 0.1);
+		}
+	}
 } // end .gradient-underlay
 
 
-// Images
+// Images / Videos
+img {
+	max-width: 100%;
+}
 .image-cover {
   background-size: cover;
   background-repeat: no-repeat;
@@ -120,7 +136,7 @@ section {
 // Typography
 h1, h2, h3, h4, h5, h6 {
 font-family: $font_family_primary;
-color: $grey;
+color: $grey_dark;
 }
 h1 {
 @include font-size($h1_size);
@@ -260,7 +276,7 @@ ul {
     background: $grey_light; // fallback
     margin: 0 2px;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); // remove tap highlight
-    @include transition(all 0.0.2s $ease);
+    @include transition(all 0.2s $ease);
     &:before,
     &:after {
       content: "";
@@ -274,9 +290,9 @@ ul {
     }
     &:before { // active ring
       background-color: transparent;
-      border: 2px solid #AAA9A8;
+      border: 2px solid lighten($grey, 10%);
       z-index: -1;
-      @include transition(all 0.0.2s $ease);
+      @include transition(all 0.2s $ease);
     }
     &:after { // shine (on hover)
       background: linear-gradient(
@@ -441,6 +457,10 @@ ul {
 
 
 @include mquery(l) {
+
+	body {
+		padding-top: $desktop_header_height;
+	}
 
 } // end media-query large
 

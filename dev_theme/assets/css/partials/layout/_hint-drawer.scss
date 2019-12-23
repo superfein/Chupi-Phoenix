@@ -4,12 +4,14 @@
 #hint-drawer {
   grid-template-rows: minmax(min-content, max-content) auto; // auto = main section
   .drawer-header {
+    border-bottom: 1px solid $grey_light;
     h2 {
       position: relative;
       display: inline-block;
       max-width: calc(100% - 40px);
       //margin-bottom: 0;
       padding-right: 35px;
+      border-bottom: 0;
       &:after {
         content: "";
         position: absolute;
@@ -41,7 +43,7 @@
           @include transition(all 0.4s $ease_out_quint);
           h3 {
             font-size: 28px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
           }
         }
         #hint-send-group {
@@ -95,6 +97,10 @@
 @include mquery(s) {
 
   #hint-drawer {
+    .drawer-main {
+      padding: 0 50px;
+      padding-top: 30px;
+    }
     &.active { // drawer open
       .drawer-main {
         #hint-form {
@@ -109,6 +115,7 @@
       }
     }
   }
+
 } // end media-query small
 
 
@@ -127,75 +134,38 @@
 
 
 
+
+
+
 @include mquery(ml) {
 
   #hint-drawer {
     max-width: 850px;
-    // padding-left: 0;
-    // padding-bottom: 0;
-    padding: 0;
-    //padding: 0 $mobile_side-padding;
-    //grid-template-rows: minmax(min-content, max-content) auto; // auto = main section
-    // &:before {
-    //     content: "";
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     width: 110%;
-    //     height: 110%;
-    //     background: grey;
-    //   }
+    padding: 30px;
     .drawer-header {
-      //margin-left: $mobile_side-padding;
-      padding: $mobile_side-padding;
-      padding-bottom: 0;
-      background-color: $grey_lightest;
-      //padding-left: $mobile_side-padding;
-      //padding: $mobile_side-padding;
-      // h2 {
-      //   position: relative;
-      //   display: inline-block;
-      //   max-width: calc(100% - 40px);
-      //   //margin-bottom: 0;
-      //   padding-right: 35px;
-      //   &:after {
-      //     content: "";
-      //     position: absolute;
-      //     top: 0;
-      //     right: 0;
-      //     width: 25px;
-      //     height: 25px;
-      //     background-image: url($drawing_paper_plane_dark);
-      //     background-position: center;
-      //     background-repeat: no-repeat;
-      //     background-size: contain;
-      //   }
-      // }
+      border-bottom: 0;
+      min-height: 30px; // Allow space for accessing absolute close-btn
+      h2 {
+        display: none;
+      }
       .close-btn {
-        top: 5px;
-        right: 5px;
+        &:before, &:after {
+          content: "";
+          width: 25px;
+        }
       }
     } // end .drawer-header
     .drawer-main {
       position: relative;
       display: grid;
       grid-template-columns: 4fr 5fr;
+      grid-gap: 50px;
+      padding: 0;
       padding-top: 0;
-      // padding-top: 30px;
-      // padding-bottom: 0;
       #hint-form {
         opacity: 0;
         @include transform(translateX(30px));
         @include transition(all 0.4s $ease_out_quint);
-        // position: relative;
-        // grid-column: span 1;
-        // padding-bottom: 60px; // space for submit button
-        //padding: $mobile_side-padding;
-        padding: 30px;
-        padding-bottom: 30px;
-        background-color: $grey_lightest;
-        // width: calc(100% + #{$mobile_side-padding});
-        // margin-left: -$mobile_side-padding;
         form {
           //overflow-y: auto;
           // fieldset {
@@ -226,7 +196,7 @@
         display: block;
         position: relative;
         grid-column: span 1;
-        //align-self: center;
+        align-self: center;
         padding: 40px;
         max-height: 100vh;
 
@@ -234,6 +204,19 @@
         @include transform(translateX(30px));
         @include transition(all 0.4s $ease_out_quint);
         .inner {
+          text-align: center;
+          h2 {
+            position: relative;
+            display: inline-block;
+            font-size: 48px;
+            //padding-left: 60px;
+            img {
+              position: absolute;
+              top: 5px;
+              right: calc(100% + 25px);
+              width: 40px;
+            }
+          }
           img {
             display: block;
             width: 300px;
@@ -282,15 +265,30 @@
 
 
 
+
+
 @include mquery(l) {
 
+  #hint-drawer {
+    padding: 30px 50px;
+    .drawer-header {
+      .close-btn {
+        top: -10px;
+        right: -30px;
+      }
+    } // end .drawer-header
+  }
+
 } // end media-query large
+
+
 
 
 
 @include mquery(xl) {
 
 } // end media-query extra-large
+
 
 
 

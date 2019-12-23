@@ -1,0 +1,613 @@
+
+// _overlays.scss
+
+// Standard overlay
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  //background-color: rgba($grey_dark, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 30; // Header z-index 10
+  @include transition(all 0.3s $ease 0.3s, background-color 0.3s $ease 0s);
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include transform(translateY(100%));
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    @include transition(all 0.3s $ease_out_quint 0s);
+
+    display: grid;
+    grid-template-columns: 100%;
+    //grid-template-rows: minmax(min-content, max-content) auto minmax(min-content, max-content); // Header | Main | Footer
+    grid-template-rows: minmax(min-content, max-content) 1fr minmax(min-content, max-content); // Header | Main | Footer
+    grid-gap: 0px;
+    background-color: $grey_lightest;
+    .modal-header {
+      position: relative;
+      grid-row: 1 / span 1;
+      align-self: start;
+    }
+    .modal-main {
+      grid-row: 2 / span 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+      webkit-overflow-scrolling: touch;
+      scroll-behaviour: smooth;
+    }
+    .modal-footer {
+      grid-row: 3 / span 1;
+      align-self: end;
+    }
+    .modal-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 1px;
+        height: 0.05em;
+        top: 50%;
+        left: 50%;
+        background-color: $grey;
+        @include transition(all 0.2s $ease);
+      }
+      &:before {
+        @include transform(translate(-50%, -50%) rotateZ(135deg));
+      }
+      &:after {
+        @include transform(translate(-50%, -50%) rotateZ(45deg));
+      }
+      &:hover {
+        &:before, &:after {
+          background-color: $grey_dark;
+        }
+      }
+      &:focus {
+        outline: 0;
+      }
+    }
+  } // end .modal
+  // Active
+  &.active {
+    background-color: rgba($grey_dark, 0.5);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    @include transition(all 0s $ease 0s, background-color 0.3s $ease 0s);
+    .modal {
+      @include transform(translateY(0));
+    }
+  }
+} // end .overlay
+
+
+
+// Packaging overlay
+.overlay.packaging {
+  .modal {
+    .modal-main {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: minmax(auto, 50%) minmax(50%, auto); // Header | Main | Footer
+      grid-gap: 0px;
+      > div:nth-of-type(1) {
+        position: relative;
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      > div:nth-of-type(2) {
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+        text-align: center;
+        padding: 30px $mobile_side-padding;
+        h3 {
+          color: $grey;
+        }
+        p {
+          font-size: 16px;
+        }
+        h4 {
+          font-size: 28px;
+          font-weight: $font_weight_semibold;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+} // end .overlay.packaging
+
+
+
+
+
+// Shop story overlay
+.overlay.shop-story-overlay {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  z-index: auto;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  @include transition(none); // disable transition to work with jQuery slide
+  .modal {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    padding-bottom: 25px;
+    background-color: $white;
+    @include transform(translateY(0%));
+    .modal-main {
+      grid-template-columns: 100%;
+      grid-gap: 20px;
+      overflow-y: hidden; // prevent scrollbar showing on slide down
+      opacity: 0;
+      @include transform(translateY(-10px));
+      @include transition(opacity 0.1s $ease, transform 0.1s $ease 0.2s);
+      .grid-item {
+        // Transform the product-card to new layout for mobile
+        .product-card {
+          min-height: 100px;
+          .inner {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-gap: 10px;
+            align-items: center;
+            text-align: left;
+            .upper {
+              grid-column: span 1;
+              .variant-switcher {
+                display: none;
+              }
+            }
+            h3 {
+              grid-column: span 1;
+              padding: 10px 45px 20px 0; // right - wishlist-add, bottom - price
+            }
+          }
+          .wishlist-add {
+            top: 0;
+            right: 0;
+          }
+          .metal-switcher {
+            display: none;
+          }
+          .price {
+            font-size: 14px;
+            color: $grey;
+            bottom: 0;
+            left: calc(100%/3 + 8px); // line up with second grid item
+            @include transform(translateX(0) translateX(0));
+          }
+        }
+        &:nth-of-type(1) { // Main image
+          display: none;
+        }
+      }
+    }
+    .modal-close {
+      display: none;
+    }
+  }
+  // Active state
+  &.active {
+    .modal {
+      .modal-main { // grid
+        opacity: 1;
+        @include transform(translateY(0px));
+        @include transition(opacity 0.2s $ease 0.1s, transform 0.2s $ease 0.1s);
+      }
+    }
+  }
+} // end .overlay.shop-story-overlay
+
+
+
+
+// Press overlay (Press page)
+.press-overlay {
+  .modal {
+    .modal-main {
+      grid-template-columns: 100%;
+      grid-template-rows: 1fr 1fr;
+      padding: 15px;
+      padding-top: 40px;
+      grid-gap: 20px;
+      .grid-item {
+        grid-row: span 1;
+        max-width: 400px;
+        justify-self: center;
+        &:nth-of-type(1) {
+          position: relative;
+          display: block;
+          width: 100%;
+          .logo {
+            display: block;
+            max-width: 300px;
+            max-height: 50px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+          }
+          .image {
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            height: 300px;
+          }
+        }
+        &:nth-of-type(2) {
+          h3 {
+            margin-bottom: 15px;
+          }
+          > span {
+            display: block;
+            font-size: 14px;
+          }
+          .btn {
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+  }
+} // end .press-overlay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+  // Packaging overlay
+  .overlay.packaging {
+    .modal {
+      .modal-main {
+        > div:nth-of-type(1) {
+          padding: 30px 15%;
+          text-align: center;
+          img {
+            position: relative;
+            display: inline-block;
+            top: auto;
+            left: auto;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+        > div:nth-of-type(2) {
+          padding: 30px 15%;
+        }
+      }
+    }
+  } // end .overlay.packaging
+
+
+  // Shop story overlay
+  .overlay.shop-story-overlay {
+    .modal {
+      padding: 25px 0;
+      //padding-bottom: 30px;
+      .modal-main {
+        .grid-item {
+          // Transform the product-card to new layout for mobile
+          .product-card {
+            .inner {
+              grid-template-columns: 1fr 3fr;
+              grid-gap: 20px;
+              h3 {
+                padding: 10px 45px 30px 0; // right - wishlist-add, bottom - price
+              }
+            }
+            .price {
+              left: calc(100%/4 + 18px); // line up with second grid item
+              bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  } // end .overlay.shop-story-overlay
+
+} // end media-query small
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+  .overlay.shop-story-overlay {
+    .modal {
+      .modal-main {
+        grid-template-columns: 1fr 1fr;
+        .grid-item {
+          // Transform the product-card to new layout for mobile
+          .product-card {
+            .inner {
+              grid-template-columns: 1fr 2fr;
+              grid-gap: 10px;
+              h3 {
+                padding: 10px 45px 20px 0; // right - wishlist-add, bottom - price
+              }
+            }
+            .price {
+              left: calc(100%/3 + 8px); // line up with second grid item
+              bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  } // end .overlay.shop-story-overlay
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  // Standard overlay
+  .overlay {
+    @include transition(all 0.3s $ease 0s);
+    .modal {
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%) scale(0.9));
+      width: 800px;
+      height: auto;
+      max-width: 90%;
+      max-height: 90%;
+      opacity: 0;
+      @include transition(all 0.3s $ease_out_quint 0s);
+    }
+    // Active
+    &.active {
+      @include transition(all 0s $ease 0s, background-color 0.3s $ease 0s);
+      .modal {
+        opacity: 1;
+        @include transform(translate(-50%, -50%) scale(1));
+        @include transition(all 0.3s $ease_out_quint 0.1s);
+      }
+    }
+  } // end .overlay
+
+
+  // Packaging overlay
+  .overlay.packaging {
+    .modal {
+      .modal-main {
+        grid-template-columns: 3fr 4fr;
+        grid-template-rows: 100%;
+        > div:nth-of-type(1) {
+          grid-column: 1 / span 1;
+          grid-row: 1 / span 1;
+          padding: 0;
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        > div:nth-of-type(2) {
+          grid-column: 2 / span 1;
+          grid-row: 1 / span 1;
+          padding: 50px 50px;
+        }
+      }
+    }
+  } // end .overlay.packaging
+
+
+  // Shop story overlay
+  .overlay.shop-story-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 30; // Header z-index 10
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    @include transition(all 0.3s $ease 0.3s, background-color 0.3s $ease 0s);
+    .modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      max-width: $content_max_width;
+      height: auto;
+      padding: 50px 30px;
+      @include transform(translate(-50%, -50%) scale(0.9));
+      .modal-main {
+        overflow-y: auto; // allow vertical scrolling (default)
+        opacity: 1;
+        @include transform(none);
+        @include transition(none);
+        grid-template-columns: 1fr 1fr 1fr;
+        .grid-item {
+          // Revert the product-card to new original for desktop
+          .product-card {
+            min-height: 100px;
+            height: 100%;
+            .inner {
+              display: block;
+              text-align: center;
+              .upper {
+                .variant-switcher {
+                  display: block;
+                }
+              }
+              h3 {
+                padding: 10px;
+                padding-bottom: 80px;
+              }
+            }
+            .wishlist-add {
+              top: 5px;
+              right: 5px;
+            }
+            .metal-switcher {
+              display: block;
+            }
+            .price {
+              font-size: 16px;
+              color: $grey_dark;
+              bottom: 15px;
+              left: 10px;
+              @include transform(translateX(0));
+            }
+          }
+          &:nth-of-type(1) { // Main image
+            display: block;
+            grid-row: span 2;
+            img {
+              display: block;
+              width: 100%;
+            }
+          }
+        }
+      }
+      .modal-close {
+        display: block;
+      }
+    }
+    // Active state
+    &.active {
+      background-color: rgba($grey_dark, 0.5);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      @include transition(all 0s $ease 0s, background-color 0.3s $ease 0s);
+      // .modal {
+      //   @include transform(translateY(0));
+      // }
+      .modal {
+        @include transform(translate(-50%, -50%) scale(1));
+        @include transition(all 0.3s $ease_out_quint 0.1s);
+        .modal-main { // grid
+          @include transform(translateY(0));
+          //opacity: 1;
+          //@include transform(translateY(0px));
+          //@include transition(opacity 0.2s $ease 0.1s, transform 0.2s $ease 0.1s);
+        }
+      }
+    }
+  } // end .overlay.shop-story-overlay
+
+
+  // Press overlay
+  .press-overlay {
+    .modal {
+      .modal-main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 100%;
+        padding: 50px;
+        padding-top: 50px;
+        grid-gap: 50px;
+        .grid-item {
+          max-width: none;
+          align-self: center;
+          &:nth-of-type(1) {
+            padding-bottom: 50px;
+            .image {
+              //height: 400px;
+            }
+          }
+          &:nth-of-type(2) {
+
+          }
+        }
+      }
+    }
+  } // end .press-overlay
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

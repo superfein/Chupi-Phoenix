@@ -11,7 +11,9 @@
 @import "partials/components/badges";
 @import "partials/components/buttons";
 @import "partials/components/cards";
+@import "partials/components/carousels";
 @import "partials/components/currencies";
+@import "partials/components/overlays";
 @import "partials/components/sliders";
 @import "partials/components/forms";
 
@@ -24,10 +26,18 @@
 @import "partials/layout/hint-drawer";
 
 // Page styles
+@import "partials/pages/account";
 @import "partials/pages/home";
 @import "partials/pages/collection";
+@import "partials/pages/collection-landing";
+@import "partials/pages/collection-story";
+@import "partials/pages/instagram";
+@import "partials/pages/press";
 @import "partials/pages/product";
+@import "partials/pages/product-hvp";
 @import "partials/pages/product-customisation";
+@import "partials/pages/about";
+@import "partials/pages/upgrade-program";
 
 // Animations
 @import "partials/animations/animations";

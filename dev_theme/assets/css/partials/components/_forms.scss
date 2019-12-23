@@ -1,114 +1,112 @@
 
 // _forms.scss
 
-/*
-
-form {
-  .form-field {
-    position: relative;
-    display: inline-block;
+// Raw inputs form fields (without parent)
+input:not([type=submit]), select, textarea {
+  font-family: $font_family_secondary;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+  color: $grey;
+  padding: 12px 10px;
+  border: 1px solid lighten($grey, 40%);
+  background-color: transparent;
+  @include transition(border 0.2s $ease);
+  &:focus, &:active, &:visited {
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+    border: 1px solid $grey;
+  }
+}
+input[type=checkbox] {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  padding: 0;
+  pointer-events: none;
+  + label {
+    display: block;
+    font-size: 14px;
     width: 100%;
-    margin-top: 20px;
-    @include transition(all 0.2s $ease);
-    input:not([type=submit]), select, textarea {
-      display: block;
-      width: 100%;
-      font-size: 14px;
-      font-weight: $font-weight-lighter;
-      color: $grey;
-      padding: 10px 0;
-      border: none;
-      border-bottom: 1px solid $grey;
-      &:focus, &:focus, &:focus {
-        outline: none;
-      }
+    padding: 10px 0;
+    padding-left: 25px;
+    cursor: pointer;
+    &:before, // Checkbox
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
     }
-    select {
-      padding-right: 40px;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      cursor: pointer;
-    }
-    select::-ms-expand {
-      display: none; // Hide default IE select arrow
-    }
-    textarea {
-      max-width: 100%;
-      min-width: 100%;
-      min-height: 120px;
-      height: 120px;
-      max-height: 500px;
-      //resize: none;
-      -ms-overflow-style: none;
+    &:before { // Checkbox box
+      background-color: $grey_lightest;
+      border: 1px solid lighten($grey, 30%);
+      border-radius: 3px;
       @include transition(all 0.2s $ease);
     }
-    textarea.active {
-      height: 300px;
-      min-height: 300px;
-    }
-    label {
-      position: absolute;
-      top: 10px;
-      left: 0;
-      font-size: 14px;
-      font-weight: $font-weight-lighter;
-      line-height: 1.5;
-      color: $grey;
-      text-align: left;
-      pointer-events: none;
-      @include transition(all 0.4s $ease_in_out_quart);
-    }
-  } // end .form-field
-  .form-field.open { // Open field (focused or complete - class added via JS)
-    //margin-top: 35px;
-    label {
-      top: -18px;
-      font-size: 12px;
-      color: $grey;
+    &:after { // Checkbox tick
+      width: 6px;
+      height: 10px;
+      top: 11px;
+      left: 6px;
+      border-right: 3px solid $grey;
+      border-bottom: 3px solid $grey;
+      opacity: 0;
+      @include transform(rotate(45deg) scale(0.5));
+      @include transition(all 0.12s $ease_in_out_quart);
     }
   }
-  &.single-field { // single-field form (e.g. signup)
-    position: relative;
-    .form-field {
-      input:not([type=submit]), select, textarea {
-        padding-right: 70px;
-      }
-    }
-    > button[type="submit"] {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: auto;
-      font-size: 14px;
-      font-weight: $font-weight-lighter;
-      color: $grey;
-      text-transform: uppercase;
-      padding: 10px;
-      padding-right: 20px;
-      cursor: pointer;
-      border: none;
-      background-color: transparent;
-      -webkit-appearance: none;
+  &:checked {
+    + label {
       &:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 0;
-        width: 11px;
-        height: 11px;
-        background-color: transparent;
-        background-image: url($icon_chevron_dark);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        @include transform(translateY(-50%) rotate(-90deg));
-        @include transition(all 0.2s $ease_in);
+        opacity: 1;
+        @include transform(rotate(45deg) scale(1));
       }
     }
   }
-} // end form
-
-*/
+} // end input[type=checkbox]
+select {
+  position: relative;
+  font-family: $font_family_secondary;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+  padding-right: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  background-image: url($icon_chevron_dark);
+  background-position: right center;
+  background-size: 12px;
+  background-repeat: no-repeat;
+}
+select::-ms-expand {
+  display: none; // Hide default IE select arrow
+}
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 120px;
+  height: 120px;
+  max-height: 500px;
+  //resize: none;
+  -ms-overflow-style: none;
+  @include transition(all 0.2s $ease);
+}
+textarea.active {
+  height: 300px;
+  min-height: 300px;
+}
+input[type=submit],
+button[type=submit] {
+  font-family: $font_family_secondary;
+  cursor: pointer;
+  min-width: 200px;
+  margin-top: 20px;
+}
 
 
 
@@ -124,160 +122,174 @@ form {
     input:not([type=submit]), select, textarea {
       display: block;
       width: 100%;
-      font-size: 14px;
-      font-weight: $font-weight-lighter;
-      color: $grey;
-      padding: 15px;
-      border: 1px solid lighten($grey, 40%);
-      @include transition(border 0.2s $ease);
-      &:focus, &:active, &:visited {
-        outline: none;
-      }
-      &:focus {
-        border: 1px solid $grey;
-      }
+      // font-family: $font_family_secondary;
+      // font-size: 14px;
+      // font-weight: $font-weight-light;
+      // color: $grey;
+      // padding: 15px;
+      // border: 1px solid lighten($grey, 40%);
+      // background-color: transparent;
+      // @include transition(border 0.2s $ease);
+      // &:focus, &:active, &:visited {
+      //   outline: none;
+      // }
+      // &:focus {
+      //   outline: none;
+      //   border: 1px solid $grey;
+      // }
     }
     input[type=checkbox] {
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
-      padding: 0;
-      pointer-events: none;
       + label {
-        display: block;
-        font-size: 14px;
-        width: 100%;
-        padding: 10px 0;
-        padding-left: 25px;
-        cursor: pointer;
-        &:before, // Checkbox
-        &:after {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 8px;
-          width: 18px;
-          height: 18px;
-          pointer-events: none;
-        }
-        &:before { // Checkbox box
-          background-color: $grey_lightest;
-          border: 1px solid lighten($grey, 30%);
-          border-radius: 3px;
-          @include transition(all 0.2s $ease);
-        }
-        &:after { // Checkbox tick
-          width: 6px;
-          height: 10px;
-          top: 11px;
-          left: 6px;
-          border-right: 3px solid $grey;
-          border-bottom: 3px solid $grey;
-          opacity: 0;
-          @include transform(rotate(45deg) scale(0.5));
-          @include transition(all 0.12s $ease_in_out_quart);
-        }
+        margin-bottom: 0;
       }
-      &:checked {
-        + label {
-          &:after {
-            opacity: 1;
-            @include transform(rotate(45deg) scale(1));
-          }
-        }
-      }
-    } // end input[type=checkbox]
-    select {
-      padding-right: 40px;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      cursor: pointer;
     }
-    select::-ms-expand {
-      display: none; // Hide default IE select arrow
+    label {
+      display: inline-block;
+      font-size: 14px;
+      margin-bottom: 5px;
     }
-    textarea {
-      max-width: 100%;
-      min-width: 100%;
-      min-height: 120px;
-      height: 120px;
-      max-height: 500px;
-      //resize: none;
-      -ms-overflow-style: none;
-      @include transition(all 0.2s $ease);
-    }
-    textarea.active {
-      height: 300px;
-      min-height: 300px;
-    }
-  } // end .form-field
+    // input[type=checkbox] {
+    //   opacity: 0;
+    //   visibility: hidden;
+    //   height: 0;
+    //   padding: 0;
+    //   pointer-events: none;
+    //   + label {
+    //     display: block;
+    //     font-size: 14px;
+    //     width: 100%;
+    //     padding: 10px 0;
+    //     padding-left: 25px;
+    //     cursor: pointer;
+    //     &:before, // Checkbox
+    //     &:after {
+    //       content: "";
+    //       position: absolute;
+    //       left: 0;
+    //       top: 8px;
+    //       width: 18px;
+    //       height: 18px;
+    //       pointer-events: none;
+    //     }
+    //     &:before { // Checkbox box
+    //       background-color: $grey_lightest;
+    //       border: 1px solid lighten($grey, 30%);
+    //       border-radius: 3px;
+    //       @include transition(all 0.2s $ease);
+    //     }
+    //     &:after { // Checkbox tick
+    //       width: 6px;
+    //       height: 10px;
+    //       top: 11px;
+    //       left: 6px;
+    //       border-right: 3px solid $grey;
+    //       border-bottom: 3px solid $grey;
+    //       opacity: 0;
+    //       @include transform(rotate(45deg) scale(0.5));
+    //       @include transition(all 0.12s $ease_in_out_quart);
+    //     }
+    //   }
+    //   &:checked {
+    //     + label {
+    //       &:after {
+    //         opacity: 1;
+    //         @include transform(rotate(45deg) scale(1));
+    //       }
+    //     }
+    //   }
+    // } // end input[type=checkbox]
+    // select {
+    //   padding-right: 40px;
+    //   -webkit-appearance: none;
+    //   -moz-appearance: none;
+    //   cursor: pointer;
+    // }
+    // select::-ms-expand {
+    //   display: none; // Hide default IE select arrow
+    // }
+    // textarea {
+    //   max-width: 100%;
+    //   min-width: 100%;
+    //   min-height: 120px;
+    //   height: 120px;
+    //   max-height: 500px;
+    //   //resize: none;
+    //   -ms-overflow-style: none;
+    //   @include transition(all 0.2s $ease);
+    // }
+    // textarea.active {
+    //   height: 300px;
+    //   min-height: 300px;
+    // }
 
-  &.single-field { // single-field form (e.g. signup)
-    position: relative;
-    margin-top: 20px;
-    @include transition(all 0.2s $ease);
-    .form-field {
-      margin-bottom: 0;
+    // Floating labels (requires JS)
+    &.floating-label {
+      margin-top: 20px;
       label {
         position: absolute;
-        top: 10px;
+        top: 5px;
         left: 0;
-        font-size: 14px;
-        font-weight: $font-weight-lighter;
+        font-size: 16px;
+        font-weight: $font-weight-light;
         line-height: 1.5;
         color: $grey;
+        margin-bottom: 0;
         text-align: left;
         pointer-events: none;
-        @include transition(all 0.4s $ease_in_out_quart);
+        @include transition(all 0.3s $ease_in_out_quart);
       }
       input:not([type=submit]), select, textarea {
-        padding: 10px 0;
+        width: 100%;
+        padding: 8px 0;
         border: 0;
         border-bottom: 1px solid $grey;
-        padding-right: 70px;
+        border-radius: 0;
       }
       &.open { // Open field (focused or complete - class added via JS)
         label {
           top: -18px;
-          font-size: 12px;
-          color: $grey;
+          font-size: 14px;
+          color: lighten($grey, 30%);
         }
       }
-    }
-    > button[type="submit"] {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: auto;
-      font-size: 14px;
-      font-weight: $font-weight-lighter;
-      color: $grey;
-      text-transform: uppercase;
-      padding: 10px;
-      padding-right: 20px;
-      cursor: pointer;
-      border: none;
-      background-color: transparent;
-      -webkit-appearance: none;
-      &:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 0;
-        width: 11px;
-        height: 11px;
-        background-color: transparent;
-        background-image: url($icon_chevron_dark);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        @include transform(translateY(-50%) rotate(-90deg));
-        @include transition(all 0.2s $ease_in);
+    } // end .floating-labels
+
+    // Required fields
+    &.required {
+      label {
+        position: relative;
+        padding-right: 15px;
+        &:after { // Asterisk
+          content: '*';
+          position: absolute;
+          top: -2px;
+          right: 0;
+          font-size: 20px;
+          font-weight: $font-weight-lighter;
+          color: $grey_dark;
+          @include transition(all 0.3s $ease_in_out_quart);
+        }
       }
-    }
-  } // end .single-field
+      &.floating-label {
+        label {
+          position: absolute;
+        }
+        &.open { // Open field (focused or complete - class added via JS)
+          label {
+            &:after { // Asterisk
+              font-size: 18px;
+              color: lighten($grey, 30%);
+            }
+          }
+        }
+      }
+    } // end .required
+
+  } // end .form-field
 
 } // end form
+
+
 
 
 
@@ -297,15 +309,28 @@ form {
 
 
 
+
+
 @include mquery(m) {
 
 } // end media-query medium
 
 
 
+
+
+
 @include mquery(ml) {
 
+  // Raw inputs form fields (without parent)
+  input:not([type=submit]), select, textarea {
+    padding: 15px 10px;
+  }
+
 } // end media-query medium-large
+
+
+
 
 
 
@@ -315,9 +340,15 @@ form {
 
 
 
+
+
+
+
 @include mquery(xl) {
 
 } // end media-query extra-large
+
+
 
 
 
