@@ -1,4 +1,4 @@
 node_modules/
 .DS_Store
 /*/.DS_Store
-theme/config.yml
+compiled_theme/config.yml
