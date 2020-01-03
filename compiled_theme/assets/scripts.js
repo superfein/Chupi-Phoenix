@@ -531,7 +531,7 @@
     // });
 
 
-    //-------------- Gallery -------------- //
+
 
     // Slick Slider - set parameters (Ref: http://kenwheeler.github.io/slick/)
     var slickSliderSettings = {
@@ -548,7 +548,6 @@
   		swipe: true,
       swipeToSlide: true,
       touchThreshold: 200,
-      //verticalSwiping: true,
       touchMove: true,
   		infinite: true,
   		pauseOnFocus: true,
@@ -557,21 +556,10 @@
   		speed: 300,
   		waitForAnimate: true,
   		responsive: [ // More swipe-friendly on mobile
-  	    // {
-  	    //   breakpoint: 1199,
-  	    //   settings: {
-  	    //     cssEase: 'ease',
-  			// 		speed: 300
-  	    //   }
-  	    // },
   			{
   	      breakpoint: 992, // desktop
   	      settings: {
-  	        dots: false,
-            arrows: true,
   					speed: 400
-            //fade: true
-            //slickFilter: '.video-slide'
   	      }
   	    }
   		]
