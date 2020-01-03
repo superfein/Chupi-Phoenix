@@ -8,8 +8,7 @@
         "external": "Opent externe website.",
         "new_window_and_external": "Opent externe website in een nieuw venster."
       },
-      "refresh_page": "een selectie kiezen resulteert in het geheel verversen van de pagina",
-      "selection_help": "druk op de spatiebalk en vervolgens op de pijltoetsen om een selectie te maken"
+      "refresh_page": "een selectie kiezen resulteert in het geheel verversen van de pagina"
     },
     "meta": {
       "tags": "Getagged \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Abonneer u op onze mailinglijst",
       "email_placeholder": "E-mailadres",
-      "confirmation": "Bedankt voor het abonneren!",
+      "confirmation": "Bedankt voor het abonneren",
       "submit": "Abonneren"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Volgende dia",
       "previous_slide": "Vorige dia",
       "pause_slideshow": "Diavoorstelling pauzeren",
-      "rotate_slideshow": "Diavoorstelling afspelen",
-      "load_slide": "Laad dia {{ slide_number }}",
-      "navigation_instructions": "Gebruik de pijlen links\/rechts om door de diavoorstelling te navigeren, of veeg links\/rechts op een mobiel apparaat"
+      "play_slideshow": "Diavoorstelling afspelen",
+      "play_video": "Video afspelen",
+      "close_video": "Video sluiten"
     },
     "featured_product": {
       "title": "Uitgelicht product",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "U hebt de gebruikslimiet van de Google API overschreden. Overweeg een upgrade naar een <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium-pakket<\/a>.",
       "auth_error_html": "Er is een probleem opgetreden bij het verifiëren van uw Google Maps-account.",
       "section_heading": "Locatie"
-    },
-    "video": {
-      "play": "Video afspelen",
-      "pause": "Video pauzeren",
-      "resume": "Video hervatten",
-      "close": "Video sluiten"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Collectie"
     },
     "sorting": {
-      "title": "Sorteer op"
+      "title": "Sorteer op",
+      "featured": "Uitgelicht",
+      "best_selling": "Best verkopende",
+      "az": "Alfabetisch: A-Z",
+      "za": "Alfabetisch: Z-A",
+      "price_ascending": "Prijs: laag naar hoog",
+      "price_descending": "Prijs: hoog naar laag",
+      "date_descending": "Datum: nieuw naar oud",
+      "date_ascending": "Datum: oud naar nieuw"
     },
     "filters": {
       "title_tags": "Filter op",
@@ -214,8 +215,8 @@
       "first_name": "Voornaam",
       "last_name": "Achternaam",
       "company": "Bedrijf",
-      "address1": "Adres",
-      "address2": "Appertementnr. etc.",
+      "address1": "Adres 1",
+      "address2": "Adres 2",
       "city": "Stad",
       "country": "Land",
       "province": "Provincie",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Besteloverzicht",
       "order_number": "Bestelling",
-      "order_number_link": "Bestelnummer {{ number }}",
       "date": "Datum",
       "payment_status": "Betaalstatus",
       "fulfillment_status": "Status uitvoering",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Bestelling {{ name }}",
-      "date_html": "Geplaatst op {{ date }}",
-      "cancelled_html": "Bestelling geannuleerd op {{ date }}",
+      "date": "Geplaatst op {{ date }}",
+      "cancelled": "Bestelling geannuleerd op {{ date }}",
       "cancelled_reason": "Reden: {{ reason }}",
       "billing_address": "Factuuradres",
       "payment_status": "Betaalstatus",
@@ -265,7 +265,7 @@
       "price": "Prijs",
       "quantity": "Aantal",
       "total": "Totaal",
-      "fulfilled_at_html": "Voldaan {{ date }}",
+      "fulfilled_at": "Voldaan {{ date }}",
       "subtotal": "Subtotaal",
       "track_shipment": "Volg verzending"
     },

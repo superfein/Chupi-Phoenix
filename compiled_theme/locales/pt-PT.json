@@ -8,8 +8,7 @@
         "external": "Abrirá uma página externa.",
         "new_window_and_external": "Abrirá uma página externa numa nova janela."
       },
-      "refresh_page": "escolher uma seleção resulta em uma atualização de página inteira",
-      "selection_help": "Prima a tecla de espaço e as teclas de setas para efetuar uma seleção"
+      "refresh_page": "escolher uma seleção resulta em uma atualização de página inteira"
     },
     "meta": {
       "tags": "Etiquetado como \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Subscreva a nossa lista de contactos",
       "email_placeholder": "Endereço de correio eletrónico",
-      "confirmation": "Agradecemos a sua subscrição!",
+      "confirmation": "Obrigado por subscrever",
       "submit": "Subscrever"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Slide seguinte",
       "previous_slide": "Slide anterior",
       "pause_slideshow": "Pausa na apresentação de slides",
-      "rotate_slideshow": "Reproduzir apresentação de slides",
-      "load_slide": "Carregar slide {{ slide_number }}",
-      "navigation_instructions": "Utilize as setas esquerda\/direita para navegar pela apresentação, ou deslize para a esquerda\/direita se estiver a utilizar um dispositivo móvel"
+      "play_slideshow": "Reproduzir apresentação de slides",
+      "play_video": "reprodução de vídeo",
+      "close_video": "Fechar vídeo"
     },
     "featured_product": {
       "title": "Produto em destaque",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Você excedeu a cota de uso da API do Google. Considere a atualização para um <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Plano Premium<\/a>.",
       "auth_error_html": "Houve um problema autenticação de sua conta do Google Maps.",
       "section_heading": "Localização"
-    },
-    "video": {
-      "play": "Reprodução de vídeo",
-      "pause": "Pausar vídeo",
-      "resume": "Retomar vídeo",
-      "close": "Fechar vídeo"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Coleção"
     },
     "sorting": {
-      "title": "Ordenar"
+      "title": "Ordenar",
+      "featured": "Em Destaque",
+      "best_selling": "Mais Vendidos",
+      "az": "Alfabeticamente, A-Z",
+      "za": "Alfabeticamente, Z-A",
+      "price_ascending": "Preço, mais baratos",
+      "price_descending": "Preço, mais caros",
+      "date_descending": "Data, mais recentes",
+      "date_ascending": "Data, mais antigos"
     },
     "filters": {
       "title_tags": "Filtrar",
@@ -214,8 +215,8 @@
       "first_name": "Nome Próprio",
       "last_name": "Sobrenome",
       "company": "Empresa",
-      "address1": "Endereço",
-      "address2": "Andar, fração, etc.",
+      "address1": "Endereço1",
+      "address2": "Endereço2",
       "city": "Localidade",
       "country": "País",
       "province": "Província",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Histórico de Pedidos",
       "order_number": "Pedido",
-      "order_number_link": "Número da encomenda: {{ number }}",
       "date": "Data",
       "payment_status": "Estado de Pagamento",
       "fulfillment_status": "Estado de Atendimento",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Pedido {{ name }}",
-      "date_html": "Efetuado em{{ date }}",
-      "cancelled_html": "Pedido Cancelado em {{ date }}",
+      "date": "Efetuado em{{ date }}",
+      "cancelled": "Pedido Cancelado em {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
       "billing_address": "Endereço de Faturação",
       "payment_status": "Estado de Pagamento",
@@ -265,7 +265,7 @@
       "price": "Preço",
       "quantity": "Quantidade",
       "total": "Total",
-      "fulfilled_at_html": "Concluído em {{ date }}",
+      "fulfilled_at": "Concluído em {{ date }}",
       "subtotal": "Subtotal",
       "track_shipment": "Acompanhar envio"
     },

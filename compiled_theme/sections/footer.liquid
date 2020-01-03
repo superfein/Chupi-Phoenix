@@ -53,13 +53,10 @@
     border-bottom: 1px solid {{ section.settings.color_footer_bg | color_darken: 10 }};
   }
 
-  .site-footer p,
-  .site-footer h4,
-  .site-footer small {
+  .site-footer,
+  .site-footer a,
+  .site-footer__rte p {
     color: {{ section.settings.color_footer_text }};
-  }
-
-  .site-footer {
     background-color: {{ section.settings.color_footer_bg }};
   }
 
@@ -81,7 +78,7 @@
           <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
             {%- if block.settings.title -%}
-              <p class="h4">{{ block.settings.title | escape }}</p>
+              <h4>{{ block.settings.title | escape }}</h4>
             {%- endif -%}
 
             {%- case block.type -%}
@@ -90,40 +87,26 @@
                           {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
                   {%- assign formId = 'ContactFooter' -%}
                   {% form 'customer', id: formId, novalidate: 'novalidate' %}
-                    {%- if form.posted_successfully? -%}
-                      <p class="form-message form-message--success" tabindex="-1" data-form-status>
-                        {{ 'general.newsletter_form.confirmation' | t }}
-                      </p>
-                    {%- endif -%}
-                    <input type="hidden" name="contact[tags]" value="newsletter">
-                    <div class="input-group {% if form.errors %} input-group--error{% endif %}">
+                    {% include 'form-status', formId %}
+                    <label for="{{ formId }}-email" class="visually-hidden">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                    <div class="site-footer__newsletter{% if form.errors %} newsletter__input-group--error{% endif %}">
+                      <input type="hidden" name="contact[tags]" value="newsletter">
                       <input type="email"
                         name="contact[email]"
                         id="{{ formId }}-email"
-                        class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}"
-                        value="{{ form.email }}"
+                        class="newsletter__input{% if form.errors %} input--error{% endif %}"
+                        value="{% if customer %}{{ customer.email }}{% endif %}"
                         placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                        aria-required="true"
-                        required
                         autocorrect="off"
                         autocapitalize="off"
-                        {% if form.errors %}
-                          aria-invalid="true"
-                          aria-describedby="{{ formId }}-email-error"
-                          data-form-status
-                        {% endif %}>
+                        {% if form.errors %} aria-invalid="true" aria-describedby="{{ formId }}-email-error"{% endif %}>
                       <span class="input-group__btn">
                         <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
                           <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
                         </button>
                       </span>
+                      <span id="{{ formId }}-email-error" class="input-error-message">{% include 'icon-error' %} {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
                     </div>
-                    {% if form.errors contains 'email' %}
-                      <span id="{{ formId }}-email-error" class="input-error-message">
-                        {% include 'icon-error' %} {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.
-                      </span>
-                    {% endif %}
                   {% endform %}
                 </div>
 
@@ -141,11 +124,7 @@
                             {% if inline_list %}list--inline{% endif %}">
                     {%- for link in linklists[footer_linklist].links -%}
                       <li class="site-footer__linklist-item">
-                        <a href="{{ link.url }}"
-                          {% if link.current %} aria-current="page"{% endif %}
-                        >
-                          {{ link.title | escape }}
-                        </a>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
                       </li>
                     {%- endfor -%}
                   </ul>
@@ -470,7 +449,7 @@
         "es": "Suscripción al boletín",
         "fr": "Inscription",
         "it": "Iscriviti alla Newsletter",
-        "ja": "メールマガジンの登録",
+        "ja": "メールマガジンのサインアップ",
         "pt-BR": "Assinatura da newsletter"
       },
       "settings": [
@@ -501,7 +480,7 @@
             "es": "Boletín",
             "fr": "Newsletter",
             "it": "Newsletter",
-            "ja": "メールマガジン",
+            "ja": "ニュースレター",
             "pt-BR": "Newsletter"
           }
         }

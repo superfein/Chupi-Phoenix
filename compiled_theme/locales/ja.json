@@ -8,8 +8,7 @@
         "external": "外部のウェブサイトに移動します。",
         "new_window_and_external": "外部のウェブサイトを新しいウィンドウで開く"
       },
-      "refresh_page": "選択範囲を選択すると、ページ全体がリフレッシュされます",
-      "selection_help": "スペースキーを押してから矢印キーを押して選択します"
+      "refresh_page": "選択範囲を選択すると、ページ全体がリフレッシュされます"
     },
     "meta": {
       "tags": "タグ \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "私たちのメーリングリストに登録する",
       "email_placeholder": "メールアドレス",
-      "confirmation": "ご登録ありがとうございます!",
+      "confirmation": "ご登録ありがとうございます",
       "submit": "登録する"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "次のスライド",
       "previous_slide": "前のスライド",
       "pause_slideshow": "スライドショーを止める",
-      "rotate_slideshow": "スライドショーを再生する",
-      "load_slide": "スライド{{ slide_number }}を読み込む",
-      "navigation_instructions": "右と左の矢印を使ってスライドショーをナビゲートするか、モバイルデバイスを使用している場合は左右にスワイプします"
+      "play_slideshow": "スライドショーを再生する",
+      "play_video": "動画を再生する",
+      "close_video": "動画を閉じる"
     },
     "featured_product": {
       "title": "おすすめ商品",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Google APIの使用量の制限を超えました。<a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">プレミアムプラン<\/a>へのアップグレードをご検討ください。",
       "auth_error_html": "あなたのGoogle Mapsのアカウント認証で問題が発生しました。",
       "section_heading": "アクセス"
-    },
-    "video": {
-      "play": "ビデオを見る",
-      "pause": "ビデオを一時停止する",
-      "resume": "ビデオを再開する",
-      "close": "動画を閉じる"
     }
   },
   "blogs": {
@@ -142,10 +135,10 @@
       "remove": "削除",
       "subtotal": "小計",
       "savings": "節約",
-      "taxes_and_shipping_at_checkout": "税と送料はチェックアウト時に計算されます",
-      "taxes_and_shipping_policy_at_checkout_html": "税と<a href=\"{{ link }}\">送料<\/a>はチェックアウト時に計算されます",
-      "taxes_included_but_shipping_at_checkout": "税込みで配送料はチェックアウト時に計算されます。",
-      "taxes_included_and_shipping_policy_html": "税込み。<a href=\"{{ link }}\">送料<\/a>はチェックアウト時に計算されます。",
+      "taxes_and_shipping_at_checkout": "チェックアウト時に計算された税金と送料",
+      "taxes_and_shipping_policy_at_checkout_html": "チェックアウト時に計算された税金と<a href=\"{{ link }}\">送料<\/a>",
+      "taxes_included_but_shipping_at_checkout": "税込みでチェックアウト時に計算された送料",
+      "taxes_included_and_shipping_policy_html": "税込み。チェックアウト時に計算された<a href=\"{{ link }}\">送料<\/a>",
       "update": "アップデート",
       "checkout": "チェックアウト",
       "empty": "カート内に商品がありません。",
@@ -173,7 +166,15 @@
       "collection_label": "コレクション"
     },
     "sorting": {
-      "title": "並び替え"
+      "title": "並び替え",
+      "featured": "オススメ",
+      "best_selling": "人気順",
+      "az": "アルファベット順, A-Z",
+      "za": "アルファベット順, Z-A",
+      "price_ascending": "価格の安い順",
+      "price_descending": "価格の高い順",
+      "date_descending": "新着順",
+      "date_ascending": "古い商品順"
     },
     "filters": {
       "title_tags": "絞り込み方法",
@@ -215,7 +216,7 @@
       "last_name": "姓",
       "company": "会社名",
       "address1": "住所",
-      "address2": "アパート、部屋番号など",
+      "address2": "住所",
       "city": "市区町村",
       "country": "国",
       "province": "都道府県",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "注文履歴",
       "order_number": "注文",
-      "order_number_link": "注文番号 {{ number }}",
       "date": "日付",
       "payment_status": "お支払い状況",
       "fulfillment_status": "フルフィルメントの状況",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "注文 {{ name }}",
-      "date_html": "注文の日付 {{ date }}",
-      "cancelled_html": "注文がキャンセルされた日付 {{ date }}",
+      "date": "注文の日付 {{ date }}",
+      "cancelled": "注文がキャンセルされた日付 {{ date }}",
       "cancelled_reason": "理由: {{ reason }}",
       "billing_address": "請求先住所",
       "payment_status": "お支払いの状況",
@@ -265,7 +265,7 @@
       "price": "価格",
       "quantity": "個数",
       "total": "合計",
-      "fulfilled_at_html": "フルフィルメントされた日付 {{ date }}",
+      "fulfilled_at": "フルフィルメントされた日付 {{ date }}",
       "subtotal": "小計",
       "track_shipment": "荷物を追跡"
     },
@@ -341,7 +341,7 @@
       "vendor": "ベンダー",
       "quantity_minimum_message": "数量は1以上でなければなりません",
       "include_taxes": "税込み。",
-      "shipping_policy_html": "<a href=\"{{ link }}\">配送料<\/a>はチェックアウト時に計算されます。"
+      "shipping_policy_html": "チェックアウト時に計算された<a href=\"{{ link }}\">送料<\/a>"
     }
   },
   "gift_cards": {
@@ -361,6 +361,6 @@
     }
   },
   "date_formats": {
-    "month_day_year": "%Y年%b%d日"
+    "month_day_year": "%Y年%B月%d日"
   }
 }

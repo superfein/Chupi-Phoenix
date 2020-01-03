@@ -8,8 +8,7 @@
         "external": "Abrirá uma página externa.",
         "new_window_and_external": "Abrirá uma página externa numa nova janela."
       },
-      "refresh_page": "escolher uma seleção resulta em uma atualização de página inteira",
-      "selection_help": "aperte a tecla de espaço, e, em seguida, as teclas de seta para fazer uma seleção"
+      "refresh_page": "escolher uma seleção resulta em uma atualização de página inteira"
     },
     "meta": {
       "tags": "Marcado \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Assine nossa newsletter",
       "email_placeholder": "E-mail",
-      "confirmation": "Obrigado por se inscrever!",
+      "confirmation": "Obrigado por se inscrever",
       "submit": "Me inscrever"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Próximo slide",
       "previous_slide": "Slide anterior",
       "pause_slideshow": "Pausar slideshow",
-      "rotate_slideshow": "Reproduzir slideshow",
-      "load_slide": "Abrir slide {{ slide_number }}",
-      "navigation_instructions": "Utilize as setas esquerda\/direita para navegar pelo slideshow, ou deslize para a esquerda\/direita se estiver usando um dispositivo móvel"
+      "play_slideshow": "Reproduzir slideshow",
+      "play_video": "Reproduzir vídeo",
+      "close_video": "Fechar vídeo"
     },
     "featured_product": {
       "title": "Produto em destaque",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Você excedeu a cota de uso da API do Google. Considere a atualização para um <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Plano Premium<\/a>.",
       "auth_error_html": "Ocorreu um problema ao autenticar sua conta do Google Maps.",
       "section_heading": "Localização"
-    },
-    "video": {
-      "play": "Reproduzir vídeo",
-      "pause": "Pausar o vídeo",
-      "resume": "Continuar o vídeo",
-      "close": "Fechar vídeo"
     }
   },
   "blogs": {
@@ -144,8 +137,8 @@
       "savings": "Você está economizando",
       "taxes_and_shipping_at_checkout": "Impostos e frete calculados no checkout",
       "taxes_and_shipping_policy_at_checkout_html": "Impostos e <a href=\"{{ link }}\">frete<\/a> calculados no checkout",
-      "taxes_included_but_shipping_at_checkout": "Imposto incluído e frete calculado no checkout",
-      "taxes_included_and_shipping_policy_html": "Taxas incluídas. <a href=\"{{ link }}\">Frete<\/a> calculado no checkout.",
+      "taxes_included_but_shipping_at_checkout": "Imposto incluído e frete calculado no check-out",
+      "taxes_included_and_shipping_policy_html": "Taxas incluídas. <a href=\"{{ link }}\">Envio<\/a> calculado no check-out.",
       "update": "Atualizar",
       "checkout": "Finalizar compra",
       "empty": "Seu carrinho está vazio no momento.",
@@ -173,7 +166,15 @@
       "collection_label": "Coleção"
     },
     "sorting": {
-      "title": "Ordenar por"
+      "title": "Ordenar por",
+      "featured": "Em destaque",
+      "best_selling": "Mais vendidos",
+      "az": "Ordem alfabética, A–Z",
+      "za": "Ordem alfabética, Z–A",
+      "price_ascending": "Preço, do menor ao maior",
+      "price_descending": "Preço, do maior ao menor",
+      "date_descending": "Data, mais recente primeiro",
+      "date_ascending": "Data, mais antiga primeiro"
     },
     "filters": {
       "title_tags": "Filtrar por",
@@ -214,8 +215,8 @@
       "first_name": "Nome",
       "last_name": "Sobrenome",
       "company": "Empresa",
-      "address1": "Endereço",
-      "address2": "Casa, apto. etc.",
+      "address1": "Endereço 1",
+      "address2": "Endereço 2",
       "city": "Cidade",
       "country": "País",
       "province": "Província\/Estado",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Histórico de pedidos",
       "order_number": "Pedido",
-      "order_number_link": "Pedido número {{ number }}",
       "date": "Data",
       "payment_status": "Status do pagamento",
       "fulfillment_status": "Status de processamento do pedido",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Pedido {{ name }}",
-      "date_html": "Efetuado em {{ date }}",
-      "cancelled_html": "Pedido cancelado em {{ date }}",
+      "date": "Efetuado em {{ date }}",
+      "cancelled": "Pedido cancelado em {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
       "billing_address": "Endereço de cobrança",
       "payment_status": "Status do pagamento",
@@ -265,7 +265,7 @@
       "price": "Preço",
       "quantity": "Quantidade",
       "total": "Total",
-      "fulfilled_at_html": "Processado em {{ date }}",
+      "fulfilled_at": "Processado em {{ date }}",
       "subtotal": "Subtotal",
       "track_shipment": "Rastrear o pacote"
     },
@@ -341,7 +341,7 @@
       "vendor": "Fornecedor",
       "quantity_minimum_message": "Quantidade deve ser 1 ou mais",
       "include_taxes": "Taxas incluídas.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Frete<\/a> calculado no checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Envio<\/a> calculado no check-out."
     }
   },
   "gift_cards": {

@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="{{ shop.locale }}">
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,11 +21,14 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'gift-card.scss.css' | asset_url | stylesheet_tag }}
 
-  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer="defer"></script>
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}"></script><![endif]-->
 
-  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
 
-  <script src="{{ 'gift-card.js' | asset_url }}" defer="defer"></script>
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'gift-card.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'gift-card.js' | asset_url }}"></script><![endif]-->
 
   <script>
     var theme = {

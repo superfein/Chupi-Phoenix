@@ -8,8 +8,7 @@
         "external": "Abre sitio externo.",
         "new_window_and_external": "Abre sitio externo externo en una nueva ventana."
       },
-      "refresh_page": "elegir una selección de resultados en una actualización de página completa",
-      "selection_help": "presiona la tecla de espacio y luego las teclas de flecha para hacer una selección"
+      "refresh_page": "elegir una selección de resultados en una actualización de página completa"
     },
     "meta": {
       "tags": "Etiquetado \"{{ tags }}\"",
@@ -35,7 +34,7 @@
       "signup_form_success": "¡Te enviaremos un correo electrónico antes de inaugurar!",
       "admin_link_html": "¿Eres el dueño de la tienda? <a href=\"\/admin\" class=\"text-link\">Regístrate aquí<\/a>",
       "password_link": "Entrar usando contraseña",
-      "powered_by_shopify_html": "Esta tienda contará con tecnología Shopify {{ shopify }}"
+      "powered_by_shopify_html": "Esta tienda estará impulsada por {{ shopify }}"
     },
     "social": {
       "share_on_facebook": "Compartir",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Suscríbete a nuestra lista de correo",
       "email_placeholder": "Dirección de correo electrónico",
-      "confirmation": "¡Gracias por suscribirte!",
+      "confirmation": "Gracias por su suscripción",
       "submit": "Suscribir"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Siguiente diapositiva",
       "previous_slide": "Anterior diapositiva",
       "pause_slideshow": "Pausar la presentación",
-      "rotate_slideshow": "Reproducir la presentación",
-      "load_slide": "Cargar diapositiva {{ slide_number }}",
-      "navigation_instructions": "Utiliza las flechas izquierda\/derecha para navegar por la presentación o deslízate hacia la izquierda\/derecha si usas un dispositivo móvil"
+      "play_slideshow": "Reproducir la presentación",
+      "play_video": "Reproduce el video",
+      "close_video": "Cerca de vídeo"
     },
     "featured_product": {
       "title": "Producto destacado",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Se ha excedido el límite de uso de la API de Google . Considere la posibilidad de actualizar a un <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Plan Premium<\/a>.",
       "auth_error_html": "Hubo un problema de autenticación con su cuenta de Google Maps.",
       "section_heading": "Ubicación"
-    },
-    "video": {
-      "play": "Reproduce el video",
-      "pause": "Pausar el video",
-      "resume": "Reanudar el video",
-      "close": "Cerca de vídeo"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Colección"
     },
     "sorting": {
-      "title": "Ordenar por"
+      "title": "Ordenar por",
+      "featured": "Destacados",
+      "best_selling": "Más vendidos",
+      "az": "Alfabéticamente, A-Z",
+      "za": "Alfabéticamente, Z-A",
+      "price_ascending": "Precio, menor a mayor",
+      "price_descending": "Precio, mayor a menor",
+      "date_descending": "Fecha, nuevo a antiguo",
+      "date_ascending": "Fecha, antiguo a nuevo"
     },
     "filters": {
       "title_tags": "Filtrar por",
@@ -214,8 +215,8 @@
       "first_name": "Nombre",
       "last_name": "Apellido",
       "company": "Compañía",
-      "address1": "Dirección",
-      "address2": "Apartamento, suite, etc.",
+      "address1": "Dirección1",
+      "address2": "Dirección2",
       "city": "Ciudad",
       "country": "País",
       "province": "Provincia",
@@ -241,22 +242,21 @@
     "orders": {
       "title": "Historial de pedidos",
       "order_number": "Pedido",
-      "order_number_link": "Número de pedido {{ number }}",
       "date": "Fecha",
       "payment_status": "Estado del pago",
-      "fulfillment_status": "Estado de la preparación",
+      "fulfillment_status": "Estado de finalización",
       "total": "Total",
       "none": "No ha realizado algún pedido aún."
     },
     "order": {
       "title": "Pedido {{ name }}",
-      "date_html": "Realizado en {{ date }}",
-      "cancelled_html": "Pedido cancelado en {{ date }}",
+      "date": "Realizado en {{ date }}",
+      "cancelled": "Pedido cancelado en {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
       "billing_address": "Dirección de facturación",
       "payment_status": "Estado del pago",
       "shipping_address": "Dirección de envío",
-      "fulfillment_status": "Estado de la preparación",
+      "fulfillment_status": "Estado de finalización",
       "discount": "Descuento",
       "shipping": "Envío",
       "tax": "Impuesto",
@@ -265,7 +265,7 @@
       "price": "Precio",
       "quantity": "Cantidad",
       "total": "Total",
-      "fulfilled_at_html": "Finalizado {{ date }}",
+      "fulfilled_at": "Finalizado {{ date }}",
       "subtotal": "Subtotal",
       "track_shipment": "Rastrear envío"
     },

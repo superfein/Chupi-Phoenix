@@ -8,8 +8,7 @@
         "external": "Öffnet externe Webseite.",
         "new_window_and_external": "Öffnet externe Webseite in einem neuen Fenster."
       },
-      "refresh_page": "Wenn Sie eine Auswahl auswählen, wird eine vollständige Seite aktualisiert",
-      "selection_help": "drücken Sie die Leertaste und dann die Pfeiltasten, um eine Auswahl zu treffen"
+      "refresh_page": "Wenn Sie eine Auswahl auswählen, wird eine vollständige Seite aktualisiert"
     },
     "meta": {
       "tags": "Getaggt \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Abonnieren Sie unsere Mailingliste",
       "email_placeholder": "E-Mail-Adresse",
-      "confirmation": "Danke für Ihre Anmeldung!",
+      "confirmation": "Danke für Ihre Anmeldung",
       "submit": "Abonnieren"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Nächster Schieber",
       "previous_slide": "Vorheriger Schieber",
       "pause_slideshow": "Diashow pausieren",
-      "rotate_slideshow": "Diashow abspielen",
-      "load_slide": "Folie {{ slide_number }} laden",
-      "navigation_instructions": "Nutzen Sie die linken\/rechten Pfeile, um durch die Slideshow zu navigieren, oder wischen Sie nach links bzw. rechts, wenn Sie ein mobiles Gerät verwenden"
+      "play_slideshow": "Diashow abspielen",
+      "play_video": "Video abspielen",
+      "close_video": "Video schliessen"
     },
     "featured_product": {
       "title": "Vorgestelltes Produkt",
@@ -97,14 +96,8 @@
       "address_error": "Kann die Adresse nicht finden",
       "address_no_results": "Keine Ergebnisse für diese Adresse",
       "address_query_limit_html": "Sie haben die Google- API-Nutzungsgrenze überschritten. Betrachten wir zu einem <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium-Paket<\/a> zu aktualisieren.",
-      "auth_error_html": "Es gab ein Problem bei der Authentifizierung Ihres Google Maps-Kontos.",
+      "auth_error_html": "Es gab ein Problem bei Google Maps Konto zu authentifizieren.",
       "section_heading": "Lage"
-    },
-    "video": {
-      "play": "Video abspielen",
-      "pause": "Video pausieren",
-      "resume": "Video fortsetzen",
-      "close": "Video schliessen"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Sammlung"
     },
     "sorting": {
-      "title": "Sortieren nach"
+      "title": "Sortieren nach",
+      "featured": "Ausgewählt",
+      "best_selling": "Meistverkauft",
+      "az": "Alphabetisch, A-Z",
+      "za": "Alphabetisch, Z-A",
+      "price_ascending": "Preis, niedrig nach hoch",
+      "price_descending": "Preis, hoch nach niedrig",
+      "date_descending": "Datum, neu nach alt",
+      "date_ascending": "Datum, alt nach neu"
     },
     "filters": {
       "title_tags": "Filtern nach",
@@ -193,17 +194,17 @@
   },
   "customer": {
     "account": {
-      "title": "Mein Konto",
-      "details": "Kontodetails",
+      "title": "Mein Account",
+      "details": "Account-Details",
       "view_addresses": "Adressen ansehen",
-      "return": "Zurück zu Kontodetails"
+      "return": "Zurück zu Account-Details"
     },
     "activate_account": {
-      "title": "Konto aktivieren",
-      "subtext": "Erstellen Sie ein Passwort, um Ihr Konto zu aktiveren.",
+      "title": "Account aktivieren",
+      "subtext": "Erstellen Sie ein Passwort, um Ihren Account zu aktiveren.",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
-      "submit": "Konto aktivieren",
+      "submit": "Account aktivieren",
       "cancel": "Einladung ablehnen"
     },
     "addresses": {
@@ -214,8 +215,8 @@
       "first_name": "Vorname",
       "last_name": "Nachname",
       "company": "Firma",
-      "address1": "Adresse",
-      "address2": "Wohnung, Zimmer usw.",
+      "address1": "Adresse1",
+      "address2": "Adresse2",
       "city": "Stadt",
       "country": "Land",
       "province": "Bundesland",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Bestellungen",
       "order_number": "Bestellung",
-      "order_number_link": "Bestellnummer {{ number }}",
       "date": "Datum",
       "payment_status": "Zahlungsstatus",
       "fulfillment_status": "Lieferstatus",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Bestellung {{ name }}",
-      "date_html": "Aufgegeben am {{ date }}",
-      "cancelled_html": "Bestellung storniert am {{ date }}",
+      "date": "Aufgegeben am {{ date }}",
+      "cancelled": "Bestellung storniert am {{ date }}",
       "cancelled_reason": "Grund: {{ reason }}",
       "billing_address": "Rechnungsadresse",
       "payment_status": "Zahlungsstatus",
@@ -265,7 +265,7 @@
       "price": "Preis",
       "quantity": "Menge",
       "total": "Gesamt",
-      "fulfilled_at_html": "Geliefert am {{ date }}",
+      "fulfilled_at": "Geliefert am {{ date }}",
       "subtotal": "Zwischensumme",
       "track_shipment": "Sendung verfolgen"
     },
@@ -278,14 +278,14 @@
       "success": "Wir haben Ihnen eine E-Mail mit einem Link zum Aktualisieren des Passworts geschickt."
     },
     "reset_password": {
-      "title": "Passwort für Konto zurücksetzen",
+      "title": "Account-Passwort zurücksetzen",
       "subtext": "Geben Sie ein neues Passwort für {{ email }} ein",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
       "submit": "Passwort zurücksetzen"
     },
     "register": {
-      "title": "Konto erstellen",
+      "title": "Account erstellen",
       "first_name": "Vorname",
       "last_name": "Nachname",
       "email": "E-Mail",
@@ -319,10 +319,10 @@
       }
     },
     "customer": {
-      "account": "Konto",
+      "account": "Account",
       "log_out": "Ausloggen",
       "log_in": "Einloggen",
-      "create_account": "Konto erstellen"
+      "create_account": "Account erstellen"
     },
     "footer": {
       "social_platform": "{{ name }} auf {{ platform }}"

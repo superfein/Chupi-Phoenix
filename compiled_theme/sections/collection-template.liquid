@@ -89,7 +89,7 @@
                   <div class="filters-toolbar__item-child">
                     <label class="filters-toolbar__label select-label" for="FilterTags">{{ 'collections.filters.title_tags' | t }}</label>
                     <div class="filters-toolbar__input-wrapper select-group">
-                      <select class="filters-toolbar__input hidden" name="FilterTags" id="FilterTags" aria-describedby="a11y-refresh-page-message a11y-selection-message">
+                      <select class="filters-toolbar__input hidden" name="FilterTags" id="FilterTags" aria-describedby="a11y-refresh-page-message">
                         {% if current_tags %}
                           {% if collection.handle %}
                             <option value="/collections/{{ collection.handle }}">{{ 'collections.filters.all_tags' | t }}</option>
@@ -116,17 +116,19 @@
                   {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
                   <label class="filters-toolbar__label select-label" for="SortBy">{{ 'collections.sorting.title' | t }}</label>
                   <div class="filters-toolbar__input-wrapper select-group">
-                    <select name="sort_by" id="SortBy"
-                      class="filters-toolbar__input hidden"
-                      aria-describedby="a11y-refresh-page-message a11y-selection-message"
-                      data-default-sortby="{{ collection.default_sort_by }}"
-                    >
-                      {%- for option in collection.sort_options -%}
-                        <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
-                      {%- endfor -%}
+                    <select name="SortBy" id="SortBy" class="filters-toolbar__input hidden" aria-describedby="a11y-refresh-page-message">
+                      <option value="manual"{% if sort_by == "manual" %} selected="selected"{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
+                      <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+                      <option value="title-ascending"{% if sort_by == "title-ascending"  %}selected="selected"{% endif %}>{{ 'collections.sorting.az' | t }}</option>
+                      <option value="title-descending"{% if sort_by == "title-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.za' | t }}</option>
+                      <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+                      <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+                      <option value="created-descending"{% if sort_by == "created-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
+                      <option value="created-ascending"{% if sort_by == "created-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
                     </select>
                     {% include 'icon-chevron-down' %}
                   </div>
+                  <input id="DefaultSortBy" type="hidden" value="{{ collection.default_sort_by }}">
                 </div>
               {% endif %}
             </div>

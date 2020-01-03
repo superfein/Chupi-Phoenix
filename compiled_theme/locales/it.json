@@ -8,8 +8,7 @@
         "external": "Apre un sito esterno.",
         "new_window_and_external": "Apre un sito esterno in una nuova finestra."
       },
-      "refresh_page": "scegliendo una selezione si ottiene un aggiornamento completo della pagina",
-      "selection_help": "premi la barra spaziatrice e i tasti freccia per effettuare una selezione"
+      "refresh_page": "scegliendo una selezione si ottiene un aggiornamento completo della pagina"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
@@ -66,12 +65,12 @@
     "newsletter_form": {
       "newsletter_email": "Iscriviti alla nostra mailing list",
       "email_placeholder": "Indirizzo email",
-      "confirmation": "Grazie per l'iscrizione!",
+      "confirmation": "Grazie per l'iscrizione",
       "submit": "Registrati"
     },
     "filters": {
       "show_more": "Mostra di Più",
-      "show_less": "Mostra di meno"
+      "show_less": "Mostra di Meno"
     },
     "payment": {
       "method": "Metodi di pagamento"
@@ -85,9 +84,9 @@
       "next_slide": "Slide successiva",
       "previous_slide": "Slide Precedente",
       "pause_slideshow": "Metti in pausa",
-      "rotate_slideshow": "Avvia slideshow",
-      "load_slide": "Carica slide {{ slide_number }}",
-      "navigation_instructions": "Usa le frecce sinistra\/destra per navigare nella presentazione o scorri a sinistra\/destra se stai utilizzando un dispositivo mobile"
+      "play_slideshow": "Avvia slideshow",
+      "play_video": "Play video",
+      "close_video": "Chiudi il video"
     },
     "featured_product": {
       "title": "Prodotto presentato",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Hai superato il limite di utilizzo dell'API di Google. Considera l’aggiornamento a un <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Piano Premium<\/a>.",
       "auth_error_html": "Si è verificato un problema di autenticazione con il tuo account di Google Maps.",
       "section_heading": "Posizione"
-    },
-    "video": {
-      "play": "Play video",
-      "pause": "Metti video in pausa",
-      "resume": "Riprendi video",
-      "close": "Chiudi il video"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Collezione"
     },
     "sorting": {
-      "title": "Ordina per"
+      "title": "Ordina per",
+      "featured": "In primo piano",
+      "best_selling": "Bestseller",
+      "az": "In ordine alfabetico, A - Z",
+      "za": "In ordine alfabetico, Z - A",
+      "price_ascending": "Prezzo crescente",
+      "price_descending": "Prezzo decrescente",
+      "date_descending": "Data, dal più al meno recente",
+      "date_ascending": "Data, dal più vecchio al più recente"
     },
     "filters": {
       "title_tags": "Filtra per",
@@ -214,8 +215,8 @@
       "first_name": "Nome",
       "last_name": "Cognome",
       "company": "Azienda",
-      "address1": "Indirizzo",
-      "address2": "Interno, scala, ecc.",
+      "address1": "Indirizzo - campo 1",
+      "address2": "Indirizzo - campo 2",
       "city": "Città",
       "country": "Paese",
       "province": "Provincia",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Cronologia degli ordini",
       "order_number": "Ordine",
-      "order_number_link": "Numero ordine {{ number }}",
       "date": "Data",
       "payment_status": "Stato del pagamento",
       "fulfillment_status": "Stato di evasione ordine",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Ordine {{ name }}",
-      "date_html": "Piazzato il {{ date }}",
-      "cancelled_html": "Ordine annullato il {{ date }}",
+      "date": "Piazzato il {{ date }}",
+      "cancelled": "Ordine annullato il {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
       "billing_address": "Indirizzo di fatturazione",
       "payment_status": "Stato del pagamento",
@@ -265,7 +265,7 @@
       "price": "Prezzo",
       "quantity": "Quantità",
       "total": "Totale",
-      "fulfilled_at_html": "Evaso il {{ date }}",
+      "fulfilled_at": "Evaso il {{ date }}",
       "subtotal": "Totale parziale",
       "track_shipment": "Controlla lo status della spedizione"
     },

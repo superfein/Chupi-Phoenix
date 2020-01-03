@@ -7,7 +7,7 @@
       <div class="blog-filter">
         <label class="blog-filter__label select-label" for="BlogTagFilter">{{ 'collections.filters.title_tags' | t }}</label>
         <div class="select-group">
-          <select id="BlogTagFilter" aria-describedby="a11y-refresh-page-message a11y-selection-message">
+          <select id="BlogTagFilter" aria-describedby="a11y-refresh-page-message">
             <option value="/blogs/{{ blog.handle }}">{{ 'blogs.article.all_topics' | t }}</option>
             {% for tag in blog.all_tags %}
               <option value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>

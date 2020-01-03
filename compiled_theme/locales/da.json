@@ -8,8 +8,7 @@
         "external": "Åbner ekstern hjemmeside.",
         "new_window_and_external": "Åbner ekstern hjemmeside i nyt vindue."
       },
-      "refresh_page": "når du vælger en samling bliver hele siden genindlæst",
-      "selection_help": "tryk på mellemrumstasten og derefter på piletasterne for at vælge"
+      "refresh_page": "når du vælger en samling bliver hele siden genindlæst"
     },
     "meta": {
       "tags": "Mærket \"{{ tags }}\"",
@@ -66,7 +65,7 @@
     "newsletter_form": {
       "newsletter_email": "Tilmeld dig vores distributionsliste",
       "email_placeholder": "E-mailadresse",
-      "confirmation": "Tak for dit abonnement.",
+      "confirmation": "Tak for dit abonnement",
       "submit": "Abonnér"
     },
     "filters": {
@@ -85,9 +84,9 @@
       "next_slide": "Næste billede",
       "previous_slide": "Forrige billede",
       "pause_slideshow": "Sæt slideshow på pause",
-      "rotate_slideshow": "Afspil slideshow",
-      "load_slide": "Indlæs dias {{ slide_number }}",
-      "navigation_instructions": "Brug venstre\/højre pile til at navigere i diasshowet eller stryg til venstre\/højre, hvis du bruger en mobilenhed"
+      "play_slideshow": "Afspil slideshow",
+      "play_video": "Afspil video",
+      "close_video": "Luk video"
     },
     "featured_product": {
       "title": "Fremhævet produkt",
@@ -99,12 +98,6 @@
       "address_query_limit_html": "Du har overskredet Googles API-brugerbegrænsning. Overvej at opgradere til en <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium-plan<\/a>.",
       "auth_error_html": "Der opstod et problem under forsøg på at bekræfte din Google Maps-konto.",
       "section_heading": "Beliggenhed"
-    },
-    "video": {
-      "play": "Afspil video",
-      "pause": "Sæt video på pause",
-      "resume": "Genoptag afspilning af video",
-      "close": "Luk video"
     }
   },
   "blogs": {
@@ -173,7 +166,15 @@
       "collection_label": "Samling"
     },
     "sorting": {
-      "title": "Sortér efter"
+      "title": "Sortér efter",
+      "featured": "Fremhævet",
+      "best_selling": "Bestsellere",
+      "az": "Alfabetisk, A-Å",
+      "za": "Alfabetisk, Å-A",
+      "price_ascending": "Pris, lav til høj",
+      "price_descending": "Pris, høj til lav",
+      "date_descending": "Dato, nyere til ældre",
+      "date_ascending": "Dato, ældre til nyere"
     },
     "filters": {
       "title_tags": "Filtrer efter",
@@ -214,8 +215,8 @@
       "first_name": "Fornavn",
       "last_name": "Efternavn",
       "company": "Firma",
-      "address1": "Adresse",
-      "address2": "Lejlighed, etage osv.",
+      "address1": "Adresse 1",
+      "address2": "Adresse 2",
       "city": "By",
       "country": "Land",
       "province": "Landsdel",
@@ -241,7 +242,6 @@
     "orders": {
       "title": "Ordrehistorik",
       "order_number": "Ordre",
-      "order_number_link": "Ordrenummer {{ number }}",
       "date": "Dato",
       "payment_status": "Betalingsstatus",
       "fulfillment_status": "Forsendelsesstatus",
@@ -250,8 +250,8 @@
     },
     "order": {
       "title": "Ordre {{ name }}",
-      "date_html": "Indgivet den {{ date }}",
-      "cancelled_html": "Ordre annulleret den {{ date }}",
+      "date": "Indgivet den {{ date }}",
+      "cancelled": "Ordre annulleret den {{ date }}",
       "cancelled_reason": "Begrundelse: {{ reason }}",
       "billing_address": "Faktureringsadresse",
       "payment_status": "Betalingsstatus",
@@ -265,7 +265,7 @@
       "price": "Pris",
       "quantity": "Antal",
       "total": "I alt",
-      "fulfilled_at_html": "Leveret den {{ date }}",
+      "fulfilled_at": "Leveret den {{ date }}",
       "subtotal": "Subtotal",
       "track_shipment": "Følg forsendelse"
     },
