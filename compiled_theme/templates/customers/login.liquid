@@ -2,27 +2,49 @@
   <div class="grid">
 
     <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
-      <div class="form-message form-message--success hide" id="ResetSuccess">
+      <div class="form-message form-message--success hide" id="ResetSuccess" tabindex="-1">
         {{ 'customer.recover_password.success' | t }}
       </div>
 
       <div id="CustomerLoginForm" class="form-vertical">
-        {% form 'customer_login' %}
 
-          <h1 class="text-center">{{ 'customer.login.title' | t }}</h1>
+        <h1 id="LoginHeading" class="text-center">{{ 'customer.login.title' | t }}</h1>
+
+        {% form 'customer_login', novalidate: 'novalidate' %}
 
           {%- if form.errors -%}
             <div class="form-message form-message--error">
+              <h2 class="h3 form-message__title " tabindex="-1" data-form-status>{{ 'contact.form.error_heading' | t }}</h2>
               {{ form.errors | default_errors }}
             </div>
           {%- endif -%}
 
           <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
-          <input type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" autocorrect="off" autocapitalize="off" autofocus>
+          <input
+            type="email"
+            name="customer[email]"
+            id="CustomerEmail"
+            autocomplete="email"
+            autocorrect="off"
+            autocapitalize="off"
+            {%- if form.errors contains 'form' -%}
+              class="input--error"
+              aria-invalid="true"
+            {%- endif -%}
+            >
 
           {% if form.password_needed %}
             <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
-            <input type="password" value="" name="customer[password]" id="CustomerPassword" class="{% if form.errors contains 'password' %} input--error{% endif %}">
+            <input
+              type="password"
+              value=""
+              name="customer[password]"
+              id="CustomerPassword"
+              {%- if form.errors contains 'form' -%}
+                class="input--error"
+                aria-invalid="true"
+              {%- endif -%}
+            >
           {% endif %}
 
           <div class="text-center">
@@ -43,18 +65,12 @@
       <div id="RecoverPasswordForm" class="hide">
 
         <div class="text-center">
-          <h2>{{ 'customer.recover_password.title' | t }}</h2>
+          <h2 id="RecoverHeading">{{ 'customer.recover_password.title' | t }}</h2>
           <p>{{ 'customer.recover_password.subtext' | t }}</p>
         </div>
 
         <div class="form-vertical">
           {% form 'recover_customer_password' %}
-
-            {%- if form.errors -%}
-              <div class="form-message form-message--error">
-                {{ form.errors | default_errors }}
-              </div>
-            {%- endif -%}
 
             {% comment %}
               Add a hidden span to indicate the form was submitted succesfully.
@@ -64,14 +80,31 @@
             {% endif %}
 
             <label for="RecoverEmail">{{ 'customer.recover_password.email' | t }}</label>
-            <input type="email" value="" name="email" id="RecoverEmail" class="input-full"autocorrect="off" autocapitalize="off">
+            <input
+              type="email"
+              value=""
+              name="email"
+              id="RecoverEmail"
+              class="input-full{% if form.errors %} input--error{% endif %}"
+              autocorrect="off"
+              autocapitalize="off"
+              {% if form.errors %}
+                aria-invalid="true"
+                aria-describedby="RecoverEmail-email-error"
+              {%- endif -%}
+              >
+            {%- if form.errors -%}
+              <span id="RecoverEmail-email-error" class="input-error-message">
+                {% include 'icon-error' %} {{ form.errors.messages['form'] }}
+              </span>
+            {%- endif -%}
 
             <div class="text-center">
               <p>
                 <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
               </p>
 
-              <button type="button" id="HideRecoverPasswordLink" class="text-link">{{ 'customer.recover_password.cancel' | t }}</button>
+              <a href="#LoginHeading" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</a>
             </div>
           {% endform %}
         </div>

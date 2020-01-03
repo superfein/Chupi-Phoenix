@@ -1,4 +1,4 @@
 development:
-  password: 03cd9ac45c2345db664d1ea02e49da09
-  theme_id: "80560816206"
-  store: us-chupi-jewellery.myshopify.com
+  password: ${DONAL_DEV_PASSWD}
+  theme_id: ${DONAL_DEV_THEMEID}
+  store: ${DEV_SHOP}

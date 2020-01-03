@@ -180,11 +180,11 @@ function localesFiles(cb) {
 function watch() {
 
   browserSync.init({
-    server: {
-      baseDir: paths.devHTMLDir // point server to base HTML
-    }
+    // server: {
+    //   baseDir: paths.devHTMLDir // point server to base HTML
+    // }//,
     // reloadDelay: 1000, // manual delay to allow for ThemeKit to sync
-    // reloadOnRestart: true
+    // reloadOnRestart: false
   });
 
   gulp.watch(paths.devHTML, gulp.series(pipeHTML));

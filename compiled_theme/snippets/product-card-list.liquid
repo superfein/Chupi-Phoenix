@@ -6,7 +6,7 @@
   <div class="list-view-item__link">
     <div class="list-view-item__image-column">
       <div class="list-view-item__image-wrapper product-card__image-wrapper">
-        <img class="list-view-item__image" src="{{ product.featured_image.src | img_url: '95x95', scale: 2 }}" alt="">
+        <img class="list-view-item__image" src="{{ product.featured_image.src | img_url: '95x95', scale: 2 }}" alt="{{ product.featured_image.alt }}">
       </div>
     </div>
 
