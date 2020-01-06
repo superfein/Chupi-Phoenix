@@ -8,6 +8,6 @@ node_modules/
 # Ignore Themekit config file
 compiled_theme/config.yml
 
-# Ignore environment variables
+# Ignore any environment variables
 variables
 variables.env

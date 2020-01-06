@@ -1,4 +1,12 @@
+# ThemeKit environment variables set in: ${HOME}/Library/Application Support/Shopify/Themekit/variables
+# See: https://shopify.github.io/themekit/configuration/
+
 development:
-  password: ${DONAL_DEV_PASSWD}
-  theme_id: ${DONAL_DEV_THEMEID}
-  store: ${DEV_SHOP}
+  password: ${CHUPI_PHOENIX_API_PASSWORD}
+  theme_id: ${CHUPI_PHOENIX_DONAL_THEMEID}
+  store: ${CHUPI_PHOENIX_STORE}
+
+production:
+  password: ${CHUPI_PHOENIX_API_PASSWORD}
+  theme_id: ${CHUPI_PHOENIX_MASTER_THEMEID}
+  store: ${CHUPI_PHOENIX_STORE}
