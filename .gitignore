@@ -9,5 +9,5 @@ node_modules/
 compiled_theme/config.yml
 
 # Ignore any environment variables
-variables
-variables.env
+#variables
+#variables.env

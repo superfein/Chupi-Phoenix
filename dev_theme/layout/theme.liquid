@@ -24,6 +24,25 @@
     <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
 
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ 'apple-icon-57x57.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ 'apple-icon-60x60.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ 'apple-icon-72x72.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ 'apple-icon-76x76.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ 'apple-icon-114x114.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ 'apple-icon-120x120.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ 'apple-icon-144x144.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ 'apple-icon-152x152.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-icon-180x180.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="192x192"  href="{{ 'android-icon-192x192.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96x96.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}">
+  <!-- <link rel="manifest" href="{{ 'manifest.json"> -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
   <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
 
   <link rel="canonical" href="{{ canonical_url }}" />
@@ -47,7 +66,7 @@
  {% endif %}
 
  {% comment %} Creates a transparent header, defined in chupi-header-phoenix.liquid {% endcomment %}
- {% if page.handle contains 'store' %}
+ {% if template.name == 'index' or page.handle contains 'store' %}
    {% assign transparentHeader = true %}
  {% else %}
    {% assign transparentHeader = false %}
@@ -56,18 +75,24 @@
 
 
 
- <body data-currency-sample="{{ 100 | money }}" data-currency="{{ cart.currency.iso_code }}" data-currency-symbol="{{ cart.currency.symbol }}" id="{{ page_title | handle }}" data-dynamic-cart="{{ dynamicCartStatus }}" class="{% if transparentHeader %} transparent-header {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+ <body data-currency-sample="{{ 100 | money }}" data-currency="{{ cart.currency.iso_code }}" data-currency-symbol="{{ cart.currency.symbol }}" id="{{ page_title | handle }}" data-dynamic-cart="{{ dynamicCartStatus }}" class="{% if transparentHeader %} transparent-header transparent-header-no-spacing {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
 
   <!-- Header -->
-  {% include 'chupi-header-phoenix' %}
+  {% render 'header' %}
 
-  <!-- Main content -->
-  <h3>Test</h3>
-  {{ content_for_layout }}
+  <!-- Page main content -->
+  <main>
+    {{ content_for_layout }}
+  </main>
 
   <!-- Footer -->
-  {% include 'chupi-footer-phoenix' %}
+  {% render 'footer' %}
+
+  {% if template != 'cart' %}
+    <!-- Dynamic cart -->
+    {% render 'dynamic-cart' %}
+  {% endif %}
 
 
 

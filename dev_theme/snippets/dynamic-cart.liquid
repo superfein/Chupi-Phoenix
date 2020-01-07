@@ -1,0 +1,117 @@
+<!-- Variable to get things from the gift-box -->
+{% assign giftBox = all_products['luxury-gifting-box'] %}
+
+
+<aside id="dynamic-cart" class="drawer" data-gift-box-price="{{ giftBox.price }}" data-gift-box-id="{{ giftBox.selected_or_first_available_variant.id }}">
+
+  <div class="drawer-back"></div>
+
+  <div class="drawer-header">
+    <h2>Shopping Bag</h2>
+    <p>Free worldwide delivery and 100 days for returns</p>
+    <a href="javascript:;" class="close-btn"></a>
+  </div> <!-- end .drawer-header -->
+
+  <div class="drawer-main">
+    <ul>
+
+      <!-- Template cart item -->
+      <li class="cart-item cart-item-template" data-line="0" data-item-properties="" data-key="">
+        <div>
+          <a href=""><img class="" src="" alt=""></a>
+        </div>
+        <div>
+          <a class="title" href=""><h4></h4></a>
+          <div class="qty">
+            <span>Qty</span>
+            <select data-variant-id="">
+              <option value="1" selected="">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <span class="price"></span>
+          <div class="packaging-lux add">
+            <a href="javascript:;" class="packaging-option"><span>Upgrade to luxury packaging</span></a>
+            <a href="javascript:;" class="info-btn"></a>
+          </div>
+          <div class="packaging-lux added">
+            <div class="packaging-option"><span>Luxury packaging added</span></div>
+            <a href="javascript:;" class="undo">Undo</a>
+          </div>
+          <div class="packaging-lux comp">
+            <div class="packaging-option"><span>Complimentary gift box included for this piece</span></div>
+            <a href="javascript:;" class="info-btn"></a>
+          </div>
+          <div class="packaging-basic">
+            <a href="javascript:;" class="packaging-option"><span>I want minimal packaging for this piece</span></a>
+          </div>
+          <div class="packaging-basic-selected">
+            <div class="packaging-option"><span>Minimal packaging selected</span></div>
+            <a href="javascript:;" class="undo">Undo</a>
+          </div>
+          <a href="javascript:;" class="remove"></a>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="cart-empty">
+      <p>Sadly your Shopping Bag is empty!</p>
+      <a href="/collections/most-popular-solid-gold" class="btn btn-dark btn-solid">Shop our favourites</a>
+    </div>
+
+  </div> <!-- end .drawer-main -->
+
+  <div class="drawer-footer">
+    {% if cart.note == blank %}
+    <a href="javascript:;" class="add-note-btn">Add a note to this order?</a>
+    {% else %}
+    <a href="javascript:;" class="add-note-btn">Edit order note</a>
+    {% endif %}
+    <div class="notes-wrapper">
+      <textarea name="note" id="note" class="additional-notes" maxlength="180">{{ cart.note }}</textarea>
+      <div class="additional-notes-progress" title="maximum number of characters reached">
+        <svg class="progress-radial" width="24" height="24" viewBox="0 0 120 120">
+          <circle class="progress-radial__meter" cx="60" cy="60" r="54" stroke-width="12"></circle>
+          <circle class="progress-radial__value" cx="60" cy="60" r="54" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="339.292"></circle>
+        </svg>
+      </div>
+    </div>
+    <h3>Total</h3>
+    <div class="totals-item dhl-delivery">
+      <span class="title">DHL Delivery</span>
+      <span class="value">FREE</span>
+    </div>
+    <div class="totals-item standard-delivery">
+      <span class="title">Delivery</span>
+      <span class="value">FREE</span>
+    </div>
+    <div class="totals-item gift-boxes">
+      <span class="title">Luxury Packaging</span>
+      <span class="value"></span>
+    </div>
+    <div class="totals-item">
+      <span class="title">Total</span>
+      <span id="cart-total-price" class="value"></span>
+    </div>
+    <a href="/checkout" id="checkout-btn" class="btn btn-dark btn-solid"><img src="{{ 'lock-light.svg' | asset_url}}"/>Checkout</a>
+    <div class="we-accept">
+      <span>We accept the following payments</span>
+      <img src="{{ 'cards-accepted.png' | asset_url}}" alt="Visa, Mastercard, PayPal, American Express" />
+    </div>
+  </div> <!-- end .drawer-footer -->
+
+</aside> <!-- end #cart-drawer -->
+
+
+
+
+{% render 'packaging-overlays' with giftBox as giftBox %}

@@ -19,6 +19,7 @@
     "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
+    "gulp-contains": "^1.2.0",
     "gulp-imagemin": "^6.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-shopify-theme": "^1.1.3",

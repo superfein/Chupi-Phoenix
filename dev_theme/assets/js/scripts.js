@@ -251,6 +251,91 @@
 
 
 
+  // Currency selector
+  function submitFormOnChangeStandard(){
+    const currencySelector = $('.currency-select');
+    currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
+      var form = $(this).children('form');
+    	var select = form.children('select');
+      select.on('change', function(){
+        form.submit();
+      });
+    });
+  }
+  submitFormOnChangeStandard();
+
+  function createFrontActive(option){
+    const currencySelector = $('.currency-select');
+    currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
+      var frontActive = $(this).children('.currency-btn');
+      frontActive.addClass('currency-' + option.value.toLowerCase());
+      frontActive.html(option.value);
+    });
+  }
+
+  function createFrontOption(option, appendTarget){
+    var optionListItem = document.createElement('li');
+    optionListItem.setAttribute('data-value', option.value);
+    optionListItem.innerHTML = '<a href="javascript:;" class="currency-item">' + option.value + '</a>';
+    optionListItem.querySelector('a').classList.add('currency-' + option.value.toLowerCase());
+    if (option.selected){
+      createFrontActive(option);
+      optionListItem.classList.add('active');
+    };
+    appendTarget.append(optionListItem);
+    //optionListItem.insertBefore(appendTarget.find())
+  }
+
+  function createFront(){
+    const currencySelector = $('.currency-select');
+    currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
+      var form = $(this).children('form');
+    	var select = form.children('select');
+      var options = Array.from(select.children('option'));
+      var frontActive = $(this).children('.currency-btn');
+      var frontList = $(this).children('.currency-list');
+
+      options.map(option => {
+        createFrontOption(option, frontList)
+      });
+      // Append back button to mobile currency
+      if ($(this).is("#currency-select-mobile")) {
+        frontList.append('<li><a href="javascript:;" class="currency-close-btn">Currency</a></li>');
+      }
+    });
+  }
+  createFront();
+
+  function submitFormFromFront(){
+    const currencySelector = $('.currency-select');
+    currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
+      var form = $(this).children('form');
+      var select = form.children('select');
+      var options = Array.from(select.children('option'));
+      var frontActive = $(this).children('.currency-btn');
+      var frontList = $(this).children('.currency-list');
+      var frontListItems = Array.from(frontList.children('li'));
+      frontListItems.map(item => {
+        item.addEventListener('click', function(){
+          for (let i in options){
+            if (options[i].value === item.getAttribute('data-value')){
+              options[i].selected = true;
+              form.submit();
+              break;
+            }
+          }
+        })
+      })
+    });
+  }
+  submitFormFromFront();
+
+
+
+
+
+
+
 
   // Custom fix for object-cover images in IE 11
   var isIE11 = !!navigator.userAgent.match(/Trident.*rv\:11\./);
@@ -631,6 +716,38 @@
 	// if( $('.slider').length ) {
 	//   $('.slider').slick(slickSliderSettings);
 	// } // end if
+
+
+
+
+
+
+
+
+
+
+  // Make Currency
+  function makeCurrency(amount, commas) {
+    const symbol = document.body.getAttribute('data-currency-symbol');
+    const trailingZeroes = document.body.getAttribute('data-currency-sample').includes('.00');
+    if (trailingZeroes){
+      if (typeof amount === 'string'){
+        amount = parseInt(amount);
+      }
+      amount = amount.toFixed(2);
+      if (commas === true){
+        amount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      let money = (symbol + amount);
+      return money;
+    } else {
+      if (commas === true){
+        amount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      let money = symbol + amount;
+      return money;
+    }
+  }
 
 
 

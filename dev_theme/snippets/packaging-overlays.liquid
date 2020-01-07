@@ -1,0 +1,89 @@
+
+{% comment %} To be included as part of dynamic-cart.liquid {% endcomment %}
+
+<div class="overlay packaging packaging-lux-add">
+  <div class="modal">
+    <div class="modal-header"></div>
+    <div class="modal-main">
+      <div>
+        <img src="{{ 'sustainability-packaging.jpg' | asset_url}}" alt="Luxury Packaging">
+      </div>
+      <div>
+        <h3>Add Luxury Gifting Box</h3>
+        <p>Your Chupi piece will arrive beautifully presented in our signature grey jewellery box hand-tied with the
+          softest grosgrain ribbon placed in a Chupi grey paper bag. To make your gift extra special you can add our
+          luxury gift box to your order. This beautiful keepsake box is ready to give to that special someone or to keep for yourself.</p>
+        <h4 class="gift-box-price-update">
+          <span class="gift-box-price-update">{{ giftBox.price | money }}</span>
+        </h4>
+        <a href="javascript:;" class="btn btn-dark btn-solid">Add for this piece</a>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+    <button class="modal-close"></button>
+  </div>
+</div>
+
+<div class="overlay packaging packaging-lux-comp">
+  <div class="modal">
+    <div class="modal-header"></div>
+    <div class="modal-main">
+      <div>
+        <img src="{{ 'sustainability-packaging.jpg' | asset_url}}" alt="Luxury Packaging">
+      </div>
+      <div>
+        <h3>Complimentary Luxury Gifting Box</h3>
+        <p>Your solid gold Chupi heirloom will arrive beautifully presented in our blush pink velvet jewellery box
+          hand-tied with the softest grosgrain ribbon placed in a petite Chupi paper bag with a soft velvet pouch included.
+          To ensure your piece is extra special we have added our luxury gift box to your order. This beautiful keepsake box
+          is ready to give to that special someone or to keep for yourself.</p>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+    <button class="modal-close"></button>
+  </div>
+</div>
+
+<div class="overlay packaging packaging-lux-comp-notebook">
+  <div class="modal">
+    <div class="modal-header"></div>
+    <div class="modal-main">
+      <div>
+        <img src="{{ 'sustainability-packaging.jpg' | asset_url}}" alt="Luxury Packaging">
+      </div>
+      <div>
+        <h3>Complimentary Luxury Gifting Box</h3>
+        <p>Your Chupi solid gold heirloom piece will arrive beautifully presented in our signature blush pink velvet
+          jewellery box hand-tied with the softest grosgrain ribbon placed in a petite Chupi paper bag with a soft velvet
+          pouch included for travel.</p>
+      <p>To make your package extra special we have added our luxury gift box to your order.
+        This beautiful keepsake box is tied with a bow ready to give to that special someone or to keep for yourself.</p>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+    <button class="modal-close"></button>
+  </div>
+</div>
+
+<div class="overlay packaging packaging-min-add">
+  <div class="modal">
+    <div class="modal-header"></div>
+    <div class="modal-main">
+      <div>
+        <img src="{{ 'sustainability-packaging.jpg' | asset_url}}" alt="Luxury Packaging">
+      </div>
+      <div>
+        <h3>Minimal Packaging</h3>
+        <p>Sustainability is at the heart of everything we do. If you would like to opt for discrete minimal packaging
+          instead of our signature packaging simply press the button and we will send your piece in a small velvet
+          pouch in a simple flat box enclosed in a secure recycled padded envelope.</p>
+        <h4 class="gift-box-price-update">
+          <span class="gift-box-price-update">Free</span>
+        </h4>
+        <a href="javascript:;" class="btn btn-dark btn-solid">Add for this piece</a>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+    <button class="modal-close"></button>
+  </div>
+</div>
