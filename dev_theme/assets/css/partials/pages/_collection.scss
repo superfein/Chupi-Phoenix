@@ -98,12 +98,12 @@
           pointer-events: none;
         }
       }
-      .grid-item:nth-of-type(2) {
+      .grid-item:nth-of-type(2) { // Sort/Filter buttons
         grid-column: 1 / span 1;
         margin-left: -$mobile_side-padding;
         margin-right: -$mobile_side-padding;
         height: 40px;
-        #filter-buttons {
+        > .inner {
           position: relative;
           display: inline-block;
           width: 100%;
@@ -111,14 +111,189 @@
           background-color: $white;
           border-top: 1px solid $grey_light;
           border-bottom: 1px solid $grey_light;
-          a {
+          .sort,
+          .filter {
+            position: relative;
             display: inline-block;
             float: left;
             width: 50%;
             max-height: 38px;
             border: none;
-            &:nth-of-type(2) {
-              border-left: 1px solid $grey_light; // centerline
+            > a { // buttons
+              position: relative;
+              display: block;
+              font-size: 14px;
+              line-height: 1.2;
+              font-weight: $font-weight-light;
+              text-decoration: none;
+              color: $grey_dark;
+              background-color: transparent;
+              padding: 10px 20px;
+              text-align: center;
+              @include transition(background-color 0.2s $ease);
+              &:after {
+                content: "";
+                position: relative;
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                vertical-align: middle;
+                margin-left: 7px;
+                background-color: transparent;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+              &:hover {
+                text-decoration: none;
+              }
+              &#sort-button {
+                border-right: 1px solid $grey_light;
+                &:after {
+                  background-image: url($icon_sort_dark);
+                }
+              }
+              &#filter-button {
+                &:after {
+                  background-image: url($icon_filter_dark);
+                }
+              }
+            } // end a
+            .dropdown {
+              position: fixed;
+              display: grid;
+              grid-template-columns: 100%;
+              grid-template-rows: minmax(min-content, max-content) auto minmax(min-content, max-content); // auto = main section
+              grid-row-gap: 0px;
+              z-index: 8;
+              top: $mobile_header_height;
+              right: 0;
+              width: 100%;
+              height: 100%;
+              height: calc(100% - #{$mobile_header_height});
+              padding: 20px $mobile_side-padding;
+              background-color: $grey_lightest;
+              opacity: 1;
+              pointer-events: none;
+              @include transform(translateY(100%));
+              @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+              &.active { // customise panel open
+                opacity: 1;
+                pointer-events: auto;
+                @include transform(translateY(0%));
+                @include transition(transform 0.4s $ease_out_quint 0s, opacity 0.4s $ease_out_quint 0s);
+              }
+              .dropdown-header {
+                position: relative;
+                display: block;
+                //padding-right: 50px;
+                grid-column: 1 / span 2;
+                h3 {
+                  position: relative;
+                  display: inline-block;
+                  font-size: 20px;
+                  max-width: calc(100% - 40px);
+                  margin-bottom: 0;
+                  padding-right: 25px;
+                  &:after {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    right: 0;
+                    width: 15px;
+                    height: 15px;
+                    background-image: url($icon_sort_dark);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                  }
+                }
+                .close-btn {
+                  position: absolute;
+                  top: -9px;
+                  right: -12px;
+                  width: 40px;
+                  height: 40px;
+                  &:before, &:after {
+                    content: "";
+                    position: absolute;
+                    width: 18px;
+                    height: 0.05em;
+                    top: 50%;
+                    left: 50%;
+                    background-color: $grey;
+                    @include transition(all 0s $ease);
+                  }
+                  &:before {
+                    @include transform(translate(-50%, -50%) rotateZ(135deg));
+                  }
+                  &:after {
+                    @include transform(translate(-50%, -50%) rotateZ(45deg));
+                  }
+                }
+              } // end .dropdown-header
+              .dropdown-main {
+                //padding: 15px;
+                padding-top: 30px;
+                ul {
+                  display: grid;
+                  grid-template-columns: 100%;
+                  list-style-type: none;
+                  padding: 10px 0;
+                  //max-height: 0;
+                  //max-width: 400px;
+                  margin: 0 auto;
+                  padding: 0;
+                  @include transition(max-height 0.4s $ease_out_quint 0s, padding 0.2s $ease 0s, opacity 0.2s $ease 0s);
+                  > li {
+                    position: relative;
+                    grid-column: span 1;
+                    > a {
+                      position: relative;
+                      display: block;
+                      font-size: 14px;
+                      font-weight: $font_weight_lighter;
+                      text-decoration: none;
+                      color: $grey;
+                      padding: 8px 0;
+                      padding-left: 30px;
+                      &:before, // Checkbox
+                      &:after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 7px;
+                        width: 18px;
+                        height: 18px;
+                        pointer-events: none;
+                      }
+                      &:before { // Checkbox box
+                        background-color: $grey_lightest;
+                        border: 1px solid lighten($grey, 30%);
+                        border-radius: 3px;
+                        @include transition(all 0.2s $ease);
+                      }
+                      &:after { // Checkbox tick
+                        width: 6px;
+                        height: 10px;
+                        top: 10px;
+                        left: 6px;
+                        border-right: 3px solid $grey;
+                        border-bottom: 3px solid $grey;
+                        opacity: 0;
+                        @include transform(rotate(45deg) scale(0.5));
+                        @include transition(all 0.12s $ease_in_out_quart);
+                      }
+                      &.active { // li.active
+                        &:after {
+                          opacity: 1;
+                          @include transform(rotate(45deg) scale(1));
+                        }
+                      }
+                    }
+                  } // end li
+                }
+              } // end .dropdown-main
             }
           }
           &.sticky {
@@ -130,7 +305,7 @@
             margin-left: 0;
             margin-right: 0;
           }
-        } // end #filter-buttons
+        } // end .inner
       }
     } // end #filter-bar
   }
@@ -156,53 +331,59 @@
           height: 100%;
         }
       }
-    } // end .grid
-    .collection-pagination {
-      display: block;
-      padding: 50px 0;
-      text-align: center;
-      .progress-available {
+      #collection-pagination {
         display: block;
-        #pagination-progress-bar {
-          position: relative;
-          display: inline-block;
-          width: 100%;
-          height: 8px;
-          border-radius: 4px;
-          max-width: 480px;
-          margin-bottom: 20px;
-          background-color: $grey_lighter;
-          #pagination-progress { // dynamic width
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
+        padding: 50px 15px;
+        grid-column: span 2;
+        text-align: center;
+        // .progress-available {
+        //   display: block;
+          #pagination-progress-bar {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 8px;
             border-radius: 4px;
-            background-color: $grey_light;
-            @include transition(width 0.5s $ease_in_out_quint);
+            max-width: 480px;
+            margin-bottom: 20px;
+            background-color: $grey_lighter;
+            overflow: hidden; // prevent inner bar from exceeding length
+            #pagination-progress { // dynamic width
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              border-radius: 4px;
+              background-color: $grey_light;
+              @include transition(width 0.5s $ease_in_out_quint, background-color 0.3s $ease);
+              &.active {
+                background-color: darken($grey_light, 10%);
+                //@include animation('progressBarActive 0.8s ease both');
+              }
+            }
+          }
+          > p {
+            display: block;
+            font-size: 14px;
+            color: $grey;
+            margin-bottom: 30px
+          }
+        // }
+        .progress-unavailable {
+          display: none;
+          > a {
+            display: inline-block;
+            font-size: 14px;
+            color: $grey;
+            text-decoration: none;
+            padding: 10px;
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
-        > p {
-          display: block;
-          font-size: 14px;
-          color: $grey;
-          margin-bottom: 30px
-        }
-      }
-      .progress-unavailable {
-        display: none;
-        > a {
-          display: inline-block;
-          font-size: 14px;
-          color: $grey;
-          text-decoration: none;
-          padding: 10px;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    } // end .collection-pagination
+      } // end #collection-pagination
+    } // end .grid
   }
 } // end #collection-listing
 
@@ -242,6 +423,9 @@
         grid-row-gap: 25px;
         margin-left: 0;
         margin-right: 0;
+        #collection-pagination {
+          padding: 50px 0px;
+        }
       }
     }
   }
@@ -261,6 +445,9 @@
     .content {
       .grid {
         grid-template-columns: 1fr 1fr 1fr;
+        #collection-pagination {
+          grid-column: span 3;
+        }
       }
     }
   } // end #collection-listing
@@ -315,25 +502,67 @@
             display: none;
           }
         }
-        .grid-item:nth-of-type(2) { // #filter-buttons
+        .grid-item:nth-of-type(2) { // Sort/Filter buttons
           grid-column: 2 / span 1;
           margin-left: 0;
           margin-right: 0;
           height: auto;
-          #filter-buttons {
+          > .inner {
             float: right;
             width: auto;
             height: auto;
             border-top: 0;
             border-bottom: 0;
-            a {
+            .sort,
+            .filter {
               display: inline-block;
               float: left;
               width: auto;
               max-height: none;
-              border: 1px solid $grey_light;
+              border: 0;
               &:nth-of-type(2) {
                 margin-left: 10px;
+              }
+              > a { // buttons
+                position: relative;
+                display: block;
+                font-size: 14px;
+                line-height: 1.2;
+                font-weight: $font-weight-light;
+                text-decoration: none;
+                color: $grey_dark;
+                background-color: transparent;
+                padding: 10px 20px;
+                border: 1px solid $grey_light;
+                text-align: center;
+                @include transition(background-color 0.2s $ease);
+                &:hover {
+                  background-color: $grey_lightest;
+                }
+              } // end a
+              .sort-dropdown {
+                display: none;
+              }
+              .dropdown {
+                position: absolute;
+                z-index: 1;
+                top: 100%;
+                right: 0;
+                width: auto;
+                min-width: 200px;
+                height: auto;
+                padding: 15px 25px;
+                background-color: $white;
+                box-shadow: 0px 5px 10px rgba(0,0,0,0.12);
+                opacity: 0;
+                pointer-events: none;
+                @include transform(translateY(-10px));
+                .dropdown-header {
+                  display: none;
+                } // end .dropdown-header
+                .dropdown-main {
+                  padding-top: 0px;
+                } // end .dropdown-main
               }
             }
           } // end .inner
@@ -366,9 +595,9 @@
             @include transform(translateY(-50px));
           }
         }
-      }
-      .collection-pagination {
-        padding: 70px 0;
+        #collection-pagination {
+          padding: 70px 0;
+        }
       }
     }
   } // end #collection-listing

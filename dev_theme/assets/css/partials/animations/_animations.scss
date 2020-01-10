@@ -60,3 +60,11 @@
   60% { transform: translateY(-20%) rotate(180deg); }
   100% { transform: translateY(0%) rotate(180deg); }
 }
+
+// Progress bar active (used on collections pagination)
+@include keyframes(progressBarActive) {
+  0% { background-color: $grey_light; }
+  30% { background-color: darken($grey_light, 10%); }
+  70% { background-color: darken($grey_light, 10%); }
+  100% { background-color: $grey_light; }
+}

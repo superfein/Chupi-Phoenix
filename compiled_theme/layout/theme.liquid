@@ -102,6 +102,10 @@
   {{ 'scripts.js' | asset_url | script_tag }}
   {{ 'dynamic-cart.js' | asset_url | script_tag }}
 
+  {% if template contains 'collection' %}
+    {{ 'filter.js' | asset_url | script_tag }}
+  {% endif %}
+
 
 
 </body>

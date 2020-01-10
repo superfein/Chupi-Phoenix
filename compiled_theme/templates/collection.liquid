@@ -1,18 +1,108 @@
-{% paginate collection.products by 2 %}
-  <h1>{{ collection.title }}</h1>
-  {% for product in collection.products %}
-    <div>
-      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-      {{ product.price | money }}
-      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-      <a href="{{ product.url | within: collection }}">
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-      </a>
+
+<section id="collection-top" class="section-top">
+
+  <div class="content">
+    <h1>{{ collection.title }}</h1>
+    <div class="compressed-text">
+      <div class="inner">
+        <!-- collection.description -->
+        <p>There is an incredible wealth of creative talent and craftsmanship in our team, from our founder and designer,
+          our master goldsmiths to our highly skilled jewellers we have over 100 years of experience in making beautiful pieces.</p>
+        <p>From our founder and designer, our master goldsmiths to our highly skilled jewellers we have over 100 years of experience in making beautiful pieces.</p>
+        <p>Meet the incredible team behind our jewellery below.</p>
+      </div>
+      <a class="expand-toggle" href="javscript:;">more</a>
     </div>
-  {% else %}
-    <p>no matches</p>
-  {% endfor %}
-  {% if paginate.pages > 1 %}
-    {{ paginate | default_pagination }}
-  {% endif %}
-{% endpaginate %}
+  </div> <!-- end .content -->
+
+  <div class="content">
+    <div id="filter-bar" class="grid">
+      <div class="grid-item">
+        <div class="inner">
+          {% render 'collection-inner-nav' %}
+        </div>
+      </div>
+      <div class="grid-item">
+        <div id="sort-filter" class="inner">
+          <div class="sort">
+            <a href="javascript:;" id="sort-button">Sort</a>
+            <div class="dropdown">
+              <div class="dropdown-header">
+                <h3>Sort</h3>
+                <a href="javascript:;" class="close-btn"></a>
+              </div>
+              <div class="dropdown-main">
+                <ul>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="default">Default</a></li>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="best-selling">Best Selling</a></li>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="created-descending">Newest</a></li>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="created-ascending">Oldest</a></li>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="price-descending">Price high to low</a></li>
+                  <li><a href="javascript:;" class="collection-sort-option" data-sort-type="price-ascending">Price low to high</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="filter">
+            <a href="javascript:;" id="filter-button">Filter</a>
+          </div>
+        </div> <!-- end #sort-filter -->
+      </div>
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+
+</section>
+
+
+
+
+
+<section id="collection-listing">
+  <div class="content">
+    <div class="grid">
+
+      {% paginate collection.products by 12 %}
+
+        {% if collection.products.size > 0 %}
+
+          {% for product in collection.products%}
+            <div class="grid-item">
+              {% render 'product-card' with product as product %}
+            </div>
+          {% endfor %}
+
+          {% if paginate.next %}
+            {% render 'collection-pagination' with paginate as paginate %}
+          {% endif %}
+
+        {% else %}
+        <!-- no products - include empty upsell -->
+        {% endif %}
+
+      {% endpaginate %}
+
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>
+
+
+
+
+<section id="collection-help">
+  <div class="content">
+    <div class="grid">
+      <div class="grid-item">
+        <span class="pre-heading">Need help?</span>
+        <h2>Let us help you find your perfect ring</h2>
+        <p>We ask a few simple questions, crunch the numbers and calculate a size recommendation. It’s not science but we like to be helpful :)</p>
+        <a href="javscript:;" class="btn btn-dark">Start now</a>
+      </div>
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>
+
+
+
+
+
+{% render 'collection-filter' %}

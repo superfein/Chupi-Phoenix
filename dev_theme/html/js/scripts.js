@@ -413,63 +413,79 @@
 
 
 
+  // Collection pagination
+  function collectionPagination() {
+    // abbreviating 'pagination' to 'pag'
+    let pagSection = $('#collection-pagination');
+    let pagProgressBar = pagSection.find('#pagination-progress-bar');
+    let pagProgress = pagProgressBar.children('#pagination-progress');
+    let productsViewed = pagSection.find('#products-viewed');
+    let loadMoreButton = pagSection.find('#pagination-load-more');
 
+    var collectionTotalProducts = parseInt(pagSection.attr('data-total-products'));
+    var pagStepSize = parseInt(pagSection.attr('data-pagination-step'));
+    var pagTotalPages = parseInt(pagSection.attr('data-pagination-pages'));
+    var productsLoaded = parseInt($('#collection-listing').find('.product-card').length);
 
+    var currentPageIndex = 1;
+    var nextPageUrl = pagSection.attr("data-next-page-url");
+    var filterApplied = nextPageUrl.split("&")[1];
+    var pageToFetch = nextPageUrl.split("=")[0] + "=" + (currentPageIndex + 1) + "&" + filterApplied;
 
-  // Sticky filter bar
-  function stickyFilterBar() {
-    var filterButtonsPosTopDefault = $('#filter-buttons').parent().offset().top; // Position when not sticky
-    var filterBarPosTopDefault = $('#filter-bar').parent().offset().top; // Position when not sticky
-    var headerHeight = $('header').outerHeight();
-	  var scrolled = $(window).scrollTop();
-
-    if( window.innerWidth <= desktopBreakPoint ) { // Mobile only
-      $('#filter-bar').removeClass('sticky'); // Remove desktop sticky
-  		if( scrolled >= (filterButtonsPosTopDefault - headerHeight) ) { // If past top and menu open
-        $('#filter-buttons').addClass('sticky');
-  		} else {
-        $('#filter-buttons').removeClass('sticky');
-      }
+    function countProductsLoaded() {
+      productsLoaded = $('#collection-listing').find('.product-card').length;
+      return productsLoaded;
     }
-    else { // Desktop only
-      $('#filter-buttons').removeClass('sticky'); // Remove mobile sticky
-      if( scrolled >= (filterBarPosTopDefault - headerHeight) ) { // If past top and menu open
-        $('#filter-bar').addClass('sticky');
-  		} else {
-        $('#filter-bar').removeClass('sticky');
-      }
+
+    // Update progress bar on load
+    var percentageViewed = 100 * (productsLoaded/collectionTotalProducts);
+    pagProgress.css('width', percentageViewed + '%');
+
+    // Update progress bar before ajax call by increasing by pagination step size
+    function updateProgressBar() {
+      percentageViewed = 100 * ((productsLoaded + pagStepSize)/collectionTotalProducts);
+      pagProgress.css('width', percentageViewed + '%');
     }
+
+    loadMoreButton.click(function() {
+      // Update progress bar
+      pagProgress.addClass('active');
+      updateProgressBar();
+      // Get data from next page of products
+      $.ajax({
+        url: pageToFetch,
+        success: function(result) {
+          // Find product-cards from next page and append
+          let newItems = $(result).find('.product-card');
+          newItems.each( function(i) {
+            newItem = $(newItems[i]).wrap( "<div class='grid-item'></div>" ); // Wrap each product-card in a grid-item
+            $(newItem.parent()).insertBefore($("#collection-pagination")); // Append new wrapped item to the list before pagination section
+          });
+          // Update products-viewed text in pagination section
+          productsViewed.text(countProductsLoaded());
+          pagProgress.removeClass('active'); // Reset progress bar state
+        }
+      }).done(function() {
+        // pagProgress.removeClass('active'); // Reset progress bar state
+        // Update pagination data
+        currentPageIndex++;
+        pageToFetch = nextPageUrl.split("=")[0] + "=" + (currentPageIndex + 1) + "&" + filterApplied;
+        pagSection.attr('data-next-page-url', pageToFetch);
+        // If pagination complete, apply feedback
+        if (currentPageIndex == pagTotalPages) {
+          loadMoreButton.fadeOut();
+          //loadMoreButton.text('Complete').addClass('disabled');
+          pagSection.find('p').text('Viewing all ' + collectionTotalProducts + ' items in this collection');
+        }
+      });
+
+    }); // end click
+
 	}
-  if ($('#filter-bar').length) {
-    stickyFilterBar();
-  	$(window).scroll ( function() {	stickyFilterBar(); });
-  	$(window).resize ( function() {	stickyFilterBar(); });
+  if ($('#collection-pagination').length) {
+    collectionPagination();
   }
 
-
-
-
-
-
-
-  // Filter drawer
-  // Open filter drawer
-  $('#filter-filter-button').off().click( function() {
-    $('#filter-drawer').addClass('active');
-  });
-  // Expand filter section
-  $('.filter-section > a').off().click( function() {
-    if ($(this).parent('.filter-section').hasClass('active')) { // if click on active, close
-      $(this).parent('.filter-section').removeClass('active');
-    } else { // else open clicked
-      $('.filter-section').removeClass('active');
-      $(this).parent('.filter-section').addClass('active');
-    }
-  });
-  // Select filter item (temp)
-  $('.filter-section ul li a').off().click( function() {
-    $(this).parent('li').toggleClass('active');
-  });
 
 
 

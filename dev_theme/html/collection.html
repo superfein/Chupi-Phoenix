@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="css/styles.css">
 
 </head>
-<body>
+<body data-dynamic-cart="true">
 
 
   <header class="">
@@ -272,10 +272,30 @@
             </div>
           </div>
           <div class="grid-item">
-            <div id="filter-buttons">
-              <a href="javascript:;" id="filter-sort-button" class="btn-sort">Sort</a>
-              <a href="javascript:;" id="filter-filter-button" class="btn-filter">Filter</a>
-            </div>
+            <div id="sort-filter" class="inner">
+              <div class="sort">
+                <a href="javascript:;" id="sort-button">Sort</a>
+                <div class="dropdown">
+                  <div class="dropdown-header">
+                    <h3>Sort</h3>
+                    <a href="javascript:;" class="close-btn"></a>
+                  </div>
+                  <div class="dropdown-main">
+                    <ul>
+                      <li><a href="javascript:;" class="active">Default</a></li>
+                      <li><a href="javascript:;">Best Selling</a></li>
+                      <li><a href="javascript:;">Newest</a></li>
+                      <li><a href="javascript:;">Oldest</a></li>
+                      <li><a href="javascript:;">Price high to low</a></li>
+                      <li><a href="javascript:;">Price low to high</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="filter">
+                <a href="javascript:;" id="filter-button">Filter</a>
+              </div>
+            </div> <!-- end #sort-filter -->
           </div>
         </div> <!-- end .grid -->
       </div> <!-- end .content -->
@@ -446,22 +466,15 @@
             </div> <!-- end .product-card -->
           </div>
 
-        </div> <!-- end .grid -->
-
-
-        <div class="collection-pagination">
-          <div class="progress-available active">
+          <!-- Collection pagination -->
+          <div id="collection-pagination">
             <div id="pagination-progress-bar"><div id="pagination-progress" style="width:50%;"></div></div>
             <p>Viewing <span id="products-viewed">24</span> of <span id="products-available-count">395</span> items</p>
             <a id="pagination-load-more" class="btn btn-dark" href="javascript:;">Load More</a>
-          </div>
-          <div class="progress-unavailable">
-            <a href="collection.html">Show me more</a>
-            <a href="javscript:;" class="to-top">Back to Top</a>
-          </div>
-        </div> <!-- end .loader -->
+          </div> <!-- end #collection-pagination -->
 
-      </div> <!-- end .collection-loader -->
+        </div> <!-- end .grid -->
+      </div> <!-- end .content -->
     </section>
 
 
@@ -927,6 +940,7 @@
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/scripts.js"></script>
+  <script src="js/filter.js"></script>
   <script src="js/dynamic-cart.js"></script>
 
 

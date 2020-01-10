@@ -20,7 +20,6 @@
 
 
 
-
 <section id="home-new-arrivals">
   <div class="content">
     <!-- <div class="grid">
@@ -30,45 +29,12 @@
           <div class="carousel-track">
 
             {% assign homeCarouselCollection = 'new-arrivals' %}
+            {% assign homeCarouselCount = 6 %}
 
             {% if collections[homeCarouselCollection].products.size > 0 %}
-              {% for product in collections[homeCarouselCollection].products limit:6 %}
-
-                <div class="carousel-item card product-card">
-                  {% assign onBodyShotSrc = "" %}
-                  {% assign onBodyShotCustomAlText = "" %}
-                  {% for image in product.images %}
-                    {% if image.alt contains 'on-body-shot' %}
-                      {% assign onBodyShotSrc = image.src %}
-                      {% assign onBodyShotCustomAlText = product.title %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if onBodyShotSrc != blank %}
-                  {% comment %} If image has on-body-shot alt text, show this image {% endcomment %}
-                    <img class="object-cover" src="{{ onBodyShotSrc | img_url: '1024x1024' }}" alt="On-body shot of {{ onBodyShotCustomAlText }}">
-                  {% elsif product.images[1].src %}
-                  {% comment %} Else show second image {% endcomment %}
-                    <img class="object-cover" src="{{ product.images[1].src | img_url: '1024x1024' }}" alt="{{product.images[1].alt}}">
-                  {% endif %}
-
-                  <div class="inner">
-                    <div class="upper">
-                      <a href="{{ product.url }}">
-                        <img src="{{ product.images[0].src | img_url: '1024x1024' }}" alt="{{product.images[0].alt}}">
-                      </a>
-                    </div>
-                    <a href="{{ product.url }}"><h3>{{ product.title }}</h3></a>
-                  </div>
-                  <a href="javascript:;" class="wishlist-add"></a>
-                  <div class="metal-switcher">
-                    <a href="javascript:;" class="solid-rose-gold"></a>
-                    <a href="javascript:;" class="solid-white-gold"></a>
-                    <a href="javascript:;" class="solid-gold active"></a>
-                  </div>
-                  <span class="price">{{ product.price | money }}</span>
-                </div> <!-- end .product-card -->
-
+              {% for product in collections[homeCarouselCollection].products limit:homeCarouselCount %}
+                {% comment %} Pass through product object and carousel count {% endcomment %}
+                {% render 'product-card' with product as product, homeCarouselCount: homeCarouselCount %}
               {% endfor %}
             {% endif %}
 
@@ -87,26 +53,26 @@
   <div class="content">
     <div class="grid">
       <img class="object-cover"
-        srcset="img/banner/banner2-mobile.jpg 450w, img/banner/banner2.jpg 1920w"
+        srcset="{{ 'banner2-mobile.jpg' | asset_url}} 450w, {{ 'banner2.jpg' | asset_url}} 1920w"
         sizes="(max-width: 450px) 450px, (min-width: 451px) 1920px"
-        src="img/banner/banner2.jpg"
+        src="{{ 'banner2.jpg' | asset_url}}"
         alt="Jewellery for every day" />
       <div class="gradient-underlay bottom dark"></div>
       <div class="grid-item">
         <h2>Jewellery for every day</h2>
-        <a class="btn btn-light" href="collection.html">Shop Silver Collection</a>
+        <a class="btn btn-light" href="/collections/solid-gold-jewellery">Shop Silver Collection</a>
       </div>
     </div> <!-- end .grid -->
     <div class="grid">
       <img class="object-cover"
-        srcset="img/banner/banner3-mobile.jpg 450w, img/banner/banner3.jpg 1920w"
+        srcset="{{ 'banner3-mobile.jpg' | asset_url}} 450w, {{ 'banner3.jpg' | asset_url}} 1920w"
         sizes="(max-width: 450px) 450px, (min-width: 451px) 1920px"
-        src="img/banner/banner3.jpg"
+        src="{{ 'banner3.jpg' | asset_url}}"
         alt="Modern Heirlooms" />
       <div class="gradient-underlay bottom dark"></div>
       <div class="grid-item">
         <h2>Modern Heirlooms</h2>
-        <a class="btn btn-light" href="collection.html">Shop Solid Gold</a>
+        <a class="btn btn-light" href="/collections/solid-gold-jewellery">Shop Solid Gold</a>
       </div>
     </div> <!-- end .grid -->
   </div> <!-- end .content -->
@@ -127,9 +93,9 @@
       </div>
       <div class="grid-item">
         <img class="object-cover"
-        srcset="img/misc/chupi-shot2.jpg 450w, img/misc/chupi-shot2.jpg 1920w"
+        srcset="{{ 'chupi-shot2.jpg' | asset_url}} 450w, {{ 'chupi-shot2.jpg' | asset_url}} 1920w"
         sizes="(max-width: 450px) 450px, (min-width: 451px) 1920px"
-        src="img/banner/banner3.jpg"
+        src="{{ 'chupi-shot2.jpg' | asset_url}}.jpg"
         alt="Chupi" />
       </div>
     </div> <!-- end .grid -->

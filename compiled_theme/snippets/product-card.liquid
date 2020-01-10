@@ -1,0 +1,36 @@
+
+
+<div class="card product-card {% if homeCarouselCount > 0 %}carousel-item{% endif %}"> {% comment %} Check if is used within a carousel {% endcomment %}
+  {% assign onBodyShotSrc = "" %}
+  {% assign onBodyShotCustomAlText = "" %}
+  {% for image in product.images %}
+    {% if image.alt contains 'on-body-shot' %}
+      {% assign onBodyShotSrc = image.src %}
+      {% assign onBodyShotCustomAlText = product.title %}
+    {% endif %}
+  {% endfor %}
+
+  {% if onBodyShotSrc != blank %}
+  {% comment %} If image has on-body-shot alt text, show this image {% endcomment %}
+    <img class="object-cover" src="{{ onBodyShotSrc | img_url: '1024x1024' }}" alt="On-body shot of {{ onBodyShotCustomAlText }}">
+  {% elsif product.images[1].src %}
+  {% comment %} Else show second image {% endcomment %}
+    <img class="object-cover" src="{{ product.images[1].src | img_url: '1024x1024' }}" alt="{{product.images[1].alt}}">
+  {% endif %}
+
+  <div class="inner">
+    <div class="upper">
+      <a href="{{ product.url }}">
+        <img src="{{ product.images[0].src | img_url: '1024x1024' }}" alt="{{product.images[0].alt}}">
+      </a>
+    </div>
+    <a href="{{ product.url }}"><h3>{{ product.title }}</h3></a>
+  </div>
+  <a href="javascript:;" class="wishlist-add"></a>
+  <div class="metal-switcher">
+    <a href="javascript:;" class="solid-rose-gold"></a>
+    <a href="javascript:;" class="solid-white-gold"></a>
+    <a href="javascript:;" class="solid-gold active"></a>
+  </div>
+  <span class="price">{{ product.price | money }}</span>
+</div> <!-- end .product-card -->

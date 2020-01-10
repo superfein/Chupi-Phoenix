@@ -1,0 +1,8 @@
+
+{% comment %} To be included as pagination for collection templates {% endcomment %}
+
+<div id="collection-pagination" data-next-page-url="{{ paginate.next.url }}" data-total-products="{{ paginate.items }}" data-pagination-step="{{ paginate.page_size }}" data-pagination-pages="{{ paginate.pages }}">
+  <div id="pagination-progress-bar"><div id="pagination-progress"></div></div>
+  <p>Viewing <span id="products-viewed">{{ paginate.page_size }}</span> of <span id="products-available-count">{{ paginate.items }}</span> items</p>
+  <a id="pagination-load-more" class="btn btn-dark" href="javascript:;">Load More</a>
+</div> <!-- end #collection-pagination -->

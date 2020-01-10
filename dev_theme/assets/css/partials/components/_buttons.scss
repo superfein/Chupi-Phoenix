@@ -121,51 +121,6 @@
 
 
 
-// Filter buttons (Collection page)
-.btn-sort,
-.btn-filter {
-  position: relative;
-  display: inline-block;
-  font-size: 14px;
-  line-height: 1.2;
-  font-weight: $font-weight-light;
-  text-decoration: none;
-  color: $grey_dark;
-  background-color: transparent;
-  padding: 10px 20px;
-  border: 1px solid $grey_light;
-  text-align: center;
-  @include transition(background-color 0.2s $ease);
-  &:after {
-    content: "";
-    position: relative;
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    vertical-align: middle;
-    margin-left: 7px;
-    background-color: transparent;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-}
-.btn-sort {
-  &:after {
-    background-image: url($icon_sort_dark);
-  }
-}
-.btn-filter {
-  &:after {
-    background-image: url($icon_filter_dark);
-  }
-}
-
-
-
 
 
 
@@ -373,14 +328,6 @@ ul.social-icons {
 
 
 @include mquery(ml) {
-
-  // Filter buttons (Collection page)
-  .btn-sort,
-  .btn-filter {
-    &:hover {
-      background-color: $grey_lightest;
-    }
-  }
 
   // Social icons
   ul.social-icons {
