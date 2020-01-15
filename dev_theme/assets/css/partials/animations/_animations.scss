@@ -64,7 +64,7 @@
 // Progress bar active (used on collections pagination)
 @include keyframes(progressBarActive) {
   0% { background-color: $grey_light; }
-  30% { background-color: darken($grey_light, 10%); }
-  70% { background-color: darken($grey_light, 10%); }
+  //30% { background-color: darken($grey_light, 10%); }
+  90% { background-color: darken($grey_light, 10%); }
   100% { background-color: $grey_light; }
 }

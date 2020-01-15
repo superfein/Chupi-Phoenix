@@ -1,8 +1,6 @@
 //$( document ).ready(function() {
 
-
-
-
+const openOnAddToBagDelay = 1000; // delay to allow add-to-bag button confirmation
 
 // If Dynamic Cart is enabled on <body>
 if ($('body').attr("data-dynamic-cart") === "true") {
@@ -12,8 +10,7 @@ if ($('body').attr("data-dynamic-cart") === "true") {
   const currency = $('body').attr('data-currency');
   const currencySymbol = $('body').attr('data-currency-symbol');
   const openOnAddToBag = true; // True = Open cart panel after a product is added to cart
-  const openOnAddToBagDelay = 1000; // delay to allow add-to-bag button confirmation
-  const detailNoteKeys = ['Size', 'Initials', 'Coordinates', 'Gemstone', 'Star Sign', 'Zodiac']; // List of property notes to append under each cart item title
+  const detailNoteKeys = ['Size', 'Initials', 'Coordinates', 'Birthstone', 'Starsign', 'Zodiac']; // List of property notes
   const luxPackagingTitlePhrases = ['solid', 'accessory', 'notebook', 'gift coin', 'gift card'];
   const giftBoxPrice = $('#dynamic-cart').attr('data-gift-box-price');
   const giftBoxID = $('#dynamic-cart').attr('data-gift-box-id');
@@ -111,7 +108,7 @@ if ($('body').attr("data-dynamic-cart") === "true") {
         $.each(cartItems[i].properties, function(key, val) {
           var detailNote = '<span class="detail-note">' + key + ': ' + val + '</span>';
           if ($.inArray(key, detailNoteKeys) != -1) {
-            $(title).after(detailNote);
+            $('#dynamic-cart .drawer-main ul li.current').children('div').eq(1).find('.detail-notes').append(detailNote);
           }
         });
         // Quantity
@@ -216,12 +213,12 @@ if ($('body').attr("data-dynamic-cart") === "true") {
 
 
   // Open Dynamic Cart (after Add-to-bag)
-  $('.add-to-cart').click(function(e) {
+  $('.add-to-bag').click(function(e) {
     // Check if all customise fields have 'complete' class
     if (
       !$(this).hasClass('disabled') &&
       //$('#product-upper .product-info .customise-field').length == $('#product-upper .product-info .customise-field.complete').length ||
-      $('.customise-field').length == $('.customise-field.complete').length // work with old and new verions for product template
+      $('.customise-section').length == $('.customise-section.complete').length // work with old and new verions for product template
     ) {
       if (openOnAddToBag == true) { // if setting is active
         // Hide cart-empty message
@@ -236,9 +233,9 @@ if ($('body').attr("data-dynamic-cart") === "true") {
 
   // Open Dynamic Cart if URL contains parameter (link from Blog/Care)
   //$(document).ready(function() {
-    if (window.location.href.indexOf("?cart=open") > -1) {
-      openDynamicCart();
-    }
+  if (window.location.href.indexOf("?cart=open") > -1) {
+    openDynamicCart();
+  }
   //});
 
 

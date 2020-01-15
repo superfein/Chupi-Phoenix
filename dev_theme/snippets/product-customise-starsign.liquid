@@ -1,0 +1,84 @@
+
+{% comment %} To be included on product pages {% endcomment %}
+
+
+<div class="customise-section customise-starsign" data-customise-selection="" data-required-text="Choose a starsign">
+  <a href="javascript:;" class="dropdown-btn" data-default-text="Select starsign">Select starsign</a>
+  <a href="javascript:;" class="guide-btn">Starsign Guide</a>
+  <div class="dropdown-panel">
+    <div class="dropdown-panel-header">
+      <h3>Select starsign</h3>
+      <a href="javascript:;" class="close-btn"></a>
+    </div>
+    <div class="dropdown-panel-main">
+      <ul class="grid starsign-options">
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[0].id }}">
+            <img src="{{ 'starsign-aquarius.png' | asset_url}}" alt="">Aquarius<span>Jan 20 - Feb 18</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[1].id }}">
+            <img src="{{ 'starsign-pisces.png' | asset_url}}" alt="">Pisces<span>Feb 19 - Mar 20</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[2].id }}">
+            <img src="{{ 'starsign-aries.png' | asset_url}}" alt="">Aries<span>Mar 21 - Apr 19</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[3].id }}">
+            <img src="{{ 'starsign-taurus.png' | asset_url}}" alt="">Taurus<span>Apr 20 - May 20</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[4].id }}">
+            <img src="{{ 'starsign-gemini.png' | asset_url}}" alt="">Gemini<span>May 20 - Jun 21</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="starsign-option dropdown-option" data-variant-id="{{ product.variants[5].id }}">
+            <img src="{{ 'starsign-cancer.png' | asset_url}}" alt="">Cancer<span>Jun 21 - Jul 22</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div> <!-- end .dropdown-panel -->
+  <!-- Guide drawer -->
+  <aside class="drawer product-guide-drawer starsign-guide">
+    <div class="drawer-back"></div>
+    <div class="drawer-header">
+      <h2>Starsign Guide</h2>
+      <a href="javascript:;" class="close-btn"></a>
+    </div> <!-- end .drawer-header -->
+    <div class="drawer-main">
+      <ul class="grid starsign-options">
+        <li>
+          <img src="{{ 'starsign-aquarius.png' | asset_url}}" alt="Aquarius">
+          <h3>Aquarius <span>Jan 20 - Feb 18</span></h3>
+        </li>
+        <li>
+          <img src="{{ 'starsign-pisces.png' | asset_url}}" alt="Pisces">
+          <h3>Pisces <span>Feb 19 - Mar 20</span></h3>
+        </li>
+        <li>
+          <img src="{{ 'starsign-aries.png' | asset_url}}" alt="Aries">
+          <h3>Aries <span>Mar 21 - Apr 19</span></h3>
+        </li>
+        <li>
+          <img src="{{ 'starsign-taurus.png' | asset_url}}" alt="Taurus">
+          <h3>Taurus <span>Apr 20 - May 20</span></h3>
+        </li>
+        <li>
+          <img src="{{ 'starsign-gemini.png' | asset_url}}" alt="Gemini">
+          <h3>Gemini <span>May 20 - Jun 21</span></h3>
+        </li>
+        <li>
+          <img src="{{ 'starsign-cancer.png' | asset_url}}" alt="Cancer">
+          <h3>Cancer <span>Jun 21 - Jul 22</span></h3>
+        </li>
+      </ul>
+    </div> <!-- end .drawer-main -->
+  </aside> <!-- end .product-guide-drawer -->
+</div> <!-- end .customise-section -->

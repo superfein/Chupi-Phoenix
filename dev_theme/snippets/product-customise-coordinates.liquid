@@ -1,0 +1,59 @@
+
+{% comment %} To be included on product pages {% endcomment %}
+
+
+<div class="customise-section customise-coordinates" data-customise-selection="" data-required-text="Complete coordinates">
+  <p>Select your coordinates</p>
+  <form class="coordinates-form" autocomplete="off">
+    <div class="northSouth form-group">
+      <div class="form-field">
+      	<input type="tel" min="0" max="90" class="degrees" id="ns-degrees" placeholder="0" required="" aria-label="Latitudinal degrees"><label for="ns-degrees">°</label>
+      </div>
+      <div class="form-field">
+        <input type="tel" min="0" max="60" class="minutes" id="ns-minutes" placeholder="0" required="" aria-label="Latitudinal minutes"><label for="ns-minutes">'</label>
+      </div>
+      <div class="form-field">
+        <input type="tel" min="0" max="60" class="seconds" id="ns-seconds" placeholder="0" required="" aria-label="Latitudinal seconds"><label for="ns-seconds">"</label>
+      </div>
+      <input type="hidden" maxlength="1" class="northSouthValue" value="n">
+      <div class="switch" data-options="n-s" aria-label="North South toggle" data-compass-axis="n">
+        <span class="switch-north">N</span>
+        <span class="switch-south">S</span>
+      </div>
+    </div>
+    <div class="eastWest form-group">
+      <div class="form-field">
+      	<input type="tel" min="0" max="90" class="degrees" id="ew-degrees" placeholder="0" required="" aria-label="Longitudinal degrees"><label for="ew-degrees">°</label>
+      </div>
+      <div class="form-field">
+      	<input type="tel" min="0" max="60" class="minutes" id="ew-minutes" placeholder="0" required="" aria-label="Longitudinal minutes"><label for="ew-minutes">'</label>
+      </div>
+      <div class="form-field">
+      	<input type="tel" min="0" max="60" class="seconds" id="ew-seconds" placeholder="0" required="" aria-label="Longitudinal seconds"><label for="ew-seconds">"</label>
+      </div>
+      <input type="hidden" maxlength="1" class="eastWestValue" value="w">
+      <div class="switch" data-options="e-w" aria-label="East West toggle" data-compass-axis="w">
+        <span class="switch-east">W</span>
+        <span class="switch-west">E</span>
+      </div>
+    </div>
+  </form>
+  <a href="javascript:;" class="guide-btn">How to find coordinates</a>
+  <!-- Guide drawer -->
+  <aside class="drawer product-guide-drawer coordinates-guide">
+    <div class="drawer-back"></div>
+    <div class="drawer-header">
+      <h2>Coordinates Guide</h2>
+      <a href="javascript:;" class="close-btn"></a>
+    </div> <!-- end .drawer-header -->
+    <div class="drawer-main">
+      <img src="{{ 'map-marker-large-dark.svg' | asset_url}}" alt="Map Marker">
+      <p>To find your coordinates, use a website like <a href="javscript:;">Maps.ie</a> or <a href="javscript:;">My Location</a>
+        to find the coordinates of the place that is special to you and it will generate the coordinates of this location for you. </p>
+      <p>If you’re looking for a general location like a city or country,
+        a simple google search will generate the coordinates of this location for you.</p>
+      <h3>Need more help?</h3>
+      <p>We’ve a really helpful article on the <a href="javscript:;">Chupi Blog about our coordinate offerings</a>.</p>
+    </div> <!-- end .drawer-main -->
+  </aside> <!-- end .product-guide-drawer -->
+</div> <!-- end .customise-section -->

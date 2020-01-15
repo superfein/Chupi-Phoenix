@@ -1,0 +1,81 @@
+
+{% comment %} To be included on product pages {% endcomment %}
+
+
+{% comment %} First Ring {% endcomment %}
+<div class="customise-section customise-ring-size grid" data-customise-selection="" data-required-text="Choose a ring size">
+  <a href="javascript:;" class="dropdown-btn" data-default-text="Select first ring size">Select first ring size</a>
+  <a href="javascript:;" class="guide-btn">Sizing Guide</a>
+  <div class="dropdown-panel">
+    <div class="dropdown-panel-header">
+      <h3>Select first rings size</h3>
+      <a href="javascript:;" class="close-btn"></a>
+    </div>
+    <div class="dropdown-panel-main">
+      <ul class="grid ring-size-options">
+        {% if product.options contains "Size" %}
+      		{% for variant in product.variants %}
+          <li><a href="javascript:;" class="ring-size-option dropdown-option" data-variant-id="{{ variant.id }}">{{ variant.option1 }}</a></li>
+        	{% endfor %}
+        {% endif %}
+      </ul>
+      <div class="ring-size-bespoke">
+        <a href="javascript:;">I need a bespoke size</a>
+        <div class="inner">
+          <textarea name="ring-size-bespoke" placeholder="Let us know what size works for you..."></textarea>
+          <a href="javascript:;" class="btn btn-dark btn-solid disabled">Done</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end .dropdown-panel -->
+  <!-- Ring size guide -->
+  <aside class="drawer product-guide-drawer ring-size-guide">
+    <div class="drawer-back"></div>
+    <div class="drawer-header">
+      <h2>How to find your ring size</h2>
+      <a href="javascript:;" class="close-btn"></a>
+    </div> <!-- end .drawer-header -->
+    <div class="drawer-main">
+      <img src="{{ 'phone-large-dark.svg' | asset_url}}" alt="Phone">
+      <h3>Method 1</h3>
+      <p>Wear your tiny twinkling Lucky Star rings to remind you that the future is yours.</p>
+      <img src="{{ 'ring-large-dark.svg' | asset_url}}" alt="Ring">
+      <h3>Method 2</h3>
+      <p>Wear your tiny twinkling Lucky Star rings to remind you that the future is yours.</p>
+    </div> <!-- end .drawer-main -->
+  </aside> <!-- end .product-guide-drawer -->
+
+</div> <!-- end .customise-section -->
+
+
+
+
+
+
+{% comment %} Second Ring - excludes sizing guide {% endcomment %}
+<div class="customise-section customise-ring-size grid" data-customise-selection="" data-required-text="Choose a ring size">
+  <a href="javascript:;" class="dropdown-btn" data-default-text="Select second ring size">Select second ring size</a>
+  <div class="dropdown-panel">
+    <div class="dropdown-panel-header">
+      <h3>Select second ring size</h3>
+      <a href="javascript:;" class="close-btn"></a>
+    </div>
+    <div class="dropdown-panel-main">
+      <ul class="grid ring-size-options">
+        {% if product.options contains "Size" %}
+      		{% for variant in product.variants %}
+          <li><a href="javascript:;" class="ring-size-option dropdown-option" data-variant-id="{{ variant.id }}">{{ variant.option1 }}</a></li>
+        	{% endfor %}
+        {% endif %}
+      </ul>
+      <div class="ring-size-bespoke">
+        <a href="javascript:;">I need a bespoke size</a>
+        <div class="inner">
+          <textarea name="ring-size-bespoke" placeholder="Let us know what size works for you..."></textarea>
+          <a href="javascript:;" class="btn btn-dark btn-solid disabled">Done</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end .dropdown-panel -->
+
+</div> <!-- end .customise-section -->

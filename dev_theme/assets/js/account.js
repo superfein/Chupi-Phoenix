@@ -68,50 +68,34 @@ if ($('#addresses').length) {
 // Account address preview
 function accountAddressPreview() {
 
-  var intervalA;
-
   function reflectInputInPreview(thisInput) {
     $('.address-single .preview').find('span').each( function() {
       var thisPreviewLine = $(this);
       thisPreviewLineMatchingInput = $(this).attr('data-matching-input-name');
       if(thisPreviewLineMatchingInput == thisInput.attr('name')) {
-        intervalA = setInterval(function() {
-          if (thisInput.val().length === 0) {
-            thisPreviewLine.removeClass('active');
-          } else {
-            thisPreviewLine.addClass('active').text(thisInput.val());
-          }
-        }, 20);
+        if (thisInput.val().length === 0) {
+          thisPreviewLine.removeClass('active');
+        } else {
+          thisPreviewLine.addClass('active').text(thisInput.val());
+        }
       }
     });
   }
-
   // Set Preview on load
   $('.address-single').find('.form-field').children('input').each( function() {
     var thisInput = $(this);
-    reflectInputInPreview(thisInput);
+    reflectInputInPreview($(this));
   });
-
-  // Set Preview on focus
-  $('.address-single').find('.form-field').children('input').on('focus', function() {
-    //console.log('focus');
+  // Update Preview on
+  $('.address-single').find('.form-field').children('input').keyup(function(e) {
     var thisInput = $(this);
     reflectInputInPreview(thisInput);
-  });
-
-  // Clear interval on blur
-  $('.address-single').find('.form-field').children('input').blur(function() {
-    //console.log('blur');
-    clearInterval(intervalA);
   });
 
 }
 if ($('#addresses').length) {
   accountAddressPreview();
 }
-
-
-
 
 
 

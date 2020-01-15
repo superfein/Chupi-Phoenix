@@ -68,11 +68,14 @@
               }
             }
           }
-          .detail-note {
+          .detail-notes {
             grid-column: 1 / span 2;
-            display: block;
-            font-size: 12px;
-            color: $grey;
+            .detail-note {
+              display: block;
+              font-size: 12px;
+              line-height: 1.5;
+              color: $grey;
+            }
           }
           .qty {
             grid-column: 1 / span 1;

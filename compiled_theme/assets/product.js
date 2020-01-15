@@ -1,4 +1,15 @@
-$( document ).ready(function() {
+//$( document ).ready(function() {
+
+
+
+
+  var selectionVariantId = $('#product-top').attr('data-selected-variant-id');
+  var customisationProperties = {};
+
+
+
+
+
 
 
   // Sticky Gallery and CTA
@@ -161,6 +172,7 @@ $( document ).ready(function() {
 
 
   // Image pinch zoom - https://interactjs.io/
+  /*
   if( $('.slider').length ) {
 
     // Init on current slide
@@ -245,7 +257,7 @@ $( document ).ready(function() {
     } // end makeInteractable()
 
   } // end if .slider
-
+  */
 
 
 
@@ -409,40 +421,85 @@ $(document).on('click', function(e) {
 
 
   // Click Add-to-bag
-  addToBagButton.off().click( function(e) {
-    $('.customise-section').each( function() {
-      // If this incomplete required field exists
-      if ( !$(this).hasClass('complete') ) {
-        e.stopPropagation(); // Prevent submit
-        // For general customisation, open dropdown panel
-        if ($(this).children('.dropdown-panel').length) {
-          $(this).children('.dropdown-panel').addClass('active');
-        }
-        // For Initials, focus on first blank initial
-        if ($(this).hasClass('customise-initials')) {
-          $('.customise-initials .initials-selection').each( function() { // across each selection...
-            $(this).find('span.initial-blank-faded').eq(0).addClass('active'); // Activate first blank item
+  addToBagButton.click(function(e) {
+    // Check if all customise sections are complete
+    if ( $('.customise-section').length == $('.customise-section.complete').length ) {
+      //console.log('allow!');
+
+      // Disable add-to-bag button
+      addToBagButton.addClass('disabled');
+
+      // AJAX cart update
+      // console.log(selectionVariantId);
+      // console.log(customisationProperties);
+      $.post(
+        "/cart/add.js", {
+          "quantity": 1,
+          "id": selectionVariantId,
+          "properties": customisationProperties
+        },
+        function(data){},
+        dataType="json"
+      ).done(function(){
+
+        // Added feedback
+
+        //console.log('cart done');
+        setTimeout(function() { // delay to allow add-to-bag button confirmation
+          // Reset cusomisation
+          $('.customise-section').each( function() {
+            var thisCustomiseSection = $(this);
+            var thisDropdownButton = thisCustomiseSection.find('.dropdown-btn');
+            thisCustomiseSection.removeClass('complete').attr('data-customise-selection', ''); // Reset customise selection
+            thisDropdownButton.removeClass('prepend-image').children('img').remove(); // Remove any child image
+            thisDropdownButton.text(thisDropdownButton.attr('data-default-text')); // Reset dropdown button text
+            $('#product-top').attr('data-selected-variant-id', $('#product-top').attr('data-first-variant-id'));
+            requiredCustomisationCheck(); // Run required customisation check
           });
-          $('.customise-initials .initials-selection .pointer').addClass('active'); // Show pointer (Desktop only)
-          var activeSelectionPosLeft = $('.customise-initials .initials-selection .pointer').siblings('span.active').position().left;
-          $('.customise-initials .initials-selection .pointer').css('left', activeSelectionPosLeft + 'px'); // Move pointer to active selection item
+          // Enable add-to-bag
+          addToBagButton.removeClass('disabled');
+        }, openOnAddToBagDelay); // Delay defined in dynamic-cart.js
+
+      });
+
+    }
+    else {
+
+      //console.log('prevent!');
+      e.stopPropagation(); // Prevent submit
+
+      $('.customise-section').each( function() {
+        // If this incomplete required field exists
+        if ( !$(this).hasClass('complete') ) {
+          e.stopPropagation(); // Prevent submit
+          // For general customisation, open dropdown panel
+          if ($(this).children('.dropdown-panel').length) {
+            $(this).children('.dropdown-panel').addClass('active');
+          }
+          // For Initials, focus on first blank initial
+          if ($(this).hasClass('customise-initials')) {
+            $('.customise-initials .initials-selection').each( function() { // across each selection...
+              $(this).find('span.initial-blank-faded').eq(0).addClass('active'); // Activate first blank item
+            });
+            $('.customise-initials .initials-selection .pointer').addClass('active'); // Show pointer (Desktop only)
+            var activeSelectionPosLeft = $('.customise-initials .initials-selection .pointer').siblings('span.active').position().left;
+            $('.customise-initials .initials-selection .pointer').css('left', activeSelectionPosLeft + 'px'); // Move pointer to active selection item
+          }
+          // For Coordinates, focus on first blank input
+          if ($(this).hasClass('customise-coordinates')) {
+            $('form.coordinates-form').find('.form-field').each(function() {
+              if ($(this).find('input').val() === '') { // if blank
+                $(this).find('input').focus();
+                return false;
+              }
+            });
+          }
+          return false; // Break each
         }
-        // For Coordinates, focus on first blank input
-        if ($(this).hasClass('customise-coordinates')) {
-          $('form.coordinates-form').find('.form-field').each(function() {
-            if ($(this).find('input').val() === '') { // if blank
-              $(this).find('input').focus();
-              return false;
-            }
-          });
-        }
-        return false; // Break
-      }
-      // Commit Add-to-bag
-      else {
-        //
-      }
-    });
+      }); // end each loop
+
+    }
+
   }); // end click Add-to-bag
 
 
@@ -455,7 +512,7 @@ $(document).on('click', function(e) {
 
 
 
-  //-------------- Prodct Customisation -------------- //
+  //-------------- Product Customisation -------------- //
 
   // Open product customise panel
   $('.customise-section .dropdown-btn').off().click( function() {
@@ -759,6 +816,10 @@ $(document).on('click', function(e) {
         $('.customise-coordinates').attr('data-customise-selection', createCoordinateString()); // Write coordinates data
       }
       requiredCustomisationCheck(); // Run required customisation check
+      // Update selection variant ID
+      selectionVariantId = $('#product-top').attr('data-selected-variant-id');
+      // Update customisation properties (property items to match those detail note keys in dynamic-cart.js)
+      customisationProperties.Coordinates = $('.customise-coordinates').attr('data-customise-selection');
     }
 
     $('form.coordinates-form input').keydown(function() {
@@ -858,6 +919,11 @@ $(document).on('click', function(e) {
       });
       $('.customise-initials').attr('data-customise-selection', initialsCompleteSelection);
       requiredCustomisationCheck(); // Run required customisation check
+
+      // Update selection variant ID
+      selectionVariantId = $('#product-top').attr('data-selected-variant-id');
+      // Update customisation properties (property items to match those detail note keys in dynamic-cart.js)
+      customisationProperties.Initials = $('.customise-initials').attr('data-customise-selection');
     }
 
   }); // End select character
@@ -872,9 +938,31 @@ $(document).on('click', function(e) {
     $('.customise-initials .initials-selection span, .customise-initials .initials-selection .pointer').removeClass('active');
   }
 
+  // Change disc count
+  $('.customise-initials .change-disc .dropdown-panel ul li a').off().click( function() {
+    var thisDiscSelection = $(this);
+    discCountSelection = thisDiscSelection.parents('li').attr('data-disc-count');
+    var productHandle = $('#product-top').attr('data-product-handle');
+
+    // AJAX call
+    ajaxCall('GET', window.location.protocol + '//' + window.location.hostname + '/products/' + productHandle + '.json', function(data) {
+
+      var parsedResponse = JSON.parse(data); // Parses the AJAX data
+      // Loop through product variants
+      var productVariants = parsedResponse.product.variants;
+      $.each(productVariants, function(key, val) {
+        if (val.title == discCountSelection) {
+          window.location.href = '/products/' + productHandle + '?variant=' + val.id;
+        }
+      }); // end variants loop
+
+    }); // end ajaxCall()
+
+  }); // end Change disc count
 
 
-  // Customisation - general selection (ring-size. birthstone, starsign)
+
+  // Customisation - general selection (ring-size. birthstone, starsign, zodiac)
   $('.customise-section .dropdown-panel .dropdown-option').off().click( function() {
 
     var thisCustomiseSection = $(this).closest('.customise-section');
@@ -901,6 +989,23 @@ $(document).on('click', function(e) {
     $(selectionImage).prependTo(thisDropdownButton);
     thisCustomiseSection.addClass('complete').attr('data-customise-selection', selectionTitle); // Mark as complete and append selection
     requiredCustomisationCheck(); // Run required customisation check
+
+    // Update selection variant ID
+    if ($(this).attr('data-variant-id')) {
+      selectionVariantId = $(this).attr('data-variant-id');
+      $('#product-top').attr('data-selected-variant-id', selectionVariantId);
+    }
+    // Update customisation properties (property items to match those detail note keys in dynamic-cart.js)
+           if (thisCustomiseSection.hasClass('customise-ring-size')) {
+      customisationProperties.Size = thisCustomiseSection.attr('data-customise-selection');
+    } else if (thisCustomiseSection.hasClass('customise-birthstone')) {
+      customisationProperties.Birthstone = thisCustomiseSection.attr('data-customise-selection');
+    } else if (thisCustomiseSection.hasClass('customise-starsign')) {
+      customisationProperties.Starsign = thisCustomiseSection.attr('data-customise-selection');
+    } else if (thisCustomiseSection.hasClass('customise-zodiac')) {
+      customisationProperties.Zodiac = thisCustomiseSection.attr('data-customise-selection');
+    }
+    // Coordinates and Initials handled separately
 
     // Append variant ID
   });
@@ -942,6 +1047,40 @@ $(document).on('click', function(e) {
 
 
 
+  // Drop a Hint name fill
+  function dahNameFill() {
+
+    var recipientNameInput = $('#hint-form #hint-recipient-name');
+    var senderNameInput = $('#hint-form #hint-sender-name');
+    var additionalTextInput = $('#hint-form #hint-sender-extra');
+    var recipientNameSpace = $('#hint-message #hint-message-recipient-name');
+    var senderNameSpace = $('#hint-message #hint-message-sender-name');
+    var additionalTextNameSpaceEl = $('#hint-message .additional-text');
+    var additionalTextNameSpace = $('#hint-message #hint-message-additional');
+
+    // Recipient name fill
+    recipientNameInput.keyup(function(e) {
+      recipientNameSpace.text(recipientNameInput.val());
+    });
+    // Sender name fill
+    senderNameInput.keyup(function(e) {
+      senderNameSpace.text(senderNameInput.val());
+    });
+    // Additional text fill
+    additionalTextInput.keyup(function(e) {
+      if (additionalTextInput.val()){
+        additionalTextNameSpaceEl.addClass('active');
+        additionalTextNameSpace.text(additionalTextInput.val());
+      } else {
+        additionalTextNameSpaceEl.removeClass('active');
+        additionalTextNameSpace.text('');
+      }
+    });
+
+  }
+  dahNameFill();
+
+
 
 
 
@@ -973,8 +1112,10 @@ $(document).on('click', function(e) {
       'left' : parseInt(currentPressLogo.position().left)
     });
   }
-  pressSectionAdjust();
-  $(window).resize(function() { pressSectionAdjust(); }); // on resize
+  if( $('#product-press').length ) {
+    pressSectionAdjust();
+    $(window).resize(function() { pressSectionAdjust(); }); // on resize
+	}
 
   // Change quote when a logo is selected
   $('#product-press').find('.press-logo').click( function() {
@@ -1014,4 +1155,4 @@ $(document).on('click', function(e) {
 
 
 
-}); // end document.ready
+//}); // end document.ready

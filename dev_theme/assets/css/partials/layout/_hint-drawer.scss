@@ -166,6 +166,7 @@
         opacity: 0;
         @include transform(translateX(30px));
         @include transition(all 0.4s $ease_out_quint);
+        padding-bottom: 0;
         form {
           //overflow-y: auto;
           // fieldset {
@@ -184,7 +185,7 @@
             left: auto;
             padding: 0px;
             width: 100%;
-            background-color: $grey_lightest;
+            //background-color: $grey_lightest;
             margin-bottom: 0;
             .btn {
               width: 100%;
@@ -197,7 +198,7 @@
         position: relative;
         grid-column: span 1;
         align-self: center;
-        padding: 40px;
+        padding: 15px;
         max-height: 100vh;
 
         opacity: 0;
@@ -226,8 +227,38 @@
           p {
             font-family: $font_family_primary;
             font-size: 24px;
-            #message-recipient-name {
-
+            margin-bottom: 30px;
+            #hint-message-recipient-name,
+            #hint-message-sender-name {
+              display: inline-block;
+              border-bottom: 1px solid #3c3b39;
+              min-width: 150px;
+              margin: 0 10px;
+              vertical-align: bottom;
+              &.active {
+                border-bottom: 0;
+                min-width: 0;
+                margin: 0;
+              }
+            }
+            #hint-message-product-title {
+              //color: darken($pink, 20%);
+              //color: darken($grey_light, 20%);
+            }
+            &.additional-text {
+              font-size: 20px;
+              font-style: italic;
+              opacity: 0;
+              @include transform(translatex(5px));
+              @include transition(all 0.2s $ease);
+              #hint-message-additional {
+                min-width: 20px;
+                margin: 0 10px;
+              }
+              &.active {
+                opacity: 1;
+                @include transform(translateX(0));
+              }
             }
           }
         }

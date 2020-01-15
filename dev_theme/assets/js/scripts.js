@@ -463,10 +463,10 @@
           });
           // Update products-viewed text in pagination section
           productsViewed.text(countProductsLoaded());
-          pagProgress.removeClass('active'); // Reset progress bar state
         }
       }).done(function() {
         // pagProgress.removeClass('active'); // Reset progress bar state
+        pagProgress.removeClass('active'); // Reset progress bar state
         // Update pagination data
         currentPageIndex++;
         pageToFetch = nextPageUrl.split("=")[0] + "=" + (currentPageIndex + 1) + "&" + filterApplied;

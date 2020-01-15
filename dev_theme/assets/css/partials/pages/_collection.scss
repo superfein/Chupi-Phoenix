@@ -355,10 +355,10 @@
               height: 100%;
               border-radius: 4px;
               background-color: $grey_light;
-              @include transition(width 0.5s $ease_in_out_quint, background-color 0.3s $ease);
+              @include transition(width 0.8s $ease_in_out_quint, background-color 0.3s $ease);
               &.active {
-                background-color: darken($grey_light, 10%);
-                //@include animation('progressBarActive 0.8s ease both');
+                //background-color: darken($grey_light, 10%);
+                @include animation('progressBarActive 1.5s ease both infinite');
               }
             }
           }

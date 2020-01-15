@@ -1,0 +1,129 @@
+
+{% comment %} To be included on product pages {% endcomment %}
+
+
+{% comment %} Get disc count as int {% endcomment %}
+{% assign currentDiscCountInt = 0 %}
+{% assign currentDiscCountLowercase = currentDiscCount | downcase %}
+{% if currentDiscCountLowercase contains 'one' %}
+  {% assign currentDiscCountInt = 1 %}
+{% elsif currentDiscCountLowercase contains 'two' %}
+  {% assign currentDiscCountInt = 2 %}
+{% elsif currentDiscCountLowercase contains 'three' %}
+  {% assign currentDiscCountInt = 3 %}
+{% elsif currentDiscCountLowercase contains 'four' %}
+  {% assign currentDiscCountInt = 4 %}
+{% elsif currentDiscCountLowercase contains 'five' %}
+  {% assign currentDiscCountInt = 5 %}
+{% endif %}
+
+
+<div class="customise-section customise-initials" data-customise-selection="" data-required-text="Complete initials selection">
+
+  <div class="grid-item">
+    <span>Select initials</span>
+    <div class="initials-selection">
+      {% for i in (1..currentDiscCountInt) %}
+        <span class="initial-blank-faded"></span>
+      {% endfor %}
+      <div class="pointer"></div>
+    </div>
+  </div>
+
+
+  {% comment %} Initial disc switcher {% endcomment %}
+  {% if currentDiscCount != '' %}
+    {% for product_option in product.options_with_values %}
+      {% if product_option.name == 'Discs' %}
+        <!-- Change Discs -->
+        <div class="dropdown change-disc">
+          <a href="javscript:;" class="dropdown-btn">Number of discs</a>
+          <div class="dropdown-panel">
+            <div class="dropdown-panel-header">
+              <h3>Change number of discs</h3>
+              <a href="javascript:;" class="close-btn"></a>
+            </div>
+            <div class="dropdown-panel-main">
+              <ul class="grid">
+                {% for product_option_value in product_option.values %}
+                  <li data-disc-count="{{ product_option_value }}">
+                    {% for product_variant in product.variants %}
+                      {% if product_variant.title == product_option_value %}
+                        {% assign product_variant_price = product_variant.price %}
+                      {% endif %}
+                    {% endfor %}
+                    <a href="javascript:;" {% if product_option_value == currentDiscCount %}class="disabled"{% endif %}>{{ product_option_value }}
+                      {% if product.handle contains 'necklace' %}
+                      Necklace
+                      {% elsif product.handle contains 'bracelet' %}
+                      Bracelet
+                      {% endif %}
+                      <span class="price">{{ product_variant_price | money }}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div> <!-- end .dropdown-panel -->
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+
+
+  <div class="dropdown-panel">
+    <div class="dropdown-panel-header">
+      <h3>Select initials</h3>
+      <div class="initials-selection">
+        {% for i in (1..currentDiscCountInt) %}
+          <span class="initial-blank-faded"></span>
+        {% endfor %}
+      </div>
+      <a href="javascript:;" class="close-btn"></a>
+    </div>
+    <div class="dropdown-panel-main">
+      <ul class="grid initials-options">
+        <li><a href="javascript:;" class="initial-a" title="A" data-initial="A"></a></li>
+        <li><a href="javascript:;" class="initial-b" title="B" data-initial="B"></a></li>
+        <li><a href="javascript:;" class="initial-c" title="c" data-initial="C"></a></li>
+        <li><a href="javascript:;" class="initial-d" title="D" data-initial="D"></a></li>
+        <li><a href="javascript:;" class="initial-e" title="E" data-initial="E"></a></li>
+        <li><a href="javascript:;" class="initial-f" title="F" data-initial="F"></a></li>
+        <li><a href="javascript:;" class="initial-g" title="G" data-initial="G"></a></li>
+        <li><a href="javascript:;" class="initial-h" title="H" data-initial="H"></a></li>
+        <li><a href="javascript:;" class="initial-i" title="I" data-initial="I"></a></li>
+        <li><a href="javascript:;" class="initial-j" title="J" data-initial="J"></a></li>
+        <li><a href="javascript:;" class="initial-k" title="K" data-initial="K"></a></li>
+        <li><a href="javascript:;" class="initial-l" title="L" data-initial="L"></a></li>
+        <li><a href="javascript:;" class="initial-m" title="M" data-initial="M"></a></li>
+        <li><a href="javascript:;" class="initial-n" title="N" data-initial="N"></a></li>
+        <li><a href="javascript:;" class="initial-o" title="O" data-initial="O"></a></li>
+        <li><a href="javascript:;" class="initial-p" title="P" data-initial="P"></a></li>
+        <li><a href="javascript:;" class="initial-q" title="Q" data-initial="Q"></a></li>
+        <li><a href="javascript:;" class="initial-r" title="R" data-initial="R"></a></li>
+        <li><a href="javascript:;" class="initial-s" title="S" data-initial="S"></a></li>
+        <li><a href="javascript:;" class="initial-t" title="T" data-initial="T"></a></li>
+        <li><a href="javascript:;" class="initial-u" title="U" data-initial="U"></a></li>
+        <li><a href="javascript:;" class="initial-v" title="V" data-initial="V"></a></li>
+        <li><a href="javascript:;" class="initial-w" title="W" data-initial="W"></a></li>
+        <li><a href="javascript:;" class="initial-x" title="X" data-initial="X"></a></li>
+        <li><a href="javascript:;" class="initial-y" title="Y" data-initial="Y"></a></li>
+        <li><a href="javascript:;" class="initial-z" title="Z" data-initial="Z"></a></li>
+        <li><a href="javascript:;" class="initial-a-fada" title="&#193;" data-initial="&#193;"></a></li>
+        <li><a href="javascript:;" class="initial-e-fada" title="&#201;" data-initial="&#201;"></a></li>
+        <li><a href="javascript:;" class="initial-i-fada" title="&#205" data-initial="&#205;"></a></li>
+        <li><a href="javascript:;" class="initial-o-fada" title="&#211;" data-initial="&#211;"></a></li>
+        <li><a href="javascript:;" class="initial-u-fada" title="&#218;" data-initial="&#218;"></a></li>
+        <li><a href="javascript:;" class="initial-ampersand" title="Ampersand" data-initial="Ampersand"></a></li>
+        <li><a href="javascript:;" class="initial-heart" title="Heart" data-initial="Heart"></a></li>
+        <li><a href="javascript:;" class="initial-star" title="Star" data-initial="Star"></a></li>
+        <li><a href="javascript:;" class="initial-blank" title="Blank" data-initial="Blank"></a></li>
+      </ul>
+    </div>
+    <div class="dropdown-panel-footer">
+      <a href="javascript:;" class="btn btn-dark btn-solid disabled">Done</a>
+    </div>
+  </div> <!-- end .dropdown-panel -->
+
+</div> <!-- end .customise-section -->

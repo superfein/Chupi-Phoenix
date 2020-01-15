@@ -173,9 +173,9 @@
           <!-- Top level menu item -->
           <li class="has-mega-menu"><a href="javascript:;">Wedding</a></li>
           <!-- Top level menu item -->
-          <li class="has-mega-menu"><a href="javascript:;">Story</a></li>
+          <li class="has-mega-menu"><a href="javascript:;">Personalise</a></li>
           <!-- Top level menu item -->
-          <li><a href="javascript:;">Care</a></li>
+          <li class="has-mega-menu"><a href="javascript:;">About</a></li>
           <!-- Mobile currency -->
           <li id="currency-select-mobile" class="currency-select">
             <a href="javascript:;" class="currency-btn currency-eur">EUR</a>
@@ -276,7 +276,16 @@
                 <a href="javascript:;" class="solid-white-gold"></a>
                 <a href="javascript:;" class="solid-gold active"></a>
               </div>
-              <span class="price">€2,379</span>
+              <!-- <span class="price">€2,379</span> -->
+
+              <div class="finance-options">
+                <span class="price">€2,379</span>
+                <span class="finance-options-trigger">Finance Options</span>
+                <div class="finance-options-tooltip">
+                  This product has options for financing. <a href="/pages/payment-plan-product-page#product-aquamarine-diamond-ring-one-in-a-trillion">Learn More</a>
+                </div>
+              </div>
+
               <p class="shipping">Free worldwide delivery via DHL and 100 days for returns</p>
 
               <div class="product-customise">
@@ -456,6 +465,65 @@
                 </div> <!-- end .customise-section -->
 
 
+                <!-- Customise Zodiac -->
+                <div class="customise-section customise-starsign customise-zodiac" data-customise-selection="" data-required-text="Choose a zodiac">
+                  <a href="javascript:;" class="dropdown-btn">Select zodiac</a>
+                  <a href="javascript:;" class="guide-btn">Zodiac Guide</a>
+                  <div class="dropdown-panel">
+                    <div class="dropdown-panel-header">
+                      <h3>Select zodiac</h3>
+                      <a href="javascript:;" class="close-btn"></a>
+                    </div>
+                    <div class="dropdown-panel-main">
+                      <ul class="grid starsign-options">
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-aquarius.png" alt="">Aquarius<span>Jan 20 - Feb 18</span></a></li>
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-pisces.png" alt="">Pisces<span>Feb 19 - Mar 20</span></a></li>
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-aries.png" alt="">Aries<span>Mar 21 - Apr 19</span></a></li>
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-taurus.png" alt="">Taurus<span>Apr 20 - May 20</span></a></li>
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-gemini.png" alt="">Gemini<span>May 20 - Jun 21</span></a></li>
+                        <li><a href="javascript:;" class="starsign-option dropdown-option"><img src="img/product/starsigns/starsign-cancer.png" alt="">Cancer<span>Jun 21 - Jul 22</span></a></li>
+                      </ul>
+                    </div>
+                  </div> <!-- end .dropdown-panel -->
+                  <!-- Guide drawer -->
+                  <aside class="drawer product-guide-drawer starsign-guide">
+                    <div class="drawer-back"></div>
+                    <div class="drawer-header">
+                      <h2>Zodiac Guide</h2>
+                      <a href="javascript:;" class="close-btn"></a>
+                    </div> <!-- end .drawer-header -->
+                    <div class="drawer-main">
+                      <ul class="grid starsign-options">
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Aquarius <span>Jan 20 - Feb 18</span></h3>
+                        </li>
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Pisces <span>Feb 19 - Mar 20</span></h3>
+                        </li>
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Aries <span>Mar 21 - Apr 19</span></h3>
+                        </li>
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Taurus <span>Apr 20 - May 20</span></h3>
+                        </li>
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Gemini <span>May 20 - Jun 21</span></h3>
+                        </li>
+                        <li>
+                          <img src="img/product/starsigns/starsign-aquarius.png" alt="">
+                          <h3>Cancer <span>Jun 21 - Jul 22</span></h3>
+                        </li>
+                      </ul>
+                    </div> <!-- end .drawer-main -->
+                  </aside> <!-- end .product-guide-drawer -->
+                </div> <!-- end .customise-section -->
+
+
                 <!-- Customise Coordinates -->
                 <div class="customise-section customise-coordinates" data-customise-selection="" data-required-text="Complete coordinates">
                   <p>Select your coordinates</p>
@@ -528,7 +596,7 @@
                     </div>
                   </div>
                   <div class="dropdown change-disc">
-                    <a href="javscript:;" class="dropdown-btn">Three discs</a>
+                    <a href="javscript:;" class="dropdown-btn">Number of discs</a>
                     <div class="dropdown-panel">
                       <div class="dropdown-panel-header">
                         <h3>Change number of discs</h3>
@@ -536,11 +604,11 @@
                       </div>
                       <div class="dropdown-panel-main">
                         <ul class="grid">
-                          <li><a href="javascript:;">One Disc Necklace<span class="price">€149.00</span></a></li>
-                          <li><a href="javascript:;">Two Disc Necklace<span class="price">€169.00</span></a></li>
-                          <li><a href="javascript:;" class="disabled">Three Disc Necklace<span class="price">€199.00</span></a></li>
-                          <li><a href="javascript:;">Four Disc Necklace<span class="price">€299.00</span></a></li>
-                          <li><a href="javascript:;">Five Disc Necklace<span class="price">€259.00</span></a></li>
+                          <li><a href="javascript:;">One Disc Necklace <span class="price">€149.00</span></a></li>
+                          <li><a href="javascript:;">Two Disc Necklace <span class="price">€169.00</span></a></li>
+                          <li><a href="javascript:;">Three Disc Necklace <span class="price">€199.00</span></a></li>
+                          <li><a href="javascript:;">Four Disc Necklace <span class="price">€299.00</span></a></li>
+                          <li><a href="javascript:;" class="disabled">Five Disc Necklace <span class="price">€259.00</span></a></li>
                         </ul>
                       </div>
                     </div> <!-- end .dropdown-panel -->
@@ -559,41 +627,41 @@
                     </div>
                     <div class="dropdown-panel-main">
                       <ul class="grid initials-options">
-                        <li><a href="javascript:;" class="initial-a" data-initial="A"></a></li>
-                        <li><a href="javascript:;" class="initial-b" data-initial="B"></a></li>
-                        <li><a href="javascript:;" class="initial-c" data-initial="C"></a></li>
-                        <li><a href="javascript:;" class="initial-d" data-initial="D"></a></li>
-                        <li><a href="javascript:;" class="initial-e" data-initial="E"></a></li>
-                        <li><a href="javascript:;" class="initial-f" data-initial="F"></a></li>
-                        <li><a href="javascript:;" class="initial-g" data-initial="G"></a></li>
-                        <li><a href="javascript:;" class="initial-h" data-initial="H"></a></li>
-                        <li><a href="javascript:;" class="initial-i" data-initial="I"></a></li>
-                        <li><a href="javascript:;" class="initial-j" data-initial="J"></a></li>
-                        <li><a href="javascript:;" class="initial-k" data-initial="K"></a></li>
-                        <li><a href="javascript:;" class="initial-l" data-initial="L"></a></li>
-                        <li><a href="javascript:;" class="initial-m" data-initial="M"></a></li>
-                        <li><a href="javascript:;" class="initial-n" data-initial="N"></a></li>
-                        <li><a href="javascript:;" class="initial-o" data-initial="O"></a></li>
-                        <li><a href="javascript:;" class="initial-p" data-initial="P"></a></li>
-                        <li><a href="javascript:;" class="initial-q" data-initial="Q"></a></li>
-                        <li><a href="javascript:;" class="initial-r" data-initial="R"></a></li>
-                        <li><a href="javascript:;" class="initial-s" data-initial="S"></a></li>
-                        <li><a href="javascript:;" class="initial-t" data-initial="T"></a></li>
-                        <li><a href="javascript:;" class="initial-u" data-initial="U"></a></li>
-                        <li><a href="javascript:;" class="initial-v" data-initial="V"></a></li>
-                        <li><a href="javascript:;" class="initial-w" data-initial="W"></a></li>
-                        <li><a href="javascript:;" class="initial-x" data-initial="X"></a></li>
-                        <li><a href="javascript:;" class="initial-y" data-initial="Y"></a></li>
-                        <li><a href="javascript:;" class="initial-z" data-initial="Z"></a></li>
-                        <li><a href="javascript:;" class="initial-a-fada" data-initial="&#193;"></a></li>
-                        <li><a href="javascript:;" class="initial-e-fada" data-initial="&#201;"></a></li>
-                        <li><a href="javascript:;" class="initial-i-fada" data-initial="&#205;"></a></li>
-                        <li><a href="javascript:;" class="initial-o-fada" data-initial="&#211;"></a></li>
-                        <li><a href="javascript:;" class="initial-u-fada" data-initial="&#218;"></a></li>
-                        <li><a href="javascript:;" class="initial-ampersand" data-initial="Ampersand"></a></li>
-                        <li><a href="javascript:;" class="initial-heart" data-initial="Heart"></a></li>
-                        <li><a href="javascript:;" class="initial-star" data-initial="Star"></a></li>
-                        <li><a href="javascript:;" class="initial-blank" data-initial="Blank"></a></li>
+                        <li><a href="javascript:;" class="initial-a" title="A" data-initial="A"></a></li>
+                        <li><a href="javascript:;" class="initial-b" title="B" data-initial="B"></a></li>
+                        <li><a href="javascript:;" class="initial-c" title="c" data-initial="C"></a></li>
+                        <li><a href="javascript:;" class="initial-d" title="D" data-initial="D"></a></li>
+                        <li><a href="javascript:;" class="initial-e" title="E" data-initial="E"></a></li>
+                        <li><a href="javascript:;" class="initial-f" title="F" data-initial="F"></a></li>
+                        <li><a href="javascript:;" class="initial-g" title="G" data-initial="G"></a></li>
+                        <li><a href="javascript:;" class="initial-h" title="H" data-initial="H"></a></li>
+                        <li><a href="javascript:;" class="initial-i" title="I" data-initial="I"></a></li>
+                        <li><a href="javascript:;" class="initial-j" title="J" data-initial="J"></a></li>
+                        <li><a href="javascript:;" class="initial-k" title="K" data-initial="K"></a></li>
+                        <li><a href="javascript:;" class="initial-l" title="L" data-initial="L"></a></li>
+                        <li><a href="javascript:;" class="initial-m" title="M" data-initial="M"></a></li>
+                        <li><a href="javascript:;" class="initial-n" title="N" data-initial="N"></a></li>
+                        <li><a href="javascript:;" class="initial-o" title="O" data-initial="O"></a></li>
+                        <li><a href="javascript:;" class="initial-p" title="P" data-initial="P"></a></li>
+                        <li><a href="javascript:;" class="initial-q" title="Q" data-initial="Q"></a></li>
+                        <li><a href="javascript:;" class="initial-r" title="R" data-initial="R"></a></li>
+                        <li><a href="javascript:;" class="initial-s" title="S" data-initial="S"></a></li>
+                        <li><a href="javascript:;" class="initial-t" title="T" data-initial="T"></a></li>
+                        <li><a href="javascript:;" class="initial-u" title="U" data-initial="U"></a></li>
+                        <li><a href="javascript:;" class="initial-v" title="V" data-initial="V"></a></li>
+                        <li><a href="javascript:;" class="initial-w" title="W" data-initial="W"></a></li>
+                        <li><a href="javascript:;" class="initial-x" title="X" data-initial="X"></a></li>
+                        <li><a href="javascript:;" class="initial-y" title="Y" data-initial="Y"></a></li>
+                        <li><a href="javascript:;" class="initial-z" title="Z" data-initial="Z"></a></li>
+                        <li><a href="javascript:;" class="initial-a-fada" title="&#193;" data-initial="&#193;"></a></li>
+                        <li><a href="javascript:;" class="initial-e-fada" title="&#201;" data-initial="&#201;"></a></li>
+                        <li><a href="javascript:;" class="initial-i-fada" title="&#205" data-initial="&#205;"></a></li>
+                        <li><a href="javascript:;" class="initial-o-fada" title="&#211;" data-initial="&#211;"></a></li>
+                        <li><a href="javascript:;" class="initial-u-fada" title="&#218;" data-initial="&#218;"></a></li>
+                        <li><a href="javascript:;" class="initial-ampersand" title="Ampersand" data-initial="Ampersand"></a></li>
+                        <li><a href="javascript:;" class="initial-heart" title="Heart" data-initial="Heart"></a></li>
+                        <li><a href="javascript:;" class="initial-star" title="Star" data-initial="Star"></a></li>
+                        <li><a href="javascript:;" class="initial-blank" title="Blank" data-initial="Blank"></a></li>
                       </ul>
                     </div>
                     <div class="dropdown-panel-footer">
@@ -929,7 +997,7 @@
           </div>
           <div>
             <a class="title" href=""><h4>I’d be lost without you<span>Solid Gold Ring</span></h4></a>
-            <span class="detail-note">Size: US Size 5 / UK Size J</span>
+            <div class="detail-notes"><span class="detail-note">Size: US Size 5 / UK Size J</span></div>
             <div class="qty">
               <span>Qty</span>
               <select data-variant-id="">
@@ -976,7 +1044,7 @@
           </div>
           <div>
             <a class="title" href=""><h4>I’d be lost without you<span>Solid Gold Ring</span></h4></a>
-            <span class="detail-note">Size: US Size 5 / UK Size J</span>
+            <div class="detail-notes"><span class="detail-note">Size: US Size 5 / UK Size J</span></div>
             <div class="qty">
               <span>Qty</span>
               <select data-variant-id="">
@@ -1220,9 +1288,10 @@
         <div class="inner">
           <h2><img src="img/drawing/paper-plane-dark.svg" alt="Plane icon">Drop A Hint</h2>
           <img src="img/product/open-heart-ring.jpg" alt="Open Heart Ring">
-          <p>Dear <span id="message-recipient-name">Brian</span></p>
-          <p>We happen to know that the “Solid Gold Love Heart Ring” would make Chupi ridiculously happy!</p>
+          <p>Dear <span id="hint-message-recipient-name"></span></p>
+          <p>We happen to know that the &ldquo;<span id="hint-message-product-title">Solid Gold Love Heart Ring</span>&rdquo; would make <span id="hint-message-sender-name"></span> ridiculously happy!</p>
           <p>Happy shopping! <br>The Chupi Team</p>
+          <p class="additional-text">P.S.<span id="hint-message-additional"></span></p>
         </div>
       </div>
 

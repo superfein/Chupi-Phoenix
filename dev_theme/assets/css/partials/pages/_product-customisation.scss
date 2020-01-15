@@ -223,6 +223,7 @@
                   }
                   .inner {
                     display: inline-block;
+                    width: 100%;
                     max-height: 0;
                     opacity: 0;
                     @include transform(translateY(-20px));
@@ -352,7 +353,7 @@
               }
             } // end .customise-birthstone
 
-            // Starsign
+            // Starsign, Starsign Symbol, Zodiac
             &.customise-starsign {
               .guide-btn {
                 &:before {
@@ -614,30 +615,26 @@
             // Initials
             &.customise-initials {
               grid-template-columns: 100%;
-              grid-gap: 10px;
               .grid-item {
                 position: relative;
-                display: flex;
-                justify-self: center;
-                align-self: center;
-                // align-items: center;
-                // align-content: center;
+                display: block;
                 > span {
-                  display: inline-block;
-                  font-size: 12px;
-                  margin-right: 10px;
+                  display: block;
+                  font-size: 14px;
+                  text-align: center;
+                  margin-bottom: 10px;
                   align-self: center;
-                  max-width: 50px;
                 }
                 .initials-selection { // outside panel
                   position: relative;
-                  display: inline-block;
+                  display: block;
+                  text-align: center;
                   span {
                     display: inline-block;
-                    float: left;
+                    float: none;
                     width: 40px;
                     height: 48px;
-                    margin-right: 7px;
+                    margin: 0 2px;
                     margin-bottom: 3px;
                     padding: 0;
                     border: 1px solid $grey_light;
@@ -868,6 +865,16 @@
 
               // Initials
               &.customise-initials {
+                .grid-item {
+                  position: relative;
+                  display: flex;
+                  align-content: center;
+                  justify-content: center;
+                  > span {
+                    display: inline-block;
+                    margin-right: 10px;
+                  }
+                }
                 > .dropdown-panel { // initial panel
                   .dropdown-panel-main {
                     ul {
@@ -1065,7 +1072,7 @@
                 }
               } // end .customise-birthstone
 
-              // Starsign
+              // Starsign, Starsign Symbol, Zodiac
               &.customise-starsign {
                 .dropdown-panel {
                   ul.starsign-options {
@@ -1188,8 +1195,9 @@
                   .dropdown-panel { // change disc panel
                     width: auto;
                     min-width: 300px;
-                    left: auto;
-                    right: 0;
+                    left: 50%;
+                    @include transform(translateX(-50%) translateY(-10px));
+                    right: auto;
                     .dropdown-panel-main {
                       padding-top: 0px;
                       ul {
@@ -1205,10 +1213,13 @@
                         }
                       }
                     }
+                    &.active {
+                      @include transform(translateX(-50%) translateY(0));
+                    }
                   }
                 }
                 > .dropdown-panel { // initial panel
-                  top: calc(100% + 14px);
+                  top: calc(100% + 14px - 46px); // 100% + space for pointer - height of disc-change area
                   .dropdown-panel-main {
                     padding-bottom: 0px;
                     padding: 10px 0;
@@ -1274,29 +1285,6 @@
 
 @include mquery(l) {
 
-  // #product-top {
-  //   .content {
-  //     > .grid {
-  //       #product-info {
-  //         .product-customise {
-            .customise-section {
-              // Initials
-              &.customise-initials {
-                grid-template-columns: minmax(300px, auto) auto;
-                .grid-item {
-                  justify-self: end;
-                }
-                .change-disc {
-                  justify-self: start;
-                }
-              } // end .customise-initials
-
-            } // end .customise-section
-  //         } // end .product-customise
-  //       } // end #product-info
-  //     } // end .grid
-  //   }
-  // } // end #product-top
 
 } // end media-query large
 
@@ -1309,6 +1297,42 @@
 
 
 @include mquery(xl) {
+
+  // #product-top {
+  //   .content {
+  //     > .grid {
+  //       #product-info {
+  //         .product-customise {
+            .customise-section {
+              // Initials
+              &.customise-initials {
+                // grid-template-columns: minmax(350px, auto) auto;
+                grid-template-columns: auto auto;
+                .grid-item {
+                  justify-self: end;
+                }
+                .change-disc {
+                  justify-self: start;
+                  .dropdown-panel { // change disc panel
+                    left: auto;
+                    @include transform(translateX(0%) translateY(-10px));
+                    right: 0;
+                    &.active {
+                      @include transform(translateX(0%) translateY(0));
+                    }
+                  }
+                }
+                > .dropdown-panel { // initial panel
+                  top: calc(100% + 14px); // 100% + space for pointer
+                }
+              } // end .customise-initials
+
+            } // end .customise-section
+  //         } // end .product-customise
+  //       } // end #product-info
+  //     } // end .grid
+  //   }
+  // } // end #product-top
 
 } // end media-query extra-large
 
