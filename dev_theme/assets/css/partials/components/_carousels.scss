@@ -11,11 +11,15 @@
     column-gap: 20px;
     padding-bottom: 20px;
     cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
     .carousel-item {
       grid-column: span 1;
       grid-row: 1 / span 1;
     }
   } // end .carousel-track
+
   // &:after { // side-gradient
   //   content: '';
   //   position: absolute;
@@ -99,16 +103,58 @@
       .carousel-track {
         grid-template-columns: repeat(auto-fill, 375px);
         padding-top: 20px;
+        @include transition(all 0.2s $ease);
         .carousel-item {
           width: 375px;
           &.card {
             @include transition(box-shadow 0.4s $ease_out_quint);
             &:hover {
-              box-shadow: 0px 10px 30px rgba(0,0,0,.12);
+              box-shadow: 0px 1px 20px rgba(0,0,0,.12);
+            }
+          }
+        }
+        &::-webkit-scrollbar-track {
+          background-color: $grey_lightest;
+        }
+        &::-webkit-scrollbar {
+          height: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: $grey_lighter;
+          border-radius: 5px;
+        }
+        &:hover {
+          &::-webkit-scrollbar-track {
+
+          }
+          &::-webkit-scrollbar {
+
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: $grey_light;
+          }
+        }
+        &.dragging { // Applied when the carousel is being dragged with mouse
+          .carousel-item {
+            a {
+              cursor: grabbing;
             }
           }
         }
       } // end .carousel-track
+
+      // .carousel-track::-webkit-scrollbar-track {
+      //   //opacity: 0.5;
+      // }
+      // // .carousel-track::-webkit-scrollbar {
+      // //   //opacity: 1;
+      // //   //height: 20px;
+      // //   height: 30px;
+      // // }
+      // .carousel-track::-webkit-scrollbar-thumb {
+      //   background-color: $grey_lightest;
+      // }
+
     }
   } // end .carousel
 

@@ -343,14 +343,14 @@ $(document).on('click', function(e) {
   function pressSectionAdjust() {
     // Set min height of quotes container
     var minHeight = -1;
-    $('#product-press').find('.press-quote').each(function() {
+    $('.press-quotes').find('.press-quote').each(function() {
      minHeight = minHeight > $(this).height() ? minHeight : $(this).height();
     });
-    $('#product-press').find('.press-quotes').css('min-height', minHeight);
+    $('.press-quotes').find('.press-quotes').css('min-height', minHeight);
 
     // Position underline
-    var currentPressLogo = $('#product-press').find('.press-logo.current');
-    $('#product-press').find('.underline').css({
+    var currentPressLogo = $('.press-quotes').find('.press-logo.current');
+    $('.press-quotes').find('.underline').css({
       'width' : parseInt(currentPressLogo.innerWidth()),
       'left' : parseInt(currentPressLogo.position().left)
     });
@@ -359,20 +359,20 @@ $(document).on('click', function(e) {
   $(window).resize(function() { pressSectionAdjust(); }); // on resize
 
   // Change quote when a logo is selected
-  $('#product-press').find('.press-logo').click( function() {
+  $('.press-quotes').find('.press-logo').click( function() {
     currentPressLogo = $(this);
     // Assign current class
-    $('#product-press').find('.press-logo').removeClass('current');
+    $('.press-quotes').find('.press-logo').removeClass('current');
     $(this).addClass('current');
     // Move underline
     var thisLogoIndex = $('.press-logo').index(this);
     $(this).siblings('.underline').css({
-      'width' : parseInt($('#product-press').find('.press-logo.current').innerWidth()),
-      'left' : parseInt($('#product-press').find('.press-logo.current').position().left)
+      'width' : parseInt($('.press-quotes').find('.press-logo.current').innerWidth()),
+      'left' : parseInt($('.press-quotes').find('.press-logo.current').position().left)
     });
     // Show matching quote
-    $('#product-press').find('.press-quote').removeClass('active');
-    $('#product-press').find('.press-quote').eq(thisLogoIndex).addClass('active');
+    $('.press-quotes').find('.press-quote').removeClass('active');
+    $('.press-quotes').find('.press-quote').eq(thisLogoIndex).addClass('active');
   });
 
 
@@ -380,13 +380,13 @@ $(document).on('click', function(e) {
 
 
   // Product FAQs open/close
-  $('#product-faq .question').off().click(function(e) {
+  $('.faq-section .question').off().click(function(e) {
     e.preventDefault();
     var thisQuestion = $(this);
-    $('#product-faq .question').not(thisQuestion).removeClass('active').siblings('.answer').slideUp(mobileMenuSlideTime); // close all
+    $('.faq-section .question').not(thisQuestion).removeClass('active').siblings('.answer').slideUp(mobileMenuSlideTime); // close all
     thisQuestion.toggleClass('active').siblings('.answer').slideToggle(mobileMenuSlideTime); // open this
   });
-
+ 
 
 
 

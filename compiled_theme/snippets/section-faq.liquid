@@ -1,0 +1,61 @@
+
+{% comment %} Full-width-section {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-faq' %}
+{% elsif template == 'product-hvp' %}
+  {% assign sectionId = 'hvp-faq' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="faq-section">
+  <div class="content">
+    <h2><span>Commonly Asked</span> Questions</h2>
+    <!-- Two columns for desktop show/hide to work independently -->
+    <div class="grid"> <!-- Left column -->
+      <div class="grid-item">
+        <a href="javascript:;" class="question">Where do you ship to?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+      <div class="grid-item">
+        <a href="javascript:;" class="question">Do you offer an engraving service?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+      <div class="grid-item">
+        <a href="javascript:;" class="question">What is your returns policy?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+    </div> <!-- end .grid -->
+    <div class="grid"> <!-- Right column -->
+      <div class="grid-item">
+        <a href="javascript:;" class="question">Where do you ship to?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+      <div class="grid-item">
+        <a href="javascript:;" class="question">What’s the estimated delivery time?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+      <div class="grid-item">
+        <a href="javascript:;" class="question">Can I track my order?</a>
+        <div class="answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
+        </div>
+      </div>
+    </div> <!-- end .grid -->
+    <div class="cta">
+      <a href="javascript:;" class="btn btn-dark btn-solid">Need something else?</a>
+    </div>
+  </div> <!-- end .content -->
+</section>

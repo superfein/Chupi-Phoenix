@@ -3,10 +3,29 @@
 
 
 
+  const productId = $('#product-top').attr('data-product-id');
+  const firstVariantId = $('#product-top').attr('data-first-variant-id');
   var selectionVariantId = $('#product-top').attr('data-selected-variant-id');
   var customisationProperties = {};
 
 
+
+
+  function makeCurrency(amount) {
+    const symbol = document.body.getAttribute('data-currency-symbol');
+    const trailingZeroes = document.body.getAttribute('data-currency-sample').includes('.00');
+    if (trailingZeroes){
+      if (typeof amount === 'string'){
+        amount = parseInt(amount);
+      }
+      amount = amount.toFixed(2);
+      let money = (symbol + amount);
+      return money;
+    } else {
+      let money = symbol + amount;
+      return money;
+    }
+  }
 
 
 
@@ -431,7 +450,7 @@ $(document).on('click', function(e) {
 
       // AJAX cart update
       // console.log(selectionVariantId);
-      // console.log(customisationProperties);
+      console.log(customisationProperties);
       $.post(
         "/cart/add.js", {
           "quantity": 1,
@@ -1000,7 +1019,7 @@ $(document).on('click', function(e) {
       customisationProperties.Size = thisCustomiseSection.attr('data-customise-selection');
     } else if (thisCustomiseSection.hasClass('customise-birthstone')) {
       customisationProperties.Birthstone = thisCustomiseSection.attr('data-customise-selection');
-    } else if (thisCustomiseSection.hasClass('customise-starsign')) {
+    } else if (thisCustomiseSection.hasClass('customise-starsign') && !thisCustomiseSection.hasClass('customise-zodiac')) {
       customisationProperties.Starsign = thisCustomiseSection.attr('data-customise-selection');
     } else if (thisCustomiseSection.hasClass('customise-zodiac')) {
       customisationProperties.Zodiac = thisCustomiseSection.attr('data-customise-selection');
@@ -1100,38 +1119,38 @@ $(document).on('click', function(e) {
   function pressSectionAdjust() {
     // Set min height of quotes container
     var minHeight = -1;
-    $('#product-press').find('.press-quote').each(function() {
+    $('.press-quotes').find('.press-quote').each(function() {
      minHeight = minHeight > $(this).height() ? minHeight : $(this).height();
     });
-    $('#product-press').find('.press-quotes').css('min-height', minHeight);
+    $('.press-quotes').find('.press-quotes').css('min-height', minHeight);
 
     // Position underline
-    var currentPressLogo = $('#product-press').find('.press-logo.current');
-    $('#product-press').find('.underline').css({
+    var currentPressLogo = $('.press-quotes').find('.press-logo.current');
+    $('.press-quotes').find('.underline').css({
       'width' : parseInt(currentPressLogo.innerWidth()),
       'left' : parseInt(currentPressLogo.position().left)
     });
   }
-  if( $('#product-press').length ) {
+  if( $('.press-quotes').length ) {
     pressSectionAdjust();
     $(window).resize(function() { pressSectionAdjust(); }); // on resize
 	}
 
   // Change quote when a logo is selected
-  $('#product-press').find('.press-logo').click( function() {
+  $('.press-quotes').find('.press-logo').click( function() {
     currentPressLogo = $(this);
     // Assign current class
-    $('#product-press').find('.press-logo').removeClass('current');
+    $('.press-quotes').find('.press-logo').removeClass('current');
     $(this).addClass('current');
     // Move underline
     var thisLogoIndex = $('.press-logo').index(this);
     $(this).siblings('.underline').css({
-      'width' : parseInt($('#product-press').find('.press-logo.current').innerWidth()),
-      'left' : parseInt($('#product-press').find('.press-logo.current').position().left)
+      'width' : parseInt($('.press-quotes').find('.press-logo.current').innerWidth()),
+      'left' : parseInt($('.press-quotes').find('.press-logo.current').position().left)
     });
     // Show matching quote
-    $('#product-press').find('.press-quote').removeClass('active');
-    $('#product-press').find('.press-quote').eq(thisLogoIndex).addClass('active');
+    $('.press-quotes').find('.press-quote').removeClass('active');
+    $('.press-quotes').find('.press-quote').eq(thisLogoIndex).addClass('active');
   });
 
 
@@ -1141,15 +1160,111 @@ $(document).on('click', function(e) {
 
 
   // Product FAQs open/close
-  $('#product-faq .question').off().click(function(e) {
+  $('.faq-section .question').off().click(function(e) {
     e.preventDefault();
     var thisQuestion = $(this);
-    $('#product-faq .question').not(thisQuestion).removeClass('active').siblings('.answer').slideUp(mobileMenuSlideTime); // close all
+    $('.faq-section .question').not(thisQuestion).removeClass('active').siblings('.answer').slideUp(mobileMenuSlideTime); // close all
     thisQuestion.toggleClass('active').siblings('.answer').slideToggle(mobileMenuSlideTime); // open this
   });
 
 
 
+
+
+
+
+  // Related products
+
+
+  // Global AJAX call function
+  function ajaxFetch(method, url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+    var response = '';
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
+        if (xmlhttp.status == 200) {
+          response = this.responseText;
+          xmlhttp.onload = function() {
+            callback(response);
+          };
+        } else if (xmlhttp.status == 400) {
+          console.warn('There was an error 400 on the AJAX call');
+        } else {
+          console.warn('something else other than 200 was returned');
+        }
+      }
+    };
+
+    xmlhttp.open(method, url, true);
+    xmlhttp.send();
+  }
+
+  // Related products
+  function getRelatedProducts() {
+
+    var relatedProductCard = $('.related-products').find('.product-card');
+    var fetchProductLimit = 5;
+
+    // Init on load
+    ajaxFetch('GET', window.location.protocol + '//' + window.location.hostname + '/recommendations/products.json?product_id=' + productId + '&limit=' + fetchProductLimit, function(response){
+
+      const parsedResponse = JSON.parse(response); // Parse AJAX data
+      const products = parsedResponse.products;
+      let editedProducts = products;
+
+      // Clean up the array
+      for (let i = 0; i < products.length; i++){
+        let {tags} = products[i];
+        if (tags.includes("hidefromcollection") || tags.includes("algolia-ignore") || tags.includes("ring sizer")){
+          console.log("hidden product found at index " + products.indexOf(products[i]));
+          let currentIndex = products.indexOf(products[i]);
+          editedProducts.splice(currentIndex, 1);
+        }
+      }
+
+      // For each related product
+      for (let i = 0; i < editedProducts.length; i++){
+
+        // Get data
+        let productId = products[i].id;
+        let productFirstVariantId = products[i].variants[0].id;
+        let {title, price, url} = products[i];
+        price = makeCurrency(price/100);
+        let images = products[i].images;
+        let media = products[i].media;
+        let firstImageUrl = images[0];
+        firstImageUrl = firstImageUrl.split('.jpg')[0] + '_480x480.jpg' + firstImageUrl.split('.jpg')[1]; // Replace image size
+        let onBodyImageUrl = '';
+        // Check all images for on-body alt text, if none found use second image
+        for (let j = 0; j < media.length; j++){
+          if (media[j].alt == 'on-body-shot') {
+            onBodyImageUrl = media[j].src;
+            break;
+          } else {
+            onBodyImageUrl = images[1];
+          }
+        }
+
+        // Apply data to related product cards
+        relatedProductCard.eq(i).children('.inner').find('.upper a').attr('href', url); // URL
+        relatedProductCard.eq(i).children('.inner').children('a').attr('href', url); // URL
+        relatedProductCard.eq(i).children('.inner').find('img').attr('src', firstImageUrl).attr('alt', title); // First image 
+        relatedProductCard.eq(i).children('img').attr('src', onBodyImageUrl).attr('alt', title); // Second image (rollover)
+        relatedProductCard.eq(i).children('.inner').find('h3').text(title); // Title
+        relatedProductCard.eq(i).find('.price').text(price); // Price
+        relatedProductCard.eq(i).attr('data-product-id', productId); // Product ID
+        relatedProductCard.eq(i).attr('data-first-variant-id', productFirstVariantId); // First variant ID
+        // if (Appmate.wk.getProduct(productId) !== null) { // If this item is in Wishlist, set active state
+        //   productSlots[i].querySelector('.recommended-wishlist-add').classList.add('active');
+        // }
+      }
+
+    });
+
+  }
+  if ($('.related-products').length > 0) {
+    getRelatedProducts();
+  }
 
 
 

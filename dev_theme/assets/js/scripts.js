@@ -685,6 +685,61 @@
 
 
 
+  function carouselDragScroll() {
+
+    // Ref: https://stackoverflow.com/questions/5766297/handle-click-and-drag-movement-to-scroll-horizontally-with-mootools-or-jquery#answer-5839943
+    var x,left,down,parentLinkElement,parentLink;
+    var scrollPreventdefaultMargin = 20; // Distance to drag before links get disabled
+    var carousel = $('.carousel .carousel-track');
+
+    carousel.mousedown(function(e){
+      if (e.which === 1) { // on left-click only
+        down = true;
+        x = e.pageX; // Get X position of cursor
+        left = carousel.scrollLeft(); // Get scroll position of carousel
+        if (e.target.closest('a')) {
+          parentLinkElement = e.target.closest('a'); // Determine link element
+          parentLink = parentLinkElement.getAttribute('href'); // Get link URL
+        }
+        e.preventDefault(); // Important - Cancels left-click specific mousedown register
+      }
+    });
+
+    $("body").mousemove(function(e){
+        if(down){ // Drag
+          var newX = e.pageX;
+          if (Math.abs(x-newX) > scrollPreventdefaultMargin) { // if dragged more than set margin
+            parentLinkElement.setAttribute('href', 'javscript:;'); // Temporarily remove link URL
+            carousel.addClass('dragging');
+          }
+          carousel.scrollLeft(left - newX + x); // Scroll carousel with drag
+        }
+    });
+
+    //$("body").mouseup(function(e){
+    $('body').on('mouseup mouseleave', function(e) { // Reset on mouseup OR when the mouse leaves the window
+      setTimeout( function() {
+        parentLinkElement.setAttribute('href', parentLink); // Reset original link URL
+      }, 10);
+      carousel.removeClass('dragging');
+      down = false; // Reset to default behaviour
+    });
+  }
+
+  if ($('.carousel').length) {
+    carouselDragScroll();
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   // Set parameters
 	// Ref: http://kenwheeler.github.io/slick/
@@ -764,6 +819,7 @@
       return money;
     }
   }
+
 
 
 

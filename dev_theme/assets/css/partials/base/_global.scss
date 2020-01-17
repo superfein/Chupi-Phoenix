@@ -191,6 +191,59 @@ ul {
   padding-left: $mobile_side-padding;
 }
 
+blockquote {
+  position: relative;
+  font-family: $font-family-primary;
+  font-size: 24px;
+  line-height: 1.3;
+  color: $grey;
+  padding: 0 30px;
+  &:before, // Quotation marks
+  &:after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url($icon_quotation_marks_pink);
+  }
+  &:before {
+    top: -10px;
+    left: 0;
+  }
+  &:after {
+    bottom: 80px;
+    right: 0;
+    @include transform(rotate(180deg));
+  }
+	.author {
+	  position: relative;
+		display: block;
+	  font-size: 18px;
+	  font-weight: $font-weight-light;
+	  padding-top: 20px;
+	  margin: 0;
+	  margin-top: 20px;
+	  &:before { // line
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 50%;
+	    @include transform(translate(-50%));
+	    width: 100px;
+	    height: 1px;
+	    background-color: $grey;
+	  }
+	  span {
+	    display: block;
+	    font-size: 14px;
+	    margin-top: 3px;
+	  }
+	}
+} // end blockquote
+
 
 // Misc.
 
@@ -415,6 +468,27 @@ ul {
     font-size: 30px;
   }
 
+	blockquote {
+		font-size: 32px;
+    padding: 0 40px;
+	  &:before, // Quotation marks
+	  &:after {
+			width: 32px;
+      height: 32px;
+	  }
+	  &:after {
+	    bottom: 90px;
+	  }
+		.author {
+			font-size: 20px;
+      padding-top: 30px;
+      margin-top: 30px;
+		  &:before { // line
+		    width: 160px;
+		  }
+		}
+	} // end blockquote
+
   // Compressed text
   .compressed-text {
     .expand-toggle {
@@ -461,6 +535,19 @@ ul {
 	body {
 		padding-top: $desktop_header_height;
 	}
+
+	blockquote {
+		font-size: 38px;
+    padding: 0 45px;
+	  &:before, // Quotation marks
+	  &:after {
+			width: 44px;
+      height: 44px;
+	  }
+		&:before {
+			top: -20px;
+		}
+	} // end blockquote
 
 } // end media-query large
 

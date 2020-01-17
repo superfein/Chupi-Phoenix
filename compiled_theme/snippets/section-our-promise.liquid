@@ -1,24 +1,28 @@
 
-{% comment %} Full-width section {% endcomment %}
+{% comment %} Full-width-section {% endcomment %}
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-promise' %}
+{% endif %}
 
 
-<section id="product-promise">
+<section id="{{ sectionId }}" class="three-block-icon">
   <div class="content">
     <h2>Our Promise</h2>
     <div class="grid">
       <div class="grid-item">
-        <img src="{{ 'gift-box-dark.svg' | asset_url}}" alt="Chupi gift box">
+        <img src="{{ 'drawing-gift-box-dark.svg' | asset_url}}" alt="Chupi gift box">
         <h3>Packaging</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
       </div>
       <div class="grid-item">
-        <img src="{{ 'sustainability-dark.svg' | asset_url}}" alt="Sustainability">
+        <img src="{{ 'drawing-sustainability-dark.svg' | asset_url}}" alt="Sustainability">
         <h3>Sustainability</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
       </div>
       <div class="grid-item">
-        <img src="{{ 'gift-box-dark.svg' | asset_url}}" alt="Chupi gift box">
-        <!-- <img src="{{ 'heart-dark.svg' | asset_url}}" alt="Heart"> -->
+        <img src="{{ 'drawing-heart-dark.svg' | asset_url}}" alt="Chupi gift box">
         <h3>Customer Service</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
       </div>

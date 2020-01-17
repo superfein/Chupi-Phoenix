@@ -263,7 +263,7 @@
 } // end #hvp-top
 
 
-#product-details { // Shares styles with same section in _product.scss
+#hvp-details {
   padding-top: 50px;
   padding-bottom: 50px;
 } // end #product-details
@@ -583,6 +583,11 @@
   }
 } // end #hvp-guarantee
 
+#hvp-cta-simple {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: $pink_lighter;
+}
 
 
 
@@ -847,10 +852,10 @@
   } // end #hvp-top
 
 
-  #product-details { // Shares styles with same section in _product.scss
+  #hvp-details {
     padding-top: 80px;
     padding-bottom: 50px;
-  } // end #product-details
+  } // end #hvp-details
 
 
   #wedding-match {

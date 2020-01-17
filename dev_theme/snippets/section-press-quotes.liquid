@@ -1,0 +1,32 @@
+
+{% comment %} Full-width-section {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-press-quotes' %}
+{% elsif template == 'hvp-press-quotes' %}
+  {% assign sectionId = 'hvp-ugc' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="press-quotes image-cover" style="background-image: url({{ 'product-press-bg2.jpg' | asset_url}});">
+  <div class="content">
+    <h2>In the press</h2>
+    <div class="press-quotes">
+      <div class="press-quote active"><p>I love the idea of buying something now that will become an heirloom for my future children to cherish forever</p></div>
+      <div class="press-quote"><p>The jewelry that you’ll probably see on Instagram at least 100 times today</p></div>
+      <div class="press-quote"><p>Chupi makes delicate jewellery inspired by the stories of her childhood in Ireland</p></div>
+      <div class="press-quote"><p>Convincing Us To Ditch Traditional Rings</p></div>
+      <div class="press-quote"><p>One of the Five Best Places to Shop in Dublin</p></div>
+    </div>
+    <div class="grid press-logos">
+      <div class="press-logo current"><img src="{{ 'press-logo-vogue.png' | asset_url }}" alt="Vogue" title="Vogue"></div>
+      <div class="press-logo"><img src="{{ 'press-logo-marie-claire.png' | asset_url }}" alt="Marie Claire" title="Marie Claire"></div>
+      <div class="press-logo"><img src="{{ 'press-logo-sunday-times.png' | asset_url }}" alt="The Sunday Times" title="The Sunday Times"></div>
+      <div class="press-logo"><img src="{{ 'press-logo-refinery29.png' | asset_url }}" alt="Refinery 29" title="Refinery 29"></div>
+      <div class="press-logo"><img src="{{ 'press-logo-new-york-times.png' | asset_url }}" alt="New York Times" title="New York Times"></div>
+      <div class="underline"></div>
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>

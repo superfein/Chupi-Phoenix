@@ -690,6 +690,7 @@
                           text-align: left;
                           padding: 15px;
                           text-decoration: none;
+                          @include transition(all 0.2s $ease);
                           span.price {
                             float: right;
                             text-align: right;
@@ -1207,7 +1208,11 @@
                               margin-left: 40px;
                             }
                             &:hover {
-                              text-decoration: underline;
+                              text-decoration: none;
+                              background-color: $grey_lightest;
+                              span.price {
+                                text-decoration: none;
+                              }
                             }
                           }
                         }

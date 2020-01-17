@@ -1,0 +1,246 @@
+
+// _press-quotes.scss
+
+
+.press-quotes {
+  padding: 0;
+  .content {
+    text-align: center;
+    padding: 50px 15px;
+    h2 {
+      margin-bottom: 30px;
+    }
+    .press-quotes {
+      position: relative;
+      display: block;
+      min-height: 100px;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      .press-quote {
+        position: absolute;
+        top: calc(50% + 15px);
+        left: 0;
+        @include transform(translateY(-50%));
+        width: 100%;
+        padding: 0 30px;
+        opacity: 0;
+        pointer-events: none;
+        @include transition(opacity 0.2s $ease, top 0.2s $ease 0.2s);
+        p {
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 1.45;
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+        &:before, // Quotation marks
+        &:after {
+          content: '';
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 10px;
+          left: 0;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-image: url($icon_quotation_marks_dark);
+          opacity: 0;
+          @include transition(all 0.2s $ease 0.2s);
+        }
+        &:after {
+          left: auto;
+          right: 0;
+          @include transform(rotate(180deg));
+        }
+        &.active {
+          top: 50%;
+          opacity: 1;
+          pointer-events: auto;
+          @include transition(opacity 0.7s $ease, top 0.7s $ease 0s);
+          &:before, // Quotation marks
+          &:after {
+            top: 0;
+            opacity: 0.6;
+            @include transition(top 0.4s $ease, opacity 2s $ease);
+          }
+        }
+      }
+    }
+    .press-logos {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+      justify-content: center;
+      max-width: none;
+      margin: 0;
+      .press-logo {
+        position: relative;
+        grid-column: span 1;
+        justify-self: center;
+        align-self: center;
+        img {
+          max-width: 100%;
+          max-height: 50px;
+          margin-bottom: 10px;
+          cursor: pointer;
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          width: 80%;
+          max-width: 100px;
+          height: 2px;
+          bottom: 0;
+          left: 50%;
+          background-color: $grey_dark;
+          @include transform(translateX(-50%));
+          opacity: 0;
+          @include transition(all 0.2s $ease);
+        }
+        &.current {
+          &:after {
+            width: 100%;
+            max-width: 150px;
+            opacity: 1;
+          }
+        }
+      }
+      .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $grey_dark;
+        @include transition(all 0.2s ease);
+        display: none; // hide on mobile
+      }
+    }
+  }
+} // end .press-quotes
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  .press-quotes {
+    .content {
+      padding: 90px 50px;
+      h2 {
+        margin-bottom: 50px;
+      }
+      .press-quotes {
+        margin-bottom: 50px;
+        max-width: 800px;
+        .press-quote {
+          left: 50%;
+          @include transform(translate(-50%, -50%));
+          padding: 0 50px;
+          p {
+            font-size: 20px;
+          }
+          &:before, // Quotation marks
+          &:after {
+            width: 26px;
+            height: 26px;
+          }
+        }
+      }
+      .press-logos {
+        grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+        grid-gap: 30px;
+        .press-logo {
+          &:after {
+            display: none;
+          }
+        }
+        .underline {
+          display: block;
+        }
+      }
+    }
+  } // end .press-quotes
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

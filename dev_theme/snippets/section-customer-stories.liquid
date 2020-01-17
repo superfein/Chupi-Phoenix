@@ -1,0 +1,39 @@
+
+{% comment %} Full-width-section {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-customer-stories' %}
+{% elsif template == 'product-hvp' %}
+  {% assign sectionId = 'hvp-customer-stories' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="customer-stories">
+  <div class="content">
+    <h2>Customer Stories</h2>
+    <div class="grid">
+      <div class="grid-item customer-photos" data-active-index="2">
+        <div class="customer-photo" style="background-image: url({{ 'customer-story-1.jpg' | asset_url }});"></div> <!-- Customer 1 -->
+        <div class="customer-photo active" style="background-image: url({{ 'customer-story-2.jpg' | asset_url }});"></div> <!-- Customer 2 -->
+        <div class="customer-photo" style="background-image: url({{ 'customer-story-3.jpg' | asset_url }});"></div> <!-- Customer 3 -->
+      </div>
+      <div class="grid-item">
+        <div class="customer-quote"> <!-- Customer 1 -->
+          <p>My ring is AMAZING!!! It sparkles SOOOO much. It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
+          <span>Julie Lynn & Sam Rockwell</span>
+        </div>
+        <div class="customer-quote active"> <!-- Customer 2 -->
+          <p>It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
+          <span>Sam Rockwell & Julie Lynn</span>
+        </div>
+        <div class="customer-quote"> <!-- Customer 3 -->
+          <p>It sparkles SOOOO much. It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
+          <span>Sulie Rynn & Jam Lockwell</span>
+        </div>
+        <a href="javascript:;">More Stories</a>
+      </div>
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>

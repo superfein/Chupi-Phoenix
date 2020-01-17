@@ -387,20 +387,12 @@
   }
 } // end #collection-listing
 
-
-#collection-help {
-  background-color: $pink_lighter;
+#collection-cta-simple {
   padding-top: 70px;
   padding-bottom: 70px;
-  .content {
-    .grid {
-      grid-template-columns: 100%;
-      .grid-item {
-        text-align: center;
-      }
-    }
-  }
-} // end #collection-help
+  background-color: $pink_lighter;
+}
+
 
 
 

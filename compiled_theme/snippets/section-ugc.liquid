@@ -1,0 +1,21 @@
+
+{% comment %} Full-width-section {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-ugc' %}
+{% elsif template == 'product-hvp' %}
+  {% assign sectionId = 'hvp-ugc' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="ugc-section">
+  <div class="content">
+    <h2><span>Styled on</span> Instagram</h2>
+    <div class="ugc-container">
+
+    </div> <!-- end .ugc-container -->
+    <p>Share a photo of your x style by tagging <span>#lovechupi</span></p>
+  </div> <!-- end .content -->
+</section>

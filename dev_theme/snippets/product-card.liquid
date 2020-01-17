@@ -1,6 +1,6 @@
 
 
-<div class="card product-card {% if homeCarouselCount > 0 %}carousel-item{% endif %}"> {% comment %} Check if is used within a carousel {% endcomment %}
+<div class="card product-card {% if homeCarouselCount > 0 %}carousel-item{% endif %}" data-product-id="" data-first-variant-id=""> {% comment %} Check if is used within a carousel {% endcomment %}
   {% assign onBodyShotSrc = "" %}
   {% assign onBodyShotCustomAlText = "" %}
   {% for image in product.images %}

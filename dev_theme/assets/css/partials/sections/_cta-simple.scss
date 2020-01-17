@@ -1,0 +1,102 @@
+
+// _cta-simple.scss
+
+.cta-simple {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      justify-items: center;
+      .grid-item {
+        text-align: center;
+        max-width: 700px;
+      }
+    }
+  }
+} // end .cta-simple
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

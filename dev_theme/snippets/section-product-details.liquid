@@ -1,0 +1,82 @@
+
+{% comment %} To be included on product templates {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-details' %}
+{% elsif template == 'product-hvp' %}
+  {% assign sectionId = 'hvp-details' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="product-details">
+  <div class="content">
+    <h2>The Details</h2>
+    <div class="grid">
+
+      {% if product.description contains 'Description:' %}
+
+        <div class="grid-item">
+          {% if product.description contains 'Size:' %}
+            {% assign descriptionText = product.description | split:"Description:" | last %}
+            {% assign descriptionText = descriptionText | split:"Size:" | first %}
+            {{ descriptionText }}
+          {% elsif product.description contains 'Material:' %}
+            {% assign descriptionText = product.description | split:"Description:" | last %}
+            {% assign descriptionText = descriptionText | split:"Material:" | first %}
+            {{ descriptionText }}
+          {% elsif product.description contains 'Delivery:' %}
+            {% assign descriptionText = product.description | split:"Description:" | last %}
+            {% assign descriptionText = descriptionText | split:"Delivery:" | first %}
+            {{ descriptionText }}
+          {% else %}
+            {% assign descriptionText = product.description | split:"Description:" | last %}
+            {{ descriptionText }}
+          {% endif %}
+        </div>
+
+        <div class="grid-item">
+          {% if product.description contains 'Size:' and product.description contains 'Material:' %}
+            {% assign sizeText = product.description | split:"Size:" | last %}
+            {% assign sizeText = sizeText | split:"Material:" | first %}
+            <h3 class="size">Size</h3>
+            {{ sizeText }}
+          {% elsif product.description contains 'Size:' and product.description contains 'Delivery:' %}
+            {% assign sizeText = product.description | split:"Size:" | last %}
+            {% assign sizeText = sizeText | split:"Delivery:" | first %}
+            <h3 class="size">Size</h3>
+            {{ sizeText }}
+          {% elsif product.description contains 'Size:' %}
+            {% assign sizeText = product.description | split:"Size:" | last %}
+            <h3 class="size">Size</h3>
+            {{ sizeText }}
+          {% endif %}
+
+          {% if product.description contains 'Material:' and product.description contains 'Delivery:' %}
+            {% assign materialText = product.description | split:"Material:" | last %}
+            {% assign materialText = materialText | split:"Delivery:" | first %}
+            <h3 class="materials">Materials</h3>
+            {{ materialText }}
+          {% elsif product.description contains 'Material:' %}
+            {% assign materialText = product.description | split:"Material:" | last %}
+            <h3 class="materials">Materials</h3>
+            {{ materialText }}
+          {% endif %}
+
+          {% if product.description contains 'Delivery:' %}
+            {% assign deliveryText = product.description | split:"Delivery:" | last %}
+            <h3 class="delivery">Delivery &amp; Returns</h3>
+            {{ deliveryText }}
+          {% endif %}
+        </div>
+
+      {% else %}
+
+        {{ product.description }} {% comment %} Fallback - show content without custom formatting {% endcomment %}
+
+      {% endif %}
+
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>

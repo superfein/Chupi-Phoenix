@@ -1,0 +1,198 @@
+
+// _faq-section.scss
+
+
+.faq-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  .content {
+    max-width: 600px;
+    h2 {
+      margin-bottom: 30px;
+      span {
+        display: block;
+        font-size: 20px;
+      }
+    }
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 15px;
+      margin-bottom: 15px;
+      .grid-item {
+        grid-column: span 1;
+        text-align: left;
+        .question {
+          position: relative;
+          display: block;
+          font-family: $font_family_primary;
+          font-size: 22px;
+          text-decoration: none;
+          padding: 10px 0;
+          padding-right: 25px;
+          &:before,
+          &:after {
+            content: "";
+            position: absolute;
+            top: 13px;
+            right: 0;
+            width: 11px;
+            height: 11px;
+            background-color: transparent;
+            background-image: url($icon_minus_dark);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            @include transform(rotate(0deg));
+            @include transition(all 0.2s $ease_in);
+          }
+          &:after {
+            @include transform(rotate(90deg));
+          }
+          &.active {
+            &:before {
+              opacity: 0;
+              @include transform(rotate(90deg));
+            }
+            &:after {
+              @include transform(rotate(180deg));
+            }
+          }
+        }
+        .answer {
+          display: none; // open with JS
+        }
+      }
+      &:nth-of-type(2) {
+        margin-bottom: 50px;
+      }
+    }
+    .cta {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+} // end .faq-section
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  .faq-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    .content {
+      max-width: $content_max_width;
+      h2 {
+        font-size: 42px;
+        margin-bottom: 50px;
+        span {
+          font-size: 30px;
+        }
+      }
+      .grid {
+        grid-template-columns: 100%;
+        width: 50%;
+        .grid-item {
+          .question {
+            font-size: 26px;
+            padding-right: 30px;
+            &:before,
+            &:after {
+              width: 18px;
+              height: 18px;
+            }
+          }
+        }
+        &:nth-of-type(1) {
+          float: left;
+          padding-right: 50px;
+          margin-bottom: 50px;
+        }
+        &:nth-of-type(2) {
+          float: right;
+          padding-left: 50px;
+          margin-bottom: 50px;
+        }
+      }
+    }
+  } // end .faq-section
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

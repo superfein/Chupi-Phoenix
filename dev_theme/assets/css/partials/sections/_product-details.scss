@@ -1,0 +1,190 @@
+
+// _product-details.scss
+
+.product-details {
+  //padding-top: 70px;
+  padding-bottom: 50px;
+  .content {
+    max-width: 900px;
+    h2 {
+      font-size: 28px;
+      text-align: center;
+    }
+    .grid {
+      grid-template-columns: 100%;
+      grid-gap: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      .grid-item {
+        &:nth-of-type(1) {
+          p {
+            font-size: 16px;
+            &:first-of-type {
+              font-size: 18px;
+            }
+          }
+        }
+        &:nth-of-type(2) {
+          h3 {
+            position: relative;
+            margin-top: 30px;
+            padding-left: 35px;
+            &:first-of-type {
+              margin-top: 0;
+            }
+            &:before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 24px;
+              height: 24px;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+            &.size {
+              &:before {
+                background-image: url($icon_ruler_dark);
+              }
+            }
+            &.materials {
+              &:before {
+                background-image: url($icon_tools_dark);
+              }
+            }
+            &.delivery {
+              &:before {
+                background-image: url($icon_delivery_truck_dark);
+              }
+            }
+          }
+          span {
+            display: block;
+            font-size: 16px;
+            font-weight: $font-weight-lighter;
+            margin-bottom: 8px;
+          }
+          p {
+            font-size: 16px;
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
+} // end .product-details
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  .product-details {
+    padding-bottom: 70px;
+    .content {
+      h2 {
+        font-size: 38px;
+        margin-bottom: 50px;
+      }
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 100px;
+        max-width: none;
+        .grid-item {
+          max-width: none;
+          &:nth-of-type(1) {
+            p {
+              font-size: 16px;
+              &:first-of-type {
+                font-size: 20px;
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            h3 {
+              font-size: 26px;
+            }
+          }
+        }
+      }
+    }
+  } // end .product-details
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large
