@@ -183,14 +183,14 @@
               <li><a href="javascript:;" class="currency-item currency-aud">AUD</a></li>
               <li><a href="javascript:;" class="currency-item currency-cad">CAD</a></li>
               <li><a href="javascript:;" class="currency-item currency-eur active">EUR</a></li>
-              <li><a href="javascript:;" class="currency-item currency-aud">AUD</a></li>
+              <li><a href="javascript:;" class="currency-item currency-gbp">GBP</a></li>
               <li><a href="javascript:;" class="currency-item currency-cad">CAD</a></li>
               <li><a href="javascript:;" class="currency-item currency-eur">EUR</a></li>
               <li><a href="javascript:;" class="currency-item currency-aud">AUD</a></li>
               <li><a href="javascript:;" class="currency-item currency-cad">CAD</a></li>
               <li><a href="javascript:;" class="currency-item currency-eur">EUR</a></li>
               <!-- Currency close -->
-              <li><a href="javascript:;" class="currency-close-btn">Currency</a></li>
+              <!-- <li><a href="javascript:;" class="currency-close-btn">Currency</a></li> -->
             </ul>
           </li>
           <div class="underline"></div>
@@ -224,7 +224,7 @@
             <li><a href="javascript:;" class="currency-item currency-eur active">EUR</a></li>
             <li><a href="javascript:;" class="currency-item currency-aud">AUD</a></li>
             <li><a href="javascript:;" class="currency-item currency-cad">CAD</a></li>
-            <li><a href="javascript:;" class="currency-item currency-eur">EUR</a></li>
+            <li><a href="javascript:;" class="currency-item currency-gbp">GBP</a></li>
           </ul>
         </div>
       </div> <!-- end #header-icons -->
@@ -282,12 +282,12 @@
                   </div>
                   <div class="dropdown-main">
                     <ul>
-                      <li><a href="javascript:;" class="active">Default</a></li>
-                      <li><a href="javascript:;">Best Selling</a></li>
-                      <li><a href="javascript:;">Newest</a></li>
-                      <li><a href="javascript:;">Oldest</a></li>
-                      <li><a href="javascript:;">Price high to low</a></li>
-                      <li><a href="javascript:;">Price low to high</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option active" data-sort-type="default">Default</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option" data-sort-type="best-selling">Best Selling</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option" data-sort-type="created-descending">Newest</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option" data-sort-type="created-ascending">Oldest</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option" data-sort-type="price-descending">Price high to low</a></li>
+                      <li><a href="javascript:;" class="collection-sort-option" data-sort-type="price-ascending">Price low to high</a></li>
                     </ul>
                   </div>
                 </div>
@@ -517,58 +517,68 @@
     <div class="drawer-main">
       <div class="filter-section filter-section-metal active">
         <a href="javascript:;">Metal</a>
-        <ul>
-          <li class="active"><a href="javascript:;" class="icon filter-solid-gold">Solid Gold</a></li>
-          <li><a href="javascript:;" class="icon filter-solid-white-gold">Solid White Gold</a></li>
-          <li><a href="javascript:;" class="icon filter-solid-rose-gold">Solid Rose Gold</a></li>
-          <li><a href="javascript:;" class="icon filter-plated-gold">Plated Gold & Silver</a></li>
-        </ul>
+        <div class="inner">
+          <ul>
+            <li class="active"><a href="javascript:;" class="icon filter-solid-gold">Solid Gold</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-solid-white-gold">Solid White Gold</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-solid-rose-gold">Solid Rose Gold</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-plated-gold">Plated Gold & Silver</a></li>
+          </ul>
+        </div>
       </div>
       <div class="filter-section filter-section-stone">
         <a href="javascript:;">Stone</a>
-        <ul>
-          <li class="active"><a href="javascript:;" class="icon filter-classic-diamond">Classic Diamond</a></li>
-          <li><a href="javascript:;" class="icon filter-grey-diamond">Grey Diamond</a></li>
-          <li><a href="javascript:;" class="icon filter-moissanite">Moissanite</a></li>
-          <li><a href="javascript:;" class="icon filter-morganite">Morganite</a></li>
-          <li><a href="javascript:;" class="icon filter-sapphire">Sapphire</a></li>
-          <li><a href="javascript:;" class="icon filter-emerald">Emerald</a></li>
-        </ul>
+        <div class="inner">
+          <ul>
+            <li class="active"><a href="javascript:;" class="icon filter-classic-diamond">Classic Diamond</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-grey-diamond">Grey Diamond</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-moissanite">Moissanite</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-morganite">Morganite</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-sapphire">Sapphire</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-emerald">Emerald</a></li>
+          </ul>
+        </div>
       </div>
       <div class="filter-section filter-section-shape">
         <a href="javascript:;">Shape</a>
-        <ul>
-          <li class="active"><a href="javascript:;" class="icon filter-halo">Halo</a></li>
-          <li><a href="javascript:;" class="icon filter-round">Round</a></li>
-          <li><a href="javascript:;" class="icon filter-solitaire">Solitaire</a></li>
-          <li><a href="javascript:;" class="icon filter-three-stone">Three Stone</a></li>
-          <li><a href="javascript:;" class="icon filter-oval">Oval</a></li>
-        </ul>
+        <div class="inner">
+          <ul>
+            <li class="active"><a href="javascript:;" class="icon filter-halo">Halo</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-round">Round</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-solitaire">Solitaire</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-three-stone">Three Stone</a></li>
+            <li><a href="javascript:;" class="filter-option icon filter-oval">Oval</a></li>
+          </ul>
+        </div>
       </div>
       <div class="filter-section filter-section-band">
         <a href="javascript:;">Band</a>
-        <ul>
-          <li class="active"><a href="javascript:;" class="filter-twig">Twig Band</a></li>
-          <li><a href="javascript:;" class="filter-polished">Polished Band</a></li>
-          <li><a href="javascript:;" class="filter-eternity">Eternity</a></li>
-        </ul>
+        <div class="inner">
+          <ul>
+            <li class="active"><a href="javascript:;" class="filter-twig">Twig Band</a></li>
+            <li><a href="javascript:;" class="filter-option filter-polished">Polished Band</a></li>
+            <li><a href="javascript:;" class="filter-option filter-eternity">Eternity</a></li>
+          </ul>
+        </div>
       </div>
       <div class="filter-section filter-section-style">
         <a href="javascript:;">Style</a>
-        <ul>
-          <li class="active"><a href="javascript:;" class="filter-arrows">Arrows</a></li>
-          <li><a href="javascript:;" class="filter-polished">Birthstones</a></li>
-          <li><a href="javascript:;" class="filter-coins">Coins</a></li>
-          <li><a href="javascript:;" class="filter-coordinates">Coordinates</a></li>
-          <li><a href="javascript:;" class="filter-hearts">hearts</a></li>
-          <li><a href="javascript:;" class="filter-in-the-wild">In The Wild</a></li>
-          <li><a href="javascript:;" class="filter-initials">Initials</a></li>
-          <li><a href="javascript:;" class="filter-leaves">Leaves</a></li>
-          <li><a href="javascript:;" class="filter-little-luxuries">Little Luxuries</a></li>
-          <li><a href="javascript:;" class="filter-monograms">Monograms</a></li>
-          <li><a href="javascript:;" class="filter-stars">Stars</a></li>
-          <li><a href="javascript:;" class="filter-starsigns">Starsigns</a></li>
-        </ul>
+        <div class="inner">
+          <ul>
+            <li class=""><a href="javascript:;" class="filter-arrows">Arrows</a></li>
+            <li><a href="javascript:;" class="filter-option filter-polished">Birthstones</a></li>
+            <li><a href="javascript:;" class="filter-option filter-coins">Coins</a></li>
+            <li><a href="javascript:;" class="filter-option filter-coordinates">Coordinates</a></li>
+            <li><a href="javascript:;" class="filter-option filter-hearts">hearts</a></li>
+            <li><a href="javascript:;" class="filter-option filter-in-the-wild">In The Wild</a></li>
+            <li><a href="javascript:;" class="filter-option filter-initials">Initials</a></li>
+            <li><a href="javascript:;" class="filter-option filter-leaves">Leaves</a></li>
+            <li><a href="javascript:;" class="filter-option filter-little-luxuries">Little Luxuries</a></li>
+            <li><a href="javascript:;" class="filter-option filter-monograms">Monograms</a></li>
+            <li><a href="javascript:;" class="filter-option filter-stars">Stars</a></li>
+            <li><a href="javascript:;" class="filter-option filter-starsigns">Starsigns</a></li>
+          </ul>
+        </div>
       </div>
     </div> <!-- end .drawer-main -->
 
@@ -938,7 +948,8 @@
 
 
   <!-- JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
   <script src="js/scripts.js"></script>
   <script src="js/filter.js"></script>
   <script src="js/dynamic-cart.js"></script>

@@ -3,16 +3,15 @@
 
   <div class="content">
     <h1>{{ collection.title }}</h1>
-    <div class="compressed-text">
-      <div class="inner">
-        <!-- collection.description -->
-        <p>There is an incredible wealth of creative talent and craftsmanship in our team, from our founder and designer,
-          our master goldsmiths to our highly skilled jewellers we have over 100 years of experience in making beautiful pieces.</p>
-        <p>From our founder and designer, our master goldsmiths to our highly skilled jewellers we have over 100 years of experience in making beautiful pieces.</p>
-        <p>Meet the incredible team behind our jewellery below.</p>
+    {% assign collectionDescription = collection.description %}
+    {% if collectionDescription != blank %}
+      <div class="compressed-text">
+        <div class="inner">
+          {{ collectionDescription }}
+        </div>
+        <a class="expand-toggle" href="javscript:;">more</a>
       </div>
-      <a class="expand-toggle" href="javscript:;">more</a>
-    </div>
+    {% endif %}
   </div> <!-- end .content -->
 
   <div class="content">
@@ -88,7 +87,7 @@
 
 
 
-<section id="collection-help">
+<section id="collection-cta-simple" class="cta-simple">
   <div class="content">
     <div class="grid">
       <div class="grid-item">

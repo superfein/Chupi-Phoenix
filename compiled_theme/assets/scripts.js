@@ -252,6 +252,7 @@
 
 
   // Currency selector
+
   function submitFormOnChangeStandard(){
     const currencySelector = $('.currency-select');
     currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
@@ -289,7 +290,7 @@
   function createFront(){
     const currencySelector = $('.currency-select');
     currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
-      var form = $(this).children('form');
+      var form = $('#currency-select-mobile').children('form'); // Reference Shopify currency form (in mobile currency select)
     	var select = form.children('select');
       var options = Array.from(select.children('option'));
       var frontActive = $(this).children('.currency-btn');
@@ -298,6 +299,7 @@
       options.map(option => {
         createFrontOption(option, frontList)
       });
+
       // Append back button to mobile currency
       if ($(this).is("#currency-select-mobile")) {
         frontList.append('<li><a href="javascript:;" class="currency-close-btn">Currency</a></li>');
@@ -309,7 +311,7 @@
   function submitFormFromFront(){
     const currencySelector = $('.currency-select');
     currencySelector.each(function() { // Apply to both desktop and mobile curreny selectors
-      var form = $(this).children('form');
+      var form = $('#currency-select-mobile').children('form'); // Reference Shopify currency form (in mobile currency select)
       var select = form.children('select');
       var options = Array.from(select.children('option'));
       var frontActive = $(this).children('.currency-btn');
@@ -329,6 +331,26 @@
     });
   }
   submitFormFromFront();
+
+
+
+  // Move currency form location depending on window size
+  //var currencyForm = $('#currency-select-mobile').children('form');
+  // function currencyFormLocation(){
+  //
+  //   // $('#currency-select-mobile').children('.currency-list').clone().appendTo('#currency-select-desktop');
+  //
+  //   // if( window.innerWidth > desktopBreakPoint ) { // Desktop
+  //   //   console.log('desktop');
+  //   //   currencyForm.prependTo("#currency-select-desktop");
+  //   // }
+  //   // else { // Mobile
+  //   //   console.log('mobile');
+  //   //   currencyForm.prependTo("#desktop-select-desktop");
+  //   // }
+  // }
+  // currencyFormLocation();
+  //$(window).resize ( function() {	currencyFormLocation(); });
 
 
 
@@ -497,12 +519,14 @@
   // Compressed text
   $('.compressed-text').each( function() {
     var thisCompText = $(this);
-    // var content = thisCompText.children('.content');
-    // var contentHeight = content.outerHeight();
     var expandToggle = thisCompText.children('.expand-toggle');
-    expandToggle.off().click(function(e) {
-      thisCompText.toggleClass('active');
-    });
+    // Apply compressed text if content has more than one paragraph
+    if (thisCompText.children('.inner').children('p').length > 1) {
+      expandToggle.show();
+      expandToggle.off().click(function(e) {
+        thisCompText.toggleClass('active');
+      });
+    }
   });
 
 

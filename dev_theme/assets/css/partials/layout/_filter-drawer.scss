@@ -43,131 +43,144 @@
           @include transform(translateY(-50%) rotate(90deg));
         }
       }
-      ul {
-        display: grid;
-        grid-template-columns: 100%;
-        list-style-type: none;
-        padding: 10px 0;
-        opacity: 0;
-        visibility: hidden;
-        max-height: 0;
-        padding: 0;
-        @include transition(max-height 0.4s $ease_out_quint 0s, padding 0.2s $ease 0s, opacity 0.2s $ease 0s);
-        > li {
-          position: relative;
-          grid-column: span 1;
-          > a {
+      > .inner {
+        display: none; // uses jQuery slide up/down
+        ul {
+          display: grid;
+          grid-template-columns: 100%;
+          list-style-type: none;
+          padding: 10px 0;
+          opacity: 0;
+          visibility: hidden;
+          @include transform(translateY(-10px));
+          @include transition(all 0.5s $ease_out_quint 0.1s);
+          > li {
             position: relative;
-            display: block;
-            font-size: 14px;
-            font-weight: $font_weight_lighter;
-            text-decoration: none;
-            color: $grey;
-            padding: 8px 0;
-            &.icon {
-              padding-left: 22px;
-              &:before {
-                content: "";
-                position: absolute;
-                top: 45%;
-                left: 0;
-                display: block;
-                width: 11px;
-                height: 11px;
-                background-color: transparent;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
-                @include transform(translateY(-50%));
-              }
-              // Metal
-              &.filter-solid-gold {
-                &:before { background-image: url($icon_filter_solid_gold); }
-              }
-              &.filter-solid-white-gold {
-                &:before { background-image: url($icon_filter_solid_white_gold); }
-              }
-              &.filter-solid-rose-gold {
-                &:before { background-image: url($icon_filter_solid_rose_gold); }
-              }
-              &.filter-plated-gold {
-                &:before { background-image: url($icon_filter_plated_gold); }
-              }
-              // Stone
-              &.filter-classic-diamond {
-                &:before { background-image: url($icon_filter_classic_diamond); }
-              }
-              &.filter-grey-diamond {
-                &:before { background-image: url($icon_filter_grey_diamond); }
-              }
-              &.filter-moissanite {
-                &:before { background-image: url($icon_filter_moissanite); }
-              }
-              &.filter-morganite {
-                &:before { background-image: url($icon_filter_morganite); }
-              }
-              &.filter-sapphire {
-                &:before { background-image: url($icon_filter_sapphire); }
-              }
-              &.filter-emerald {
-                &:before { background-image: url($icon_filter_emerald); }
-              }
-              // Shape
-              &.filter-halo {
-                &:before { background-image: url($icon_filter_halo); }
-              }
-              &.filter-round {
-                &:before { background-image: url($icon_filter_round); }
-              }
-              &.filter-solitaire {
-                &:before { background-image: url($icon_filter_solitaire); }
-              }
-              &.filter-three-stone {
-                &:before { background-image: url($icon_filter_three_stone); }
-              }
-              &.filter-oval {
-                &:before { background-image: url($icon_filter_oval); }
+            grid-column: span 1;
+            > a {
+              position: relative;
+              display: block;
+              font-size: 14px;
+              font-weight: $font_weight_lighter;
+              text-decoration: none;
+              color: $grey;
+              padding: 8px 0;
+              &.icon {
+                padding-left: 22px;
+                &:before {
+                  content: "";
+                  position: absolute;
+                  top: 45%;
+                  left: 0;
+                  display: block;
+                  width: 11px;
+                  height: 11px;
+                  background-color: transparent;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  background-size: contain;
+                  @include transform(translateY(-50%));
+                }
+                // Metal
+                &.filter-solid-gold {
+                  &:before { background-image: url($icon_filter_solid_gold); }
+                }
+                &.filter-solid-white-gold {
+                  &:before { background-image: url($icon_filter_solid_white_gold); }
+                }
+                &.filter-solid-rose-gold {
+                  &:before { background-image: url($icon_filter_solid_rose_gold); }
+                }
+                &.filter-plated-gold {
+                  &:before { background-image: url($icon_filter_plated_gold); }
+                }
+                &.filter-silver {
+                  &:before { background-image: url($icon_filter_solid_white_gold); }
+                }
+                &.filter-plated-rose-gold {
+                  &:before { background-image: url($icon_filter_solid_rose_gold); }
+                }
+                // Stone
+                &.filter-classic-diamond {
+                  &:before { background-image: url($icon_filter_classic_diamond); }
+                }
+                &.filter-grey-diamond {
+                  &:before { background-image: url($icon_filter_grey_diamond); }
+                }
+                &.filter-moissanite {
+                  &:before { background-image: url($icon_filter_moissanite); }
+                }
+                &.filter-morganite {
+                  &:before { background-image: url($icon_filter_morganite); }
+                }
+                &.filter-sapphire {
+                  &:before { background-image: url($icon_filter_sapphire); }
+                }
+                &.filter-emerald {
+                  &:before { background-image: url($icon_filter_emerald); }
+                }
+                // Shape
+                &.filter-halo {
+                  &:before { background-image: url($icon_filter_halo); }
+                }
+                &.filter-round {
+                  &:before { background-image: url($icon_filter_round); }
+                }
+                &.filter-solitaire {
+                  &:before { background-image: url($icon_filter_solitaire); }
+                }
+                &.filter-three-stone {
+                  &:before { background-image: url($icon_filter_three_stone); }
+                }
+                &.filter-oval {
+                  &:before { background-image: url($icon_filter_oval); }
+                }
               }
             }
-          }
-          &:before, // Checkbox
-          &:after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 7px;
-            width: 18px;
-            height: 18px;
-            pointer-events: none;
-          }
-          &:before { // Checkbox box
-            background-color: $grey_lightest;
-            border: 1px solid lighten($grey, 30%);
-            border-radius: 3px;
-            @include transition(all 0.2s $ease);
-          }
-          &:after { // Checkbox tick
-            width: 6px;
-            height: 10px;
-            top: 10px;
-            right: 6px;
-            border-right: 3px solid $grey;
-            border-bottom: 3px solid $grey;
-            opacity: 0;
-            @include transform(rotate(45deg) scale(0.5));
-            @include transition(all 0.12s $ease_in_out_quart);
-          }
-          // &:hover {
-          //   &:before {
-          //     background-color: $grey_lighter;
-          //   }
-          // }
-          &.active { // li.active
+            &:before, // Checkbox
             &:after {
-              opacity: 1;
-              @include transform(rotate(45deg) scale(1));
+              content: "";
+              position: absolute;
+              right: 0;
+              top: 7px;
+              width: 18px;
+              height: 18px;
+              pointer-events: none;
+            }
+            &:before { // Checkbox box
+              background-color: $grey_lightest;
+              border: 1px solid lighten($grey, 30%);
+              border-radius: 3px;
+              @include transition(all 0.2s $ease);
+            }
+            &:after { // Checkbox tick
+              width: 6px;
+              height: 10px;
+              top: 10px;
+              right: 6px;
+              border-right: 3px solid $grey;
+              border-bottom: 3px solid $grey;
+              opacity: 0;
+              @include transform(rotate(45deg) scale(0.5));
+              @include transition(all 0.12s $ease_in_out_quart);
+            }
+            // &:hover {
+            //   &:before {
+            //     background-color: $grey_lighter;
+            //   }
+            // }
+            &.active { // li.active
+              &:after {
+                opacity: 1;
+                @include transform(rotate(45deg) scale(1));
+              }
             }
           }
+        }
+      }
+      &:first-of-type {
+        > .inner {
+          display: block; // Show first filter section by default
         }
       }
       &:last-of-type {
@@ -176,21 +189,25 @@
         }
       }
       &.filter-section-shape { // larger icons
-        ul {
-          li {
-            a.icon {
-              &:before {
-                width: 16px;
-                height: 16px;
+        > .inner {
+          ul {
+            li {
+              a.icon {
+                &:before {
+                  width: 16px;
+                  height: 16px;
+                }
               }
             }
           }
         }
       }
       &.filter-section-style { // two-column
-        ul {
-          grid-template-columns: 1fr 1fr;
-          grid-column-gap: 30px;
+        > .inner {
+          ul {
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 30px;
+          }
         }
       }
       &.active { // filter-section open
@@ -204,13 +221,12 @@
             opacity: 0;
           }
         }
-        ul {
-          opacity: 1;
-          visibility: visible;
-          max-height: 250px; // Probable max-height of section
-          padding: 10px 0;
-          @include transform(translateY(0));
-          @include transition(max-height 0.6s $ease_out_quint 0s, padding 0.5s $ease_out_quint 0.1s, opacity 0.2s $ease 0.1s);
+        > .inner {
+          ul {
+            opacity: 1;
+            visibility: visible;
+            @include transform(translateY(0));
+          }
         }
       }
     } // end .filter-section

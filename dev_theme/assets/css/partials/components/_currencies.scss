@@ -5,6 +5,12 @@
 $currency_aud: $icon_path + 'currency-aud.png';
 $currency_cad: $icon_path + 'currency-cad.png';
 $currency_eur: $icon_path + 'currency-eur.png';
+$currency_gbp: $icon_path + 'currency-gbp.png';
+$currency_hkd: $icon_path + 'currency-hkd.png';
+$currency_jpy: $icon_path + 'currency-jpy.png';
+$currency_nzd: $icon_path + 'currency-nzd.png';
+$currency_sgd: $icon_path + 'currency-sgd.png';
+$currency_usd: $icon_path + 'currency-usd.png';
 
 
 // Note: Currency flags prepended as :before pseudo elements
@@ -29,6 +35,36 @@ $currency_eur: $icon_path + 'currency-eur.png';
   &.currency-eur {
     &:before {
       background-image: url($currency_eur);
+    }
+  }
+  &.currency-gbp {
+    &:before {
+      background-image: url($currency_gbp);
+    }
+  }
+  &.currency-hkd {
+    &:before {
+      background-image: url($currency_hkd);
+    }
+  }
+  &.currency-jpy {
+    &:before {
+      background-image: url($currency_jpy);
+    }
+  }
+  &.currency-nzd {
+    &:before {
+      background-image: url($currency_nzd);
+    }
+  }
+  &.currency-sgd {
+    &:before {
+      background-image: url($currency_sgd);
+    }
+  }
+  &.currency-usd {
+    &:before {
+      background-image: url($currency_usd);
     }
   }
 }

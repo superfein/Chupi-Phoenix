@@ -11,61 +11,71 @@
   </div> <!-- end .drawer-header -->
 
   <div class="drawer-main">
+
     <div class="filter-section filter-section-metal active">
       <a href="javascript:;">Metal</a>
-      <ul>
-        <li class="active"><a href="javascript:;" class="icon filter-solid-gold">Solid Gold</a></li>
-        <li><a href="javascript:;" class="icon filter-solid-white-gold">Solid White Gold</a></li>
-        <li><a href="javascript:;" class="icon filter-solid-rose-gold">Solid Rose Gold</a></li>
-        <li><a href="javascript:;" class="icon filter-plated-gold">Plated Gold & Silver</a></li>
-      </ul>
+      <div class="inner">
+        <ul>
+          {% comment %} Filter options listed manually for specific order of appearance {% endcomment %}
+          <li><a class="filter-option icon all" data-tag="metal:all" href="javascript:;" >All metals</a></li>
+          {% if collection.all_tags contains 'metal:solid-gold' %}
+            <li><a class="filter-option icon filter-solid-gold" data-tag="metal:solid-gold" href="javascript:;">Solid Gold</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'metal:solid-white-gold' %}
+            <li><a class="filter-option icon filter-solid-white-gold" data-tag="metal:solid-white-gold" href="javascript:;">Solid White Gold</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'metal:solid-rose-gold' %}
+            <li><a class="filter-option icon filter-solid-rose-gold" data-tag="metal:solid-rose-gold" href="javascript:;">Solid Rose Gold</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'metal:plated-gold' %}
+            <li><a class="filter-option icon filter-plated-gold" data-tag="metal:plated-gold" href="javascript:;">Plated Gold</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'metal:silver' %}
+            <li><a class="filter-option icon filter-silver" data-tag="metal:silver" href="javascript:;">Silver</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'metal:plated-rose-gold' %}
+            <li><a class="filter-option icon filter-plated-rose-gold" data-tag="metal:plated-rose-gold" href="javascript:;">Plated Rose Gold</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-    <div class="filter-section filter-section-stone">
-      <a href="javascript:;">Stone</a>
-      <ul>
-        <li class="active"><a href="javascript:;" class="icon filter-classic-diamond">Classic Diamond</a></li>
-        <li><a href="javascript:;" class="icon filter-grey-diamond">Grey Diamond</a></li>
-        <li><a href="javascript:;" class="icon filter-moissanite">Moissanite</a></li>
-        <li><a href="javascript:;" class="icon filter-morganite">Morganite</a></li>
-        <li><a href="javascript:;" class="icon filter-sapphire">Sapphire</a></li>
-        <li><a href="javascript:;" class="icon filter-emerald">Emerald</a></li>
-      </ul>
+
+    <div class="filter-section filter-section-piece">
+      <a href="javascript:;">Piece</a>
+      <div class="inner">
+        <ul>
+          <li><a class="filter-option all" data-tag="piece:all" href="javascript:;" >All pieces</a></li>
+          {% if collection.all_tags contains 'piece:ring' %}
+            <li><a class="filter-option" data-tag="piece:ring" href="javascript:;">Rings</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:engagement-ring' %}
+            <li><a class="filter-option" data-tag="piece:engagement-ring" href="javascript:;">Engagement Rings</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:wedding-ring' %}
+            <li><a class="filter-option" data-tag="piece:wedding-ring" href="javascript:;">Wedding Rings</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:heirloom-ring' %}
+            <li><a class="filter-option" data-tag="piece:heirloom-ring" href="javascript:;">Heirloom Rings</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:necklace' %}
+            <li><a class="filter-option" data-tag="piece:necklace" href="javascript:;">Necklaces</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:earrings' %}
+            <li><a class="filter-option" data-tag="piece:earrings" href="javascript:;">Earrings</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:bracelet' %}
+            <li><a class="filter-option" data-tag="piece:bracelet" href="javascript:;">Bracelets</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:accessory' %}
+            <li><a class="filter-option" data-tag="piece:accessory" href="javascript:;">Accessories</a></li>
+          {% endif %}
+          {% if collection.all_tags contains 'piece:addition' %}
+            <li><a class="filter-option" data-tag="piece:addition" href="javascript:;">Additions</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-    <div class="filter-section filter-section-shape">
-      <a href="javascript:;">Shape</a>
-      <ul>
-        <li class="active"><a href="javascript:;" class="icon filter-halo">Halo</a></li>
-        <li><a href="javascript:;" class="icon filter-round">Round</a></li>
-        <li><a href="javascript:;" class="icon filter-solitaire">Solitaire</a></li>
-        <li><a href="javascript:;" class="icon filter-three-stone">Three Stone</a></li>
-        <li><a href="javascript:;" class="icon filter-oval">Oval</a></li>
-      </ul>
-    </div>
-    <div class="filter-section filter-section-band">
-      <a href="javascript:;">Band</a>
-      <ul>
-        <li class="active"><a href="javascript:;" class="filter-twig">Twig Band</a></li>
-        <li><a href="javascript:;" class="filter-polished">Polished Band</a></li>
-        <li><a href="javascript:;" class="filter-eternity">Eternity</a></li>
-      </ul>
-    </div>
-    <div class="filter-section filter-section-style">
-      <a href="javascript:;">Style</a>
-      <ul>
-        <li class="active"><a href="javascript:;" class="filter-arrows">Arrows</a></li>
-        <li><a href="javascript:;" class="filter-polished">Birthstones</a></li>
-        <li><a href="javascript:;" class="filter-coins">Coins</a></li>
-        <li><a href="javascript:;" class="filter-coordinates">Coordinates</a></li>
-        <li><a href="javascript:;" class="filter-hearts">hearts</a></li>
-        <li><a href="javascript:;" class="filter-in-the-wild">In The Wild</a></li>
-        <li><a href="javascript:;" class="filter-initials">Initials</a></li>
-        <li><a href="javascript:;" class="filter-leaves">Leaves</a></li>
-        <li><a href="javascript:;" class="filter-little-luxuries">Little Luxuries</a></li>
-        <li><a href="javascript:;" class="filter-monograms">Monograms</a></li>
-        <li><a href="javascript:;" class="filter-stars">Stars</a></li>
-        <li><a href="javascript:;" class="filter-starsigns">Starsigns</a></li>
-      </ul>
-    </div>
+
   </div> <!-- end .drawer-main -->
 
   <div class="drawer-footer">
@@ -73,3 +83,37 @@
   </div> <!-- end .drawer-footer -->
 
 </aside> <!-- end #filter-drawer -->
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+
+{% for tag in collection.all_tags %}
+
+  {% case tag %}
+    {% when 'metal:solid-gold' %}
+       <li><a class="icon filter-solid-gold" data-tag="metal:solid-gold" href="javascript:;">Solid Gold</a></li>
+    {% when 'metal:solid-white-gold' %}
+      <li><a class="icon filter-solid-white-gold" data-tag="metal:solid-white-gold" href="javascript:;">Solid White Gold</a></li>
+    {% when 'metal:solid-rose-gold' %}
+      <li><a class="icon filter-solid-rose-gold" data-tag="metal:solid-rose-gold" href="javascript:;">Solid Rose Gold</a></li>
+    {% when 'metal:gold-plated' %}
+      <li><a class="icon filter-plated-gold" data-tag="metal:gold-plated" href="javascript:;">Plated Gold</a></li>
+    {% when 'metal:silver' %}
+      <li><a class="icon filter-silver" data-tag="metal:silver" href="javascript:;">Silver</a></li>
+    {% when 'metal:rose-gold-plated' %}
+      <li><a class="icon filter-rose-gold-plated" data-tag="metal:rose-gold-plated" href="javascript:;">Plated Rose Gold</a></li>
+    {% else %}
+  {% endcase %}
+
+{% endfor %}
+
+{% endcomment %}

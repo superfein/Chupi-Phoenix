@@ -48,8 +48,8 @@ if ($('body').attr("data-dynamic-cart") === "true") {
     // Get cart data
     cartItemCount = parsedResponse.item_count;
     var cartItems = parsedResponse.items;
-    ////var cartTotalPrice = Shopify.formatMoney(parsedResponse.total_price.toString()).replace(/^.{1}/g, currencySymbol); // Replace the first character with current currency symbol
-    var cartTotalPrice = parsedResponse.total_price; // temp, use above comment ^^^
+    var cartTotalPrice = Shopify.formatMoney(parsedResponse.total_price.toString()).replace(/^.{1}/g, currencySymbol); // Replace the first character with current currency symbol
+    //var cartTotalPrice = parsedResponse.total_price; // temp, use above comment ^^^
     if (currency === 'JPY') { // Trim from decimal if currency is Japanese Yen
       cartTotalPrice = cartTotalPrice.split('.00')[0];
     }
@@ -66,8 +66,8 @@ if ($('body').attr("data-dynamic-cart") === "true") {
 
       // Get cart item data
       for (let i = 0; i < cartItems.length; i++) {
-        ////let thisItemPriceFormatted = Shopify.formatMoney(cartItems[i].price).replace(/^.{1}/g, currencySymbol); // Replace the first character with current currency symbol
-        let thisItemPriceFormatted = cartItems[i].price; // temp, use above comment ^^^
+        let thisItemPriceFormatted = Shopify.formatMoney(cartItems[i].price).replace(/^.{1}/g, currencySymbol); // Replace the first character with current currency symbol
+        //let thisItemPriceFormatted = cartItems[i].price; // temp, use above comment ^^^
         if (currency === 'JPY') { // Trim from decimal if currency is Japanese Yen
           thisItemPriceFormatted = thisItemPriceFormatted.split('.00')[0];
         }

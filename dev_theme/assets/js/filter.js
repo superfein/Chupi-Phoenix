@@ -2,6 +2,10 @@
 
 
 
+
+
+//-------------- Event handling -------------- //
+
 // Sticky filter bar on scroll
 function stickyFilterBar() {
   var filterButtonsPosTopDefault = $('#sort-filter').parent().offset().top; // Position when not sticky
@@ -40,20 +44,23 @@ if ($('#filter-bar').length) {
 $('#filter-button').off().click( function() {
   $('#filter-drawer').addClass('active');
 });
-// Expand filter section
+// Select filter section
+const filterSectionSlideTime = 200;
 $('.filter-section > a').off().click( function() {
-  if ($(this).parent('.filter-section').hasClass('active')) { // if click on active, close
-    $(this).parent('.filter-section').removeClass('active');
-  } else { // else open clicked
-    $('.filter-section').removeClass('active');
-    $(this).parent('.filter-section').addClass('active');
+  var thisFilterSection = $(this).closest('.filter-section');
+  // Open
+  if (!thisFilterSection.hasClass('active')) {
+    $('.filter-section').not(thisFilterSection).children('.inner').slideUp(filterSectionSlideTime);
+    $('.filter-section').not(thisFilterSection).removeClass('active');
+    thisFilterSection.children('.inner').slideDown(filterSectionSlideTime);
+    thisFilterSection.addClass('active');
+  }
+  // Close
+  else {
+    thisFilterSection.children('.inner').slideUp(filterSectionSlideTime);
+    thisFilterSection.removeClass('active');
   }
 });
-// Select filter item (temp)
-$('.filter-section ul li a').off().click( function() {
-  $(this).parent('li').toggleClass('active');
-});
-
 
 
 
@@ -100,10 +107,10 @@ $('html').click(function(e) {
 
 
 
-// Define URL parameters
+// Define URL parts
 var urlFull = window.location.href; // full URL
 var urlRoot = urlFull.split('collections/')[0]; // up to and excluding /collections/...
-var currentCollection = urlFull.split('collections/')[1].split('?')[0].split('#')[0]; // term directly after /collections/
+var currentCollection = urlFull.split('collections/')[1].split('/')[0].split('?')[0].split('#')[0]; // term directly after /collections/
 
 // console.log('urlFull: ' + urlFull);
 // console.log('urlRoot: ' + urlRoot);
@@ -112,18 +119,16 @@ var currentCollection = urlFull.split('collections/')[1].split('?')[0].split('#'
 
 
 
-// Define tag arrays here....
 
 
+
+//-------------- Sort -------------- //
 
 // Get sorting parameter
 var urlSortParam = '';
 if (urlFull.indexOf('?sort_by=') >= 1 ) {
   urlSortParam = urlFull.split('?sort_by=')[1]; // sorting parameter
 }
-//console.log('urlSortParam: ' + urlSortParam);
-
-
 
 // Define sort-parameters
 var sortDefault = '';
@@ -148,6 +153,11 @@ if (urlSortParam == sortBestSelling) {
   $('.collection-sort-option[data-sort-type="default"]').addClass('active');
 }
 
+var urlSortString = '';
+if (urlSortParam !== '') {
+  urlSortString = '?sort_by=' + urlSortParam;
+}
+
 // Click sort option
 $('.collection-sort-option').click( function() {
   // Change selected checkbox
@@ -155,8 +165,101 @@ $('.collection-sort-option').click( function() {
   $(this).addClass('active');
   // Go to new filtered URL
   var thisSortParam = $(this).attr('data-sort-type');
-  window.location.href = urlRoot + 'collections/' + currentCollection + '?sort_by=' + thisSortParam;
+  if (thisSortParam == 'default') {
+    urlSortString = '';
+  } else {
+    urlSortString = '?sort_by=' + thisSortParam;
+  }
+  window.location.href = urlRoot + 'collections/' + currentCollection + selectedTagsString + urlSortString;
 });
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------- Filter -------------- //
+
+var urlAllTags = {};
+
+// Get Metal tag
+var urlMetalTag;
+if (urlFull.indexOf('metal:') >= 1 ) {
+  urlMetalTag = 'metal:' + urlFull.split('metal:')[1].split('+')[0].split('?')[0];
+  urlAllTags.metal = urlMetalTag; // Apply metal parameter to object
+}
+// Get Piece tag
+var urlPieceTag;
+if (urlFull.indexOf('piece:') >= 1 ) {
+  urlPieceTag = 'piece:' + urlFull.split('piece:')[1].split('+')[0].split('?')[0];
+  urlAllTags.piece = urlPieceTag; // Apply piece parameter to object
+}
+
+// On Load:  Activate filter tags that are in URL
+function activateTagsFromUrl() {
+  $.each(urlAllTags, function(filterSection, tag){
+    $('.filter-option[data-tag="'+tag+'"]').parent('li').addClass('active');
+  });
+  // // If no options checked in a section, check 'All' option
+  $('.filter-section').each( function() {
+    var thisFilterSection = $(this);
+    if (!thisFilterSection.find('ul li.active').length) {
+      thisFilterSection.find('.filter-option.all').parent('li').addClass('active');
+    }
+  });
+}
+activateTagsFromUrl(); // On load
+
+var selectedTags = urlAllTags;
+var selectedTagsString = ''; // str
+
+// Compile selected tags string
+function makeTagsString(selectedTags) {
+  selectedTagsString = ''; // Reset string
+  if ($.isEmptyObject(selectedTags) == false) { // if tags object is not empty
+    $.each(selectedTags, function(filterSection, tag){
+      if (tag.indexOf(':all') == -1) { // only if tag doesn't contain ':all'
+        selectedTagsString += tag + '+'; // append tag and '+'
+      }
+    });
+    selectedTagsString = '/' + selectedTagsString.slice(0,-1); // Prepend '/' and trim last '+'
+  }
+}
+makeTagsString(selectedTags); // Call on load
+
+// Update selected tags
+function updateSelectedTags(selectedTag) {
+  selectedTagType = selectedTag.split(':')[0];
+  selectedTags[selectedTagType] = selectedTag; // Modify the selected tags object
+  makeTagsString(selectedTags); // Rewrite the selected tags string
+}
+
+// Select filter item
+$('.filter-option').click( function() {
+  $(this).parent().siblings('li').removeClass('active');
+  $(this).parent('li').addClass('active');
+  var thisItemTag = $(this).attr('data-tag');
+  updateSelectedTags(thisItemTag); // Update selectedTagArray
+});
+
+// Apply filters
+$('#filter-update').click( function() {
+  window.location.href = urlRoot + 'collections/' + currentCollection + selectedTagsString + urlSortString;
+  return false;
+});
+
+
+
+
+
+
+
 
 
 
