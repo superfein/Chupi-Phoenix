@@ -28,8 +28,8 @@
         <div class="carousel product-carousel">
           <div class="carousel-track">
 
-            {% assign homeCarouselCollection = 'new-arrivals' %}
-            {% assign homeCarouselCount = 6 %}
+            {% assign homeCarouselCollection = 'filter-test' %}
+            {% assign homeCarouselCount = 16 %}
 
             {% if collections[homeCarouselCollection].products.size > 0 %}
               {% for product in collections[homeCarouselCollection].products limit:homeCarouselCount %}

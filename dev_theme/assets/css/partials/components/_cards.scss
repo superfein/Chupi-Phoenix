@@ -273,6 +273,22 @@
         background-color: rgba(255,255,255,0.6);
       }
     } // end collection-card:hover
+    &.no-hover { // Disables the default hover effect when the metal switcher is in use
+      filter: brightness(0.97); // darken whole card to light grey
+      > .object-cover {
+        opacity: 1;
+        @include transform(scale(1));
+      }
+      .inner {
+        background-color: $white;
+        .upper {
+          opacity: 1;
+        }
+      }
+      .wishlist-add {
+        background-color: rgba(255,255,255,0.6);
+      }
+    } // end .no-hover
 
   } // .product-card
 

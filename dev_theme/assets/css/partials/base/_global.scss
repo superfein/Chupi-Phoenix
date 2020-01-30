@@ -321,7 +321,7 @@ blockquote {
 
 // Metal switcher
 .metal-switcher {
-  > a {
+  .metal-switch {
     position: relative;
     display: inline-block;
     width: 28px;
@@ -512,7 +512,7 @@ blockquote {
 
   // Metal switcher
   .metal-switcher {
-    > a {
+    .metal-switch {
       &:hover {
         &:after {
           @include animation('metalSwitcherShine 0.7s linear both');

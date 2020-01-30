@@ -1,0 +1,104 @@
+
+{% comment %}
+
+This snippet is for use on Product templates only (metal switchers on product cards are located within
+the product-card.liquid snippet, which dynamically change the frontend data).
+
+This metal switcher links directly to a product of the same handle with an alternative metal substring.
+
+{% endcomment %}
+
+
+
+
+
+{% comment %} Reset variables for use in loop {% endcomment %}
+{% assign defaultMetal = '' %}
+{% assign altMetal_1 = '' %}
+{% assign altMetal_2 = '' %}
+{% assign altMetal_1_ProductHandle = '' %}
+{% assign altMetal_2_ProductHandle = '' %}
+
+{% assign thisProducthandle = product.handle %}
+{% comment %} Remove any metal substring irregularity {% endcomment %}
+{% if thisProducthandle contains '-14k' or thisProducthandle contains '-18k' %}
+  {% assign thisProducthandle = thisProducthandle | replace:"-14k","" | replace:"-18k","" %}
+{% endif %}
+
+{% assign productTypeLowercase = product.type | downcase %}
+
+{% comment %} Check if the product has a 'solid' metal tag {% endcomment %}
+{% assign hasSolidTag = false %}
+{% for tag in product.tags %}
+  {% if tag contains 'metal:solid' %}
+
+    {% assign hasSolidTag = true %}
+    {% assign defaultMetal = tag | replace:"metal:","" %}
+
+    {% comment %} Define product handles for alternative metals {% endcomment %}
+    {% if defaultMetal == 'solid-gold' %}
+      {% assign altMetal_1 = 'solid-white-gold' %}
+      {% assign altMetal_2 = 'solid-rose-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid","solid-white" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid","solid-rose" %}
+    {% elsif defaultMetal == 'solid-white-gold' %}
+      {% assign altMetal_1 = 'solid-gold' %}
+      {% assign altMetal_2 = 'solid-rose-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid-white","solid" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid-white","solid-rose" %}
+    {% elsif defaultMetal == 'solid-rose-gold' %}
+      {% assign altMetal_1 = 'solid-gold' %}
+      {% assign altMetal_2 = 'solid-white-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid-rose","solid" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid-rose","solid-white" %}
+    {% endif %}
+
+    {% comment %} Assign product data variables for alternative metal 1 {% endcomment %}
+    {% assign altMetal_1_ProductUrl = all_products[altMetal_1_ProductHandle].url %}
+    {% comment %} Assign product data variables for alternative metal 2 {% endcomment %}
+    {% assign altMetal_2_ProductUrl = all_products[altMetal_2_ProductHandle].url %}
+
+    {% break %}
+
+  {% endif %}
+{% endfor %}
+
+
+
+
+{% comment %} If the default metal and at least one alt metal exists {% endcomment %}
+{% if defaultMetal != '' and altMetal_1_ProductUrl != '' or altMetal_2_ProductUrl != '' %}
+  <div class="metal-switcher">
+
+    {% if defaultMetal == 'solid-gold' %}
+      <a href="javascript:;" class="metal-switch solid-gold active"></a>
+    {% elsif altMetal_1 == 'solid-gold' and altMetal_1_ProductUrl != '' %}
+      <a href="{{ altMetal_1_ProductUrl }}" class="metal-switch solid-gold"></a>
+    {% elsif altMetal_2 == 'solid-gold' and altMetal_2_ProductUrl != '' %}
+      <a href="{{ altMetal_2_ProductUrl }}" class="metal-switch solid-gold"></a>
+    {% else %}
+      {% comment %} No Solid Gold switch {% endcomment %}
+    {% endif %}
+
+    {% if defaultMetal == 'solid-white-gold' %}
+      <a href="javascript:;" class="metal-switch solid-white-gold active"></a>
+    {% elsif altMetal_1 == 'solid-white-gold' and altMetal_1_ProductUrl != '' %}
+      <a href="{{ altMetal_1_ProductUrl }}" class="metal-switch solid-white-gold"></a>
+    {% elsif altMetal_2 == 'solid-white-gold' and altMetal_2_ProductUrl != '' %}
+      <a href="{{ altMetal_2_ProductUrl }}" class="metal-switch solid-white-gold"></a>
+    {% else %}
+      {% comment %} No Solid White Gold switch {% endcomment %}
+    {% endif %}
+
+    {% if defaultMetal == 'solid-rose-gold' %}
+      <a href="javascript:;" class="metal-switch solid-rose-gold active"></a>
+    {% elsif altMetal_1 == 'solid-rose-gold' and altMetal_1_ProductUrl != '' %}
+      <a href="{{ altMetal_1_ProductUrl }}" class="metal-switch solid-rose-gold"></a>
+    {% elsif altMetal_2 == 'solid-rose-gold' and altMetal_2_ProductUrl != '' %}
+      <a href="{{ altMetal_2_ProductUrl }}" class="metal-switch solid-rose-gold"></a>
+    {% else %}
+      {% comment %} No Solid Rose Gold switch {% endcomment %}
+    {% endif %}
+
+  </div>
+{% endif %}

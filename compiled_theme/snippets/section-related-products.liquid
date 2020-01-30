@@ -1,5 +1,6 @@
 
-{% comment %} Full-width-section {% endcomment %}
+{% comment %} Related products {% endcomment %}
+
 
 
 {% assign sectionId = '' %}
@@ -11,7 +12,7 @@
 
 
 
-<section id="{{ sectionId }}" class="related-products">
+<section id="{{ sectionId }}" class="related-products" data-related-product-count="3">
 
   <div class="content">
     <h2>You may also like</h2>
@@ -29,3 +30,8 @@
   </div> <!-- end .content -->
 
 </section>
+
+
+
+{% comment %} Load JS for this snippet with defer {% endcomment %}
+<script src="{{ 'related-products.js' | asset_url }}" defer></script>

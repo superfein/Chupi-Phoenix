@@ -18,27 +18,27 @@ if ($('body').attr("data-dynamic-cart") === "true") {
 
 
   // Global AJAX call function
-  function ajaxCall(method, url, callback) {
-    var xmlhttp = new XMLHttpRequest();
-    var response = '';
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
-        if (xmlhttp.status == 200) {
-          response = this.responseText;
-          xmlhttp.onload = function() {
-            callback(response);
-          };
-        } else if (xmlhttp.status == 400) {
-          console.warn('There was an error 400 on the AJAX call');
-        } else {
-          console.warn('something else other than 200 was returned');
-        }
-      }
-    };
-
-    xmlhttp.open(method, url, true);
-    xmlhttp.send();
-  }
+  // function ajaxCall(method, url, callback) {
+  //   var xmlhttp = new XMLHttpRequest();
+  //   var response = '';
+  //   xmlhttp.onreadystatechange = function() {
+  //     if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
+  //       if (xmlhttp.status == 200) {
+  //         response = this.responseText;
+  //         xmlhttp.onload = function() {
+  //           callback(response);
+  //         };
+  //       } else if (xmlhttp.status == 400) {
+  //         console.warn('There was an error 400 on the AJAX call');
+  //       } else {
+  //         console.warn('something else other than 200 was returned');
+  //       }
+  //     }
+  //   };
+  //
+  //   xmlhttp.open(method, url, true);
+  //   xmlhttp.send();
+  // }
 
 
   // AJAX Callback function

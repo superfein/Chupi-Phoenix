@@ -1,0 +1,209 @@
+
+// _four-cs-section.scss
+
+.four-cs-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  .content {
+    .grid {
+      grid-template-columns: 100%;
+      .grid-item {
+        align-self: center;
+        grid-column: span 1;
+        max-width: 600px;
+          margin: 0 auto;
+        h2 {
+          span {
+            display: block;
+            font-size: 20px;
+          }
+        }
+        > p {
+          font-size: 16px;
+        }
+        .options {
+          position: relative;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(30px, auto));
+          grid-gap: 20px;
+          justify-content: center;
+          margin-bottom: 20px;
+          a {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: $font-weight-lighter;
+            text-decoration: none;
+            padding: 10px 0;
+            @include transition(all 0.2s ease);
+            &.current {
+              //font-weight: $font-weight-light;
+              text-shadow: 0px 0px 1px $grey_dark; // pseudo font-weight
+            }
+          }
+          .underline {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: $grey_dark;
+            @include transition(all 0.2s ease);
+          }
+        }
+        .descriptions {
+          position: relative;
+          display: block;
+          min-height: 100px;
+          .description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include transform(translateY(10px));
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            @include transition(opacity 0.2s $ease, transform 0.2s $ease 0.2s);
+            p {
+              font-size: 16px;
+              &:last-of-type {
+                margin-bottom: 0;
+              }
+            }
+            &.active {
+              opacity: 1;
+              pointer-events: auto;
+              @include transform(translateY(0px));
+              @include transition(opacity 0.7s $ease, transform 0.7s $ease 0s);
+            }
+          }
+        }
+      }
+    }
+  }
+} // end .four-cs-section
+
+
+
+
+
+
+
+
+
+
+
+
+//----------- Media queries from mobile up (xs, xs_landscape, s, m, ml, l, xl, xxl) -----------//
+
+
+@include mquery(s) {
+
+
+
+} // end media-query small
+
+
+
+
+
+
+
+
+
+
+@include mquery(m) {
+
+
+
+} // end media-query medium
+
+
+
+
+
+
+
+
+
+
+@include mquery(ml) {
+
+  .four-cs-section {
+    padding-top: 100px;
+    padding-bottom: 80px;
+    .content {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        .grid-item {
+          grid-column: 2 / span 1;
+          max-width: none;
+          margin: 0;
+          padding: 0 50px;
+          h2 {
+            margin-bottom: 50px;
+            span {
+              font-size: 30px;
+            }
+          }
+          > p {
+            font-size: 20px;
+          }
+          .options {
+            margin-bottom: 30px;
+          }
+          .descriptions {
+            position: relative;
+            display: block;
+            min-height: 100px;
+            .description {
+              p {
+                font-size: 18px;
+                line-height: 1.5;
+              }
+            }
+          }
+        }
+      }
+    }
+  } // .four-cs-section
+
+} // end media-query medium-large
+
+
+
+
+
+
+
+
+
+
+
+@include mquery(l) {
+
+
+
+} // end media-query large
+
+
+
+
+
+
+
+
+
+
+@include mquery(xl) {
+
+} // end media-query extra-large
+
+
+
+
+
+
+@include mquery(xxl) {
+
+} // end media-query extra-extra-large

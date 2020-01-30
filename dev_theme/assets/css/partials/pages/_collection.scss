@@ -314,7 +314,7 @@
 
 #collection-listing {
   padding-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 50px;
   .content {
     .grid {
       grid-template-columns: 1fr 1fr;
@@ -333,7 +333,8 @@
       }
       #collection-pagination {
         display: block;
-        padding: 50px 15px;
+        padding: 0 15px;
+        margin-top: 50px;
         grid-column: span 2;
         text-align: center;
         // .progress-available {
@@ -416,7 +417,7 @@
         margin-left: 0;
         margin-right: 0;
         #collection-pagination {
-          padding: 50px 0px;
+          padding: 0px;
         }
       }
     }
@@ -437,6 +438,7 @@
     .content {
       .grid {
         grid-template-columns: 1fr 1fr 1fr;
+        //grid-template-columns: repeat(3, minmax(1fr, 1fr));
         #collection-pagination {
           grid-column: span 3;
         }
@@ -577,7 +579,7 @@
 
   #collection-listing {
     padding-top: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 120px;
     .content {
       .grid {
         grid-column-gap: 30px;
@@ -588,7 +590,7 @@
           }
         }
         #collection-pagination {
-          padding: 70px 0;
+          margin-top: 70px;
         }
       }
     }

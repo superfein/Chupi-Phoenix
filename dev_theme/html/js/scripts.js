@@ -13,6 +13,76 @@
 
 
 
+
+  // Global AJAX call function
+	function ajaxCall(method, url, callback) {
+		var xmlhttp = new XMLHttpRequest();
+		var response = '';
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
+				if (xmlhttp.status == 200) {
+					response = this.responseText;
+					xmlhttp.onload = function() {
+						callback(response);
+					};
+				} else if (xmlhttp.status == 400) {
+					console.warn('There was an error 400 on the AJAX call');
+				} else {
+					console.warn('something else other than 200 was returned');
+				}
+			}
+		};
+
+		xmlhttp.open(method, url, true);
+		xmlhttp.send();
+	}
+	// Define max number of products and product pages
+	const ajaxMaxItems = 250;
+	const totalProductCount = $('body').attr('data-product-count');
+	const totalProductPages = Math.ceil(totalProductCount / ajaxMaxItems); // round up
+
+
+
+
+
+
+
+  // Check if object is empty
+  function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
+
+
+
+
+
+
+  // Make currency
+  function makeCurrency(amount) {
+    const symbol = document.body.getAttribute('data-currency-symbol');
+    const trailingZeroes = document.body.getAttribute('data-currency-sample').includes('.00');
+    if (trailingZeroes){
+      if (typeof amount === 'string'){
+        amount = parseInt(amount);
+      }
+      amount = amount.toFixed(2);
+      let money = (symbol + amount);
+      return money;
+    } else {
+      let money = symbol + amount;
+      return money;
+    }
+  }
+
+
+
+
+
+
   // Reset mega menus on resize
   function megaMenuReset() {
     if( window.innerWidth > desktopBreakPoint ) { // Desktop
@@ -534,11 +604,51 @@
 
 
 
+
   // Metal switcher
-  $('.metal-switcher a').off().click(function(e) {
-    $(this).siblings().removeClass('active');
-    $(this).addClass('active');
-  });
+  function metalSwitcher() {
+
+    // Switch metal
+    $('body').on('click', '.metal-switch', function() { // Work for existing metal-switches and dynamically rendered metal-switches
+
+      // Make active
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+
+      // Product card only
+      if ($(this).closest('.product-card').length) {
+
+        var thisProductCard = $(this).closest('.product-card');
+        var thisProductCardFirstImage = thisProductCard.children('.inner').find('img');
+        var thisProductCardTitle = thisProductCard.find('h3');
+        var thisProductCardPrice = thisProductCard.find('.price');
+        var thisProductCardUrl = thisProductCard.children('.inner').find('a');
+        var thisProductCardBodyImage = thisProductCard.children('img');
+
+        thisProductCard.addClass('no-hover'); // Disable hover effect
+
+        // Change data based on metal selection
+        var selectedAltMetalIndex = $(this).attr('data-alt-metal-index'); // index of 0 is default setting
+        thisProductCardFirstImage.attr('src', thisProductCardFirstImage.attr('data-alt-metal-'+selectedAltMetalIndex+'-first-image')); // Change first image
+        thisProductCardTitle.text(thisProductCardTitle.attr('data-alt-metal-'+selectedAltMetalIndex+'-title')); // Change title
+        thisProductCardPrice.text(thisProductCardPrice.attr('data-alt-metal-'+selectedAltMetalIndex+'-price')); // Change price
+        thisProductCardUrl.attr('href', thisProductCardUrl.attr('data-alt-metal-'+selectedAltMetalIndex+'-link')); // Change URL
+        thisProductCardBodyImage.attr('src', thisProductCardBodyImage.attr('data-alt-metal-'+selectedAltMetalIndex+'-body-image')); // Change first image
+        thisProductCard.attr('data-product-id', thisProductCard.attr('data-alt-metal-'+selectedAltMetalIndex+'-product-id')); // Change product ID
+
+      }
+    });
+
+    // Reset hover effect on mouseleave
+    $('body').on('mouseleave', '.product-card.no-hover', function() {
+      $(this).removeClass('no-hover');
+    });
+
+  }
+  //if ($('.metal-switch').length > 0) {
+    metalSwitcher(); // No conditional call as some metal switchers are not present in the DOM on load
+  //}
+
 
 
 

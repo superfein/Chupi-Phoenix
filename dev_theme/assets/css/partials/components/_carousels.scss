@@ -9,6 +9,8 @@
     grid-template-rows: auto;
     overflow-x: auto;
     column-gap: 20px;
+    // padding: 20px;
+    // padding-top: 0;
     padding-bottom: 20px;
     cursor: grab;
     &:active {
@@ -115,6 +117,7 @@
         }
         &::-webkit-scrollbar-track {
           background-color: $grey_lightest;
+          //margin-left: 20px;
         }
         &::-webkit-scrollbar {
           height: 10px;

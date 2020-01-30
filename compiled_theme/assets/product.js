@@ -11,21 +11,6 @@
 
 
 
-  function makeCurrency(amount) {
-    const symbol = document.body.getAttribute('data-currency-symbol');
-    const trailingZeroes = document.body.getAttribute('data-currency-sample').includes('.00');
-    if (trailingZeroes){
-      if (typeof amount === 'string'){
-        amount = parseInt(amount);
-      }
-      amount = amount.toFixed(2);
-      let money = (symbol + amount);
-      return money;
-    } else {
-      let money = symbol + amount;
-      return money;
-    }
-  }
 
 
 
@@ -449,7 +434,7 @@ $(document).on('click', function(e) {
       addToBagButton.addClass('disabled');
 
       // AJAX cart update
-      // console.log(selectionVariantId);
+      console.log(selectionVariantId);
       console.log(customisationProperties);
       $.post(
         "/cart/add.js", {
@@ -1173,40 +1158,180 @@ $(document).on('click', function(e) {
 
 
 
-  // Related products
+  // Four Cs section
+  function fourCsSectionAdjust() {
+    // Set min height of desription container
+    var minHeight = -1;
+    $('.four-cs-section').find('.descriptions .description').each(function() {
+     minHeight = minHeight > $(this).height() ? minHeight : $(this).height();
+    });
+    $('.four-cs-section').find('.descriptions').css('min-height', minHeight);
+
+    // Position underline
+    var currentFourC = $('.four-cs-section').find('.options a.current');
+    $('.four-cs-section').find('.options .underline').css({
+      'width' : parseInt(currentFourC.innerWidth()),
+      'left' : parseInt(currentFourC.position().left)
+    });
+  }
+  if( $('.four-cs-section').length ) {
+    fourCsSectionAdjust();
+    $(window).resize(function() { fourCsSectionAdjust(); }); // on resize
+	}
+
+  // Change description when a Four Cs option is selected
+  $('.four-cs-section').find('.options a').click( function() {
+    currentFourC = $(this);
+    // Assign current class
+    $('.four-cs-section').find('.options a').removeClass('current');
+    $(this).addClass('current');
+    // Move underline
+    var thisFourCIndex = $('.options a').index(this);
+    $(this).siblings('.underline').css({
+      'width' : parseInt($('.four-cs-section').find('.options a.current').innerWidth()),
+      'left' : parseInt($('.four-cs-section').find('.options a.current').position().left)
+    });
+    // Show matching quote
+    $('.four-cs-section').find('.descriptions .description').removeClass('active');
+    $('.four-cs-section').find('.descriptions .description').eq(thisFourCIndex).addClass('active');
+  });
 
 
-  // Global AJAX call function
-  function ajaxFetch(method, url, callback) {
-    var xmlhttp = new XMLHttpRequest();
-    var response = '';
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
-        if (xmlhttp.status == 200) {
-          response = this.responseText;
-          xmlhttp.onload = function() {
-            callback(response);
-          };
-        } else if (xmlhttp.status == 400) {
-          console.warn('There was an error 400 on the AJAX call');
+
+
+
+
+  // Ring pairing section
+  function ringPairing() {
+
+    const collection = 'rings'; // Collection to search for pairing rings (used in AJAX call)
+
+    // Get array of pairing ring titles from image alt attributes
+    var pairingRingTitlesArray = [];
+    $('#hvp-pairing .grid .grid-item').not('.main').each( function() {
+      pairingRingTitlesArray.push($(this).find('img').attr('alt'));
+    });
+    //console.log(pairingRingTitlesArray);
+
+    // Loop through all products in collection, if match to pairing ring title, get and apply link
+	  function productPairingCallback(data) {
+
+	    var parsedResponse = JSON.parse(data); // Parses the AJAX data
+
+	    for (i = 0; i < parsedResponse.products.length; i++) { // Loop through products
+	      var dataProductTitle = parsedResponse.products[i].title;
+	      var dataProductUrl = window.location.protocol + '//' + window.location.hostname + '/products/' + parsedResponse.products[i].handle;
+        if ($.inArray(dataProductTitle, pairingRingTitlesArray) != -1) {
+          // Apply link to data attribute of matching item
+          var matchingItem = $('#hvp-pairing .grid .grid-item').find("img[alt='" + dataProductTitle + "']").parent('.grid-item');
+          matchingItem.attr('data-pairing-link', dataProductUrl);
+        }
+	    } // end loop through products
+
+      // If first pairing item has link, enable link button
+      if ($('#hvp-pairing .grid .grid-item.main').attr('data-pairing-link') !== '') {
+        $('#hvp-pairing .grid .grid-item.main .btn').attr('href', $('#hvp-pairing .grid .grid-item.main').attr('data-pairing-link'));
+        $('#hvp-pairing .grid .grid-item.main .btn').addClass('active');
+      }
+
+	  } // end productPairingCallback()
+
+    // AJAX calls to ALL products on load
+    for (i = 0; i < totalProductPages; i++) {
+      var page = i+1;
+      ajaxCall('GET', window.location.protocol + '//' + window.location.hostname + '/collections/' + collection + '/products.json' + '?limit=' + ajaxMaxItems + '&page=' + page, productPairingCallback);
+    }
+
+    $('#hvp-pairing .grid .grid-item').click( function() {
+      var thisParingRing = $(this);
+      if (!$(this).hasClass('main')) { // does not apply to main view box
+        $('#hvp-pairing .grid .grid-item').removeClass('active');
+        thisParingRing.addClass('active');
+        $('#hvp-pairing .grid .grid-item.main').children('img').attr('src', thisParingRing.find('img').attr('src')); // Change main image
+        $('#hvp-pairing .grid .grid-item.main h3').text(thisParingRing.find('img').attr('alt')); // Change main title
+        $('#hvp-pairing .grid .grid-item.main .btn').attr('href', thisParingRing.attr('data-pairing-link')); // Change main button link
+        // Only show button if it has a valid link
+        if (thisParingRing.attr('data-pairing-link') !== '') {
+          $('#hvp-pairing .grid .grid-item.main .btn').addClass('active');
         } else {
-          console.warn('something else other than 200 was returned');
+          $('#hvp-pairing .grid .grid-item.main .btn').removeClass('active');
         }
       }
-    };
-
-    xmlhttp.open(method, url, true);
-    xmlhttp.send();
+    });
   }
+  if( $('#hvp-pairing').length ) {
+    ringPairing();
+    //$(window).resize(function() { ringPairing(); }); // on resize
+	}
+
+
+
+
+
+
+  /*
 
   // Related products
+  // See: https://help.shopify.com/en/themes/liquid/objects/recommendations
   function getRelatedProducts() {
 
     var relatedProductCard = $('.related-products').find('.product-card');
-    var fetchProductLimit = 5;
+    var fetchProductLimit = $('.related-products').attr('data-related-product-count');
+
+    function makeMetalSwitcher(product, metalTag) {
+      var defaultMetal = metalTag.split('metal:')[1];
+      console.log('defaultMetal: ' + defaultMetal);
+      var altMetal1, altMetal2, altMetal1ProductHandle, altMetal2ProductHandle = '';
+      var handle = product.handle;
+      //handle = product.handle.replace('18k', '').replace('-14k', ''); // Remove any instances of '14k' or '18k' from the handle
+      // Create alt metal handles
+      if (defaultMetal == 'solid-gold') {
+        altMetal1 = 'solid-white-gold';
+        altMetal2 = 'solid-rose-gold';
+        // solid-14k-rose-gold
+        altMetal1ProductHandle = handle.replace('solid-14k', 'solid-14k-white').replace('solid-18k', 'solid-18k-white').replace('solid-gold', 'solid-white-gold');
+        altMetal2ProductHandle = handle.replace('solid-14k', 'solid-14k-rose').replace('solid-18k', 'solid-18k-rose').replace('solid-gold', 'solid-rose-gold');
+      }
+      else if (defaultMetal == 'solid-white-gold') {
+        altMetal1 = 'solid-gold';
+        altMetal2 = 'solid-rose-gold';
+        altMetal1ProductHandle = handle.replace('solid-14k-white', 'solid-14k').replace('solid-18k-white', 'solid-18k').replace('solid-white-gold', 'solid-gold');
+        altMetal2ProductHandle = handle.replace('solid-14k-white', 'solid-14k-rose').replace('solid-18k-white', 'solid-18k-rose').replace('solid-white-gold', 'solid-rose-gold');
+      }
+      else if (defaultMetal == 'solid-rose-gold') {
+        altMetal1 = 'solid-gold';
+        altMetal2 = 'solid-white-gold';
+        altMetal1ProductHandle = handle.replace('solid-14k-rose', 'solid-14k').replace('solid-18k-rose', 'solid-18k').replace('solid-rose-gold', 'solid-gold');
+        altMetal2ProductHandle = handle.replace('solid-14k-rose', 'solid-14k-white').replace('solid-18k-rose', 'solid-18k-white').replace('solid-rose-gold', 'solid-white-gold');
+      }
+      console.log('altMetal1ProductHandle: ' + altMetal1ProductHandle);
+      console.log('altMetal2ProductHandle: ' + altMetal2ProductHandle);
+      //console.log(product.handle);
+
+      // Get product data from alt metal handles
+      // console.log(window.location.protocol + '//' + window.location.hostname + '/products/' + product.handle + '.json');
+      // console.log(product);
+      $.getJSON(window.location.protocol + '//' + window.location.hostname + '/products/' + altMetal1ProductHandle + '.json', function(product) {
+        product = product.product;
+        //console.log('The title of this product is ' + product.title);
+        var altMetal1ProductId = product.id;
+        var altMetal1ProductTitle = product.title;
+        var altMetal1ProductUrl = product.url;
+        var altMetal1ProductPrice = product.price;
+        var altMetal1ProductFirstImage = product.images[0].src;
+        var altMetal1ProductBodyImage = product.images[1].src;
+        $.each(product.images, function(key, val) { // Check for on-body shot
+          if (val.alt == 'on-body-shot') {
+            altMetal1ProductBodyImage = key.src;
+          }
+        });
+        //console.log(altMetal1ProductBodyImage);
+
+      });
+    }
 
     // Init on load
-    ajaxFetch('GET', window.location.protocol + '//' + window.location.hostname + '/recommendations/products.json?product_id=' + productId + '&limit=' + fetchProductLimit, function(response){
+    ajaxCall('GET', window.location.protocol + '//' + window.location.hostname + '/recommendations/products.json?product_id=' + productId + '&limit=' + fetchProductLimit, function(response){
 
       const parsedResponse = JSON.parse(response); // Parse AJAX data
       const products = parsedResponse.products;
@@ -1220,6 +1345,15 @@ $(document).on('click', function(e) {
           let currentIndex = products.indexOf(products[i]);
           editedProducts.splice(currentIndex, 1);
         }
+
+        // if (tags.includes("metal:plated-rose-gold")){
+        //   console.log(tags);
+        // }
+        // else {
+        //   console.log("no tag found");
+        // }
+        //console.log(tags);
+
       }
 
       // For each related product
@@ -1228,7 +1362,7 @@ $(document).on('click', function(e) {
         // Get data
         let productId = products[i].id;
         let productFirstVariantId = products[i].variants[0].id;
-        let {title, price, url} = products[i];
+        let {handle, title, price, url, tags} = products[i];
         price = makeCurrency(price/100);
         let images = products[i].images;
         let media = products[i].media;
@@ -1244,6 +1378,16 @@ $(document).on('click', function(e) {
             onBodyImageUrl = images[1];
           }
         }
+        // Check all tags for 'metal:' substring
+        let hasMetalTag = false;
+        $.each(tags, function(key, val) {
+          if (val.indexOf('metal:solid') >= 0) {
+            hasMetalTag = true;
+            var metalTag = val;
+            makeMetalSwitcher(products[i], metalTag); // Make new metal switcher
+            return false; // Break loop
+          }
+        });
 
         // Apply data to related product cards
         relatedProductCard.eq(i).children('.inner').find('.upper a').attr('href', url); // URL
@@ -1252,6 +1396,14 @@ $(document).on('click', function(e) {
         relatedProductCard.eq(i).children('img').attr('src', onBodyImageUrl).attr('alt', title); // Second image (rollover)
         relatedProductCard.eq(i).children('.inner').find('h3').text(title); // Title
         relatedProductCard.eq(i).find('.price').text(price); // Price
+        relatedProductCard.eq(i).find('.metal-switcher').remove(); // Remove existing metal switcher
+        ////relatedProductCard.eq(i).find('.price').insertBefore(metalSwitcher); // Metal switcher
+
+        // if (hasMetalTag == true) { // Metal switcher
+        //   relatedProductCard.eq(i).find('.metal-switcher').show();
+        // } else {
+        //   relatedProductCard.eq(i).find('.metal-switcher').hide();
+        // }
         relatedProductCard.eq(i).attr('data-product-id', productId); // Product ID
         relatedProductCard.eq(i).attr('data-first-variant-id', productFirstVariantId); // First variant ID
         // if (Appmate.wk.getProduct(productId) !== null) { // If this item is in Wishlist, set active state
@@ -1266,6 +1418,7 @@ $(document).on('click', function(e) {
     getRelatedProducts();
   }
 
+  */
 
 
 

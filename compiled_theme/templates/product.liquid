@@ -124,11 +124,8 @@
           	<h1>{{ product.title }}</h1>
           {% endif %}
 
-          <div class="metal-switcher">
-            <a href="javascript:;" class="solid-rose-gold"></a>
-            <a href="javascript:;" class="solid-white-gold"></a>
-            <a href="javascript:;" class="solid-gold active"></a>
-          </div>
+          {% comment %} Metal switcher {% endcomment %}
+          {% render 'product-metal-switcher' %}
 
           {% comment %} Sets boolean to reflect whether item is eligible for financing {% endcomment %}
           {% assign financing_eligible = false %}

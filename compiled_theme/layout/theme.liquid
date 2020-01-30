@@ -75,7 +75,7 @@
 
 
 
- <body data-currency-sample="{{ 100 | money }}" data-currency="{{ cart.currency.iso_code }}" data-currency-symbol="{{ cart.currency.symbol }}" id="{{ page_title | handle }}" data-dynamic-cart="{{ dynamicCartStatus }}" class="{% if transparentHeader %} transparent-header transparent-header-no-spacing {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+ <body data-currency-sample="{{ 100 | money }}" data-currency="{{ cart.currency.iso_code }}" data-currency-symbol="{{ cart.currency.symbol }}" data-dynamic-cart="{{ dynamicCartStatus }}" data-product-count="{{ shop.products_count }}" id="{{ page_title | handle }}" class="{% if transparentHeader %} transparent-header transparent-header-no-spacing {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
 
   <!-- Header -->
@@ -109,6 +109,8 @@
 
   {% if template == 'product' %}
     {{ 'jquery.slick.min.js' | asset_url | script_tag }}
+  {% endif %}
+  {% if template == 'product' or template == 'product.high-value' %}
     {{ 'product.js' | asset_url | script_tag }}
   {% endif %}
 

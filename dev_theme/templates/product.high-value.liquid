@@ -15,6 +15,10 @@
 
 
 
+{% assign imageCount = product.images | size %}
+
+
+
 
 <section id="hvp-top" class="section-top">
 
@@ -32,11 +36,7 @@
         	<h1>{{ product.title }}</h1>
         {% endif %}
 
-        <div class="metal-switcher">
-          <a href="javascript:;" class="solid-rose-gold"></a>
-          <a href="javascript:;" class="solid-white-gold"></a>
-          <a href="javascript:;" class="solid-gold active"></a>
-        </div>
+        {% render 'product-metal-switcher' %}
 
         <a href="javascript:;" class="wishlist-add"></a>
 
@@ -90,7 +90,7 @@
             {% render 'product-customise-ring-size' with product as product %}
           {% endif %}
 
-          <a href="javascript:;" id="add-to-bag" class="btn btn-dark btn-solid">Add to Bag</a>
+          <a href="javascript:;" id="add-to-bag" class="add-to-bag btn btn-dark btn-solid">Add to Bag</a>
 
         </div>
 
@@ -153,7 +153,9 @@
 
 
 
-<section id="hvp-block-images" class="">
+
+{% comment %} If product has at most 7 images (base 0) use large-block layout here {% endcomment %}
+<section id="hvp-block-images" class="{% if imageCount <= 7 %}all-large{% endif %}">
   <div class="content">
     <div class="grid">
       {% comment %} Loop for images 5, 6, 7, 8, and 9 (base 0) {% endcomment %}
@@ -172,150 +174,95 @@
 
 
 
-<section id="wedding-match">
 
-  {% for product in collection['filter-test'].products%}
-    {{ product.title }}
-  {% endfor %}
+{% comment %} Check if this product is a wedding ring. If so, get the gender and serve up wedding rings of the other gender. {% endcomment %}
+{% if product.tags contains 'piece:wedding-ring' %}
 
-  <div class="content">
-    <h2><span>Match your love </span> Men’s Wedding Rings</h2>
+  <section id="wedding-match">
+    <div class="content">
 
-    <div class="grid">
+      {% comment %} Get genders {% endcomment %}
+      {% assign genderTag = '' %}
+      {% assign genderTagOpposite = '' %}
+      {% for tag in product.tags %}
+        {% if tag contains 'gender:' %}
+          {% assign genderTag = tag %}
+          {% if genderTag == 'gender:female' %}
+            {% assign genderTagOpposite = 'gender:male' %}
+            <h2><span>Match your love </span> Men’s Wedding Rings</h2>
+          {% elsif genderTag == 'gender:male' %}
+            {% assign genderTagOpposite = 'gender:female' %}
+            <h2><span>Match your love </span> Women’s Wedding Rings</h2>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
 
-      <div class="grid-item">
-        <div class="card product-card">
-          <img class="object-cover" src="img/product/body/body-product1.jpg" alt="I’d be lost without you">
-          <div class="inner">
-            <div class="upper">
-              <a href="product.html"><img src="img/product/hvp/mens-wedding-band.jpg" alt="Alt text"></a>
-              <span class="variant-switcher variant-birthstones">12 Birthstones</span>
-            </div>
-            <a href="product.html"><h3>Darling In The Complete Absolute Wild<span>Classic Engagement Ring</span></h3></a>
-          </div>
-          <a href="javascript:;" class="wishlist-add"></a>
-          <div class="metal-switcher">
-            <a href="javascript:;" class="solid-rose-gold"></a>
-            <a href="javascript:;" class="solid-white-gold"></a>
-            <a href="javascript:;" class="solid-gold active"></a>
-          </div>
-          <span class="price">€4,789</span>
-        </div> <!-- end .product-card -->
+
+      <div class="grid">
+
+        {% comment %} Get wedding-ring products for opposite gender (max 3) {% endcomment %}
+        {% assign count = 1 %}
+        {% for product in collections['Filter-test'].products %}
+          {% if product.tags contains 'piece:wedding-ring' and product.tags contains genderTagOpposite %}
+            {% if count <= 3 %}
+              <div class="grid-item">
+                {% render 'product-card' with product as product %}
+              </div>
+              {% assign count = count | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
       </div>
+    </div> <!-- end .content -->
+  </section>
 
-      <div class="grid-item">
-        <div class="card product-card">
-          <img class="object-cover" src="img/product/body/body-product2.jpg" alt="I’d be lost without you">
-          <div class="inner">
-            <div class="upper">
-              <a href="product.html"><img src="img/product/hvp/mens-wedding-band.jpg" alt="Alt text"></a>
-            </div>
-            <a href="product.html"><h3>Darling In The Wild<span>Classic Engagement Ring</span></h3></a>
-          </div>
-          <a href="javascript:;" class="wishlist-add"></a>
-          <div class="metal-switcher">
-            <a href="javascript:;" class="solid-rose-gold"></a>
-            <a href="javascript:;" class="solid-white-gold"></a>
-            <a href="javascript:;" class="solid-gold active"></a>
-          </div>
-          <span class="price">€4,789</span>
-        </div> <!-- end .product-card -->
-      </div>
-
-      <div class="grid-item">
-        <div class="card product-card">
-          <img class="object-cover" src="img/product/body/body-product3.jpg" alt="I’d be lost without you">
-          <div class="inner">
-            <div class="upper">
-              <a href="product.html"><img src="img/product/hvp/mens-wedding-band.jpg" alt="Alt text"></a>
-              <span class="variant-switcher variant-starsigns">12 Starsigns</span>
-            </div>
-            <a href="product.html"><h3>Darling In The Complete Absolute Wild<span>Classic Engagement Ring</span></h3></a>
-          </div>
-          <a href="javascript:;" class="wishlist-add"></a>
-          <div class="metal-switcher">
-            <a href="javascript:;" class="solid-rose-gold"></a>
-            <a href="javascript:;" class="solid-white-gold"></a>
-            <a href="javascript:;" class="solid-gold active"></a>
-          </div>
-          <span class="price">€4,789</span>
-        </div> <!-- end .product-card -->
-      </div>
-
-    </div> <!-- end .grid -->
-
-  </div> <!-- end .content -->
-
-</section>
+{% endif %}
 
 
 
-<section id="hvp-four-cs" class="image-cover" style="background-image: url('img/product/hvp/four-cs-bg.jpg')">
-  <div class="content">
-    <div class="grid">
-      <div class="grid-item">
-        <h2><span>The important details in </span> Choosing your ring</h2>
-        <p>Determining the quality of a gemstone involves what jewellers refer to as the “Four C’s”; Cut, Colour, Clarity and Carat.</p>
-        <div class="options">
-          <a href="javascript:;" class="current">Cut</a>
-          <a href="javascript:;">Colour</a>
-          <a href="javascript:;">Clarity</a>
-          <a href="javascript:;">Carat</a>
-          <div class="underline"></div>
+
+
+{% render 'section-four-cs' %}
+
+
+
+
+
+
+
+{% comment %} Only show section if image 11 (base 0) exists (first of paired rings) {% endcomment %}
+{% if product.images[10] %}
+
+  <section id="hvp-pairing">
+    <div class="content">
+      <h2><span>Match your band with a sparking </span> Wedding Ring</h2>
+      <div class="grid">
+        <div class="grid-item main" data-pairing-link="">
+          <img src="{{ product.images[10].src | img_url: '1024x1024' }}" alt="{{ product.images[10].alt }}">
+          <h3>{{ product.images[10].alt }}</h3>
+          <a href="javscript:;" class="btn btn-dark">View ring</a>
         </div>
-        <div class="descriptions">
-          <div class="description active">
-            <p>The cut refers to the design of the stone, such as round or oval.
-            Each cut sparkles in its own way and this is an important factor as it determines the shape of the stone you want to go for.</p>
-          </div>
-          <div class="description">
-            <p>This refers to the colour of the stone. With grey diamonds, morganites & rubies you want a colourful stone,
-              but with white or classic diamonds you want a completely colourless stone.</p>
-          </div>
-          <div class="description">
-            <p>Clarity refers to the number of amazing inclusions in a gemstone. With grey diamonds we look for the most beautiful inclusions,
-              like a scattering of stars sparkling in the night sky, but with white or classic diamonds we look for no inclusions.
-              Morganites are clear whilst other stones like moonstone or tourmaline have the most beautiful, exciting inclusions.</p>
-          </div>
-          <div class="description">
-            <p>Carat is a measurement of weight, not love. It is simply what the precious stone weighs in metric carats which are a unit of measurement like kilos or pounds.</p>
-          </div>
-        </div> <!-- end .grid -->
-      </div>
-    </div> <!-- end .grid -->
-  </div> <!-- end .content -->
-</section>
-
-
-
-<section id="hvp-pairing">
-  <div class="content">
-    <h2><span>Match your band with a sparking </span> Wedding Ring</h2>
-    <div class="grid">
-      <div class="grid-item main">
-        <img src="img/product/hvp/Chupi-Solid-Gold-Polished-Band-Ring-You-Me-and-Magic-Grey-Diamond.jpg" alt="Alt text">
-        <h3>Solid Gold Crown of Love Ring Classic Diamond</h3>
-        <a href="javscript:;" class="btn btn-dark">View ring</a>
-      </div>
-      <div class="grid-item active">
-        <img src="img/product/hvp/hvp-main-image-1.jpg" alt="Alt text">
-        <a href="javascript:;" class="wishlist-add"></a>
-      </div>
-      <div class="grid-item">
-        <img src="img/product/hvp/hvp-main-image-2.jpg" alt="Alt text">
-        <a href="javascript:;" class="wishlist-add"></a>
-      </div>
-      <div class="grid-item">
-        <img src="img/product/hvp/hvp-main-image-3.jpg" alt="Alt text">
-        <a href="javascript:;" class="wishlist-add"></a>
-      </div>
-      <div class="grid-item">
-        <img src="img/product/hvp/hvp-main-image-1.jpg" alt="Alt text">
-        <a href="javascript:;" class="wishlist-add"></a>
+        {% comment %} Loop for images 10, 11, 12, and 13 (base 0) {% endcomment %}
+        {% for i in (10..13) %}
+        	{% if product.images[i] %}
+            <div class="grid-item {% if i == 10 %}active{% endif %}" data-pairing-link="">
+              {% comment %} These images must contain the title of product to link to as their alt text {% endcomment %}
+              <img src="{{ product.images[i].src | img_url: '1024x1024' }}" alt="{{ product.images[i].alt }}"/>
+              <a href="javascript:;" class="wishlist-add"></a>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
-  </div>
-</section> <!-- end #hvp-pairing -->
+  </section> <!-- end #hvp-pairing -->
+
+{% endif %}
+
+
+
+
+
 
 
 
@@ -333,7 +280,7 @@
           as their glittering inclusions and colour sets them apart.</p>
       </div>
       <div class="grid-item">
-        <img src="img/product/hvp/guarantee-image-1.jpg" alt="Alt text here">
+        <img src="{{ 'guarantee-image-1.jpg' | asset_url}}" alt="Ethnically sourced diamonds">
       </div>
 
       <div class="grid-item">
@@ -343,7 +290,7 @@
           We offer lots of beautiful alternative stones including: emeralds, morganites and even cultivated stones such as moissanites.</p>
       </div>
       <div class="grid-item">
-        <img src="img/product/hvp/guarantee-image-2.jpg" alt="Alt text here">
+        <img src="{{ 'guarantee-image-2.jpg' | asset_url}}" alt="Alternative Stones">
       </div>
 
       <div class="grid-item">
@@ -354,7 +301,7 @@
           All of our precious jewellery is made using ethical gold and conflict free stones.</p>
       </div>
       <div class="grid-item">
-        <img src="img/misc/sustainability-packaging.jpg" alt="Alt text here">
+        <img src="{{ 'sustainability-packaging.jpg' | asset_url}}" alt="Sustainable jewellery & packaging">
       </div>
 
     </div>
@@ -363,68 +310,27 @@
 
 
 
-<section id="hvp-ugc" class="ugc-section">
-  <div class="content">
-    <h2><span>Styled on</span> Instagram</h2>
-    <div class="ugc-container">
-
-    </div> <!-- end .ugc-container -->
-    <p>Share a photo of your x style by tagging <span>#lovechupi</span></p>
-  </div> <!-- end .content -->
-</section>
 
 
 
-<section id="hvp-customer-stories" class="customer-stories">
-  <div class="content">
-    <h2>Customer Stories</h2>
-    <div class="grid">
-      <div class="grid-item customer-photos" data-active-index="2">
-        <div class="customer-photo" style="background-image: url(img/misc/customer-story-1.jpg);"></div> <!-- Customer 1 -->
-        <div class="customer-photo active" style="background-image: url(img/misc/customer-story-2.jpg);"></div> <!-- Customer 2 -->
-        <div class="customer-photo" style="background-image: url(img/misc/customer-story-3.jpg);"></div> <!-- Customer 3 -->
-      </div>
-      <div class="grid-item">
-        <div class="customer-quote"> <!-- Customer 1 -->
-          <p>My ring is AMAZING!!! It sparkles SOOOO much. It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
-          <span>Julie Lynn & Sam Rockwell</span>
-        </div>
-        <div class="customer-quote active"> <!-- Customer 2 -->
-          <p>It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
-          <span>Sam Rockwell & Julie Lynn</span>
-        </div>
-        <div class="customer-quote"> <!-- Customer 3 -->
-          <p>It sparkles SOOOO much. It gives me so much peace of mind knowing where my engagement ring comes from and all the hard work involved in making it.</p>
-          <span>Sulie Rynn & Jam Lockwell</span>
-        </div>
-        <a href="javascript:;">More Stories</a>
-      </div>
-    </div> <!-- end .grid -->
-  </div> <!-- end .content -->
-</section>
+{% render 'section-ugc' %}
 
 
 
-<section id="hvp-press-quotes" class="press-quotes image-cover" style="background-image: url(img/banner/product-press-bg2.jpg);">
-  <div class="content">
-    <h2>In the press</h2>
-    <div class="press-quotes">
-      <div class="press-quote active"><p>I love the idea of buying something now that will become an heirloom for my future children to cherish forever</p></div>
-      <div class="press-quote"><p>The jewelry that you’ll probably see on Instagram at least 100 times today</p></div>
-      <div class="press-quote"><p>Chupi makes delicate jewellery inspired by the stories of her childhood in Ireland</p></div>
-      <div class="press-quote"><p>Convincing Us To Ditch Traditional Rings</p></div>
-      <div class="press-quote"><p>One of the Five Best Places to Shop in Dublin</p></div>
-    </div>
-    <div class="grid press-logos">
-      <div class="press-logo current"><img src="img/misc/press-logo-vogue.png" alt="Vogue" title="Vogue"></div>
-      <div class="press-logo"><img src="img/misc/press-logo-marie-claire.png" alt="Marie Claire" title="Marie Claire"></div>
-      <div class="press-logo"><img src="img/misc/press-logo-sunday-times.png" alt="The Sunday Times" title="The Sunday Times"></div>
-      <div class="press-logo"><img src="img/misc/press-logo-refinery29.png" alt="Refinery 29" title="Refinery 29"></div>
-      <div class="press-logo"><img src="img/misc/press-logo-new-york-times.png" alt="New York Times" title="New York Times"></div>
-      <div class="underline"></div>
-    </div> <!-- end .grid -->
-  </div> <!-- end .content -->
-</section>
+
+
+
+{% render 'section-customer-stories' %}
+
+
+
+
+
+
+{% render 'section-press-quotes' %}
+
+
+
 
 
 
@@ -443,55 +349,13 @@
 
 
 
-<section id="hvp-faq" class="faq-section">
-  <div class="content">
-    <h2><span>Commonly Asked</span> Questions</h2>
-    <!-- Two columns for desktop show/hide to work independently -->
-    <div class="grid"> <!-- Left column -->
-      <div class="grid-item">
-        <a href="javascript:;" class="question">Where do you ship to?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-      <div class="grid-item">
-        <a href="javascript:;" class="question">Do you offer an engraving service?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-      <div class="grid-item">
-        <a href="javascript:;" class="question">What is your returns policy?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-    </div> <!-- end .grid -->
-    <div class="grid"> <!-- Right column -->
-      <div class="grid-item">
-        <a href="javascript:;" class="question">Where do you ship to?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-      <div class="grid-item">
-        <a href="javascript:;" class="question">What’s the estimated delivery time?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-      <div class="grid-item">
-        <a href="javascript:;" class="question">Can I track my order?</a>
-        <div class="answer">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam cursus mi gravida.</p>
-        </div>
-      </div>
-    </div> <!-- end .grid -->
-    <div class="cta">
-      <a href="javascript:;" class="btn btn-dark btn-solid">Need something else?</a>
-    </div>
-  </div> <!-- end .content -->
-</section>
+
+
+
+
+{% render 'section-faq' %}
+
+
 
 
 

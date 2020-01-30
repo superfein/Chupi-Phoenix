@@ -60,7 +60,12 @@
   <div class="content">
     <div class="grid">
 
-      {% paginate collection.products by 24 %}
+      {% comment %}
+      Note: For products that are rendered after a count of 20, the metal switcher will not show on product cards. This is due
+      to Shopify's 20-product limit of the 'all_products' function, used in product-card.liquid. Recommend to keep collection
+      render count below 20.
+      {% endcomment %}
+      {% paginate collection.products by 18 %}
 
         {% if collection.products.size > 0 %}
 

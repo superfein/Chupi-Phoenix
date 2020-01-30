@@ -1,0 +1,47 @@
+
+{% comment %} To be included on product templates {% endcomment %}
+
+
+{% assign sectionId = '' %}
+{% if template == 'product' %}
+  {% assign sectionId = 'product-four-cs' %}
+{% elsif template == 'product.high-value' %}
+  {% assign sectionId = 'hvp-four-cs' %}
+{% endif %}
+
+
+<section id="{{ sectionId }}" class="four-cs-section image-cover" style="background-image: url('{{ 'four-cs-bg.jpg' | asset_url}}')">
+  <div class="content">
+    <div class="grid">
+      <div class="grid-item">
+        <h2><span>The important details in </span> Choosing your ring</h2>
+        <p>Determining the quality of a gemstone involves what jewellers refer to as the “Four C’s”; Cut, Colour, Clarity and Carat.</p>
+        <div class="options">
+          <a href="javascript:;" class="current">Cut</a>
+          <a href="javascript:;">Colour</a>
+          <a href="javascript:;">Clarity</a>
+          <a href="javascript:;">Carat</a>
+          <div class="underline"></div>
+        </div>
+        <div class="descriptions">
+          <div class="description active">
+            <p>The cut refers to the design of the stone, such as round or oval.
+            Each cut sparkles in its own way and this is an important factor as it determines the shape of the stone you want to go for.</p>
+          </div>
+          <div class="description">
+            <p>This refers to the colour of the stone. With grey diamonds, morganites & rubies you want a colourful stone,
+              but with white or classic diamonds you want a completely colourless stone.</p>
+          </div>
+          <div class="description">
+            <p>Clarity refers to the number of amazing inclusions in a gemstone. With grey diamonds we look for the most beautiful inclusions,
+              like a scattering of stars sparkling in the night sky, but with white or classic diamonds we look for no inclusions.
+              Morganites are clear whilst other stones like moonstone or tourmaline have the most beautiful, exciting inclusions.</p>
+          </div>
+          <div class="description">
+            <p>Carat is a measurement of weight, not love. It is simply what the precious stone weighs in metric carats which are a unit of measurement like kilos or pounds.</p>
+          </div>
+        </div> <!-- end .grid -->
+      </div>
+    </div> <!-- end .grid -->
+  </div> <!-- end .content -->
+</section>

@@ -1,6 +1,9 @@
 
 {% comment %} To be included as filter panel for collection templates {% endcomment %}
 
+{% comment %} This filter requires the use implementation of filter-prefixed tags, e.g. metal:solid-gold, piece:necklace {% endcomment %}
+
+
 <aside id="filter-drawer" class="drawer">
 
   <div class="drawer-back"></div>
@@ -44,6 +47,7 @@
       <a href="javascript:;">Piece</a>
       <div class="inner">
         <ul>
+          {% comment %} Filter options listed manually for specific order of appearance {% endcomment %}
           <li><a class="filter-option all" data-tag="piece:all" href="javascript:;" >All pieces</a></li>
           {% if collection.all_tags contains 'piece:ring' %}
             <li><a class="filter-option" data-tag="piece:ring" href="javascript:;">Rings</a></li>

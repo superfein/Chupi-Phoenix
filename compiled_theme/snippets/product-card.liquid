@@ -1,36 +1,167 @@
 
+{% comment %}
 
-<div class="card product-card {% if homeCarouselCount > 0 %}carousel-item{% endif %}" data-product-id="" data-first-variant-id=""> {% comment %} Check if is used within a carousel {% endcomment %}
-  {% assign onBodyShotSrc = "" %}
-  {% assign onBodyShotCustomAlText = "" %}
+This product card is designed to work as a snippet in a collection page, related products section,
+product carousel, or anywhere else that provides a product object.
+
+It includes a metal switcher that allows for dynamic switching to the same product in other
+available metals.
+
+Any data found for alternative metals is included in elements as data atrributes. The JS metalSwitcher()
+function is then used to handle the switching of data displayed on the frontend.
+
+Note: In order for the metal switcher to work, it relies on product handles to be identical, except of
+course for the metal substring.
+
+Note: Collection render count should be kept below 20 due to the limitations of the all_products
+function used in this snippet.
+
+{% endcomment %}
+
+
+
+
+
+{% comment %} Reset variables for use in loop {% endcomment %}
+{% assign defaultMetal = '' %}
+{% assign altMetal_1 = '' %}
+{% assign altMetal_2 = '' %}
+{% assign altMetal_1_ProductHandle = '' %}
+{% assign altMetal_2_ProductHandle = '' %}
+{% assign altMetal_1_ProductTitle = '' %}
+{% assign altMetal_2_ProductTitle = '' %}
+
+{% assign thisProducthandle = product.handle %}
+{% comment %} Remove any metal substring irregularity {% endcomment %}
+{% if thisProducthandle contains '-14k' or thisProducthandle contains '-18k' %}
+  {% assign thisProducthandle = thisProducthandle | replace:"-14k","" | replace:"-18k","" %}
+{% endif %}
+
+{% assign productTypeLowercase = product.type | downcase %}
+
+{% comment %} Check if the product has a 'solid' metal tag {% endcomment %}
+{% assign hasSolidTag = false %}
+{% for tag in product.tags %}
+  {% if tag contains 'metal:solid' %}
+
+    {% assign hasSolidTag = true %}
+    {% assign defaultMetal = tag | replace:"metal:","" %}
+
+    {% comment %} Define product handles for alternative metals {% endcomment %}
+    {% if defaultMetal == 'solid-gold' %}
+      {% assign altMetal_1 = 'solid-white-gold' %}
+      {% assign altMetal_2 = 'solid-rose-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid","solid-white" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid","solid-rose" %}
+    {% elsif defaultMetal == 'solid-white-gold' %}
+      {% assign altMetal_1 = 'solid-gold' %}
+      {% assign altMetal_2 = 'solid-rose-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid-white","solid" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid-white","solid-rose" %}
+    {% elsif defaultMetal == 'solid-rose-gold' %}
+      {% assign altMetal_1 = 'solid-gold' %}
+      {% assign altMetal_2 = 'solid-white-gold' %}
+      {% assign altMetal_1_ProductHandle = thisProducthandle | replace_first:"solid-rose","solid" %}
+      {% assign altMetal_2_ProductHandle = thisProducthandle | replace_first:"solid-rose","solid-white" %}
+    {% endif %}
+
+    {% comment %} Assign product data variables for alternative metal 1 {% endcomment %}
+    {% assign altMetal_1_ProductId = all_products[altMetal_1_ProductHandle].id %}
+    {% assign altMetal_1_ProductTitle = all_products[altMetal_1_ProductHandle].title %}
+    {% assign altMetal_1_ProductUrl = all_products[altMetal_1_ProductHandle].url %}
+    {% assign altMetal_1_ProductPrice = all_products[altMetal_1_ProductHandle].price | money %}
+    {% assign altMetal_1_ProductFirstImage = all_products[altMetal_1_ProductHandle].images[0].src | img_url: '480x480' %}
+    {% assign altMetal_1_ProductBodyImage = all_products[altMetal_1_ProductHandle].images[1].src | img_url: '480x480' %}
+    {% for image in all_products[altMetal_1_ProductHandle].images %} {% comment %} Use body image if exists {% endcomment %}
+      {% if image.alt contains 'on-body-shot' %}
+        {% assign altMetal_1_ProductBodyImage = image.src | img_url: '480x480' %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} Assign product data variables for alternative metal 2 {% endcomment %}
+    {% assign altMetal_2_ProductId = all_products[altMetal_2_ProductHandle].id %}
+    {% assign altMetal_2_ProductTitle = all_products[altMetal_2_ProductHandle].title %}
+    {% assign altMetal_2_ProductUrl = all_products[altMetal_2_ProductHandle].url %}
+    {% assign altMetal_2_ProductPrice = all_products[altMetal_2_ProductHandle].price | money %}
+    {% assign altMetal_2_ProductFirstImage = all_products[altMetal_2_ProductHandle].images[0].src | img_url: '480x480' %}
+    {% assign altMetal_2_ProductBodyImage = all_products[altMetal_2_ProductHandle].images[1].src | img_url: '480x480' %}
+    {% for image in all_products[altMetal_2_ProductHandle].images %} {% comment %} Use body image if exists {% endcomment %}
+      {% if image.alt contains 'on-body-shot' %}
+        {% assign altMetal_2_ProductBodyImage = image.src | img_url: '480x480' %}
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+{% endfor %}
+
+
+
+
+<div class="card product-card {% if homeCarouselCount > 0 %}carousel-item{% endif %}" data-product-id="{{ product.id }}" data-alt-metal-0-product-id="{{ product.id }}" data-alt-metal-1-product-id="{{ altMetal_1_ProductId }}" data-alt-metal-2-product-id="{{ altMetal_2_ProductId }}" data-first-variant-id="{{ product.variants[0].id }}">
+
+  {% comment %} If image has on-body-shot alt text, show this image as rollover. If not, show the second image as rollover {% endcomment %}
+  {% assign onBodyShotSrc = product.images[1].src | img_url: '480x480' %}
+  {% assign onBodyShotCustomAlText = product.images[1].alt %}
   {% for image in product.images %}
     {% if image.alt contains 'on-body-shot' %}
-      {% assign onBodyShotSrc = image.src %}
+      {% assign onBodyShotSrc = image.src | img_url: '480x480' %}
       {% assign onBodyShotCustomAlText = product.title %}
     {% endif %}
   {% endfor %}
 
-  {% if onBodyShotSrc != blank %}
-  {% comment %} If image has on-body-shot alt text, show this image {% endcomment %}
-    <img class="object-cover" src="{{ onBodyShotSrc | img_url: '1024x1024' }}" alt="On-body shot of {{ onBodyShotCustomAlText }}">
-  {% elsif product.images[1].src %}
-  {% comment %} Else show second image {% endcomment %}
-    <img class="object-cover" src="{{ product.images[1].src | img_url: '1024x1024' }}" alt="{{product.images[1].alt}}">
-  {% endif %}
+  <img class="object-cover" src="{{ onBodyShotSrc }}" alt="On-body shot of {{ onBodyShotCustomAlText }}" data-alt-metal-0-body-image="{{ onBodyShotSrc }}" data-alt-metal-1-body-image="{{ altMetal_1_ProductBodyImage }}" data-alt-metal-2-body-image="{{ altMetal_2_ProductBodyImage }}">
 
   <div class="inner">
     <div class="upper">
-      <a href="{{ product.url }}">
-        <img src="{{ product.images[0].src | img_url: '1024x1024' }}" alt="{{product.images[0].alt}}">
+      <a href="{{ product.url }}" data-alt-metal-0-link="{{ product.url }}" data-alt-metal-1-link="{{ altMetal_1_ProductUrl }}" data-alt-metal-2-link="{{ altMetal_2_ProductUrl }}">
+        <img src="{{ product.images[0].src | img_url: '480x480' }}" alt="{{product.images[0].alt}}" data-alt-metal-0-first-image="{{ product.images[0].src | img_url: '480x480' }}" data-alt-metal-1-first-image="{{ altMetal_1_ProductFirstImage }}" data-alt-metal-2-first-image="{{ altMetal_2_ProductFirstImage }}">
       </a>
     </div>
-    <a href="{{ product.url }}"><h3>{{ product.title }}</h3></a>
+    <a href="{{ product.url }}" data-alt-metal-0-link="{{ product.url }}" data-alt-metal-1-link="{{ altMetal_1_ProductUrl }}" data-alt-metal-2-link="{{ altMetal_2_ProductUrl }}">
+      <h3 data-alt-metal-0-title="{{ product.title }}" data-alt-metal-1-title="{{ altMetal_1_ProductTitle }}" data-alt-metal-2-title="{{ altMetal_2_ProductTitle }}">{{ product.title }}</h3>
+    </a>
   </div>
+
   <a href="javascript:;" class="wishlist-add"></a>
-  <div class="metal-switcher">
-    <a href="javascript:;" class="solid-rose-gold"></a>
-    <a href="javascript:;" class="solid-white-gold"></a>
-    <a href="javascript:;" class="solid-gold active"></a>
-  </div>
-  <span class="price">{{ product.price | money }}</span>
+
+  {% comment %} Metal switcher (different from metal swicther on product template) {% endcomment %}
+  {% comment %} If the default metal and at least one alt metal exists {% endcomment %}
+  {% if defaultMetal != '' and altMetal_1_ProductTitle != '' or altMetal_2_ProductTitle != '' %}
+    <div class="metal-switcher">
+
+      {% if defaultMetal == 'solid-gold' %}
+        <a href="javascript:;" class="metal-switch solid-gold active" data-alt-metal-index="0"></a>
+      {% elsif altMetal_1 == 'solid-gold' and altMetal_1_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-gold" data-alt-metal-index="1"></a>
+      {% elsif altMetal_2 == 'solid-gold' and altMetal_2_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-gold" data-alt-metal-index="2"></a>
+      {% else %}
+        {% comment %} No Solid Gold switch {% endcomment %}
+      {% endif %}
+
+      {% if defaultMetal == 'solid-white-gold' %}
+        <a href="javascript:;" class="metal-switch solid-white-gold active" data-alt-metal-index="0"></a>
+      {% elsif altMetal_1 == 'solid-white-gold' and altMetal_1_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-white-gold" data-alt-metal-index="1"></a>
+      {% elsif altMetal_2 == 'solid-white-gold' and altMetal_2_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-white-gold" data-alt-metal-index="2"></a>
+      {% else %}
+        {% comment %} No Solid White Gold switch {% endcomment %}
+      {% endif %}
+
+      {% if defaultMetal == 'solid-rose-gold' %}
+        <a href="javascript:;" class="metal-switch solid-rose-gold active" data-alt-metal-index="0"></a>
+      {% elsif altMetal_1 == 'solid-rose-gold' and altMetal_1_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-rose-gold" data-alt-metal-index="1"></a>
+      {% elsif altMetal_2 == 'solid-rose-gold' and altMetal_2_ProductTitle != '' %}
+        <a href="javascript:;" class="metal-switch solid-rose-gold" data-alt-metal-index="2"></a>
+      {% else %}
+        {% comment %} No Solid Rose Gold switch {% endcomment %}
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+  <span class="price" data-alt-metal-0-price="{{ product.price | money }}" data-alt-metal-1-price="{{ altMetal_1_ProductPrice }}" data-alt-metal-2-price="{{ altMetal_2_ProductPrice }}">{{ product.price | money }}</span>
+
 </div> <!-- end .product-card -->
